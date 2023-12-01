@@ -12,3 +12,4 @@
 
 *.zwc
 zsh/.zsh_history
+nvim/plugin/
