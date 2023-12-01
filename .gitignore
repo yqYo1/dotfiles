@@ -8,6 +8,7 @@
 !/dotfilesLink.sh
 !/starship.toml
 !/zsh/
+!/nvim/
 
 *.zwc
 zsh/.zsh_history
