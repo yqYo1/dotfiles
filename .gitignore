@@ -2,7 +2,7 @@
 /*
 /.**
 
-# not ignore #
+# not ignore
 !/.gitignore
 !/README.md
 !/zsh/
