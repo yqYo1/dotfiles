@@ -5,7 +5,7 @@
 # not ignore #
 !/.gitignore
 !/README.md
-!/zsh/*.zsh
-!/zsh/.zshrc
+!/zsh/
 
-/*.zwc
+*.zwc
+zsh/.zsh_history
