@@ -5,6 +5,8 @@
 # not ignore
 !/.gitignore
 !/README.md
+!/dotfilesLink.sh
+!/starship.toml
 !/zsh/
 
 *.zwc
