@@ -12,7 +12,8 @@ function ensure_zcompiled {
   fi
 }
 ensure_zcompiled ~/.zshrc
-
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="$HOME/.local/share"
 export SHELDON_CONFIG_DIR="$ZSHRC_DIR/sheldon"
 sheldon_cache="$SHELDON_CONFIG_DIR/sheldon.zsh"
 sheldon_toml="$SHELDON_CONFIG_DIR/plugins.toml"

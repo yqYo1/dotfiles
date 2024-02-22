@@ -9,7 +9,9 @@
 !/starship.toml
 !/zsh/
 !/nvim/
+!/aquaproj-aqua/aqua.yaml
+!/renovate.json
 
 *.zwc
 zsh/.zsh_history
-nvim/plugin/
+nvim/lua/cli/node_server/node_modules
