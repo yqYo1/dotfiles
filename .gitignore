@@ -16,4 +16,4 @@
 *.zwc
 zsh/.zsh_history
 nvim/lua/cli/node_server/node_modules
-nvim/lua/cli/node_server/package.json.old
+*.old

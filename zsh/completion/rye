@@ -93,8 +93,24 @@ _arguments "${_arguments_options[@]}" \
 '(-v --verbose)--quiet[Turns off all output]' \
 '-h[Print help (see more with '\''--help'\'')]' \
 '--help[Print help (see more with '\''--help'\'')]' \
-':version -- The version of Python to fetch:' \
-'::arch -- Overrides the architecture to fetch:' \
+'::version -- The version of Python to fetch:' \
+&& ret=0
+;;
+(fmt)
+_arguments "${_arguments_options[@]}" \
+'*-p+[Perform the operation on a specific package]:PACKAGE: ' \
+'*--package=[Perform the operation on a specific package]:PACKAGE: ' \
+'--pyproject=[Use this pyproject.toml file]:PYPROJECT_TOML:_files' \
+'-a[Perform the operation on all packages]' \
+'--all[Perform the operation on all packages]' \
+'-v[Enables verbose diagnostics]' \
+'--verbose[Enables verbose diagnostics]' \
+'(-v --verbose)-q[Turns off all output]' \
+'(-v --verbose)--quiet[Turns off all output]' \
+'--check[Run format in check mode]' \
+'-h[Print help (see more with '\''--help'\'')]' \
+'--help[Print help (see more with '\''--help'\'')]' \
+'*::paths -- List of files or directories to limit the operation to:_files' \
 && ret=0
 ;;
 (init)
@@ -112,12 +128,13 @@ _arguments "${_arguments_options[@]}" \
 '--no-pin[Do not create .python-version file (requires-python will be used)]' \
 '--private[Set "Private \:\: Do Not Upload" classifier, used for private projects]' \
 '--no-import[Don'\''t import from setup.cfg, setup.py, or requirements files]' \
+'--virtual[Initialize this as a virtual package]' \
 '-v[Enables verbose diagnostics]' \
 '--verbose[Enables verbose diagnostics]' \
 '(-v --verbose)-q[Turns off all output]' \
 '(-v --verbose)--quiet[Turns off all output]' \
-'-h[Print help]' \
-'--help[Print help]' \
+'-h[Print help (see more with '\''--help'\'')]' \
+'--help[Print help (see more with '\''--help'\'')]' \
 '::path -- Where to place the project (defaults to current path):_files' \
 && ret=0
 ;;
@@ -158,8 +175,26 @@ _arguments "${_arguments_options[@]}" \
 '--update-all[Update all packages to the latest]' \
 '--pre[Update to pre-release versions]' \
 '--all-features[Enables all features]' \
+'--with-sources[Set to true to lock with sources in the lockfile]' \
 '-h[Print help]' \
 '--help[Print help]' \
+&& ret=0
+;;
+(lint)
+_arguments "${_arguments_options[@]}" \
+'*-p+[Perform the operation on a specific package]:PACKAGE: ' \
+'*--package=[Perform the operation on a specific package]:PACKAGE: ' \
+'--pyproject=[Use this pyproject.toml file]:PYPROJECT_TOML:_files' \
+'-a[Perform the operation on all packages]' \
+'--all[Perform the operation on all packages]' \
+'-v[Enables verbose diagnostics]' \
+'--verbose[Enables verbose diagnostics]' \
+'(-v --verbose)-q[Turns off all output]' \
+'(-v --verbose)--quiet[Turns off all output]' \
+'--fix[Apply fixes]' \
+'-h[Print help (see more with '\''--help'\'')]' \
+'--help[Print help (see more with '\''--help'\'')]' \
+'*::paths -- List of files or directories to limit the operation to:_files' \
 && ret=0
 ;;
 (make-req)
@@ -232,15 +267,6 @@ _arguments "${_arguments_options[@]}" \
 '--help[Print help]' \
 && ret=0
 ;;
-(shell)
-_arguments "${_arguments_options[@]}" \
-'--pyproject=[Use this pyproject.toml file]:PYPROJECT_TOML:_files' \
-'--no-banner[Do not show banner]' \
-'--allow-nested[Allow nested invocations]' \
-'-h[Print help]' \
-'--help[Print help]' \
-&& ret=0
-;;
 (show)
 _arguments "${_arguments_options[@]}" \
 '--pyproject=[Use this pyproject.toml file]:PYPROJECT_TOML:_files' \
@@ -265,6 +291,7 @@ _arguments "${_arguments_options[@]}" \
 '--update-all[Update all packages to the latest]' \
 '--pre[Update to pre-release versions]' \
 '--all-features[Enables all features]' \
+'--with-sources[Set to true to lock with sources in the lockfile]' \
 '-h[Print help]' \
 '--help[Print help]' \
 && ret=0
@@ -291,8 +318,7 @@ _arguments "${_arguments_options[@]}" \
 '(-v --verbose)--quiet[Turns off all output]' \
 '-h[Print help (see more with '\''--help'\'')]' \
 '--help[Print help (see more with '\''--help'\'')]' \
-':version -- The version of Python to fetch:' \
-'::arch -- Overrides the architecture to fetch:' \
+'::version -- The version of Python to fetch:' \
 && ret=0
 ;;
 (list)
@@ -490,8 +516,11 @@ _arguments "${_arguments_options[@]}" \
 (install)
 _arguments "${_arguments_options[@]}" \
 '--toolchain=[Register a specific toolchain before bootstrap]:TOOLCHAIN:_files' \
+'--toolchain-version=[Use a specific toolchain version]:TOOLCHAIN_VERSION: ' \
 '-y[Skip prompts]' \
 '--yes[Skip prompts]' \
+'--modify-path[Always modify without asking the PATH environment variable]' \
+'--no-modify-path[Do not modify the PATH environment variable]' \
 '-h[Print help (see more with '\''--help'\'')]' \
 '--help[Print help (see more with '\''--help'\'')]' \
 && ret=0
@@ -564,6 +593,19 @@ _arguments "${_arguments_options[@]}" \
 '::version -- The version to set:' \
 && ret=0
 ;;
+(list)
+_arguments "${_arguments_options[@]}" \
+'--pyproject=[Use this pyproject.toml file]:PYPROJECT_TOML:_files' \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(shell)
+_arguments "${_arguments_options[@]}" \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
 (help)
 _arguments "${_arguments_options[@]}" \
 ":: :_rye__help_commands" \
@@ -592,6 +634,10 @@ _arguments "${_arguments_options[@]}" \
 _arguments "${_arguments_options[@]}" \
 && ret=0
 ;;
+(fmt)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
 (init)
 _arguments "${_arguments_options[@]}" \
 && ret=0
@@ -601,6 +647,10 @@ _arguments "${_arguments_options[@]}" \
 && ret=0
 ;;
 (lock)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(lint)
 _arguments "${_arguments_options[@]}" \
 && ret=0
 ;;
@@ -621,10 +671,6 @@ _arguments "${_arguments_options[@]}" \
 && ret=0
 ;;
 (run)
-_arguments "${_arguments_options[@]}" \
-&& ret=0
-;;
-(shell)
 _arguments "${_arguments_options[@]}" \
 && ret=0
 ;;
@@ -736,6 +782,14 @@ _arguments "${_arguments_options[@]}" \
 _arguments "${_arguments_options[@]}" \
 && ret=0
 ;;
+(list)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(shell)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
 (help)
 _arguments "${_arguments_options[@]}" \
 && ret=0
@@ -756,15 +810,16 @@ _rye_commands() {
 'build:Builds a package for distribution' \
 'config:Reads or modifies the global \`config.toml\` file' \
 'fetch:Fetches a Python interpreter for the local machine' \
+'fmt:Run the code formatter on the project' \
 'init:Initialize a new or existing Python project with Rye' \
 'install:Installs a package as global tool' \
 'lock:Updates the lockfiles without installing dependencies' \
+'lint:Run the linter on the project' \
 'make-req:Builds and prints a PEP 508 requirement string from parts' \
 'pin:Pins a Python version to this project' \
 'publish:Publish packages to a package repository' \
 'remove:Removes a package from this project' \
 'run:Runs a command installed into this package' \
-'shell:Spawns a shell with the virtualenv activated' \
 'show:Prints the current state of the project' \
 'sync:Updates the virtualenv based on the pyproject.toml' \
 'toolchain:Helper utility to manage Python toolchains' \
@@ -772,6 +827,8 @@ _rye_commands() {
 'self:Rye self management' \
 'uninstall:Uninstalls a global tool' \
 'version:Get or set project version' \
+'list:Prints the currently installed packages' \
+'shell:The shell command was removed' \
 'help:Print this message or the help of the given subcommand(s)' \
     )
     _describe -t commands 'rye commands' commands "$@"
@@ -846,6 +903,16 @@ _rye__toolchain__help__fetch_commands() {
     local commands; commands=()
     _describe -t commands 'rye toolchain help fetch commands' commands "$@"
 }
+(( $+functions[_rye__fmt_commands] )) ||
+_rye__fmt_commands() {
+    local commands; commands=()
+    _describe -t commands 'rye fmt commands' commands "$@"
+}
+(( $+functions[_rye__help__fmt_commands] )) ||
+_rye__help__fmt_commands() {
+    local commands; commands=()
+    _describe -t commands 'rye help fmt commands' commands "$@"
+}
 (( $+functions[_rye__help_commands] )) ||
 _rye__help_commands() {
     local commands; commands=(
@@ -853,15 +920,16 @@ _rye__help_commands() {
 'build:Builds a package for distribution' \
 'config:Reads or modifies the global \`config.toml\` file' \
 'fetch:Fetches a Python interpreter for the local machine' \
+'fmt:Run the code formatter on the project' \
 'init:Initialize a new or existing Python project with Rye' \
 'install:Installs a package as global tool' \
 'lock:Updates the lockfiles without installing dependencies' \
+'lint:Run the linter on the project' \
 'make-req:Builds and prints a PEP 508 requirement string from parts' \
 'pin:Pins a Python version to this project' \
 'publish:Publish packages to a package repository' \
 'remove:Removes a package from this project' \
 'run:Runs a command installed into this package' \
-'shell:Spawns a shell with the virtualenv activated' \
 'show:Prints the current state of the project' \
 'sync:Updates the virtualenv based on the pyproject.toml' \
 'toolchain:Helper utility to manage Python toolchains' \
@@ -869,6 +937,8 @@ _rye__help_commands() {
 'self:Rye self management' \
 'uninstall:Uninstalls a global tool' \
 'version:Get or set project version' \
+'list:Prints the currently installed packages' \
+'shell:The shell command was removed' \
 'help:Print this message or the help of the given subcommand(s)' \
     )
     _describe -t commands 'rye help commands' commands "$@"
@@ -975,6 +1045,21 @@ _rye__tools__install_commands() {
     local commands; commands=()
     _describe -t commands 'rye tools install commands' commands "$@"
 }
+(( $+functions[_rye__help__lint_commands] )) ||
+_rye__help__lint_commands() {
+    local commands; commands=()
+    _describe -t commands 'rye help lint commands' commands "$@"
+}
+(( $+functions[_rye__lint_commands] )) ||
+_rye__lint_commands() {
+    local commands; commands=()
+    _describe -t commands 'rye lint commands' commands "$@"
+}
+(( $+functions[_rye__help__list_commands] )) ||
+_rye__help__list_commands() {
+    local commands; commands=()
+    _describe -t commands 'rye help list commands' commands "$@"
+}
 (( $+functions[_rye__help__toolchain__list_commands] )) ||
 _rye__help__toolchain__list_commands() {
     local commands; commands=()
@@ -984,6 +1069,11 @@ _rye__help__toolchain__list_commands() {
 _rye__help__tools__list_commands() {
     local commands; commands=()
     _describe -t commands 'rye help tools list commands' commands "$@"
+}
+(( $+functions[_rye__list_commands] )) ||
+_rye__list_commands() {
+    local commands; commands=()
+    _describe -t commands 'rye list commands' commands "$@"
 }
 (( $+functions[_rye__toolchain__help__list_commands] )) ||
 _rye__toolchain__help__list_commands() {

@@ -1,6 +1,6 @@
 ZSHRC_DIR=${${(%):-%N}:A:h}
 
-function source {
+function zc_source {
   ensure_zcompiled $1
   builtin source $1
 }
@@ -20,10 +20,10 @@ sheldon_toml="$SHELDON_CONFIG_DIR/plugins.toml"
 if [[ ! -r "$sheldon_cache" || "$sheldon_toml" -nt "$sheldon_cache" ]]; then
   sheldon source > $sheldon_cache
 fi
-source "$sheldon_cache"
+zc_source "$sheldon_cache"
 unset sheldon_cache sheldon_toml
 
-source $ZSHRC_DIR/nolazy.zsh
+zc_source $ZSHRC_DIR/nolazy.zsh
 zsh-defer source $ZSHRC_DIR/lazy.zsh
-unfunction source
+unfunction zc_source
 eval "$(starship init zsh)"
