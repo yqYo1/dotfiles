@@ -15,5 +15,6 @@
 
 *.zwc
 zsh/.zsh_history
+zsh/completion/*
 nvim/lua/cli/node_server/node_modules
 *.old
