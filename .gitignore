@@ -8,7 +8,8 @@
 !/dotfilesLink.sh
 !/starship.toml
 !/zsh/
-!/rye/
+!/rye/config.toml
+!/rye/env
 !/nvim/
 !/aquaproj-aqua/aqua.yaml
 !/renovate.json
