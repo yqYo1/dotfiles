@@ -2,7 +2,7 @@
   "name": "node_servers",
   "module": "index.ts",
   "dependencies": {
-    "yaml-language-server": "^1.14.0"
+    "yaml-language-server": "1.14.0"
   },
   "type": "module"
 }
