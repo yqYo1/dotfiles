@@ -11,11 +11,12 @@
 !/rye/config.toml
 !/rye/env
 !/nvim/
-!/aquaproj-aqua/aqua.yaml
+!/aquaproj-aqua/
 !/renovate.json
 
 *.zwc
 zsh/.zsh_history
 zsh/completion/*
+aquaproj-aqua/log.txt
 nvim/lua/cli/node_server/node_modules
 *.old
