@@ -2,8 +2,8 @@ local M = {}
 
 function M.init()
 	local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-	if not vim.uv.fs_stat(lazypath) then
-		vim.fn.system({
+	if not vim.loop.fs_stat(lazypath) then
+		vim.loop.system({
 			"git",
 			"clone",
 			"--filter=blob:none",
