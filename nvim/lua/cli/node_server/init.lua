@@ -3,6 +3,7 @@ return {
 	dir = vim.fn.fnamemodify(debug.getinfo(1).source:sub(2), ":h"),
 	dependencies = { "nvim-lua/plenary.nvim" },
 	build = "bun install",
+  --[[
 	config = function(spec)
 		local Path = require("plenary.path")
 		local dir = spec.dir
@@ -14,4 +15,5 @@ return {
 		vim.env.PATH = BIN_DIR:absolute() .. ":" .. vim.env.PATH
 		vim.system({ "bun", "i" }, { cwd = dir, text = true })
 	end,
+  ]]
 }

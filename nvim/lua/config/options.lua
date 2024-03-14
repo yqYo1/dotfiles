@@ -10,8 +10,10 @@ vim.opt.confirm = true
 vim.opt.shortmess:append("I")
 
 vim.opt.number = true
+vim.opt.relativenumber = true
 
 vim.opt.fenc = "utf-8"
+
 local tabwidth = 2
 vim.opt.tabstop = tabwidth
 vim.opt.softtabstop = tabwidth
