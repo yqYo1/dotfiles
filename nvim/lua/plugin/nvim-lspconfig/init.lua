@@ -24,7 +24,7 @@ return {
         return
       end
 
-      --require("plugin.nvim-lspconfig").on_attach(client, bufnr)
+      require("plugin.nvim-lspconfig.format").on_attach(client, bufnr)
 
       vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
     end)
