@@ -94,13 +94,14 @@ return {
 
     return o
   end,
+
   ---@param _ any
   ---@param opts LSPConfigOpts
   config = function(_, opts)
     local format_config = opts.format_config
     local setup = opts.setup
-    local html_like = opts.html_like
-    local typescriptInlayHints = opts.typescriptInlayHints
+    --local html_like = opts.html_like
+    --local typescriptInlayHints = opts.typescriptInlayHints
 
     local lspconfig = require("lspconfig")
 
@@ -156,6 +157,9 @@ return {
       },
       settings = {
         Lua = {
+          runtime = {
+            version = 'LuaJIT'
+          },
           diagnostics = {
             globals = { "vim" },
           },
