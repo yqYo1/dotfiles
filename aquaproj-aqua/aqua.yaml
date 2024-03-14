@@ -21,7 +21,7 @@ packages:
 - name: rust-lang/rust-analyzer@2024-03-11
 - name: mattn/efm-langserver@v0.0.50
 - name: rhysd/actionlint@v1.6.27
-- name: denoland/deno@v1.41.2
+- name: denoland/deno@v1.41.3
 - name: oven-sh/bun@bun-v1.0.30
 - name: starship/starship@v1.17.1
 - name: neovim/neovim@v0.9.5
