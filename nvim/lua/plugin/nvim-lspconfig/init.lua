@@ -10,7 +10,7 @@ return {
   dependencies = {
     "node_servers",
     "python_tools",
-    "cli",
+    --"cli",
     "b0o/schemastore.nvim",
     { "hrsh7th/cmp-nvim-lsp", cond = has_cmp },
     { "hrsh7th/cmp-nvim-lsp-document-symbol", cond = has_cmp },
@@ -31,7 +31,7 @@ return {
   end,
   opts = function()
     ---@class LSPConfigOpts
-    local o = { lsp_opts ={} }
+    local o = { lsp_opts = {} }
 
     o.lsp_opts.capabilities = vim.tbl_deep_extend(
       "force",
@@ -84,7 +84,7 @@ return {
 
       local local_opts = vim.tbl_deep_extend("force", {}, o.lsp_opts, extra_opts or {})
 
-      local_opts.filetypes =vim.tbl_flatten({
+      local_opts.filetypes = vim.tbl_flatten({
         local_opts.filetypes or default_opts.filetypes or {},
         local_opts.extra_filetypes or {},
       })
@@ -158,7 +158,7 @@ return {
       settings = {
         Lua = {
           runtime = {
-            version = 'LuaJIT'
+            version = "LuaJIT",
           },
           diagnostics = {
             globals = { "vim" },
@@ -211,8 +211,8 @@ return {
 
     local python_lsp_init = function(_, config)
       config.settings.python.pythonPath = vim.env.VIRTUAL_ENV
-      and lspconfig.util.path.join(vim.env.VIRTUAL_ENV, "bin", "python3")
-      or utils.find_cmd("python3", ".venv/bin", config.root_dir)
+          and lspconfig.util.path.join(vim.env.VIRTUAL_ENV, "bin", "python3")
+        or utils.find_cmd("python3", ".venv/bin", config.root_dir)
     end
     setup(lspconfig.ruff_lsp, { before_init = python_lsp_init })
   end,
