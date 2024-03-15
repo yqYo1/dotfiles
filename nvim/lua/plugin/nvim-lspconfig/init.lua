@@ -177,6 +177,7 @@ return {
       },
     })
 
+    --[[
     setup(lspconfig.jsonls, {
       on_attach = format_config(false),
       settings = {
@@ -187,6 +188,7 @@ return {
         },
       },
     })
+    ]]
 
     setup(lspconfig.yamlls, {
       settings = {
