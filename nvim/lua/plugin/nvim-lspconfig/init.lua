@@ -216,6 +216,30 @@ return {
           and lspconfig.util.path.join(vim.env.VIRTUAL_ENV, "bin", "python3")
         or utils.find_cmd("python3", ".venv/bin", config.root_dir)
     end
-    setup(lspconfig.ruff_lsp, { before_init = python_lsp_init })
+    setup(lspconfig.pyright, {
+      before_init = python_lsp_init,
+      settings = {
+        pyright = {
+          -- Using Ruff's import organizer
+          disableOrganizeImports = true,
+        },
+        python = {
+          analysis = {
+            -- Ignore all files for analysis to exclusively use Ruff for linting
+            ignore = { "*" },
+          },
+        },
+      },
+    })
+
+    setup(lspconfig.ruff_lsp, {
+      before_init = python_lsp_init,
+      on_attach = function(client, bufnr)
+        if client.name == "ruff_lsp" then
+          -- Disable hover in favor of Pyright
+          client.server_capabilities.hoverProvider = false
+        end
+      end,
+    })
   end,
 }

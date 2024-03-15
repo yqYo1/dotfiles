@@ -16,12 +16,17 @@ cattrs==23.2.3
 lsprotocol==2023.0.1
     # via pygls
     # via ruff-lsp
+nodeenv==1.8.0
+    # via pyright
 packaging==24.0
     # via ruff-lsp
 pygls==1.3.0
     # via ruff-lsp
+pyright==1.1.354
 ruff==0.3.2
     # via ruff-lsp
 ruff-lsp==0.0.53
+setuptools==69.2.0
+    # via nodeenv
 typing-extensions==4.10.0
     # via ruff-lsp
