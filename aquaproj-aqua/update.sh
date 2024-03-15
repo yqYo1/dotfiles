@@ -4,6 +4,6 @@ AQUA_DIR="$(dirname $AQUA_GLOBAL_CONFIG)"
 cd $AQUA_DIR
 set +e
 log=$AQUA_DIR/log.txt
-exec &> >(awk '{print strftime("[%Y/%m/%d %H:%M:%S] "),$0 } { fflush() } ' >> $log)
-aqua up
-aqua i -a
+#exec &> >(awk '{print strftime("[%Y/%m/%d %H:%M:%S] "),$0 } { fflush() } ' >> $log)
+#aqua up
+aqua i -a 2>&1 | tee -a $log
