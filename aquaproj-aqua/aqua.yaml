@@ -19,7 +19,7 @@ packages:
 - name: mitsuhiko/rye@0.29.0
 - name: LuaLS/lua-language-server@3.7.4
 - name: rust-lang/rust-analyzer@2024-03-11
-- name: mattn/efm-langserver@v0.0.50
+- name: mattn/efm-langserver@v0.0.53
 - name: rhysd/actionlint@v1.6.27
 - name: denoland/deno@v1.41.3
 - name: oven-sh/bun@bun-v1.0.33
