@@ -216,6 +216,34 @@ return {
           and lspconfig.util.path.join(vim.env.VIRTUAL_ENV, "bin", "python3")
         or utils.find_cmd("python3", ".venv/bin", config.root_dir)
     end
+
+    setup(lspconfig.pylsp, {
+      before_init = python_lsp_init,
+      settings = {
+        pylsp = {
+          plugins = {
+            ruff = {
+              enabled = true, -- Enable the plugin
+              formatEnabled = true, -- Enable formatting using ruffs formatter
+              extendSelect = { "I" }, -- Rules that are additionally used by ruff
+              extendIgnore = { "C90" }, -- Rules that are additionally ignored by ruff
+              format = { "I" }, -- Rules that are marked as fixable by ruff that should be fixed when running textDocument/formatting
+              severities = { ["D212"] = "I" }, -- Optional table of rules where a custom severity is desired
+              unsafeFixes = false, -- Whether or not to offer unsafe fixes as code actions. Ignored with the "Fix All" action
+
+              -- Rules that are ignored when a pyproject.toml or ruff.toml is present:
+              lineLength = 88, -- Line length to pass to ruff checking and formatting
+              select = { "F" }, -- Rules to be enabled by ruff
+              ignore = { "D210" }, -- Rules to be ignored by ruff
+              preview = false, -- Whether to enable the preview style linting and formatting.
+              targetVersion = "py310", -- The minimum python version to target (applies for both linting and formatting).
+            },
+          },
+        },
+      },
+    })
+
+    --[[
     setup(lspconfig.pyright, {
       before_init = python_lsp_init,
       settings = {
@@ -241,5 +269,6 @@ return {
         end
       end,
     })
+    ]]
   end,
 }
