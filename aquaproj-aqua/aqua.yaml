@@ -22,7 +22,7 @@ packages:
 - name: mattn/efm-langserver@v0.0.53
 - name: rhysd/actionlint@v1.6.27
 - name: denoland/deno@v1.42.0
-- name: oven-sh/bun@bun-v1.0.36
+- name: oven-sh/bun@bun-v1.1.3
 - name: starship/starship@v1.18.2
 - name: neovim/neovim@v0.9.5
 - name: eza-community/eza@v0.18.9
