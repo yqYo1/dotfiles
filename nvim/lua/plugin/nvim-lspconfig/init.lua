@@ -7,11 +7,13 @@ end
 return {
   "neovim/nvim-lspconfig",
   event = { "BufReadPre", "BufNewFile", "VeryLazy" },
+  cond = not is_vscode(),
   dependencies = {
     "node_servers",
     "python_tools",
     --"cli",
     "b0o/schemastore.nvim",
+    "ray-x/lsp_signature.nvim", --test
     { "hrsh7th/cmp-nvim-lsp", cond = has_cmp },
     { "hrsh7th/cmp-nvim-lsp-document-symbol", cond = has_cmp },
     { "hrsh7th/cmp-nvim-lsp-signature-help", cond = has_cmp },
