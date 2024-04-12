@@ -1,9 +1,10 @@
 return {
   "hrsh7th/nvim-cmp",
   event = { "InsertEnter", "CmdlineEnter" },
+  cond = not is_vscode(),
   dependencies = {
     { "onsails/lspkind.nvim" },
-    { "FelipeLema/cmp-async-path"},
+    { "FelipeLema/cmp-async-path" },
     { "hrsh7th/cmp-buffer" },
     { "hrsh7th/cmp-nvim-lsp" },
     { "hrsh7th/cmp-nvim-lsp-signature-help" },
@@ -20,13 +21,10 @@ return {
 
     -- Setup dependencies
     local cmp = require("cmp")
-    local types = require("cmp.types")
     local lspkind = require("lspkind")
 
-
     local setup_opt = {
-      mapping = cmp.mapping.preset.insert({
-      }),
+      mapping = cmp.mapping.preset.insert({}),
       sorting = {
         comparators = {
           cmp.config.compare.offset,
@@ -100,8 +98,8 @@ return {
         { name = "cmdline" },
       }, {
         { name = "buffer" },
-      },{
-        { name = 'nvim_lsp_document_symbol' }
+      }, {
+        { name = "nvim_lsp_document_symbol" },
       }),
       completion = {
         completeopt = "menu,menuone,noselect",
@@ -111,8 +109,8 @@ return {
     cmp.setup.cmdline(":", {
       mapping = cmp.mapping.preset.cmdline(),
       sources = cmp.config.sources(
-      { { name = "async_path" } },
-      { { name = "cmdline" }, { { name = "cmdline_history" } } }
+        { { name = "async_path" } },
+        { { name = "cmdline" }, { { name = "cmdline_history" } } }
       ),
       completion = {
         completeopt = "menu,menuone,noselect",
