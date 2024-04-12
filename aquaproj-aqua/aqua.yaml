@@ -12,7 +12,6 @@ registries:
 packages:
 - name: cli/cli@v2.47.0
 - name: golang/go@go1.22.2
-- name: golang/tools/guru@v0.20.0
 - name: golang/tools/goimports@v0.20.0
 - name: golang/tools/gorename@v0.20.0
 - name: junegunn/fzf@0.49.0
@@ -27,6 +26,6 @@ packages:
 - name: neovim/neovim@v0.9.5
 - name: eza-community/eza@v0.18.10
 - name: sharkdp/bat@v0.24.0
-- name: BurntSushi/ripgrep@14.1.0
 - name: martinvonz/jj@v0.16.0
 - name: JohnnyMorganz/StyLua@v0.20.0
+- name: BurntSushi/ripgrep@14.1.0
