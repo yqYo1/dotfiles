@@ -5,5 +5,6 @@
     "github>aquaproj/aqua-renovate-config#2.2.1(aquaproj-aqua/aqua.yaml)"
   ],
   "platformAutomerge": true,
+  "ignoreTests": true,
   "automerge": true,
 }
