@@ -13,6 +13,7 @@
 !/nvim/
 !/aquaproj-aqua/
 !/renovate.json
+!/setup.ps1
 
 *.zwc
 zsh/.zsh_history
