@@ -8,6 +8,7 @@
 !/dotfilesLink.sh
 !/starship.toml
 !/zsh/
+!/PowerShell
 !/rye/config.toml
 !/rye/env
 !/nvim/
