@@ -1,5 +1,8 @@
 # run as admin
-if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole("Administrators")) { Start-Process pwsh.exe "-File `"$PSCommandPath`"" -Verb RunAs; exit }
+if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole("Administrators")) {
+	Start-Process pwsh.exe "-File `"$PSCommandPath`"" -Verb RunAs; exit
+	. "$env:USERPROFILE\Documents\PowerShell\Profile.ps1"
+}
 
 $pwshDir = "$env:USERPROFILE\Documents\PowerShell"
 if (-not Test-Path $pwshDir){
@@ -14,6 +17,7 @@ if (Test-Path $pwshProfile) {
 }else {
   New-Item -ItemType SymbolicLink -Path $pwshProfile -Value $PSScriptRoot\PowerShell\Profile.ps1
 }
+. "$env:USERPROFILE\Documents\PowerShell\Profile.ps1"
 
 Get-Command aqua -ea SilentlyContinue | Out-Null
 if ($? -eq $true) {
