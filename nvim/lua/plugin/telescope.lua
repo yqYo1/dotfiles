@@ -15,7 +15,12 @@ M = {
   cmd = { "Telescope" },
   dependencies = {
     { "nvim-lua/plenary.nvim" },
-    { "nvim-telescope/telescope-fzf-native.nvim", build = "make", config = le("fzf") },
+    --{ "nvim-telescope/telescope-fzf-native.nvim", build = "make", config = le("fzf") },
+    {
+      'nvim-telescope/telescope-fzf-native.nvim',
+      build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build',
+      config = le("fzf")
+    },
     { "nvim-telescope/telescope-live-grep-args.nvim", config = le("live_grep_args") },
     { "nvim-telescope/telescope-symbols.nvim" },
     { "nvim-telescope/telescope-github.nvim", config = le("gh") },
