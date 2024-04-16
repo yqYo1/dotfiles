@@ -10,11 +10,6 @@ if (
   Start-Process vs_BuildTools.exe "--passive --config `"$PSScriptRoot\minimum.vsconfig`"" -Wait
   Remove-Item .\vs_BuildTools.exe
   <#
-  C:\msys64\usr\bin\bash -lc ' '
-  C:\msys64\usr\bin\bash -lc 'pacman --noconfirm -Syuu'
-  C:\msys64\usr\bin\bash -lc 'pacman --noconfirm -Syuu'
-
-  [System.Environment]::SetEnvironmentVariable("MSYSTEM", "MINGW64", "Machine")
   $oldpath = [System.Environment]::GetEnvironmentVariable("Path", "Machine")
   $newpath = ""
   if ( -not ($oldpath.Contains("C:\msys64\mingw64\bin"))){

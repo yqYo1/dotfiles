@@ -3,6 +3,7 @@ if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]:
   Start-Process pwsh.exe "-File `"$PSCommandPath`"" -Verb RunAs -Wait
     . "$env:USERPROFILE\Documents\PowerShell\Profile.ps1"
 }else{
+  winget install --id Kitware.CMake
 
   function makeDir($dir){
     if ( -not (Test-Path $dir)){
