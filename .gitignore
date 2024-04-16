@@ -16,6 +16,8 @@
 !/renovate.json
 !/setup.ps1
 !/msys64setup.ps1
+!/BuildToolsSetup.ps1
+!/minimum.vsconfig
 
 *.zwc
 zsh/.zsh_history
