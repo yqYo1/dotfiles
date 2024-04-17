@@ -1,4 +1,5 @@
 #!/bin/bash
+curl -sSfL https://raw.githubusercontent.com/aquaproj/aqua-installer/v3.0.0/aqua-installer | bash
 CURRENT=$(cd $(dirname $0);pwd)
 ln -sf $CURRENT/zsh $XDG_CONFIG_HOME/zsh
 ln -sf $CURRENT/zsh/.zshrc $HOME/.zshrc
