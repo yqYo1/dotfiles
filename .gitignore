@@ -5,7 +5,6 @@
 # not ignore
 !/.gitignore
 !/README.md
-!/dotfilesLink.sh
 !/starship.toml
 !/zsh/
 !/PowerShell
@@ -14,10 +13,7 @@
 !/nvim/
 !/aquaproj-aqua/
 !/renovate.json
-!/setup.ps1
-!/msys64setup.ps1
-!/BuildToolsSetup.ps1
-!/minimum.vsconfig
+!/setupScripts/
 
 *.zwc
 zsh/.zsh_history
