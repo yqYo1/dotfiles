@@ -25,30 +25,62 @@ if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]:
   #install CMake
   winget install --id Kitware.CMake
 
-  $dotConfig = "$env:USERPROFILE/.config"
+  #starship
+  $dotConfig = "$env:USERPROFILE\.config"
   makeDir $dotConfig
-  makeSymbolickLink "$dotConfig/starship.toml" "$PSScriptRoot/../starship.toml"
+  [Environment]::SetEnvironmentVariable("STARSHIP_CONFIG", "$dotConfig\starship.toml", 'User')
+  makeSymbolickLink "$dotConfig\starship.toml" "$PSScriptRoot\..\starship.toml"
 
+  #nvim
+  $nvimDir = "$env:USERPROFILE\AppData\Local\nvim"
+  makeDir $nvimDir
+  $InitLua = "$nvimDir\init.lua"
+  $nvimLuaDir = "$nvimDir\lua"
+  makeSymbolickLink $InitLua "$PSScriptRoot\..\nvim\init.lua"
+  makeSymbolickLink $nvimLuaDir "$PSScriptRoot\..\nvim\lua"
+
+  #aqua
+  $aquaRootDir = "$env:LOCALAPPDATA\aquaproj-aqua"
+  makeDir $aquaRootDir
+  [Environment]::SetEnvironmentVariable("AQUA_ROOT_DIR", $aquaRootDir, 'User')
+  $Env:AQUA_ROOT_DIR = $aquaRootDir
+  $oldUsePath = [System.Environment]::GetEnvironmentVariable("Path", "User")
+  #[Environment]::SetEnvironmentVariable("AQUA_ROOT_DIR", "%LOCALAPPDATA%\aquaproj-aqua", 'User')
+  $newUserPath = ""
+  if ( -not ($oldUsePath.Contains("$aquaRootDir\bat"))){
+    $newUserPath += "$aquaRootDir\bat;"
+  }
+  if ( -not ($oldUsePath.Contains("$aquaRootDir\bin"))){
+    $newUserPath += "$aquaRootDir\bin;"
+  }
+  if ($newUserPath){
+    [System.Environment]::SetEnvironmentVariable("Path", ($newUserPath + $oldUsePath), "User")
+    $Env:Path = ($newUserPath + $Env:Path)
+  }
+  makeDir "$dotConfig\aquaproj-aqua"
+  makeSymbolickLink "$dotConfig\aquaproj-aqua\aqua.yaml" "$PSScriptRoot\..\aquaproj-aqua\aqua.yaml"
+  [Environment]::SetEnvironmentVariable("AQUA_GLOBAL_CONFIG", "$dotConfig\aquaproj-aqua\aqua.yaml", 'User')
+  $Env:AQUA_GLOBAL_CONFIG = "$dotConfig\aquaproj-aqua\aqua.yaml"
+  winget install --id aquaproj.aqua
+  Push-Location -Path "$dotConfig\aquaproj-aqua"
+  aqua i -a
+  Pop-Location
+
+  #PowerShell
   $pwshDir = "$env:USERPROFILE\Documents\PowerShell"
   makeDir $pwshDir
   $pwshProfile = "$pwshDir\Profile.ps1"
   makeSymbolickLink $pwshProfile "$PSScriptRoot\..\PowerShell\Profile.ps1"
   . "$env:USERPROFILE\Documents\PowerShell\Profile.ps1"
 
-    Get-Command aqua -ea SilentlyContinue | Out-Null
-    if ( $? -eq $true ) {
-      Write-Output 'Success!'
-    } else {
-      Write-Error 'Error!'
-    }
-
-  $nvimDir = "$env:USERPROFILE\AppData\Local\nvim"
-  makeDir $nvimDir
-  $InitLua = "$nvimDir\init.lua"
-  $nvimLuaDir = "$nvimDir\lua"
-  makeSymbolickLink $InitLua "$PSScriptRoot/../nvim/init.lua"
-  makeSymbolickLink $nvimLuaDir "$PSScriptRoot/../nvim/lua"
-
+  <#
+  Get-Command aqua -ea SilentlyContinue | Out-Null
+  if ( $? -eq $true ) {
+    Write-Output 'Success!'
+  } else {
+    Write-Error 'Error!'
+  }
+  #>
   pause
 }
 Pop-Location
