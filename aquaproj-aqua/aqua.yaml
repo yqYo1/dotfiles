@@ -29,3 +29,5 @@ packages:
 - name: martinvonz/jj@v0.16.0
 - name: JohnnyMorganz/StyLua@v0.20.0
 - name: BurntSushi/ripgrep@14.1.0
+- name: ziglang/zig@0.11.0
+- name: zigtools/zls@0.11.0
