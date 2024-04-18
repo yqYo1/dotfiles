@@ -26,8 +26,6 @@ lazy.setup({
 				"matchparen",
 				"netrwPlugin",
 				"netrw",
-				"tarPlugin",
-				"tar",
 				"tohtml",
 				"tutor",
 				"zipPlugin",

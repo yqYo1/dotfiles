@@ -61,9 +61,11 @@ if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]:
   makeSymbolickLink "$dotConfig\aquaproj-aqua\aqua.yaml" "$PSScriptRoot\..\aquaproj-aqua\aqua.yaml"
   [Environment]::SetEnvironmentVariable("AQUA_GLOBAL_CONFIG", "$dotConfig\aquaproj-aqua\aqua.yaml", 'User')
   $Env:AQUA_GLOBAL_CONFIG = "$dotConfig\aquaproj-aqua\aqua.yaml"
+  [Environment]::SetEnvironmentVariable("AQUA_PROGRESS_BAR", "true", 'User')
+  $Env:AQUA_PROGRESS_BAR = "true"
   winget install --id aquaproj.aqua
   Push-Location -Path "$dotConfig\aquaproj-aqua"
-  aqua i -a
+  aqua i -a -l
   Pop-Location
 
   #PowerShell
