@@ -19,3 +19,7 @@ end
 _G.is_vscode = function()
   return tb(vim.g.vscode)
 end
+
+_G.is_windows = function()
+  return (vim.loop or vim.uv).os_uname().sysname == "Windows_NT"
+end
