@@ -41,6 +41,10 @@ if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]:
   makeSymbolickLink $InitLua "$PSScriptRoot\..\nvim\init.lua"
   makeSymbolickLink $nvimLuaDir "$PSScriptRoot\..\nvim\lua"
 
+  #rye
+  $ryeDir ="$env:USERPROFILE\.rye"
+  makeSymbolickLink $ryeDir "$PSScriptRoot\..\rye"
+
   #aqua
   $aquaRootDir = "$env:LOCALAPPDATA\aquaproj-aqua"
   makeDir $aquaRootDir
