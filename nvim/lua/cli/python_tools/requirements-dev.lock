@@ -12,26 +12,19 @@ attrs==23.2.0
     # via lsprotocol
 cattrs==23.2.3
     # via lsprotocol
-    # via pygls
     # via python-lsp-ruff
 docstring-to-markdown==0.15
     # via python-lsp-server
 jedi==0.19.1
     # via python-lsp-server
 lsprotocol==2023.0.1
-    # via pygls
     # via python-lsp-ruff
-    # via ruff-lsp
 nodeenv==1.8.0
     # via pyright
-packaging==24.0
-    # via ruff-lsp
 parso==0.8.3
     # via jedi
 pluggy==1.4.0
     # via python-lsp-server
-pygls==1.3.0
-    # via ruff-lsp
 pyright==1.1.354
 python-lsp-jsonrpc==1.1.2
     # via python-lsp-server
@@ -40,12 +33,8 @@ python-lsp-server==1.10.1
     # via python-lsp-ruff
 ruff==0.3.3
     # via python-lsp-ruff
-    # via ruff-lsp
-ruff-lsp==0.0.53
 setuptools==69.2.0
     # via nodeenv
-typing-extensions==4.10.0
-    # via ruff-lsp
 ujson==5.9.0
     # via python-lsp-jsonrpc
     # via python-lsp-server

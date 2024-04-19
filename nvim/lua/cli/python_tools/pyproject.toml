@@ -7,7 +7,6 @@ authors = [
 ]
 dependencies = [
     "ruff>=0.3.2",
-    "ruff-lsp>=0.0.53",
     "pyright>=1.1.354",
     "python-lsp-ruff>=2.2.0",
 ]
