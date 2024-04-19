@@ -1,3 +1,5 @@
+# require develoopoer mode
+
 Push-Location -Path $PSScriptRoot
 # run as admin
 if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole("Administrators")) {
