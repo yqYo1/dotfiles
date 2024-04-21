@@ -11,5 +11,5 @@
   "platformAutomerge": true,
   "ignoreTests": true,
   "automerge": true,
-  "minimumReleaseAge": "3 days",
+  "minimumReleaseAge": "3 days"
 }
