@@ -7,7 +7,7 @@
   ],
   "pyenv": {
     "enabled": false
-  {,
+  },
   "platformAutomerge": true,
   "ignoreTests": true,
   "automerge": true,
