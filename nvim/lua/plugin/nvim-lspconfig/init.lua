@@ -249,19 +249,6 @@ return {
     })
 
     --[[
-    setup(lspconfig.jsonls, {
-      on_attach = format_config(false),
-      settings = {
-        json = {
-          schemas = require("schemastore").json.schemas(),
-          validate = { enable = true },
-          format = { enable = true },
-        },
-      },
-    })
-    ]]
-
-    --[[
     setup(lspconfig.ruff_lsp, {
       before_init = python_lsp_init,
       on_attach = function(client, bufnr)
