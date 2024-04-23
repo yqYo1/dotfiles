@@ -71,7 +71,7 @@ if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]:
   $Env:AQUA_PROGRESS_BAR = "true"
   winget install --id aquaproj.aqua
   Push-Location -Path "$dotConfig\aquaproj-aqua"
-  $env:LOCALAPPDATA\Microsoft\WinGet\Links\aqua.exe i -a -l
+  "$env:LOCALAPPDATA\Microsoft\WinGet\Links\aqua.exe i -a -l"
   Pop-Location
 
   #PowerShell
@@ -85,7 +85,7 @@ if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]:
   dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
 
   winget install --id Redhat.Podman
-  $env:LOCALAPPDATA\Microsoft\WinGet\Links\podman.exe machine init
+  "$env:LOCALAPPDATA\Microsoft\WinGet\Links\podman.exe machine init"
 
   pause
 }
