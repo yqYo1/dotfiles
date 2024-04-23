@@ -71,7 +71,7 @@ if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]:
   $Env:AQUA_PROGRESS_BAR = "true"
   winget install --id aquaproj.aqua
   Push-Location -Path "$dotConfig\aquaproj-aqua"
-  aqua i -a -l
+  $env:LOCALAPPDATA\Microsoft\WinGet\Links\aqua.exe i -a -l
   Pop-Location
 
   #PowerShell
@@ -81,14 +81,12 @@ if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]:
   makeSymbolickLink $pwshProfile "$PSScriptRoot\..\PowerShell\Profile.ps1"
   . "$env:USERPROFILE\Documents\PowerShell\Profile.ps1"
 
-  <#
-  Get-Command aqua -ea SilentlyContinue | Out-Null
-  if ( $? -eq $true ) {
-    Write-Output 'Success!'
-  } else {
-    Write-Error 'Error!'
-  }
-  #>
+  dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
+  dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
+
+  winget install --id Redhat.Podman
+  $env:LOCALAPPDATA\Microsoft\WinGet\Links\podman.exe machine init
+
   pause
 }
 Pop-Location
