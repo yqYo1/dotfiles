@@ -34,7 +34,10 @@ opt.listchars = {
   extends = "❯",
   precedes = "❮",
 }
-opt.pumblend = 10
+
+opt.termguicolors = true
+opt.winblend = 0
+opt.pumblend = 0
 
 vim.diagnostic.config({ severity_sort = true })
 
