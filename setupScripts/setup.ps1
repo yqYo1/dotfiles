@@ -87,11 +87,16 @@ if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]:
   makeSymbolickLink $pwshProfile "$PSScriptRoot\..\PowerShell\Profile.ps1"
   . "$env:USERPROFILE\Documents\PowerShell\Profile.ps1"
 
-  dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
-  dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
+  gcm podman -ea SilentlyContinue | Out-Null
+  if ($? -eq $true) { # コマンドが存在すれば
+    Write-Output 'Success!'
+  } else {            # コマンドが存在しなければ
+    dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
+    dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
 
-  winget install --id Redhat.Podman
-  Start-Process -FilePath "C:\Program Files\RedHat\Podman\podman.exe" -ArgumentList "machine", "init" -Wait -NoNewWindow
+    winget install --id Redhat.Podman
+    Start-Process -FilePath "C:\Program Files\RedHat\Podman\podman.exe" -ArgumentList "machine", "init" -Wait -NoNewWindow
+  }
 
   pause
 }
