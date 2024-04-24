@@ -6,6 +6,6 @@ if wezterm.config_builder then
   config = wezterm.config_builder()
 end
 
-config.color_scheme = "AdventureTime"
+config.color_scheme = "Tokyo Night"
 
 return config

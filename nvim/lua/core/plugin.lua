@@ -12,18 +12,6 @@ function M.init()
       lazypath,
     })
   end
-  --[[
-  if not vim.loop.fs_stat(lazypath) then
-    vim.loop.system({
-      "git",
-      "clone",
-      "--filter=blob:none",
-      "--single-branch",
-      "https://github.com/folke/lazy.nvim.git",
-      lazypath,
-    })
-  end
-  ]]
   vim.opt.runtimepath:prepend(lazypath)
 end
 
