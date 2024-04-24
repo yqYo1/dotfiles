@@ -10,5 +10,6 @@ config.window_background_opacity = 0.75
 config.color_scheme = "Tokyo Night"
 config.font = wezterm.font("HackGen Console NF", { weight = "Regular", stretch = "Normal", style = "Normal" })
 config.font_size = 12
+config.adjust_window_size_when_changing_font_size = true
 
 return config
