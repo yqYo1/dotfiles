@@ -75,6 +75,10 @@ if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]:
   Start-Process -FilePath $aquaExe -ArgumentList "i", "-a", "-l" -Wait -NoNewWindow
   Pop-Location
 
+  $weztermDir = $dotConfig\wezterm
+  makeSymbolickLink $weztermDir "$PSScriptRoot\..\wezterm"
+  winget install --id wez.wezterm
+
   #PowerShell
   $pwshDir = "$env:USERPROFILE\Documents\PowerShell"
   makeDir $pwshDir
