@@ -7,7 +7,7 @@ if wezterm.config_builder then
 end
 
 --theme
-config.window_background_opacity = 0.6
+config.window_background_opacity = 0.70
 config.color_scheme = "Tokyo Night"
 
 --font
@@ -40,5 +40,7 @@ config.use_ime = true
 config.animation_fps = 60
 
 config.disable_default_key_bindings = true
+config.keys = require("keybinds").keys
+config.key_tables = require("keybinds").key_tables
 
 return config

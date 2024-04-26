@@ -13,7 +13,8 @@ return {
     "python_tools",
     --"cli",
     "b0o/schemastore.nvim",
-    "ray-x/lsp_signature.nvim", --test
+    "ray-x/lsp_signature.nvim",
+    --"lspcontainers/lspcontainers.nvim",
     { "hrsh7th/cmp-nvim-lsp", cond = has_cmp },
     { "hrsh7th/cmp-nvim-lsp-document-symbol", cond = has_cmp },
     { "hrsh7th/cmp-nvim-lsp-signature-help", cond = has_cmp },
