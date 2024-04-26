@@ -7,7 +7,7 @@ if wezterm.config_builder then
 end
 
 --theme
-config.window_background_opacity = 0.60
+config.window_background_opacity = 0.6
 config.color_scheme = "Tokyo Night"
 
 --font
@@ -28,10 +28,11 @@ config.bold_brightens_ansi_colors = "No"
 --os
 if wezterm.target_triple == "x86_64-pc-windows-msvc" then
   config.default_prog = { "pwsh.exe", "-NoLogo" }
-end
 
---gpu
-config.front_end = "WebGpu"
+  --todo: front_end set WebGpu only when using Intel Iris Xe Graphics
+  --config.front_end = "WebGpu"
+  config.front_end = "OpenGL"
+end
 
 config.audible_bell = "Disabled"
 config.use_ime = true
