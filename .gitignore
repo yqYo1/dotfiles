@@ -9,8 +9,7 @@
 !/CorvusSKK/
 !/zsh/
 !/PowerShell
-!/rye/config.toml
-!/rye/env
+!/rye/
 !/nvim/
 !/aquaproj-aqua/
 !/renovate.json

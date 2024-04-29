@@ -1,0 +1,10 @@
+
+# rye shell setup
+export RYE_HOME="/home/yayoi/.config/rye"
+case ":${PATH}:" in
+  *:"/home/yayoi/.config/rye/shims":*)
+    ;;
+  *)
+    export PATH="/home/yayoi/.config/rye/shims:$PATH"
+    ;;
+esac
