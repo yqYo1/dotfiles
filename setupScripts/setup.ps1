@@ -85,7 +85,8 @@ if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]:
   makeDir $pwshDir
   $pwshProfile = "$pwshDir\Profile.ps1"
   makeSymbolickLink $pwshProfile "$PSScriptRoot\..\PowerShell\Profile.ps1"
-  install-Module -Name PSReadLine -AllowClobber -Force
+  Install-Module -Name PSReadLine -AllowClobber -Force
+  Install-Module -Name posh-git -Scope CurrentUser -Force
 
   . "$env:USERPROFILE\Documents\PowerShell\Profile.ps1"
 
