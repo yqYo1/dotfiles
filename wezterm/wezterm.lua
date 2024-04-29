@@ -30,7 +30,7 @@ config.anti_alias_custom_block_glyphs = true
 --os
 if wezterm.target_triple == "x86_64-pc-windows-msvc" then
   config.default_prog = { "pwsh.exe", "-NoLogo" }
-  config.window_background_opacity = 0
+  config.window_background_opacity = 0.2
   config.win32_system_backdrop = "Acrylic"
 
   --todo: front_end set WebGpu only when using Intel Iris Xe Graphics
