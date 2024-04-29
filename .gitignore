@@ -6,6 +6,7 @@
 !/.gitignore
 !/README.md
 !/starship.toml
+!/CorvusSKK/
 !/zsh/
 !/PowerShell
 !/rye/config.toml
