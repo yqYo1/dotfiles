@@ -1,4 +1,6 @@
 local wezterm = require("wezterm")
+wezterm.log_info(" ")
+wezterm.log_info("init")
 
 local config = {}
 
@@ -33,9 +35,19 @@ if wezterm.target_triple == "x86_64-pc-windows-msvc" then
   config.window_background_opacity = 0.2
   config.win32_system_backdrop = "Acrylic"
 
-  --todo: front_end set WebGpu only when using Intel Iris Xe Graphics
-  --config.front_end = "WebGpu"
-  config.front_end = "OpenGL"
+  -- https://github.com/wez/wezterm/issues/4992
+  local gpus = wezterm.gui.enumerate_gpus()
+  local frontEnd = "OpenGL"
+  for _, gpu in pairs(gpus) do
+    if gpu.name == "Intel(R) Iris(R) Xe Graphics" then
+      wezterm.log_info(gpu.backend)
+      wezterm.log_info(gpu.name)
+      frontEnd = "WebGpu"
+      break
+    end
+  end
+  wezterm.log_info("front end = " .. frontEnd)
+  config.front_end = frontEnd
 else
   config.window_background_opacity = 0.70
 end
