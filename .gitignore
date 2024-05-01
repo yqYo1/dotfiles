@@ -24,4 +24,4 @@ nvim/lua/cli/node_server/node_modules
 nvim/lun/cli/python_tools/.venv
 *.old
 *.bak
-
+/nvim/lazy-lock.json
