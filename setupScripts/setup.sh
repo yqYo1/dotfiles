@@ -9,6 +9,7 @@ ln -sfnvi $CURRENT/../starship.toml $XDG_CONFIG_HOME/starship.toml
 ln -sfnvi $CURRENT/../nvim $XDG_CONFIG_HOME/nvim
 ln -sfnvi $CURRENT/../aquaproj-aqua $XDG_CONFIG_HOME/aquaproj-aqua
 ln -sfnvi $CURRENT/../rye $XDG_CONFIG_HOME/rye
+ln -sfnvi $CURRENT/../wezterm $XDG_CONFIG_HOME/wezterm
 #ln -sfnvi $CURRENT/../bun/package.json $HOME/package.json
 #ln -sfnvi $CURRENT/../bun/bun.lockb $HOME/bun.lockb
 curl https://sh.rustup.rs -sSf | sh
