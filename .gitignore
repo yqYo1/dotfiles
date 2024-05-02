@@ -16,6 +16,7 @@
 !/setupScripts/
 !/wezterm/
 !/sway/
+!/tofi/
 
 *.zwc
 zsh/.zsh_history
