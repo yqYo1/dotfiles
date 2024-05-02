@@ -15,6 +15,7 @@
 !/renovate.json
 !/setupScripts/
 !/wezterm/
+!/sway/
 
 *.zwc
 zsh/.zsh_history
