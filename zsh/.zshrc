@@ -14,9 +14,13 @@ function ensure_zcompiled {
 ensure_zcompiled ~/.zshrc
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
-export SHELDON_CONFIG_DIR="$ZSHRC_DIR/sheldon"
-sheldon_cache="$SHELDON_CONFIG_DIR/sheldon.zsh"
-sheldon_toml="$SHELDON_CONFIG_DIR/plugins.toml"
+#export SHELDON_CONFIG_DIR="$ZSHRC_DIR/sheldon"
+#sheldon_cache="$SHELDON_CONFIG_DIR/sheldon.zsh"
+#sheldon_toml="$SHELDON_CONFIG_DIR/plugins.toml"
+sheldon_cache="$XDG_CONFIG_HOME/sheldon/sheldon.zsh"
+sheldon_toml="$XDG_CONFIG_HOME/sheldon/plugins.toml"
+export AQUA_GLOBAL_CONFIG=$XDG_CONFIG_HOME/aquaproj-aqua/aqua.yaml
+export PATH=${AQUA_ROOT_DIR:-${XDG_DATA_HOME:-$HOME/.local/share}/aquaproj-aqua}/bin:$PATH
 if [[ ! -r "$sheldon_cache" || "$sheldon_toml" -nt "$sheldon_cache" ]]; then
   sheldon source > $sheldon_cache
 fi

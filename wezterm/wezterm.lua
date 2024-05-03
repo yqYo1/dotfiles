@@ -14,15 +14,6 @@ config.color_scheme = "Tokyo Night"
 --disable title bar
 config.window_decorations = "RESIZE"
 
---font
-config.font = wezterm.font_with_fallback({
-  {
-    family = "HackGen Console NF",
-    weight = "Regular",
-    stretch = "Normal",
-    style = "Normal",
-  },
-})
 config.font_size = 12
 config.adjust_window_size_when_changing_font_size = true
 config.anti_alias_custom_block_glyphs = true
@@ -48,7 +39,18 @@ if wezterm.target_triple == "x86_64-pc-windows-msvc" then
   end
   wezterm.log_info("front end = " .. frontEnd)
   config.front_end = frontEnd
+
+  --font
+  config.font = wezterm.font_with_fallback({
+    {
+      family = "HackGen Console NF",
+      weight = "Regular",
+      stretch = "Normal",
+      style = "Normal",
+    },
+  })
 else
+  -- not Windows
   config.window_background_opacity = 0.70
 end
 
