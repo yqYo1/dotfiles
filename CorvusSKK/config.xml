@@ -22,7 +22,7 @@
     <key name="privateonmkey" value="6" />
     <key name="privateoffvkey" value="0x79" />
     <key name="privateoffmkey" value="6" />
-    <key name="privatemodeauto" value="1" />
+    <key name="privatemodeauto" value="0" />
   </section>
   <section name="behavior">
     <key name="defaultmode" value="0" />
@@ -207,13 +207,6 @@
       <row ro="u" hi="う" ka="ウ" an="ｳ" so="0" />
       <row ro="e" hi="え" ka="エ" an="ｴ" so="0" />
       <row ro="o" hi="お" ka="オ" an="ｵ" so="0" />
-      <!--
-      <row ro="z" hi="あん" ka="アン" an="ｱﾝ" so="2" />
-      <row ro="k" hi="いん" ka="イン" an="ｲﾝ" so="2" />
-      <row ro="j" hi="うん" ka="ウン" an="ｳﾝ" so="2" />
-      <row ro="d" hi="えん" ka="エン" an="ｴﾝ" so="2" />
-      <row ro="l" hi="おん" ka="オン" an="ｵﾝ" so="2" />
-      -->
       <row ro="ka" hi="か" ka="カ" an="ｶ" so="0" />
       <row ro="ki" hi="き" ka="キ" an="ｷ" so="0" />
       <row ro="ku" hi="く" ka="ク" an="ｸ" so="0" />
