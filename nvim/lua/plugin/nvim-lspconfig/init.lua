@@ -109,6 +109,7 @@ return {
     local lspconfig = require("lspconfig")
 
     --server config
+    --[[
     setup(lspconfig.efm, {
       filetypes = vim.tbl_flatten({
         {
@@ -152,6 +153,7 @@ return {
         completion = true,
       },
     })
+    ]]
 
     setup(lspconfig.lua_ls, {
       on_attach = format_config(false),
@@ -180,6 +182,7 @@ return {
       },
     })
 
+    --[[
     setup(lspconfig.yamlls, {
       settings = {
         yaml = {
@@ -200,6 +203,7 @@ return {
         },
       },
     })
+    ]]
 
     local python_lsp_init = function(_, config)
       config.settings.python.pythonPath = vim.env.VIRTUAL_ENV
