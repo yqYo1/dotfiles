@@ -35,6 +35,8 @@ opt.listchars = {
   precedes = "❮",
 }
 
+opt.cmdheight = 0
+
 opt.termguicolors = true
 opt.winblend = 0
 opt.pumblend = 0
