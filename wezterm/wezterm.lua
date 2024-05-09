@@ -30,7 +30,7 @@ if wezterm.target_triple == "x86_64-pc-windows-msvc" then
   local gpus = wezterm.gui.enumerate_gpus()
   local frontEnd = "OpenGL"
   for _, gpu in pairs(gpus) do
-    if gpu.name == "Intel(R) Iris(R) Xe Graphics" then
+    if gpu.name == "Intel(R) Iris(R) Xe Graphics" and gpu.backend == "Dx12" then
       wezterm.log_info(gpu.backend)
       wezterm.log_info(gpu.name)
       frontEnd = "WebGpu"
