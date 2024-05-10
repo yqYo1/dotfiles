@@ -23,14 +23,13 @@ config.anti_alias_custom_block_glyphs = true
 --os
 if wezterm.target_triple == "x86_64-pc-windows-msvc" then
   config.default_prog = { "pwsh.exe", "-NoLogo" }
-  config.window_background_opacity = 0.2
-  config.win32_system_backdrop = "Acrylic"
+  config.window_background_opacity = 0.70
 
   -- https://github.com/wez/wezterm/issues/4992
   local gpus = wezterm.gui.enumerate_gpus()
   local frontEnd = "OpenGL"
   for _, gpu in pairs(gpus) do
-    if gpu.name == "Intel(R) Iris(R) Xe Graphics" and gpu.backend == "Dx12" then
+    if gpu.name == "Intel(R) Iris(R) Xe Graphics" and gpu.backend == "Vulkan" then
       wezterm.log_info(gpu.backend)
       wezterm.log_info(gpu.name)
       frontEnd = "WebGpu"
