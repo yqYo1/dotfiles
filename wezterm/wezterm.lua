@@ -16,9 +16,6 @@ config.window_decorations = "RESIZE"
 
 config.font_size = 12
 config.adjust_window_size_when_changing_font_size = true
-config.anti_alias_custom_block_glyphs = true
---config.bold_brightens_ansi_colors = "BrightOnly"
---config.bold_brightens_ansi_colors = "No"
 
 --os
 if wezterm.target_triple == "x86_64-pc-windows-msvc" then
@@ -33,6 +30,7 @@ if wezterm.target_triple == "x86_64-pc-windows-msvc" then
       wezterm.log_info(gpu.backend)
       wezterm.log_info(gpu.name)
       frontEnd = "WebGpu"
+      config.bold_brightens_ansi_colors = "BrightOnly"
       break
     end
   end
