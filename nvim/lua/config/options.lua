@@ -1,7 +1,7 @@
 local opt = vim.opt
 
 opt.backup = true
-opt.backupdir = vim.fn.expand(vim.fn.stdpath("cache") .. "/.vim_backup")
+opt.backupdir = vim.fn.expand(vim.fn.stdpath("cache") .. "/.neovim_backup")
 opt.swapfile = false
 opt.writebackup = true
 opt.autoread = true
@@ -13,9 +13,11 @@ opt.shortmess:append("I")
 
 opt.number = true
 opt.relativenumber = true
+opt.signcolumn = "yes"
 
 opt.fenc = "utf-8"
 
+--indent
 local tabwidth = 2
 opt.tabstop = tabwidth
 opt.softtabstop = tabwidth

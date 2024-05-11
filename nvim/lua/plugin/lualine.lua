@@ -1,15 +1,15 @@
-return{
-	"nvim-lualine/lualine.nvim",
-	dependencies = {
-		"nvim-tree/nvim-web-devicons",
-	},
-	event = {"VimEnter"},
-	config = function()
-		local lualine = require("lualine")
-		lualine.setup({
-			options = {
-				theme = "tokyonight",
-			},
-		})
-	end,
+return {
+  "nvim-lualine/lualine.nvim",
+  dependencies = {
+    "nvim-tree/nvim-web-devicons",
+  },
+  event = { "VimEnter" },
+  config = function()
+    local lualine = require("lualine")
+    lualine.setup({
+      options = {
+        theme = "tokyonight",
+      },
+    })
+  end,
 }
