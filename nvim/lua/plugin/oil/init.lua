@@ -1,8 +1,11 @@
+---@type LazySpec
 return {
   "stevearc/oil.nvim",
+  event = "VeryLazy",
   cmd = { "Oil" },
   dependencies = {
     "nvim-tree/nvim-web-devicons",
+    "refractalize/oil-git-status.nvim",
   },
   init = function()
     local openWithOil = function()
@@ -21,14 +24,18 @@ return {
     vim.api.nvim_create_autocmd({ "BufEnter" }, { callback = openWithOil, nested = true })
     vim.api.nvim_create_autocmd({ "VimEnter" }, { callback = openWithOil })
   end,
-  opts =function()
+  opts = function()
     return {
       view_options = {
-        show_hidden = true
+        show_hidden = true,
+      },
+      win_options = {
+        signcolumn = "yes:2",
       },
     }
   end,
   config = function(_, opts)
     require("oil").setup(opts)
+    require("oil-git-status").setup()
   end,
 }
