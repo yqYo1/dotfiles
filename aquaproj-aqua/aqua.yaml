@@ -10,7 +10,7 @@ registries:
 - type: standard
   ref: v4.174.0 # renovate: depName=aquaproj/aqua-registry
 packages:
-- name: cli/cli@v2.49.0
+- name: cli/cli@v2.49.1
 - name: golang/go@go1.22.3
 - name: golang/tools/goimports@v0.20.0
 - name: golang/tools/gorename@v0.20.0
@@ -19,8 +19,8 @@ packages:
 - name: LuaLS/lua-language-server@3.8.3
 - name: rust-lang/rust-analyzer@2024-03-11
 - name: mattn/efm-langserver@v0.0.53
-- name: rhysd/actionlint@v1.6.27
-- name: denoland/deno@v1.43.1
+- name: rhysd/actionlint@v1.7.0
+- name: denoland/deno@v1.43.2
 - name: oven-sh/bun@bun-v1.1.7
 - name: starship/starship@v1.18.2
 - name: neovim/neovim@v0.9.5
