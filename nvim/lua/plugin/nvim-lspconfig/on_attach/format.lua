@@ -35,7 +35,7 @@ function M.format(opts)
   if vim.b.autoformat == false and not (opts and opts.force) then
     return
   end
-  local ft = vim.bo[buf].filetype
+  --local ft = vim.bo[buf].filetype
 
   vim.lsp.buf.format({
     bufnr = buf,
@@ -70,7 +70,6 @@ local function auto_format(buf)
   })
 end
 
----@type OnAttachCallback
 function M.on_attach(client, buf)
   if client.server_capabilities.documentFormattingProvider then
     command()
