@@ -103,59 +103,9 @@ return {
     ---@param _ any
     ---@param opts LSPConfigOpts
     config = function(_, opts)
-      local format_config = opts.format_config
       local setup = opts.setup
-      --local html_like = opts.html_like
-      --local typescriptInlayHints = opts.typescriptInlayHints
 
       local lspconfig = require("lspconfig")
-
-      --server config
-      --[[
-    setup(lspconfig.efm, {
-      filetypes = vim.tbl_flatten({
-        {
-          "lua",
-          "python",
-          "go",
-          "rust",
-        },
-        {
-          "json",
-          "jsonc",
-          "yaml",
-        },
-        {
-          "dockerfile",
-        },
-        {
-          "html",
-          "svelte",
-          "vue",
-          "astro",
-          "javascriptreact",
-          "javascript.jsx",
-          "typescriptreact",
-          "typescript.tsx",
-          "markdown",
-          "markdown.mdx",
-          "css",
-          "scss",
-          "less",
-          "javascript",
-          "typescript",
-        },
-      }),
-      init_options = {
-        documentFormatting = true,
-        rangeFormatting = true,
-        hover = true,
-        documentSymbol = true,
-        codeAction = true,
-        completion = true,
-      },
-    })
-    ]]
 
       local python_lsp_init = function(_, config)
         config.settings.python.pythonPath = vim.env.VIRTUAL_ENV
@@ -204,18 +154,6 @@ return {
           },
         },
       })
-
-      --[[
-    setup(lspconfig.ruff_lsp, {
-      before_init = python_lsp_init,
-      on_attach = function(client, bufnr)
-        if client.name == "ruff_lsp" then
-          -- Disable hover in favor of Pyright
-          client.server_capabilities.hoverProvider = false
-        end
-      end,
-    })
-    ]]
     end,
   },
 }
