@@ -190,7 +190,7 @@ end
 function o.setup(client, extra_opts)
   client = _convert_client(client)
 
-  local default_config = client.document_config.default_config
+  -- local default_config = client.document_config.default_config
 
   local default_opts = o.default_opts()
   ---@class LSPConfigOpts
