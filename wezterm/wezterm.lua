@@ -20,7 +20,7 @@ config.adjust_window_size_when_changing_font_size = true
 --os
 if wezterm.target_triple == "x86_64-pc-windows-msvc" then
   config.default_prog = { "pwsh.exe", "-NoLogo" }
-  config.window_background_opacity = 0.70
+  config.window_background_opacity = 0.75
 
   -- https://github.com/wez/wezterm/issues/4992
   local gpus = wezterm.gui.enumerate_gpus()
