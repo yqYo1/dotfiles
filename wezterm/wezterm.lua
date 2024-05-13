@@ -1,6 +1,5 @@
 local wezterm = require("wezterm")
-wezterm.log_info(" ")
-wezterm.log_info("init")
+--wezterm.log_info("init")
 
 local config = {}
 
@@ -27,14 +26,14 @@ if wezterm.target_triple == "x86_64-pc-windows-msvc" then
   local frontEnd = "OpenGL"
   for _, gpu in pairs(gpus) do
     if gpu.name == "Intel(R) Iris(R) Xe Graphics" and gpu.backend == "Vulkan" then
-      wezterm.log_info(gpu.backend)
-      wezterm.log_info(gpu.name)
+      --wezterm.log_info(gpu.backend)
+      --wezterm.log_info(gpu.name)
       frontEnd = "WebGpu"
       config.bold_brightens_ansi_colors = "BrightOnly"
       break
     end
   end
-  wezterm.log_info("front end = " .. frontEnd)
+  --wezterm.log_info("front end = " .. frontEnd)
   config.front_end = frontEnd
 
   --font
