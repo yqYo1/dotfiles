@@ -6,7 +6,7 @@ return {
       enabled = true,
       disable_virtual_lines_ft = {
         "yaml",
-        --"python",
+        "python",
       },
     })
   end,
