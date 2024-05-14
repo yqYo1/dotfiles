@@ -4,14 +4,15 @@ return {
   cond = not is_vscode(),
   dependencies = {
     { "onsails/lspkind.nvim" },
-    { url = "https://codeberg.org/FelipeLema/cmp-async-path.git" },
     --{ "FelipeLema/cmp-async-path" },
+    { url = "https://codeberg.org/FelipeLema/cmp-async-path.git" },
     { "hrsh7th/cmp-buffer" },
     { "hrsh7th/cmp-nvim-lua" },
-    { "hrsh7th/cmp-omni" },
+    --{ "hrsh7th/cmp-omni" },
     { "hrsh7th/cmp-cmdline" },
     { "hrsh7th/cmp-calc" },
     { "hrsh7th/cmp-emoji" },
+    { "tzachar/cmp-ai" },
     { "lukas-reineke/cmp-rg" },
     { "ray-x/cmp-treesitter" },
   },
@@ -25,8 +26,9 @@ return {
     local setup_opt = {
       mapping = cmp.mapping.preset.insert({}),
       sorting = {
-        comparators = {
-          cmp.config.compare.offset,
+        comparator = {
+          require("cmp_ai.compare"),
+          cmp.config.compare.offet,
           cmp.config.compare.exact,
           cmp.config.compare.score,
           cmp.config.compare.kind,
@@ -38,6 +40,7 @@ return {
         },
       },
       sources = cmp.config.sources({
+        { name = "cmp_ai", priority = 100 },
         { name = "nvim_lsp", priority = 100 },
         {
           name = "async_path",
@@ -51,7 +54,7 @@ return {
       }, {
         { name = "treesitter" },
         { name = "buffer" },
-        { name = "omni" },
+        --{ name = "omni" },
         { name = "calc" },
       }),
       completion = {
@@ -66,17 +69,21 @@ return {
       nvim_lsp = "[LSP]",
       buffer = "[Buffer]",
       async_path = "[Path]",
+      cmp_ai = "[AI]",
       nvim_lua = "[Lua]",
-      ultisnips = "[UltiSnips]",
       spell = "[Spell]",
       calc = "[Calc]",
       emoji = "[Emoji]",
       neorg = "[Neorg]",
       rg = "[rg]",
       omni = "[Omni]",
-      -- cmp_tabnine = "[Tabnine]",
       nvim_lsp_signature_help = "[Signature]",
       cmdline_history = "[History]",
+    }
+
+    local custom_menu_icon = {
+      calc = " 󰃬 ",
+      cmp_ai = "  ",
     }
 
     setup_opt.formatting = {
@@ -84,10 +91,19 @@ return {
         mode = "symbol_text",
         maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
         before = function(entry, vim_item)
+          --menu
           if entry.source.name == "nvim_lsp" then
             vim_item.menu = "{" .. entry.source.source.client.name .. "}"
           else
             vim_item.menu = menu[entry.source.name] or entry.source.name
+          end
+
+          if entry.source.name == "calc" then
+            -- Get the custom icon for 'calc' source
+            -- Replace the kind glyph with the custom icon
+            vim_item.kind = custom_menu_icon.calc
+          elseif entry.source.name == "cmp_ai" then
+            vim_item.kind = custom_menu_icon.cmp_ai
           end
 
           return vim_item
