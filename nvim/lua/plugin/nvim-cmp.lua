@@ -4,7 +4,8 @@ return {
   cond = not is_vscode(),
   dependencies = {
     { "onsails/lspkind.nvim" },
-    { "FelipeLema/cmp-async-path" },
+    { url = "https://codeberg.org/FelipeLema/cmp-async-path.git" },
+    --{ "FelipeLema/cmp-async-path" },
     { "hrsh7th/cmp-buffer" },
     { "hrsh7th/cmp-nvim-lua" },
     { "hrsh7th/cmp-omni" },
@@ -38,7 +39,13 @@ return {
       },
       sources = cmp.config.sources({
         { name = "nvim_lsp", priority = 100 },
-        { name = "async_path", priority = 100 },
+        {
+          name = "async_path",
+          option = {
+            trailing_slash = true,
+          },
+          priority = 100,
+        },
         { name = "emoji", insert = true, priority = 50 },
         { name = "nvim_lua", priority = 50 },
       }, {
@@ -106,10 +113,14 @@ return {
 
     cmp.setup.cmdline(":", {
       mapping = cmp.mapping.preset.cmdline(),
-      sources = cmp.config.sources(
-        { { name = "async_path" } },
-        { { name = "cmdline" }, { { name = "cmdline_history" } } }
-      ),
+      sources = cmp.config.sources({
+        {
+          name = "async_path",
+          option = {
+            trailing_slash = true,
+          },
+        },
+      }, { { name = "cmdline" }, { { name = "cmdline_history" } } }),
       completion = {
         completeopt = "menu,menuone,noselect",
       },
