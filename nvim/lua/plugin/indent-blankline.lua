@@ -1,7 +1,10 @@
 return {
   "lukas-reineke/indent-blankline.nvim",
   main = "ibl",
-  event = "VimEnter",
+  event = { "BufReadPost", "VeryLazy" },
+  dependencies = {
+    "HiPhish/rainbow-delimiters.nvim",
+  },
   config = function()
     local highlight = {
       "RainbowRed",

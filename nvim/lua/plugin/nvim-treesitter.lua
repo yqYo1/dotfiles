@@ -13,8 +13,6 @@ return {
         return has_cmp() and not is_vscode()
       end,
     },
-    { "HiPhish/rainbow-delimiters.nvim" },
-    { "m-demare/hlargs.nvim" },
     { "nvim-treesitter/nvim-treesitter-context" },
     { "haringsrob/nvim_context_vt" },
   },
