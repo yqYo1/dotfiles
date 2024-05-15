@@ -28,3 +28,5 @@ nvim/lun/cli/python_tools/.venv
 *.bak
 /nvim/lazy-lock.json
 /CorvusSKK/userdict.txt
+/rye/env
+/rye/*/*
