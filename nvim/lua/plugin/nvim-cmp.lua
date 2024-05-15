@@ -8,22 +8,29 @@ return {
     { url = "https://codeberg.org/FelipeLema/cmp-async-path.git" },
     { "hrsh7th/cmp-buffer" },
     { "hrsh7th/cmp-nvim-lua" },
-    --{ "hrsh7th/cmp-omni" },
     { "hrsh7th/cmp-cmdline" },
     { "hrsh7th/cmp-calc" },
     { "hrsh7th/cmp-emoji" },
     { "tzachar/cmp-ai" },
     { "lukas-reineke/cmp-rg" },
     { "ray-x/cmp-treesitter" },
+    { "saadparwaiz1/cmp_luasnip" }, -- Snippets source for nvim-cmp
+    { "L3MON4D3/LuaSnip" }, -- Snippets plugin
   },
   config = function()
     vim.o.completeopt = "menuone,noinsert,noselect"
 
     -- Setup dependencies
+    local luasnip = require("luasnip")
     local cmp = require("cmp")
     local lspkind = require("lspkind")
 
     local setup_opt = {
+      snippet = {
+        expand = function(args)
+          luasnip.lsp_expand(args.body)
+        end,
+      },
       mapping = cmp.mapping.preset.insert({}),
       sorting = {
         comparator = {
@@ -42,6 +49,7 @@ return {
       sources = cmp.config.sources({
         { name = "cmp_ai", priority = 100 },
         { name = "nvim_lsp", priority = 100 },
+        { name = "luasnip", priority = 100 },
         {
           name = "async_path",
           option = {
@@ -67,6 +75,7 @@ return {
 
     local menu = {
       nvim_lsp = "[LSP]",
+      luasnip = "[LSnip]",
       buffer = "[Buffer]",
       async_path = "[Path]",
       cmp_ai = "[AI]",
