@@ -1,4 +1,4 @@
-local utils = require("core.utils")
+--local utils = require("core.utils")
 local lsp_utils = require("plugin.nvim-lspconfig.uitls")
 local has_cmp = lsp_utils.has_cmp()
 
@@ -34,6 +34,7 @@ return {
         vim.bo.omnifunc = "v:lua.vim.lsp.omnifunc"
       end)
     end,
+    --[[
     opts = function()
       ---@class LSPConfigOpts
       local o = { lsp_opts = {} }
@@ -155,5 +156,6 @@ return {
         },
       })
     end,
+    ]]
   },
 }
