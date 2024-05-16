@@ -6,6 +6,7 @@ return {
       "ruff",
       "ruff-lsp",
       "pylyzer",
+      "basedpyright",
     },
   },
   config = function(_, opts)

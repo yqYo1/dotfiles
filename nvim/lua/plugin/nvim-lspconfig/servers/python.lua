@@ -19,6 +19,7 @@ return {
   {
     name = "pylyzer",
     dir = "",
+    enabled = false,
     dependencies = {
       "neovim/nvim-lspconfig",
       "python_tools",
@@ -35,6 +36,35 @@ return {
             diagnostics = true,
             inlayHints = true,
             smartCompletion = true,
+          },
+        },
+      }
+    end,
+    config = function(spec, opts)
+      setup(spec.name, opts)
+    end,
+  },
+  {
+    name = "basedpyright",
+    dir = "",
+    dependencies = {
+      "neovim/nvim-lspconfig",
+      "python_tools",
+    },
+    ft = function(spec)
+      return lsp_utils.get_default_filetypes(spec.name)
+    end,
+    opts = function()
+      return {
+        before_init = python_lsp_init,
+        settings = {
+          basedpyright = {
+            disableOrganizeImports = false,
+            analysis = {
+              autoSearchPaths = true,
+              diagnosticMode = "openFilesOnly",
+              useLibraryCodeForTypes = true,
+            },
           },
         },
       }
