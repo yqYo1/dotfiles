@@ -16,10 +16,22 @@ _G.t = function(str)
   return vim.api.nvim_replace_termcodes(str, true, true, true)
 end
 
+---@param str string
+---@return function
+_G._l = function(str)
+  local lamda_chunk = [[
+  return function(%s)
+    return %s
+  end
+  ]]
+  local arg, body = str:match("(.*):(.*)")
+  return assert(load(lamda_chunk:format(arg, body)))()
+end
+
 _G.is_vscode = function()
   return tb(vim.g.vscode)
 end
 
 _G.is_windows = function()
-  return (vim.loop or vim.uv).os_uname().sysname == "Windows_NT"
+  return vim.uv.os_uname().sysname == "Windows_NT"
 end
