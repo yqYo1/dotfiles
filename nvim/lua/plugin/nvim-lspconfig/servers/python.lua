@@ -31,7 +31,7 @@ return {
         before_init = python_lsp_init,
         settings = {
           python = {
-            checkOnType = true,
+            checkOnType = false,
             diagnostics = true,
             inlayHints = true,
             smartCompletion = true,
