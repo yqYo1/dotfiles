@@ -43,6 +43,18 @@ o.ft.js_like = {
   "typescript.tsx",
 }
 
+o.ft.js_framework_like = vim
+  .iter({
+    o.ft.js_like,
+    {
+      "svelte",
+      "astro",
+      "vue",
+    },
+  })
+  :flatten(math.huge) -- error: attempt to flatten a dict-like table
+  :totable()
+
 o.ft.markdown_like = {
   "markdown",
   "markdown.mdx",
@@ -53,6 +65,15 @@ o.ft.css_like = {
   "scss",
   "less",
 }
+
+o.ft.html_like = vim.iter({
+  o.ft.markdown_like,
+  o.ft.css_like,
+  o.ft.js_framework_like,
+  { "html", "htmldjango" },
+})
+  :flatten(math.huge)
+  :totable()
 
 o.ft.json_like = {
   "json",
@@ -65,6 +86,14 @@ o.ft.yaml_like = {
   "yaml.docker-compose",
   "yaml.gitlab",
 }
+
+o.ft.config_like = vim.iter({
+  o.ft.json_like,
+  o.ft.yaml_like,
+  { "toml" },
+})
+  :flatten(math.huge)
+  :totable()
 
 o.ft.sh_like = {
   "sh",
@@ -89,70 +118,12 @@ o.ft.node_specific_files = {
   "pnpm-lock.yaml", -- pnpm
 }
 
---neovim0.9
-o.ft.js_framework_like = vim.tbl_flatten({
-  o.ft.js_like,
-  {
-    "svelte",
-    "astro",
-    "vue",
-  },
-})
-
-o.ft.html_like = vim.tbl_flatten({
-  o.ft.markdown_like,
-  o.ft.css_like,
-  o.ft.js_framework_like,
-  { "html", "htmldjango" },
-})
-
-o.ft.config_like = vim.tbl_flatten({
-  o.ft.json_like,
-  o.ft.yaml_like,
-  { "toml" },
-})
-
-o.ft.node_files = vim.tbl_flatten({
-  o.ft.node_specific_files,
-  "package.json",
-})
-
---[[
-o.ft.js_framework_like = vim.iter({
-  o.ft.js_like,
-  {
-    "svelte",
-    "astro",
-    "vue",
-  },
-})
-  :flatten(math.huge)
-  :totable()
-
-o.ft.html_like = vim.iter({
-  o.ft.markdown_like,
-  o.ft.css_like,
-  o.ft.js_framework_like,
-  { "html", "htmldjango" },
-})
-  :flatten(math.huge)
-  :totable()
-
-o.ft.config_like = vim.iter({
-  o.ft.json_like,
-  o.ft.yaml_like,
-  { "toml" },
-})
-  :flatten(math.huge)
-  :totable()
-
 o.ft.node_files = vim.iter({
   o.ft.node_specific_files,
   "package.json",
 })
   :flatten(math.huge)
   :totable()
-]]
 
 ---Typescript inlay hints confis
 o.typescriptInlayHints = {
@@ -196,18 +167,13 @@ function o.setup(client, extra_opts)
   ---@class LSPConfigOpts
   local local_opts = vim.tbl_deep_extend("force", {}, default_opts, extra_opts or {})
 
-  local_opts.filetypes = vim.tbl_flatten({
-    local_opts.filetypes or o.get_default_filetypes(client),
-    local_opts.extra_filetypes or {},
-  })
-  --[[
   local_opts.filetypes = vim.iter({
     local_opts.filetypes or o.get_default_filetypes(client),
     local_opts.extra_filetypes or {},
   })
     :flatten()
     :totable()
-]]
+
   local_opts.extra_filetypes = nil
   client.setup(local_opts)
 end

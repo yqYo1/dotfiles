@@ -10,11 +10,9 @@ return {
     },
   },
   config = function(_, opts)
-    --[[
     vim.schedule(function()
       vim.iter(opts.tools):map(_l("x: vim.system({ 'rye', 'install', '-f', x }, { text = true })"))
     end)
-    ]]
   end,
 
   --[[

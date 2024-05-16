@@ -39,12 +39,14 @@ end
 M.on_attach = function(client, bufnr)
   local supports_inlay_hint = client.server_capabilities.inlayHintProvider
 
+  --[[
   if client.name ~= nil then
     Util.info(
       supports_inlay_hint and "Inlay hints supported" or "Inlay hints not supported",
       { title = client.name }
     )
   end
+  ]]
 
   if supports_inlay_hint then
     keymap(bufnr)
