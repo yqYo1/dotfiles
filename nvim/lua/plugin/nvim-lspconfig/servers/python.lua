@@ -1,7 +1,9 @@
 local utils = require("core.utils")
 local lsp_utils = require("plugin.nvim-lspconfig.uitls")
+local lspconfig = require("lspconfig")
 local setup = lsp_utils.setup
 
+--[[
 local pythonName = "python3"
 
 if is_windows() then
@@ -13,6 +15,13 @@ local function python_lsp_init(_, config)
   config.settings.python.pythonPath = vim.env.VIRTUAL_ENV
       and lspconfig.util.path.join(vim.env.VIRTUAL_ENV, "bin", pythonName)
     or utils.find_cmd(pythonName, ".venv/bin", config.root_dir)
+end
+]]
+
+local python_lsp_init = function(_, config)
+  config.settings.python.pythonPath = vim.env.VIRTUAL_ENV
+      and lspconfig.util.path.join(vim.env.VIRTUAL_ENV, "bin", "python3")
+    or utils.find_cmd("python3", ".venv/bin", config.root_dir)
 end
 
 return {
@@ -29,7 +38,7 @@ return {
     end,
     opts = function()
       return {
-        before_init = python_lsp_init,
+        --before_init = python_lsp_init,
         settings = {
           python = {
             checkOnType = false,
@@ -56,13 +65,17 @@ return {
     end,
     opts = function()
       return {
-        before_init = python_lsp_init,
+        --before_init = python_lsp_init,
         settings = {
           basedpyright = {
             disableOrganizeImports = false,
             analysis = {
+              autoImportCompletions = true,
               autoSearchPaths = true,
-              diagnosticMode = "openFilesOnly",
+              ignore = { "*" },
+              diagnosticMode = "workspace",
+              --diagnosticMode = "openFilesOnly",
+              typeCheckingMode = "all",
               useLibraryCodeForTypes = true,
             },
           },
@@ -85,7 +98,7 @@ return {
     end,
     opts = function()
       return {
-        before_init = python_lsp_init,
+        --before_init = python_lsp_init,
         init_options = {
           settings = {
             -- Any extra CLI arguments for `ruff` go here.
