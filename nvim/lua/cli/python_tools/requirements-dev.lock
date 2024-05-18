@@ -10,6 +10,7 @@
 attrs==23.2.0
     # via cattrs
     # via lsprotocol
+basedpyright==1.12.2
 cattrs==23.2.3
     # via lsprotocol
     # via pygls
@@ -24,6 +25,8 @@ lsprotocol==2023.0.1
     # via ruff-lsp
 nodeenv==1.8.0
     # via pyright
+nodejs-wheel-binaries==20.13.1
+    # via basedpyright
 packaging==24.0
     # via ruff-lsp
 parso==0.8.4
