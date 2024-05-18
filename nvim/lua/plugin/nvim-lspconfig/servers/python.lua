@@ -1,15 +1,17 @@
 local lsp_utils = require("plugin.nvim-lspconfig.uitls")
 local setup = lsp_utils.setup
 --[[
+--[[
+]]
 local utils = require("core.utils")
 local lspconfig = require("lspconfig")
 local python_lsp_init = function(_, config)
   config.settings.python.pythonPath = vim.env.VIRTUAL_ENV
       and lspconfig.util.path.join(vim.env.VIRTUAL_ENV, "bin", "python3")
     or utils.find_cmd("python3", ".venv/bin", config.root_dir)
-    --or utils.find_cmd("python3", "venv/bin", config.root_dir)
+  --or utils.find_cmd("python3", "venv/bin", config.root_dir)
 end
-]]
+--]]
 
 return {
   {
@@ -24,20 +26,30 @@ return {
     end,
     opts = function()
       return {
-        --before_init = python_lsp_init,
+        before_init = python_lsp_init,
         settings = {
           basedpyright = {
             disableOrganizeImports = false,
             analysis = {
               autoImportCompletions = true,
-              autoSearchPaths = true,
-              ignore = { "*" },
-              diagnosticMode = "workspace",
-              --diagnosticMode = "openFilesOnly",
+              autoSearchPaths = false,
+              --ignore = { "*" },
+              --diagnosticMode = "workspace",
+              diagnosticMode = "openFilesOnly",
+              diagnosticSeverityOverrides = {
+                -- https://detachhead.github.io/basedpyright/#/configuration?id=based-options
+                reportUnusedImport = false,
+                reportMissingTypeStubs = false,
+                reportImplicitRelativeImport = false,
+                reportUnusedCallResult = false,
+                reportAny = "information",
+              },
               typeCheckingMode = "all",
+              --typeCheckingMode = "standard",
               useLibraryCodeForTypes = true,
             },
           },
+          python = {},
         },
       }
     end,
@@ -65,6 +77,7 @@ return {
             args = {},
           },
         },
+        python = {},
       })
     end,
   },
