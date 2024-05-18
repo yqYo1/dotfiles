@@ -1,21 +1,15 @@
-local utils = require("core.utils")
 local lsp_utils = require("plugin.nvim-lspconfig.uitls")
-local lspconfig = require("lspconfig")
 local setup = lsp_utils.setup
-
 --[[
+local utils = require("core.utils")
+local lspconfig = require("lspconfig")
 local python_lsp_init = function(_, config)
   config.settings.python.pythonPath = vim.env.VIRTUAL_ENV
       and lspconfig.util.path.join(vim.env.VIRTUAL_ENV, "bin", "python3")
     or utils.find_cmd("python3", ".venv/bin", config.root_dir)
+    --or utils.find_cmd("python3", "venv/bin", config.root_dir)
 end
 ]]
-
-local python_lsp_init = function(_, config)
-  config.settings.python.pythonPath = vim.env.VIRTUAL_ENV
-      and lspconfig.util.path.join(vim.env.VIRTUAL_ENV, "bin", "python3")
-    or utils.find_cmd("python3", ".venv/bin", config.root_dir)
-end
 
 return {
   {
@@ -30,7 +24,7 @@ return {
     end,
     opts = function()
       return {
-        before_init = python_lsp_init,
+        --before_init = python_lsp_init,
         settings = {
           basedpyright = {
             disableOrganizeImports = false,
@@ -54,7 +48,7 @@ return {
   {
     name = "ruff_lsp",
     dir = "",
-    enabled = false,
+    --enabled = false,
     dependencies = {
       "neovim/nvim-lspconfig",
       "python_tools",
@@ -64,7 +58,7 @@ return {
     end,
     config = function(spec, _)
       setup(spec.name, {
-        before_init = python_lsp_init,
+        --before_init = python_lsp_init,
         init_options = {
           settings = {
             -- Any extra CLI arguments for `ruff` go here.
