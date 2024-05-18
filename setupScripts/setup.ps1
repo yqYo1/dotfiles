@@ -44,6 +44,16 @@ if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]:
   #rye
   $ryeDir ="$env:USERPROFILE\.rye"
   makeSymbolickLink $ryeDir "$PSScriptRoot\..\rye"
+  [Environment]::SetEnvironmentVariable("RYE_HOME", $ryeDir, 'User')
+  $oldUsePath = [System.Environment]::GetEnvironmentVariable("Path", "User")
+  $newUserPath = ""
+  if ( -not ($oldUsePath.Contains("$Env:RYE_HOME\shims"))){
+    $newUserPath += "$Env:RYE_HOME\shims;"
+  }
+  if ($newUserPath){
+    [System.Environment]::SetEnvironmentVariable("Path", ($newUserPath + $oldUsePath), "User")
+    $Env:Path = ($newUserPath + $Env:Path)
+  }
 
   #aqua
   $aquaRootDir = "$env:LOCALAPPDATA\aquaproj-aqua"
@@ -51,7 +61,6 @@ if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]:
   [Environment]::SetEnvironmentVariable("AQUA_ROOT_DIR", $aquaRootDir, 'User')
   $Env:AQUA_ROOT_DIR = $aquaRootDir
   $oldUsePath = [System.Environment]::GetEnvironmentVariable("Path", "User")
-  #[Environment]::SetEnvironmentVariable("AQUA_ROOT_DIR", "%LOCALAPPDATA%\aquaproj-aqua", 'User')
   $newUserPath = ""
   if ( -not ($oldUsePath.Contains("$aquaRootDir\bat"))){
     $newUserPath += "$aquaRootDir\bat;"
