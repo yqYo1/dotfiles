@@ -95,7 +95,7 @@ if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]:
 
   . "$env:USERPROFILE\Documents\PowerShell\Profile.ps1"
 
-  gcm podman -ea SilentlyContinue | Out-Null
+  Get-Command podman -ea SilentlyContinue | Out-Null
   if ($? -eq $true) { # コマンドが存在すれば
     Write-Output 'Success!'
   } else {            # コマンドが存在しなければ
