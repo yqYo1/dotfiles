@@ -208,19 +208,32 @@
       <row ro="e" hi="え" ka="エ" an="ｴ" so="0" />
       <row ro="o" hi="お" ka="オ" an="ｵ" so="0" />
       <row ro="ka" hi="か" ka="カ" an="ｶ" so="0" />
-      <row ro="ki" hi="き" ka="キ" an="ｷ" so="0" />
-      <row ro="ku" hi="く" ka="ク" an="ｸ" so="0" />
-      <row ro="ke" hi="け" ka="ケ" an="ｹ" so="0" />
-      <row ro="ko" hi="こ" ka="コ" an="ｺ" so="0" />
-      <row ro="kz" hi="かん" ka="カン" an="ｶﾝ" so="0" />
-      <row ro="kk" hi="きん" ka="キン" an="ｷﾝ" so="0" />
-      <row ro="kj" hi="くん" ka="クン" an="ｸﾝ" so="0" />
-      <row ro="kd" hi="けん" ka="ケン" an="ｹﾝ" so="0" />
-      <row ro="kl" hi="こん" ka="コン" an="ｺﾝ" so="0" />
       <row ro="kq" hi="かい" ka="カイ" an="ｶｲ" so="0" />
+      <row ro="k;" hi="かく" ka="カク" an="ｶｸ" so="0" />
+      <row ro="kz" hi="かん" ka="カン" an="ｶﾝ" so="0" />
+      <row ro="ks" hi="かっ" ka="カッ" an="ｶｯ" so="0" />
+      <row ro="ki" hi="き" ka="キ" an="ｷ" so="0" />
+      <row ro="km" hi="きき" ka="キキ" an="ｷｷ" so="0" />
+      <row ro="k," hi="きく" ka="キク" an="ｷｸ" so="0" />
+      <row ro="kk" hi="きん" ka="キン" an="ｷﾝ" so="0" />
+      <row ro="kx" hi="きっ" ka="キッ" an="ｷｯ" so="0" />
+      <row ro="ku" hi="く" ka="ク" an="ｸ" so="0" />
+      <row ro="kf" hi="くい" ka="クイ" an="ｸｲ" so="0" />
       <row ro="kh" hi="くう" ka="クウ" an="ｸｳ" so="0" />
+      <row ro="kj" hi="くん" ka="クン" an="ｸﾝ" so="0" />
+      <row ro="kc" hi="くっ" ka="クッ" an="ｸｯ" so="0" />
+      <row ro="ke" hi="け" ka="ケ" an="ｹ" so="0" />
       <row ro="kw" hi="けい" ka="ケイ" an="ｹｲ" so="0" />
+      <row ro="kn" hi="けき" ka="ケキ" an="ｹｷ" so="0" />
+      <row ro="kd" hi="けん" ka="ケン" an="ｹﾝ" so="0" />
+      <row ro="kv" hi="けっ" ka="ケッ" an="ｹｯ" so="0" />
+      <row ro="ko" hi="こ" ka="コ" an="ｺ" so="0" />
+      <row ro="k." hi="こく" ka="コク" an="ｺｸ" so="0" />
       <row ro="kp" hi="こう" ka="コウ" an="ｺｳ" so="0" />
+      <row ro="k'" hi="ここ" ka="ココ" an="ｺｺ" so="0" />
+      <row ro="k[" hi="これ" ka="コレ" an="ｺﾚ" so="0" />
+      <row ro="kl" hi="こん" ka="コン" an="ｺﾝ" so="0" />
+      <row ro="kb" hi="こっ" ka="コッ" an="ｺｯ" so="0" />
       <row ro="sa" hi="さ" ka="サ" an="ｻ" so="0" />
       <row ro="si" hi="し" ka="シ" an="ｼ" so="0" />
       <row ro="su" hi="す" ka="ス" an="ｽ" so="0" />
@@ -611,7 +624,8 @@
       <row ro=";" hi="っ" ka="ッ" an="ｯ" so="0" />
       <row ro="q" hi="ん" ka="ン" an="ﾝ" so="0" />
       <row ro="'" hi="ー" ka="ー" an="ｰ" so="0" />
-      <row ro="-" hi="ー" ka="ー" an="ｰ" so="0" />
+      <row ro="=" hi="って" ka="ッテ" an="ｯﾃ" so="0" />
+      <row ro="/" hi="った" ka="ッタ" an="ｯﾀ" so="0" />
       <row ro="kr" hi="から" ka="カラ" an="ｶﾗ" so="0" />
       <row ro="km" hi="かも" ka="カモ" an="ｶﾓ" so="0" />
       <row ro="kt" hi="こと" ka="コト" an="ｺﾄ" so="0" />
@@ -660,20 +674,24 @@
       <row ro=")" hi=")" ka=")" an=")" so="0" />
       <row ro="*" hi="*" ka="*" an="*" so="0" />
       <row ro="+" hi="+" ka="+" an="+" so="0" />
-      <row ro="," hi="、" ka="、" an="､" so="0" />
+      <row ro="x," hi="、" ka="、" an="､" so="0" />
+      <row ro="xx," hi="," ka="," an="," so="0" />
       <row ro="-" hi="ー" ka="ー" an="ｰ" so="0" />
-      <row ro="." hi="。" ka="。" an="｡" so="0" />
-      <row ro="/" hi="/" ka="/" an="/" so="0" />
+      <row ro="x." hi="。" ka="。" an="｡" so="0" />
+      <row ro="xx." hi="." ka="." an="." so="0" />
+      <row ro="x/" hi="/" ka="/" an="/" so="0" />
       <row ro="x:" hi=":" ka=":" an=":" so="0" />
       <row ro="x;" hi=";" ka=";" an=";" so="0" />
       <row ro="&lt;" hi="&lt;" ka="&lt;" an="&lt;" so="0" />
-      <row ro="=" hi="=" ka="=" an="=" so="0" />
+      <row ro="x=" hi="=" ka="=" an="=" so="0" />
       <row ro=">" hi=">" ka=">" an=">" so="0" />
       <row ro="?" hi="？" ka="？" an="?" so="0" />
       <row ro="@" hi="@" ka="@" an="@" so="0" />
       <row ro="x[" hi="「" ka="「" an="｢" so="0" />
-      <row ro="\" hi="\" ka="\" an="\" so="0" />
+      <row ro="xx[" hi="[" ka="[" an="[" so="0" />
       <row ro="]" hi="」" ka="」" an="｣" so="0" />
+      <row ro="x]" hi="]" ka="]" an="]" so="0" />
+      <row ro="\" hi="\" ka="\" an="\" so="0" />
       <row ro="^" hi="^" ka="^" an="^" so="0" />
       <row ro="_" hi="_" ka="_" an="_" so="0" />
       <row ro="`" hi="`" ka="`" an="`" so="0" />
