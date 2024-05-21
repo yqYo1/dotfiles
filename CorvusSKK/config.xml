@@ -105,11 +105,13 @@
   <section name="preservedkeyon">
     <list>
       <row vkey="0x16" mkey="0" />
+      <row vkey="0x1C" mkey="0" />
     </list>
   </section>
   <section name="preservedkeyoff">
     <list>
       <row vkey="0x1A" mkey="0" />
+      <row vkey="0x1D" mkey="0" />
     </list>
   </section>
   <section name="keymap">
