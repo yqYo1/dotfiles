@@ -52,7 +52,7 @@ o.ft.js_framework_like = vim
       "vue",
     },
   })
-  :flatten(math.huge) -- error: attempt to flatten a dict-like table
+  :flatten(math.huge) -- Assert error when trying to flatten dict-like table
   :totable()
 
 o.ft.markdown_like = {
