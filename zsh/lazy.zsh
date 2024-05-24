@@ -5,9 +5,10 @@ alias ls=eza
 alias ll='eza -alhF --git --git-repos'
 alias vi=nvim
 alias cls=clear
+alias lg=lazygit
 export AQUA_PROGRESS_BAR=true
 source <(gh completion -s zsh)
 source <(rye self completion -s zsh)
 source <(jj util completion --zsh)
 source <(podman completion zsh)
-aqua update-aqua
+$(dirname $AQUA_GLOBAL_CONFIG)/update.sh
