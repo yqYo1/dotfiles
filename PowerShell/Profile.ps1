@@ -2,6 +2,7 @@
 Function ll {eza -alhF --git --git-repos}
 Set-Alias -Name which -Value where.exe
 Set-Alias -Name vi -Value nvim
+Set-Alias -Name lg -Value Lazygit
 Set-PSReadLineOption -PredictionSource HistoryAndPlugin
 Set-PSReadLineOption -PredictionViewStyle ListView
 Set-PSReadLineKeyHandler -Key Tab -Function MenuComplete
