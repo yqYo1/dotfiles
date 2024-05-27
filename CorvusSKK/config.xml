@@ -678,30 +678,30 @@
       <row ro="sy@" hi="しょれ" ka="ショレ" an="ｼｮﾚ" so="0" />
       <row ro="syl" hi="しょん" ka="ション" an="ｼｮﾝ" so="0" />
       <row ro="syb" hi="しょっ" ka="ショッ" an="ｼｮｯ" so="0" />
-      <row ro="sya" hi="しゃ" ka="シャ" an="ｼｬ" so="0" />
-      <row ro="syq" hi="しゃい" ka="シャイ" an="ｼｬｲ" so="0" />
-      <row ro="sy;" hi="しゃく" ka="シャク" an="ｼｬｸ" so="0" />
-      <row ro="syz" hi="しゃん" ka="シャン" an="ｼｬﾝ" so="0" />
-      <row ro="sys" hi="しゃっ" ka="シャッ" an="ｼｬｯ" so="0" />
-      <row ro="syu" hi="しゅ" ka="シュ" an="ｼｭ" so="0" />
-      <row ro="syf" hi="しゅい" ka="シュイ" an="ｼｭｲ" so="0" />
-      <row ro="syh" hi="しゅう" ka="シュウ" an="ｼｭｳ" so="0" />
-      <row ro="syj" hi="しゅん" ka="シュン" an="ｼｭﾝ" so="0" />
-      <row ro="syc" hi="しゅっ" ka="シュッ" an="ｼｭｯ" so="0" />
-      <row ro="sye" hi="しぇ" ka="シェ" an="ｼｪ" so="0" />
-      <row ro="syw" hi="しぇい" ka="シェイ" an="ｼｪｲ" so="0" />
-      <row ro="syn" hi="しぇき" ka="シェキ" an="ｼｪｷ" so="0" />
-      <row ro="syd" hi="しぇん" ka="シェン" an="ｼｪﾝ" so="0" />
-      <row ro="syv" hi="しぇっ" ka="シェッ" an="ｼｪｯ" so="0" />
-      <row ro="syo" hi="しょ" ka="ショ" an="ｼｮ" so="0" />
-      <row ro="syp" hi="しょう" ka="ショウ" an="ｼｮｳ" so="0" />
-      <row ro="sy." hi="しょく" ka="ショク" an="ｼｮｸ" so="0" />
-      <row ro="sy'" hi="しょこ" ka="ショコ" an="ｼｮｺ" so="0" />
-      <row ro="sy:" hi="しょこ" ka="ショコ" an="ｼｮｺ" so="0" />
-      <row ro="sy[" hi="しょれ" ka="ショレ" an="ｼｮﾚ" so="0" />
-      <row ro="sy@" hi="しょれ" ka="ショレ" an="ｼｮﾚ" so="0" />
-      <row ro="syl" hi="しょん" ka="ション" an="ｼｮﾝ" so="0" />
-      <row ro="syb" hi="しょっ" ka="ショッ" an="ｼｮｯ" so="0" />
+      <row ro="xa" hi="しゃ" ka="シャ" an="ｼｬ" so="0" />
+      <row ro="xq" hi="しゃい" ka="シャイ" an="ｼｬｲ" so="0" />
+      <row ro="x;" hi="しゃく" ka="シャク" an="ｼｬｸ" so="0" />
+      <row ro="xz" hi="しゃん" ka="シャン" an="ｼｬﾝ" so="0" />
+      <row ro="xs" hi="しゃっ" ka="シャッ" an="ｼｬｯ" so="0" />
+      <row ro="xu" hi="しゅ" ka="シュ" an="ｼｭ" so="0" />
+      <row ro="xf" hi="しゅい" ka="シュイ" an="ｼｭｲ" so="0" />
+      <row ro="xh" hi="しゅう" ka="シュウ" an="ｼｭｳ" so="0" />
+      <row ro="xj" hi="しゅん" ka="シュン" an="ｼｭﾝ" so="0" />
+      <row ro="xc" hi="しゅっ" ka="シュッ" an="ｼｭｯ" so="0" />
+      <row ro="xe" hi="しぇ" ka="シェ" an="ｼｪ" so="0" />
+      <row ro="xw" hi="しぇい" ka="シェイ" an="ｼｪｲ" so="0" />
+      <row ro="xn" hi="しぇき" ka="シェキ" an="ｼｪｷ" so="0" />
+      <row ro="xd" hi="しぇん" ka="シェン" an="ｼｪﾝ" so="0" />
+      <row ro="xv" hi="しぇっ" ka="シェッ" an="ｼｪｯ" so="0" />
+      <row ro="xo" hi="しょ" ka="ショ" an="ｼｮ" so="0" />
+      <row ro="xp" hi="しょう" ka="ショウ" an="ｼｮｳ" so="0" />
+      <row ro="x." hi="しょく" ka="ショク" an="ｼｮｸ" so="0" />
+      <row ro="x'" hi="しょこ" ka="ショコ" an="ｼｮｺ" so="0" />
+      <row ro="x:" hi="しょこ" ka="ショコ" an="ｼｮｺ" so="0" />
+      <row ro="x[" hi="しょれ" ka="ショレ" an="ｼｮﾚ" so="0" />
+      <row ro="x@" hi="しょれ" ka="ショレ" an="ｼｮﾚ" so="0" />
+      <row ro="xl" hi="しょん" ka="ション" an="ｼｮﾝ" so="0" />
+      <row ro="xb" hi="しょっ" ka="ショッ" an="ｼｮｯ" so="0" />
       <row ro="tya" hi="ちゃ" ka="チャ" an="ﾁｬ" so="0" />
       <row ro="tyq" hi="ちゃい" ka="チャイ" an="ﾁｬｲ" so="0" />
       <row ro="ty;" hi="ちゃく" ka="チャク" an="ﾁｬｸ" so="0" />
