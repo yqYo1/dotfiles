@@ -94,6 +94,9 @@ if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]:
   makeSymbolickLink $corvusskkDir "$PSScriptRoot\..\CorvusSKK"
   winget install --id nathancorvussolis.corvusskk
 
+  $lazygitDir = "$Env:LOCALAPPDATA\lazygit"
+  makeSymbolickLink $lazygitDir "$PSScriptRoot\..\lazygit"
+
   #PowerShell
   $pwshDir = "$env:USERPROFILE\Documents\PowerShell"
   makeDir $pwshDir
