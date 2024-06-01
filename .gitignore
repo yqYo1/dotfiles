@@ -17,6 +17,7 @@
 !/wezterm/
 !/sway/
 !/tofi/
+!/lazygit/
 
 *.zwc
 zsh/.zsh_history
@@ -26,6 +27,7 @@ nvim/lua/cli/node_server/node_modules
 nvim/lun/cli/python_tools/.venv
 /nvim/lazy-lock.json
 /CorvusSKK/userdict.txt
+/lazygit/state.yml
 /rye/env
 /rye/*/*
 *.old
