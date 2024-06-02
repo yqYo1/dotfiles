@@ -16,9 +16,37 @@ config.window_decorations = "RESIZE"
 config.font_size = 12
 config.adjust_window_size_when_changing_font_size = true
 
+config.launch_menu = {}
+
 --os
 if wezterm.target_triple == "x86_64-pc-windows-msvc" then
   config.default_prog = { "pwsh.exe", "-NoLogo" }
+  table.insert(config.launch_menu, {
+    label = "pwsh",
+    args = { "pwsh.exe", "-NoLogo" },
+  })
+  for _, vsvers in ipairs(wezterm.glob("Microsoft Visual Studio/20*", "C:/Program Files (x86)")) do
+    local year = vsvers:gsub("Microsoft Visual Studio/", "")
+    table.insert(config.launch_menu, {
+      label = "x64 Native Tools VS " .. year,
+      args = {
+        "cmd.exe",
+        "/k",
+        "C:/Program Files (x86)/" .. vsvers .. "/BuildTools/VC/Auxiliary/Build/vcvars64.bat",
+      },
+    })
+    table.insert(config.launch_menu, {
+      label = "Developer PWSH VS " .. year,
+      args = {
+        "pwsh.exe",
+        "-NoLogo",
+        "-NoExit",
+        "-Command",
+        '&{Import-Module "C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/Common7/Tools/Microsoft.VisualStudio.DevShell.dll"; Enter-VsDevShell d9da56ea -SkipAutomaticLocation -DevCmdArguments "-arch=x64 -host_arch=x64"}',
+      },
+    })
+  end
+
   config.window_background_opacity = 0.75
 
   -- https://github.com/wez/wezterm/issues/4992
