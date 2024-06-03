@@ -27,6 +27,9 @@ if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]:
   #install CMake
   winget install --id Kitware.CMake
 
+  #clangd
+  . ./clangdSetup.ps1
+
   #starship
   $dotConfig = "$env:USERPROFILE\.config"
   makeDir $dotConfig
