@@ -65,13 +65,13 @@ return {
               "nvim-cmp",
               "nvim-lspconfig",
             }),
-            checkThirdParty = "Disable",
+            checkThirdParty = false,
           },
           diagnostics = {
             globals = { "vim" },
           },
           completion = {
-            showWord = "Disable",
+            showWord = "Fallback",
             callSnippet = "Replace",
           },
           format = {
@@ -79,6 +79,7 @@ return {
           },
           hint = {
             enable = true,
+            setType = true,
           },
         },
       },
