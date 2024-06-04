@@ -1,5 +1,10 @@
 ﻿Set-Alias -Name ls -Value eza
-Function ll {eza -alhF --git --git-repos}
+Function ll {eza -alhF --git --git-repos $args}
+Function d {Set-Location "~\dotfiles\"}
+Function .. {Set-Location "..\$args"}
+Function ... {Set-Location "..\..\$args"}
+Function .... {Set-Location "..\..\..\$args"}
+Function gp {git pull}
 Set-Alias -Name which -Value where.exe
 Set-Alias -Name vi -Value nvim
 Set-Alias -Name lg -Value Lazygit
