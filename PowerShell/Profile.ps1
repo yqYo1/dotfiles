@@ -4,6 +4,7 @@ Function d {Set-Location "~\dotfiles\"}
 Function .. {Set-Location "..\$args"}
 Function ... {Set-Location "..\..\$args"}
 Function .... {Set-Location "..\..\..\$args"}
+Remove-Item alias:gp -Force
 Function gp {git pull}
 Set-Alias -Name which -Value where.exe
 Set-Alias -Name vi -Value nvim
