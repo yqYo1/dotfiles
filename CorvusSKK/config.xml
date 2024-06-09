@@ -296,11 +296,11 @@
       <row ro="t@" hi="とれ" ka="トレ" an="ﾄﾚ" so="0" />
       <row ro="tl" hi="とん" ka="トン" an="ﾄﾝ" so="0" />
       <row ro="tb" hi="とっ" ka="トッ" an="ﾄｯ" so="0" />
-      <row ro="na" hi="な" ka="ネ" an="ﾅ" so="0" />
-      <row ro="nq" hi="ない" ka="ネイ" an="ﾅｲ" so="0" />
-      <row ro="n;" hi="なく" ka="ネク" an="ﾅｸ" so="0" />
-      <row ro="nz" hi="なん" ka="ネン" an="ﾅﾝ" so="0" />
-      <row ro="ns" hi="なっ" ka="ネッ" an="ﾅｯ" so="0" />
+      <row ro="na" hi="な" ka="ナ" an="ﾅ" so="0" />
+      <row ro="nq" hi="ない" ka="ナイ" an="ﾅｲ" so="0" />
+      <row ro="n;" hi="なく" ka="ナク" an="ﾅｸ" so="0" />
+      <row ro="nz" hi="なん" ka="ナン" an="ﾅﾝ" so="0" />
+      <row ro="ns" hi="なっ" ka="ナッ" an="ﾅｯ" so="0" />
       <row ro="ni" hi="に" ka="ニ" an="ﾆ" so="0" />
       <row ro="nm" hi="にき" ka="ニキ" an="ﾆｷ" so="0" />
       <row ro="n," hi="にく" ka="ニク" an="ﾆｸ" so="0" />
