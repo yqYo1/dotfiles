@@ -14,7 +14,7 @@ packages:
 - name: golang/go@go1.22.4
 - name: golang/tools/goimports@v0.20.0
 - name: golang/tools/gorename@v0.20.0
-- name: junegunn/fzf@0.52.1
+- name: junegunn/fzf@0.53.0
 - name: mitsuhiko/rye@0.34.0
 - name: LuaLS/lua-language-server@3.9.2
 - name: rust-lang/rust-analyzer@2024-03-11
