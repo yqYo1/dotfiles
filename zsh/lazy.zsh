@@ -6,6 +6,10 @@ alias ll='eza -alhF --git --git-repos'
 alias vi=nvim
 alias cls=clear
 alias lg=lazygit
+alias gp='git pull'
+alias d='cd ~/dotfiles/'
+alias ..='cd ../'
+alias ...='cd ../../'
 export AQUA_PROGRESS_BAR=true
 source <(gh completion -s zsh)
 source <(rye self completion -s zsh)
