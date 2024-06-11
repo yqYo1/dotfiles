@@ -4,7 +4,6 @@ return {
   cond = not is_vscode(),
   dependencies = {
     { "onsails/lspkind.nvim" },
-    --{ "FelipeLema/cmp-async-path" },
     { url = "https://codeberg.org/FelipeLema/cmp-async-path.git" },
     { "hrsh7th/cmp-buffer" },
     { "hrsh7th/cmp-nvim-lua" },
@@ -51,6 +50,11 @@ return {
         { name = "nvim_lsp", priority = 100 },
         { name = "luasnip", priority = 100 },
         {
+          name = "lazydev",
+          group_index = 0,
+          priority = 100,
+        },
+        {
           name = "async_path",
           option = {
             trailing_slash = true,
@@ -69,7 +73,7 @@ return {
         completeopt = "menu,menuone,noinsert,noselect",
       },
       experimental = {
-        ghost_text = false, -- this feature conflict to the copilot.vim's preview.
+        ghost_text = false,
       },
     }
 

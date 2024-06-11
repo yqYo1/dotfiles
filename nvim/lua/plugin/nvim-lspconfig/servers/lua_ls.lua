@@ -2,40 +2,6 @@ local lsp_utils = require("plugin.nvim-lspconfig.uitls")
 local setup = lsp_utils.setup
 local format_config = lsp_utils.format_config
 
-local i = require("plenary.iterators")
-
----@param names string[]
-local function get_plugin_paths(names)
-  local plugins = require("lazy.core.config").plugins
-  return i.iter(names)
-    :filter(function(n)
-      local ia = plugins[n] ~= nil
-      if not ia then
-        vim.notify("Invalid plugin name: " .. n)
-      end
-      return ia
-    end)
-    :map(function(n)
-      return plugins[n].dir .. "/lua"
-    end)
-end
-
----@param plugins string[]
----@return string[]
-local function library(plugins)
-  local paths = get_plugin_paths(plugins)
-
-  return i.iter({
-    vim.fn.stdpath("config") .. "/lua",
-    vim.env.VIMRUNTIME .. "/lua",
-    "${3rd}/luv/library",
-    "${3rd}/busted/library",
-    "${3rd}/luassert/library",
-  })
-    :chain(paths)
-    :tolist()
-end
-
 return {
   name = "lua_ls",
   dir = "",
@@ -57,14 +23,6 @@ return {
             path = { "?.lua", "?/init.lua" },
           },
           workspace = {
-            library = library({
-              "lazy.nvim",
-              "plenary.nvim",
-              "oil.nvim",
-              "noice.nvim",
-              "nvim-cmp",
-              "nvim-lspconfig",
-            }),
             checkThirdParty = false,
           },
           diagnostics = {
