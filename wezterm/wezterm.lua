@@ -28,8 +28,10 @@ if wezterm.target_triple == "x86_64-pc-windows-msvc" then
   local DevShellarg = nil
   if hostname == "FMV-LAPTOP-i7-1165G7" then
     DevShellarg = "edf27e67"
+  elseif hostname == "DESKTOP-7900X3D" then
+    DevShellarg = "d9da56ea"
   else
-    wezterm.log_info("hostname not registered")
+    wezterm.log_info("hostname " .. hostname .. " is not registered")
   end
 
   for _, vsvers in ipairs(wezterm.glob("Microsoft Visual Studio/20*", "C:/Program Files (x86)")) do
