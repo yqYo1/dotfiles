@@ -1,6 +1,6 @@
 local wezterm = require("wezterm")
---wezterm.log_info("init")
 
+local hostname = wezterm.hostname()
 local config = {}
 
 if wezterm.config_builder then
@@ -25,6 +25,13 @@ if wezterm.target_triple == "x86_64-pc-windows-msvc" then
     label = "pwsh",
     args = { "pwsh.exe", "-NoLogo" },
   })
+  local DevShellarg = nil
+  if hostname == "FMV-LAPTOP-i7-1165G7" then
+    DevShellarg = "edf27e67"
+  else
+    wezterm.log_info("hostname not registered")
+  end
+
   for _, vsvers in ipairs(wezterm.glob("Microsoft Visual Studio/20*", "C:/Program Files (x86)")) do
     local year = vsvers:gsub("Microsoft Visual Studio/", "")
     table.insert(config.launch_menu, {
@@ -42,7 +49,9 @@ if wezterm.target_triple == "x86_64-pc-windows-msvc" then
         "-NoLogo",
         "-NoExit",
         "-Command",
-        '&{Import-Module "C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/Common7/Tools/Microsoft.VisualStudio.DevShell.dll"; Enter-VsDevShell d9da56ea -SkipAutomaticLocation -DevCmdArguments "-arch=x64 -host_arch=x64"}',
+        '&{Import-Module "C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/Common7/Tools/Microsoft.VisualStudio.DevShell.dll"; Enter-VsDevShell '
+          .. DevShellarg
+          .. ' -SkipAutomaticLocation -DevCmdArguments "-arch=x64 -host_arch=x64"}',
       },
     })
   end
