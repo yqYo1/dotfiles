@@ -11,6 +11,7 @@ return {
   end,
   opts = function()
     return {
+      on_attach = format_config(false),
       settings = {},
     }
   end,
