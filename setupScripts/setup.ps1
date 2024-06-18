@@ -28,7 +28,7 @@ if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]:
   winget install --id Kitware.CMake
 
   #clangd
-  . ./clangdSetup.ps1
+  #. ./clangdSetup.ps1
 
   #starship
   $dotConfig = "$env:USERPROFILE\.config"
@@ -52,6 +52,18 @@ if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]:
   $newUserPath = ""
   if ( -not ($oldUsePath.Contains("$Env:RYE_HOME\shims"))){
     $newUserPath += "$Env:RYE_HOME\shims;"
+  }
+  if ($newUserPath){
+    [System.Environment]::SetEnvironmentVariable("Path", ($newUserPath + $oldUsePath), "User")
+    $Env:Path = ($newUserPath + $Env:Path)
+  }
+
+  #LLVM
+  winget install --id LLVM.LLVM
+  $oldUsePath = [System.Environment]::GetEnvironmentVariable("Path", "User")
+  $newUserPath = ""
+  if ( -not ($oldUsePath.Contains("C:\Program Files\LLVM\bin"))){
+    $newUserPath += "C:\Program Files\LLVM\bin;"
   }
   if ($newUserPath){
     [System.Environment]::SetEnvironmentVariable("Path", ($newUserPath + $oldUsePath), "User")
