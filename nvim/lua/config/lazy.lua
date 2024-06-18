@@ -21,7 +21,17 @@ lazy.setup({
     },
     rtp = {
       disabled_plugins = {
+        "gzip",
+        "matchit",
+        "matchparen",
         "netrwPlugin",
+        "netrw",
+        "tarPlugin",
+        "tar",
+        "tohtml",
+        "tutor",
+        "zipPlugin",
+        "zip",
       },
     },
   },
