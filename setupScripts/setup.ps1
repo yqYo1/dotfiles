@@ -43,6 +43,7 @@ if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]:
   $nvimLuaDir = "$nvimDir\lua"
   makeSymbolickLink $InitLua "$PSScriptRoot\..\nvim\init.lua"
   makeSymbolickLink $nvimLuaDir "$PSScriptRoot\..\nvim\lua"
+  makeSymbolickLink "$nvimDir\after" "$PSScriptRoot\..\nvim\after"
 
   #rye
   $ryeDir ="$env:USERPROFILE\.rye"
