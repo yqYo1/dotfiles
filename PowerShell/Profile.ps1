@@ -11,6 +11,7 @@ Set-Alias -Name vi -Value nvim
 Set-Alias -Name lg -Value Lazygit
 Set-PSReadLineOption -PredictionSource HistoryAndPlugin
 Set-PSReadLineOption -PredictionViewStyle ListView
+Set-PSReadLineOption -BellStyle None
 Set-PSReadLineKeyHandler -Key Tab -Function MenuComplete
 Import-Module posh-git
 Invoke-Expression (&starship init powershell)
