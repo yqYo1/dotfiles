@@ -35,4 +35,7 @@ lazy.setup({
       },
     },
   },
+  rocks = {
+    enabled = false,
+  },
 })
