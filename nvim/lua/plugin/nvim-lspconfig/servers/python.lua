@@ -7,11 +7,17 @@ local python_lsp_init = function(_, config)
       and lspconfig.util.path.join(vim.env.VIRTUAL_ENV, "bin", "python3")
     or utils.find_cmd("python3", ".venv/bin", config.root_dir)
 end
+local dir_base
+if is_windows() then
+  dir_base = vim.env.TEMP .. "\\nvim\\lsp-"
+else
+  dir_base = vim.env.TMPDIR .. "/nvim/lsp-"
+end
 
 return {
   {
     name = "basedpyright",
-    dir = "",
+    dir = dir_base .. "basedpyright",
     dependencies = {
       "neovim/nvim-lspconfig",
       "python_tools",
@@ -57,7 +63,7 @@ return {
   },
   {
     name = "ruff_lsp",
-    dir = "",
+    dir = dir_base .. "rufflsp",
     --enabled = false,
     dependencies = {
       "neovim/nvim-lspconfig",

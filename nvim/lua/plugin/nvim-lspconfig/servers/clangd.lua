@@ -5,7 +5,7 @@ local dir_name
 if is_windows() then
   dir_name = vim.env.TEMP .. "\\nvim\\lsp-clangd"
 else
-  dir_name = vim.env.TMPDIR .. "/lsp-clangd"
+  dir_name = vim.env.TMPDIR .. "/nvim/lsp-clangd"
 end
 
 return {
