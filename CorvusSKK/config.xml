@@ -942,6 +942,30 @@
       <row ro="by@" hi="びょれ" ka="ビョレ" an="ﾋﾞｮﾚ" so="0" />
       <row ro="byl" hi="びょん" ka="ビョン" an="ﾋﾞｮﾝ" so="0" />
       <row ro="byb" hi="びょっ" ka="ビョッ" an="ﾋﾞｮｯ" so="0" />
+      <row ro="pya" hi="ぴゃ" ka="ピャ" an="ﾋﾟｬ" so="0" />
+      <row ro="pyq" hi="ぴゃい" ka="ピャイ" an="ﾋﾟｬｲ" so="0" />
+      <row ro="py;" hi="ぴゃく" ka="ピャク" an="ﾋﾟｬｸ" so="0" />
+      <row ro="pyz" hi="ぴゃん" ka="ピャン" an="ﾋﾟｬﾝ" so="0" />
+      <row ro="pys" hi="ぴゃっ" ka="ピャッ" an="ﾋﾟｬｯ" so="0" />
+      <row ro="pyu" hi="ぴゅ" ka="ピュ" an="ﾋﾟｭ" so="0" />
+      <row ro="pyf" hi="ぴゅい" ka="ピュイ" an="ﾋﾟｭｲ" so="0" />
+      <row ro="pyh" hi="ぴゅう" ka="ピュウ" an="ﾋﾟｭｳ" so="0" />
+      <row ro="pyj" hi="ぴゅん" ka="ピュン" an="ﾋﾟｭﾝ" so="0" />
+      <row ro="pyc" hi="ぴゅっ" ka="ピュッ" an="ﾋﾟｭｯ" so="0" />
+      <row ro="pye" hi="ぴぇ" ka="ピェ" an="ﾋﾟｪ" so="0" />
+      <row ro="pyw" hi="ぴぇい" ka="ピェイ" an="ﾋﾟｪｲ" so="0" />
+      <row ro="pyn" hi="ぴぇき" ka="ピェキ" an="ﾋﾟｪｷ" so="0" />
+      <row ro="pyd" hi="ぴぇん" ka="ピェン" an="ﾋﾟｪﾝ" so="0" />
+      <row ro="pyv" hi="ぴぇっ" ka="ピェッ" an="ﾋﾟｪｯ" so="0" />
+      <row ro="pyo" hi="ぴょ" ka="ピョ" an="ﾋﾟｮ" so="0" />
+      <row ro="pyp" hi="ぴょう" ka="ピョウ" an="ﾋﾟｮｳ" so="0" />
+      <row ro="py." hi="ぴょく" ka="ピョク" an="ﾋﾟｮｸ" so="0" />
+      <row ro="py'" hi="ぴょこ" ka="ピョコ" an="ﾋﾟｮｺ" so="0" />
+      <row ro="py:" hi="ぴょこ" ka="ピョコ" an="ﾋﾟｮｺ" so="0" />
+      <row ro="py[" hi="ぴょれ" ka="ピョレ" an="ﾋﾟｮﾚ" so="0" />
+      <row ro="py@" hi="ぴょれ" ka="ピョレ" an="ﾋﾟｮﾚ" so="0" />
+      <row ro="pyl" hi="ぴょん" ka="ピョン" an="ﾋﾟｮﾝ" so="0" />
+      <row ro="pyb" hi="ぴょっ" ka="ピョッ" an="ﾋﾟｮｯ" so="0" />
       <row ro="va" hi="ゔぁ" ka="ヴァ" an="ｳﾞｧ" so="0" />
       <row ro="vq" hi="ゔぁい" ka="ヴァイ" an="ｳﾞｧｲ" so="0" />
       <row ro="v;" hi="ゔぁく" ka="ヴァク" an="ｳﾞｧｸ" so="0" />
