@@ -1,34 +1,45 @@
 # require develoopoer mode
-
-Push-Location -Path $PSScriptRoot
-# run as admin
-if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole("Administrators")) {
-  Start-Process pwsh.exe "-File `"$PSCommandPath`"" -Verb RunAs -Wait
-  . "$env:USERPROFILE\Documents\PowerShell\Profile.ps1"
+<#
+if ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole("Administrators") {
+  Write-Output "Do not run admin"
 }else{
-  function makeDir($dir){
-    if ( -not (Test-Path $dir)){
-      New-Item $dir -ItemType Directory
-    }
+  pause
+}
+#>
+function makeDir($dir){
+  if ( -not (Test-Path $dir)){
+    New-Item $dir -ItemType Directory
   }
-  function makeSymbolickLink($destination, $source){
-    if (Test-Path $destination) {
-      if ((Get-ItemProperty $destination).Mode.Substring(0,1) -ne 'l'){
-        Remove-Item $destination -Force  -Recurse
-        New-Item -ItemType SymbolicLink -Path $destination -Value "$source"
-      }
-    }else {
+}
+function makeSymbolickLink($destination, $source){
+  if (Test-Path $destination) {
+    if ((Get-ItemProperty $destination).Mode.Substring(0,1) -ne 'l'){
+      Remove-Item $destination -Force  -Recurse
       New-Item -ItemType SymbolicLink -Path $destination -Value "$source"
     }
+  }else {
+    New-Item -ItemType SymbolicLink -Path $destination -Value "$source"
   }
+}
+
+Push-Location -Path $PSScriptRoot
+
+if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole("Administrators")) {
+  #not admin
+  Start-Process pwsh.exe "-File `"$PSCommandPath`"" -Verb RunAs -Wait
+  . "$env:USERPROFILE\Documents\PowerShell\Profile.ps1"
+
+  #yaskkserv2
+  cargo install --git https://github.com/wachikun/yaskkserv2.git
+
+}else{
+  #run admin
 
   #install MSVC
   . ./BuildToolsSetup.ps1
+
   #install CMake
   winget install --id Kitware.CMake
-
-  #clangd
-  #. ./clangdSetup.ps1
 
   #starship
   $dotConfig = "$env:USERPROFILE\.config"
@@ -110,6 +121,7 @@ if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]:
   makeSymbolickLink $corvusskkDir "$PSScriptRoot\..\CorvusSKK"
   winget install --id nathancorvussolis.corvusskk
 
+  #lazygit
   $lazygitDir = "$Env:LOCALAPPDATA\lazygit"
   makeSymbolickLink $lazygitDir "$PSScriptRoot\..\lazygit"
 
@@ -120,8 +132,6 @@ if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]:
   makeSymbolickLink $pwshProfile "$PSScriptRoot\..\PowerShell\Profile.ps1"
   #Install-Module -Name PSReadLine -AllowClobber -Force
   Install-Module -Name posh-git -Scope CurrentUser -Force
-
-  . "$env:USERPROFILE\Documents\PowerShell\Profile.ps1"
 
   Get-Command podman -ea SilentlyContinue | Out-Null
   if ($? -eq $true) { # コマンドが存在すれば
