@@ -1,22 +1,3 @@
---[[
-return {
-  name = "python_tools",
-  dir = "",
-  opts = {
-    tools = {
-      "ruff",
-      "ruff-lsp",
-      "pylyzer",
-      "basedpyright",
-    },
-  },
-  config = function(_, opts)
-    vim.schedule(function()
-      vim.iter(opts.tools):map(_l("x: vim.system({ 'rye', 'install', '-f', x }, { text = true })"))
-    end)
-  end,
-}
-]]
 return {
   name = "python_tools",
   dir = vim.fn.fnamemodify(debug.getinfo(1).source:sub(2), ":h"),
