@@ -1,11 +1,4 @@
 # require develoopoer mode
-<#
-if ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole("Administrators") {
-  Write-Output "Do not run admin"
-}else{
-  pause
-}
-#>
 function makeDir($dir){
   if ( -not (Test-Path $dir)){
     New-Item $dir -ItemType Directory
@@ -35,11 +28,14 @@ if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]:
 }else{
   #run admin
 
-  #install MSVC
+  #MSVC
   . ./BuildToolsSetup.ps1
 
-  #install CMake
+  #CMake
   winget install --id Kitware.CMake
+
+  #rust
+  . ./rust.ps1
 
   #starship
   $dotConfig = "$env:USERPROFILE\.config"
