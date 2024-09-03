@@ -13,9 +13,6 @@ config.color_scheme = "Tokyo Night"
 --disable title bar
 config.window_decorations = "RESIZE"
 
-config.font_size = 12
-config.adjust_window_size_when_changing_font_size = true
-
 config.launch_menu = {}
 
 --os
@@ -89,11 +86,21 @@ else
   config.window_background_opacity = 0.70
 end
 
+config.font_size = 12
+config.adjust_window_size_when_changing_font_size = true
+
 config.audible_bell = "Disabled"
 config.use_ime = true
+config.cursor_blink_rate = 0
+config.animation_fps = 1
+config.log_unknown_escape_sequences = false
+config.notification_handling = "NeverShow"
 
-config.animation_fps = 60
+--window size
+config.initial_cols = 100
+config.initial_rows = 40
 
+--keymap
 config.disable_default_key_bindings = true
 config.keys = require("keybinds").keys
 config.key_tables = require("keybinds").key_tables
