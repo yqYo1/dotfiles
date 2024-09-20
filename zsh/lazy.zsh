@@ -1,6 +1,10 @@
 export FPATH="$ZSHRC_DIR/completion:$HOME/repos/eza/completions/zsh:$FPATH"
 autoload -Uz compinit && compinit
 export PATH="$HOME/.local/bin:$PATH"
+if [ ! -d ~/.cache/Local/local-tmp-folder ]; then
+  mkdir -p ~/.cache/Local/local-tmp-folder
+fi
+export TMPDIR="${HOME}/.cache/Local/local-tmp-folder"
 alias ls=eza
 alias ll='eza -alhF --git --git-repos'
 alias vi=nvim
