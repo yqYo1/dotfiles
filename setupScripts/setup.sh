@@ -1,5 +1,8 @@
 #!/bin/bash
 XDG_CONFIG_HOME="$HOME/.config"
+if [ ! -d $XDG_CONFIG_HOME ]; then
+	mkdir $XDG_CONFIG_HOME
+fi
 curl -sSfL https://raw.githubusercontent.com/aquaproj/aqua-installer/v3.0.1/aqua-installer | bash
 CURRENT=$(cd $(dirname $0);pwd)
 ln -sfnv $CURRENT/../zsh $XDG_CONFIG_HOME/zsh
