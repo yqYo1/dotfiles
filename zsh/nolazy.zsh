@@ -6,5 +6,5 @@ export BUN_INSTALL="$HOME/.bun"
 export RYE_HOME="$XDG_CONFIG_HOME/rye"
 export PATH=${AQUA_ROOT_DIR:-${XDG_DATA_HOME:-$HOME/.local/share}/aquaproj-aqua}/bin:$PATH
 export PATH="$BUN_INSTALL/bin:$PATH"
-source $RYE_HOME/env
+#source $RYE_HOME/env
 source $HOME/.cargo/env
