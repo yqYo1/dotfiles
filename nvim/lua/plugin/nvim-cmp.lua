@@ -34,7 +34,7 @@ return {
       sorting = {
         comparator = {
           require("cmp_ai.compare"),
-          cmp.config.compare.offet,
+          cmp.config.compare.offset,
           cmp.config.compare.exact,
           cmp.config.compare.score,
           cmp.config.compare.kind,
