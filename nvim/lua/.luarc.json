@@ -1,9 +1,0 @@
-{
-    "workspace.library": [
-        "/home/yayoi/.local/share/nvim/site/pack/packer/start/neodev.nvim/types/stable",
-        "/squashfs-root/usr/share/nvim/runtime/lua",
-        "/home/yayoi/.local/share/nvim/site/pack/packer/start/nvim-dap-ui/lua",
-        "/home/yayoi/.config/nvim/lua",
-        "${3rd}/luv/library"
-    ]
-}
