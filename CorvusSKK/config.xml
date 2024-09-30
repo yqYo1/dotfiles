@@ -190,7 +190,7 @@
       <row st="N" al="n" ok="n" />
       <row st="O" al="o" ok="o" />
       <row st="P" al="p" ok="p" />
-      <row st="Q" al="q" ok="q" />
+      <row st="Q" al="q" ok="n" />
       <row st="R" al="r" ok="r" />
       <row st="S" al="s" ok="s" />
       <row st="T" al="t" ok="t" />
