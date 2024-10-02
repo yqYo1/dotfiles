@@ -19,7 +19,7 @@ packages:
 - name: LuaLS/lua-language-server@3.10.6
 - name: rust-lang/rust-analyzer@2024-03-11
 - name: mattn/efm-langserver@v0.0.53
-- name: rhysd/actionlint@v1.7.2
+- name: rhysd/actionlint@v1.7.3
 - name: denoland/deno@v1.46.3
 - name: oven-sh/bun@bun-v1.1.29
 - name: starship/starship@v1.20.1
