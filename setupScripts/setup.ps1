@@ -10,6 +10,7 @@ function makeSymbolickLink($destination, $source){
       Remove-Item $destination -Force  -Recurse
       New-Item -ItemType SymbolicLink -Path $destination -Value "$source"
     }
+    #(Get-ItemProperty $destination).LinkTarget
   }else {
     New-Item -ItemType SymbolicLink -Path $destination -Value "$source"
   }
