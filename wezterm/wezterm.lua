@@ -55,7 +55,7 @@ if wezterm.target_triple == "x86_64-pc-windows-msvc" then
     })
   end
 
-  config.window_background_opacity = 0.75
+  config.window_background_opacity = 0.80
 
   -- https://github.com/wez/wezterm/issues/4992
   local gpus = wezterm.gui.enumerate_gpus()
