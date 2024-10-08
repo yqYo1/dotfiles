@@ -1,7 +1,7 @@
 return {
   "uga-rosa/ccc.nvim",
   cond = not is_vscode(),
-  event = { "BufReadPost" },
+  event = { "VeryLazy" },
   opts = {
     highlighter = {
       auto_enable = true,

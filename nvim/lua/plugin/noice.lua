@@ -1,15 +1,12 @@
-local has = require("core.plugin").has
+-- local has = require("core.plugin").has
 
 return {
   "folke/noice.nvim",
   event = "VeryLazy",
   cond = not is_vscode(),
-  dependencies = {
-    "MunifTanjim/nui.nvim",
-  },
-  init = function()
-    require("plugin.telescope").le("noice")
-  end,
+  -- init = function()
+  --   require("plugin.telescope").le("noice")
+  -- end,
   opts = function()
     return {
       lsp = {
@@ -24,8 +21,8 @@ return {
         },
       },
       popupmenu = {
-        enabled = true,
-        backend = has("nvim-cmp") and "cmp" or "nui",
+        enabled = false,
+        -- backend = has("nvim-cmp") and "cmp" or "nui",
       },
       notify = {
         enabled = true,
@@ -45,5 +42,4 @@ return {
       },
     }
   end,
-  config = true,
 }

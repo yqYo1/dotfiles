@@ -1,7 +1,7 @@
 return {
   "nvimtools/none-ls.nvim",
-  event = { "BufReadPre", "BufNewFile", "VeryLazy"},
-  dependencies = {"nvim-lua/plenary.nvim"},
+  event = { "VeryLazy" },
+  cond = not is_vscode(),
   config = function()
     local null_ls = require("null-ls")
     null_ls.setup({
@@ -10,5 +10,5 @@ return {
         null_ls.builtins.formatting.stylua,
       },
     })
-  end
+  end,
 }

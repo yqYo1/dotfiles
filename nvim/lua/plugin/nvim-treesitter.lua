@@ -1,23 +1,14 @@
-local function has_cmp()
-  return require("core.plugin").has("nvim-cmp")
-end
+-- local function has_cmp()
+--   return require("core.plugin").has("nvim-cmp")
+-- end
 
 return {
   "nvim-treesitter/nvim-treesitter",
   build = ":TSUpdate",
-  event = { "BufReadPost", "VeryLazy" },
-  dependencies = {
-    {
-      "ray-x/cmp-treesitter",
-      cond = function()
-        return has_cmp() and not is_vscode()
-      end,
-    },
-    { "nvim-treesitter/nvim-treesitter-context" },
-    { "haringsrob/nvim_context_vt" },
-  },
+  event = { "VeryLazy" },
   config = function()
     local configs = require("nvim-treesitter.configs")
+    ---@diagnostic disable-next-line: missing-fields
     configs.setup({
       ensure_installed = {
         "bash",
@@ -53,6 +44,7 @@ return {
         enable = true,
         additional_vim_regex_highlighting = { "python" },
       },
+      ignore_install = {},
     })
   end,
 }

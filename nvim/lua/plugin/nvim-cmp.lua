@@ -1,3 +1,6 @@
+-- local lsp_utils = require("plugin.nvim-lspconfig.uitls")
+-- local has_cmp = lsp_utils.has_cmp()
+
 return {
   "hrsh7th/nvim-cmp",
   event = { "InsertEnter", "CmdlineEnter" },
@@ -6,34 +9,46 @@ return {
     { "onsails/lspkind.nvim" },
     { url = "https://codeberg.org/FelipeLema/cmp-async-path.git" },
     { "hrsh7th/cmp-buffer" },
+    {
+      "hrsh7th/cmp-nvim-lsp",
+      -- cond = has_cmp
+    },
+    {
+      "hrsh7th/cmp-nvim-lsp-document-symbol",
+      -- cond = has_cmp
+    },
+    {
+      "hrsh7th/cmp-nvim-lsp-signature-help",
+      -- cond = has_cmp
+    },
     { "hrsh7th/cmp-nvim-lua" },
     { "hrsh7th/cmp-cmdline" },
     { "hrsh7th/cmp-calc" },
     { "hrsh7th/cmp-emoji" },
-    { "tzachar/cmp-ai" },
+    -- { "tzachar/cmp-ai" },
     { "lukas-reineke/cmp-rg" },
     { "ray-x/cmp-treesitter" },
-    { "saadparwaiz1/cmp_luasnip" }, -- Snippets source for nvim-cmp
-    { "L3MON4D3/LuaSnip" }, -- Snippets plugin
+    -- { "saadparwaiz1/cmp_luasnip" }, -- Snippets source for nvim-cmp
+    -- { "L3MON4D3/LuaSnip" }, -- Snippets plugin
   },
   config = function()
     vim.o.completeopt = "menuone,noinsert,noselect"
 
     -- Setup dependencies
-    local luasnip = require("luasnip")
+    -- local luasnip = require("luasnip")
     local cmp = require("cmp")
     local lspkind = require("lspkind")
 
     local setup_opt = {
-      snippet = {
-        expand = function(args)
-          luasnip.lsp_expand(args.body)
-        end,
-      },
+      -- snippet = {
+      --   expand = function(args)
+      --     luasnip.lsp_expand(args.body)
+      --   end,
+      -- },
       mapping = cmp.mapping.preset.insert({}),
       sorting = {
         comparator = {
-          require("cmp_ai.compare"),
+          -- require("cmp_ai.compare"),
           cmp.config.compare.offset,
           cmp.config.compare.exact,
           cmp.config.compare.score,
@@ -46,9 +61,9 @@ return {
         },
       },
       sources = cmp.config.sources({
-        { name = "cmp_ai", priority = 100 },
+        -- { name = "cmp_ai", priority = 100 },
         { name = "nvim_lsp", priority = 100 },
-        { name = "luasnip", priority = 100 },
+        -- { name = "luasnip", priority = 100 },
         {
           name = "lazydev",
           group_index = 0,
@@ -66,7 +81,6 @@ return {
       }, {
         { name = "treesitter" },
         { name = "buffer" },
-        --{ name = "omni" },
         { name = "calc" },
       }),
       completion = {
@@ -82,21 +96,19 @@ return {
       luasnip = "[LSnip]",
       buffer = "[Buffer]",
       async_path = "[Path]",
-      cmp_ai = "[AI]",
+      -- cmp_ai = "[AI]",
       nvim_lua = "[Lua]",
       spell = "[Spell]",
       calc = "[Calc]",
       emoji = "[Emoji]",
       neorg = "[Neorg]",
       rg = "[rg]",
-      omni = "[Omni]",
       nvim_lsp_signature_help = "[Signature]",
-      cmdline_history = "[History]",
     }
 
     local custom_menu_icon = {
       calc = " 󰃬 ",
-      cmp_ai = "  ",
+      -- cmp_ai = "  ",
     }
 
     setup_opt.formatting = {
@@ -106,7 +118,7 @@ return {
         before = function(entry, vim_item)
           --menu
           if entry.source.name == "nvim_lsp" then
-            vim_item.menu = "{" .. entry.source.source.client.name .. "}"
+            vim_item.menu = "[" .. entry.source.source.client.name .. "]"
           else
             vim_item.menu = menu[entry.source.name] or entry.source.name
           end
@@ -115,8 +127,8 @@ return {
             -- Get the custom icon for 'calc' source
             -- Replace the kind glyph with the custom icon
             vim_item.kind = custom_menu_icon.calc
-          elseif entry.source.name == "cmp_ai" then
-            vim_item.kind = custom_menu_icon.cmp_ai
+            -- elseif entry.source.name == "cmp_ai" then
+            --   vim_item.kind = custom_menu_icon.cmp_ai
           end
 
           return vim_item
@@ -129,8 +141,18 @@ return {
     cmp.setup.cmdline("/", {
       mapping = cmp.mapping.preset.cmdline(),
       sources = cmp.config.sources({
-        { name = "cmdline" },
+        { name = "buffer" },
       }, {
+        { name = "nvim_lsp_document_symbol" },
+      }),
+      completion = {
+        completeopt = "menu,menuone,noselect",
+      },
+    })
+
+    cmp.setup.cmdline("?", {
+      mapping = cmp.mapping.preset.cmdline(),
+      sources = cmp.config.sources({
         { name = "buffer" },
       }, {
         { name = "nvim_lsp_document_symbol" },
@@ -149,12 +171,14 @@ return {
             trailing_slash = true,
           },
         },
-      }, { { name = "cmdline" }, { { name = "cmdline_history" } } }),
+      }, {
+        { name = "cmdline" },
+      }),
       completion = {
         completeopt = "menu,menuone,noselect",
       },
     })
 
-    vim.cmd([[highlight! default link CmpItemKind CmpItemMenuDefault]])
+    -- vim.cmd([[highlight! default link CmpItemKind CmpItemMenuDefault]])
   end,
 }

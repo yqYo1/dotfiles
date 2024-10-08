@@ -1,6 +1,6 @@
 return {
   "haringsrob/nvim_context_vt",
-  event = { "BufReadPost", "VeryLazy" },
+  event = { "VeryLazy" },
   config = function()
     require("nvim_context_vt").setup({
       enabled = true,
