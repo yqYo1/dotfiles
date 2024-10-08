@@ -1,7 +1,7 @@
 return {
   name = "python_tools",
   dir = vim.fn.fnamemodify(debug.getinfo(1).source:sub(2), ":h"),
-  dependencies = { "nvim-lua/plenary.nvim" },
+  -- dependencies = { "nvim-lua/plenary.nvim" },
   build = "rye sync",
   config = function(spec)
     local Path = require("plenary.path")
