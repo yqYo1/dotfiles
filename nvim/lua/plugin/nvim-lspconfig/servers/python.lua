@@ -63,7 +63,7 @@ return {
   },
   {
     name = "ruff_lsp",
-    dir = dir_base .. "rufflsp",
+    dir = dir_base .. "ruff_lsp",
     --enabled = false,
     dependencies = {
       "neovim/nvim-lspconfig",
@@ -74,7 +74,7 @@ return {
     end,
     config = function(spec, _)
       setup(spec.name, {
-        --before_init = python_lsp_init,
+        before_init = python_lsp_init,
         init_options = {
           settings = {
             -- Any extra CLI arguments for `ruff` go here.
