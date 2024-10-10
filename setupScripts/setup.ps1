@@ -1,4 +1,3 @@
-# require develoopoer mode
 function makeDir($dir){
   if ( -not (Test-Path $dir)){
     New-Item $dir -ItemType Directory
@@ -25,6 +24,8 @@ if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]:
 
   #yaskkserv2
   cargo install --git https://github.com/wachikun/yaskkserv2.git
+  #aqua init
+  ../aquaproj-aqua/update.ps1
 
 }else{
   #run admin
