@@ -18,3 +18,4 @@ ln -sfnv $CURRENT/../tofi $XDG_CONFIG_HOME/tofi
 #ln -sfnv $CURRENT/../bun/package.json $HOME/package.json
 #ln -sfnv $CURRENT/../bun/bun.lockb $HOME/bun.lockb
 curl https://sh.rustup.rs -sSf | sh
+export AQUA_GLOBAL_CONFIG=$XDG_CONFIG_HOME/aquaproj-aqua/aqua.yaml
