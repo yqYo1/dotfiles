@@ -49,7 +49,6 @@ return {
                 reportAny = "information",
               },
               typeCheckingMode = "all",
-              --typeCheckingMode = "standard",
               useLibraryCodeForTypes = true,
             },
           },
@@ -75,9 +74,12 @@ return {
     config = function(spec, _)
       setup(spec.name, {
         before_init = python_lsp_init,
+        trace = 'messages',
         init_options = {
           settings = {
-            -- Any extra CLI arguments for `ruff` go here.
+            configurationPreference = "filesystemFirst",
+            organizeImports = true,
+            ruff.logLevel = "debug",
             args = {},
           },
         },
