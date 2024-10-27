@@ -40,7 +40,6 @@ return {
             analysis = {
               autoImportCompletions = true,
               autoSearchPaths = false,
-              --ignore = { "*" },
               --diagnosticMode = "workspace",
               diagnosticMode = "openFilesOnly",
               diagnosticSeverityOverrides = {
@@ -69,7 +68,6 @@ return {
   {
     name = "ruff",
     dir = dir_base .. "ruff",
-    --enabled = false,
     dependencies = {
       "neovim/nvim-lspconfig",
       "python_tools",
@@ -79,7 +77,6 @@ return {
     end,
     config = function(spec, _)
       setup(spec.name, {
-        before_init = python_lsp_init,
         trace = "messages",
         init_options = {
           settings = {
@@ -88,7 +85,6 @@ return {
             logLevel = "debug",
           },
         },
-        python = {},
       })
     end,
   },
