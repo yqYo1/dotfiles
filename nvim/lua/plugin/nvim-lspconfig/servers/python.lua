@@ -80,13 +80,12 @@ return {
     config = function(spec, _)
       setup(spec.name, {
         before_init = python_lsp_init,
-        trace = 'messages',
+        trace = "messages",
         init_options = {
           settings = {
             configurationPreference = "filesystemFirst",
             organizeImports = true,
-            ruff.logLevel = "debug",
-            args = {},
+            logLevel = "debug",
           },
         },
         python = {},
