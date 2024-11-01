@@ -16,3 +16,9 @@ vim.keymap.set("i", "<Right>", "<C-G>U<Right>")
 
 -- redo
 vim.keymap.set("n", "U", "<C-r>")
+
+-- don't move cusur when yank on Visual mode
+vim.keymap.set("x", "y", "mzy`z")
+
+-- Paste continuously in Visual mode
+vim.keymap.set("x", "p", "P")
