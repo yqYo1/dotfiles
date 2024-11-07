@@ -25,3 +25,9 @@ vim.keymap.set("x", "p", "P")
 
 -- escape insert
 vim.keymap.set("i", "jk", "<Esc>")
+
+-- H/L submode
+vim.keymap.set("n", "H", "H<Plug>(H)")
+vim.keymap.set("n", "L", "L<Plug>(L)")
+vim.keymap.set("n", "<Plug>(H)H", "<PageUp>H<Plug>(H)")
+vim.keymap.set("n", "<Plug>(L)L", "<PageDown>Lzb<Plug>(L)")
