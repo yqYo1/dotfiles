@@ -22,3 +22,6 @@ vim.keymap.set("x", "y", "mzy`z")
 
 -- Paste continuously in Visual mode
 vim.keymap.set("x", "p", "P")
+
+-- escape insert
+vim.keymap.set("i", "jk", "<Esc>")
