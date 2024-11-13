@@ -68,6 +68,17 @@ if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]:
     $Env:Path = ($newUserPath + $Env:Path)
   }
 
+  #uv
+  $oldUsePath = [System.Environment]::GetEnvironmentVariable("Path", "User")
+  $newUserPath = ""
+  if ( -not ($oldUsePath.Contains("$Env:USERPROFILE\.local\bin"))){
+    $newUserPath += "$Env:USERPROFILE\.local\bin;"
+  }
+  if ($newUserPath){
+    [System.Environment]::SetEnvironmentVariable("Path", ($newUserPath + $oldUsePath), "User")
+    $Env:Path = ($newUserPath + $Env:Path)
+  }
+
   #LLVM
   winget install --id LLVM.LLVM
   $oldUsePath = [System.Environment]::GetEnvironmentVariable("Path", "User")

@@ -3,9 +3,15 @@ local setup = lsp_utils.setup
 local utils = require("core.utils")
 local lspconfig = require("lspconfig")
 local python_lsp_init = function(_, config)
-  config.settings.python.pythonPath = vim.env.VIRTUAL_ENV
-      and lspconfig.util.path.join(vim.env.VIRTUAL_ENV, "bin", "python3")
-    or utils.find_cmd("python3", ".venv/bin", config.root_dir)
+  if is_windows() then
+    config.settings.python.pythonPath = vim.env.VIRTUAL_ENV
+        and lspconfig.util.path.join(vim.env.VIRTUAL_ENV, "Scripts", "python")
+      or utils.find_cmd("python.exe", ".venv/Scripts", config.root_dir)
+  else
+    config.settings.python.pythonPath = vim.env.VIRTUAL_ENV
+        and lspconfig.util.path.join(vim.env.VIRTUAL_ENV, "bin", "python3")
+      or utils.find_cmd("python3", ".venv/bin", config.root_dir)
+  end
 end
 local dir_base
 if is_windows() then
@@ -34,7 +40,6 @@ return {
             analysis = {
               autoImportCompletions = true,
               autoSearchPaths = false,
-              --ignore = { "*" },
               --diagnosticMode = "workspace",
               diagnosticMode = "openFilesOnly",
               diagnosticSeverityOverrides = {
@@ -49,7 +54,6 @@ return {
                 reportAny = "information",
               },
               typeCheckingMode = "all",
-              --typeCheckingMode = "standard",
               useLibraryCodeForTypes = true,
             },
           },
@@ -62,9 +66,8 @@ return {
     end,
   },
   {
-    name = "ruff_lsp",
-    dir = dir_base .. "ruff_lsp",
-    --enabled = false,
+    name = "ruff",
+    dir = dir_base .. "ruff",
     dependencies = {
       "neovim/nvim-lspconfig",
       "python_tools",
@@ -74,14 +77,14 @@ return {
     end,
     config = function(spec, _)
       setup(spec.name, {
-        before_init = python_lsp_init,
+        trace = "messages",
         init_options = {
           settings = {
-            -- Any extra CLI arguments for `ruff` go here.
-            args = {},
+            configurationPreference = "filesystemFirst",
+            organizeImports = true,
+            logLevel = "debug",
           },
         },
-        python = {},
       })
     end,
   },

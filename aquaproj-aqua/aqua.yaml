@@ -8,25 +8,25 @@
 #   - all
 registries:
 - type: standard
-  ref: v4.236.0 # renovate: depName=aquaproj/aqua-registry
+  ref: v4.249.0 # renovate: depName=aquaproj/aqua-registry
 packages:
-- name: cli/cli@v2.59.0
-- name: golang/go@go1.23.2
+- name: cli/cli@v2.61.0
+- name: golang/go@go1.23.3
 - name: golang/tools/goimports@v0.20.0
 - name: golang/tools/gorename@v0.20.0
-- name: junegunn/fzf@v0.55.0
-- name: mitsuhiko/rye@0.41.0
-- name: LuaLS/lua-language-server@3.11.1
+- name: junegunn/fzf@v0.56.0
+- name: mitsuhiko/rye@0.42.0
+- name: LuaLS/lua-language-server@3.12.0
 - name: rust-lang/rust-analyzer@2024-03-11
 - name: mattn/efm-langserver@v0.0.53
-- name: rhysd/actionlint@v1.7.3
-- name: denoland/deno@v2.0.2
-- name: oven-sh/bun@bun-v1.1.31
+- name: rhysd/actionlint@v1.7.4
+- name: denoland/deno@v2.0.6
+- name: oven-sh/bun@bun-v1.1.34
 - name: starship/starship@v1.21.1
 - name: neovim/neovim@v0.10.2
-- name: eza-community/eza@v0.20.4
+- name: eza-community/eza@v0.20.7
 - name: sharkdp/bat@v0.24.0
-- name: martinvonz/jj@v0.22.0
+- name: martinvonz/jj@v0.23.0
 - name: JohnnyMorganz/StyLua@v0.20.0
 - name: BurntSushi/ripgrep@14.1.1
 - name: ziglang/zig@0.13.0
@@ -34,4 +34,4 @@ packages:
 - name: rossmacarthur/sheldon@0.8.0
 - name: jesseduffield/lazygit@v0.44.1
 - name: ClementTsang/bottom@0.10.2
-- name: astral-sh/uv@0.4.24
+- name: astral-sh/uv@0.5.1
