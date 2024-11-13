@@ -18,6 +18,7 @@
 !/sway/
 !/tofi/
 !/lazygit/
+!/flake.nix
 
 *.zwc
 zsh/.zsh_history
