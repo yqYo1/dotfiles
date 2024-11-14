@@ -1,6 +1,7 @@
 -- local lsp_utils = require("plugin.nvim-lspconfig.uitls")
 -- local has_cmp = lsp_utils.has_cmp()
 
+---@type LazySpec
 return {
   "hrsh7th/nvim-cmp",
   event = { "InsertEnter", "CmdlineEnter" },
