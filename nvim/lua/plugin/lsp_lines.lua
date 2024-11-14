@@ -1,3 +1,4 @@
+---@type LazySpec
 return {
   "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
   name = "lsp_lines",
@@ -13,7 +14,8 @@ return {
   --     desc = "Toggle lsp_lines",
   --   },
   -- },
-  config = function()
-    require("lsp_lines").setup()
-  end,
+  opts = {},
+  -- config = function()
+  --   require("lsp_lines").setup()
+  -- end,
 }
