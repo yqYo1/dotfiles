@@ -18,6 +18,8 @@
 !/sway/
 !/tofi/
 !/lazygit/
+!/flake.nix
+!/home.nix
 
 *.zwc
 zsh/.zsh_history
