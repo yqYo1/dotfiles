@@ -12,7 +12,9 @@ function ensure_zcompiled {
   fi
 }
 ensure_zcompiled ~/.zshrc
-source "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
+if [ -f "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh" ]; then
+  source "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
+fi
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
 export SHELDON_CONFIG_DIR="$ZSHRC_DIR/sheldon"
