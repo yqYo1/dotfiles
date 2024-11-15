@@ -107,13 +107,34 @@ return {
     local cmp = require("cmp")
     local lspkind = require("lspkind")
 
+    local has_words_before = function()
+      if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then
+        -- if vim.api.nvim_buf_get_option_value("buftype", { buf = 0 }) == "prompt" then
+        return false
+      end
+      local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+      return col ~= 0 and vim.api.nvim_buf_get_text(0, line - 1, 0, line - 1, col, {})[1]:match("^%s*$") == nil
+    end
+
     local setup_opt = {
       -- snippet = {
       --   expand = function(args)
       --     luasnip.lsp_expand(args.body)
       --   end,
       -- },
-      mapping = cmp.mapping.preset.insert({}),
+      mapping = cmp.mapping.preset.insert({
+        ["<Tab>"] = cmp.mapping(function(fallback)
+          if cmp.visible() then
+            cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+          -- elseif luasnip.locally_jumpable(1) then
+          --   luasnip.jump(1)
+          elseif has_words_before() then
+            cmp.complete()
+          else
+            fallback()
+          end
+        end, { "i", "s" }),
+      }),
       sorting = {
         comparator = {
           cmp.config.compare.offset,
@@ -195,7 +216,9 @@ return {
     setup_opt.formatting = {
       format = lspkind.cmp_format({
         mode = "symbol_text",
-        maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
+        -- prevent the popup from showing more than provided characters
+        -- (e.g 50 will not show more than 50 characters)
+        maxwidth = 50,
         before = function(entry, vim_item)
           --menu
           if entry.source.name == "nvim_lsp" then
