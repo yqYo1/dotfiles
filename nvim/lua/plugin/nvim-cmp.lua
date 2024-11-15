@@ -1,5 +1,19 @@
--- local lsp_utils = require("plugin.nvim-lspconfig.uitls")
--- local has_cmp = lsp_utils.has_cmp()
+local function load_after(plugin)
+  local dir = plugin.dir .. "/after/plugin"
+  local fd = vim.uv.fs_scandir(dir)
+  if not fd then
+    return
+  end
+  while true do
+    local file_name, type = vim.uv.fs_scandir_next(fd)
+    if not file_name then
+      break
+    end
+    if type == "file" then
+      vim.cmd.source(dir .. "/" .. file_name)
+    end
+  end
+end
 
 ---@type LazySpec
 return {
@@ -8,27 +22,80 @@ return {
   cond = not is_vscode(),
   dependencies = {
     { "onsails/lspkind.nvim" },
-    { url = "https://codeberg.org/FelipeLema/cmp-async-path.git" },
-    { "hrsh7th/cmp-buffer" },
+    {
+      url = "https://codeberg.org/FelipeLema/cmp-async-path.git",
+      config = function(p)
+        load_after(p)
+      end,
+    },
+    {
+      "hrsh7th/cmp-buffer",
+      config = function(p)
+        load_after(p)
+      end,
+    },
     {
       "hrsh7th/cmp-nvim-lsp",
-      -- cond = has_cmp
+      config = function(p)
+        load_after(p)
+      end,
     },
     {
       "hrsh7th/cmp-nvim-lsp-document-symbol",
-      -- cond = has_cmp
+      config = function(p)
+        load_after(p)
+      end,
     },
     {
       "hrsh7th/cmp-nvim-lsp-signature-help",
-      -- cond = has_cmp
+      config = function(p)
+        load_after(p)
+      end,
     },
-    { "hrsh7th/cmp-nvim-lua" },
-    { "hrsh7th/cmp-cmdline" },
-    { "hrsh7th/cmp-calc" },
-    { "hrsh7th/cmp-emoji" },
-    -- { "tzachar/cmp-ai" },
-    { "lukas-reineke/cmp-rg" },
-    { "ray-x/cmp-treesitter" },
+    {
+      "hrsh7th/cmp-nvim-lua",
+      config = function(p)
+        load_after(p)
+      end,
+    },
+    {
+      "hrsh7th/cmp-cmdline",
+      config = function(p)
+        load_after(p)
+      end,
+    },
+    {
+      "hrsh7th/cmp-calc",
+      config = function(p)
+        load_after(p)
+      end,
+    },
+    {
+      "hrsh7th/cmp-emoji",
+      config = function(p)
+        load_after(p)
+      end,
+    },
+    {
+      "lukas-reineke/cmp-rg",
+      config = function(p)
+        load_after(p)
+      end,
+    },
+    {
+      "ray-x/cmp-treesitter",
+      config = function(p)
+        load_after(p)
+      end,
+    },
+    {
+      "zbirenbaum/copilot-cmp",
+      opts = {},
+      -- config = function(p)
+      --   require("copilot_cmp").setup()
+      --   load_after(p)
+      -- end,
+    },
     -- { "saadparwaiz1/cmp_luasnip" }, -- Snippets source for nvim-cmp
     -- { "L3MON4D3/LuaSnip" }, -- Snippets plugin
   },
@@ -49,7 +116,6 @@ return {
       mapping = cmp.mapping.preset.insert({}),
       sorting = {
         comparator = {
-          -- require("cmp_ai.compare"),
           cmp.config.compare.offset,
           cmp.config.compare.exact,
           cmp.config.compare.score,
@@ -62,13 +128,20 @@ return {
         },
       },
       sources = cmp.config.sources({
-        -- { name = "cmp_ai", priority = 100 },
-        { name = "nvim_lsp", priority = 100 },
+        {
+          name = "nvim_lsp",
+          priority = 100,
+          -- group_index = 1,
+        },
+        {
+          name = "copilot",
+          priority = 90,
+        },
         -- { name = "luasnip", priority = 100 },
         {
           name = "lazydev",
-          group_index = 0,
-          priority = 100,
+          -- group_index = 0,
+          priority = 70,
         },
         {
           name = "async_path",
@@ -77,11 +150,21 @@ return {
           },
           priority = 100,
         },
-        { name = "emoji", insert = true, priority = 50 },
-        { name = "nvim_lua", priority = 50 },
+        {
+          name = "emoji",
+          insert = true,
+          priority = 50,
+        },
+        {
+          name = "nvim_lua",
+          priority = 60,
+        },
       }, {
         { name = "treesitter" },
-        { name = "buffer" },
+        {
+          name = "buffer",
+          -- group_index = 2,
+        },
         { name = "calc" },
       }),
       completion = {
@@ -94,10 +177,12 @@ return {
 
     local menu = {
       nvim_lsp = "[LSP]",
+      lazydev = "[LazyDev]",
       luasnip = "[LSnip]",
+      copilot = "[Copilot]",
       buffer = "[Buffer]",
       async_path = "[Path]",
-      -- cmp_ai = "[AI]",
+      treesitter = "[TS]",
       nvim_lua = "[Lua]",
       spell = "[Spell]",
       calc = "[Calc]",
@@ -105,11 +190,6 @@ return {
       neorg = "[Neorg]",
       rg = "[rg]",
       nvim_lsp_signature_help = "[Signature]",
-    }
-
-    local custom_menu_icon = {
-      calc = " 󰃬 ",
-      -- cmp_ai = "  ",
     }
 
     setup_opt.formatting = {
@@ -123,15 +203,6 @@ return {
           else
             vim_item.menu = menu[entry.source.name] or entry.source.name
           end
-
-          if entry.source.name == "calc" then
-            -- Get the custom icon for 'calc' source
-            -- Replace the kind glyph with the custom icon
-            vim_item.kind = custom_menu_icon.calc
-            -- elseif entry.source.name == "cmp_ai" then
-            --   vim_item.kind = custom_menu_icon.cmp_ai
-          end
-
           return vim_item
         end,
       }),
@@ -180,6 +251,14 @@ return {
       },
     })
 
-    -- vim.cmd([[highlight! default link CmpItemKind CmpItemMenuDefault]])
+    -- copilot suggestion hidden
+    -- from https://github.com/zbirenbaum/copilot.lua?tab=readme-ov-file#suggestion
+    cmp.event:on("menu_opened", function()
+      vim.b.copilot_suggestion_hidden = true
+    end)
+
+    cmp.event:on("menu_closed", function()
+      vim.b.copilot_suggestion_hidden = false
+    end)
   end,
 }
