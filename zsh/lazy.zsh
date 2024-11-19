@@ -8,6 +8,7 @@ export TMPDIR="${HOME}/.cache/Local/local-tmp-folder"
 alias ls=eza
 alias ll='eza -alhF --git --git-repos'
 alias vi=nvim
+alias em='emacs -nw'
 alias cls=clear
 alias lg=lazygit
 alias gp='git pull'
@@ -17,6 +18,7 @@ alias ...='cd ../../'
 export AQUA_PROGRESS_BAR=true
 source <(gh completion -s zsh)
 source <(rye self completion -s zsh)
-source <(jj util completion --zsh)
+source <(uv generate-shell-completion zsh)
+source <(uvx --generate-shell-completion zsh)
 source <(podman completion zsh)
 $(dirname $AQUA_GLOBAL_CONFIG)/update.sh
