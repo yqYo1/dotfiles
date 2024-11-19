@@ -1,7 +1,7 @@
 #!/bin/bash
 XDG_CONFIG_HOME="$HOME/.config"
 if [ ! -d $XDG_CONFIG_HOME ]; then
-	mkdir $XDG_CONFIG_HOME
+  mkdir $XDG_CONFIG_HOME
 fi
 curl -sSfL https://raw.githubusercontent.com/aquaproj/aqua-installer/v3.0.1/aqua-installer | bash
 CURRENT=$(cd $(dirname $0);pwd)
@@ -15,6 +15,7 @@ ln -sfnv $CURRENT/../rye $XDG_CONFIG_HOME/rye
 ln -sfnv $CURRENT/../wezterm $XDG_CONFIG_HOME/wezterm
 ln -sfnv $CURRENT/../sway $XDG_CONFIG_HOME/sway
 ln -sfnv $CURRENT/../tofi $XDG_CONFIG_HOME/tofi
+ln -sfnv $CURRENT/../emacs $HOME/.emacs.d
 #ln -sfnv $CURRENT/../bun/package.json $HOME/package.json
 #ln -sfnv $CURRENT/../bun/bun.lockb $HOME/bun.lockb
 curl https://sh.rustup.rs -sSf | sh

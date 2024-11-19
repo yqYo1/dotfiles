@@ -20,7 +20,13 @@
 !/lazygit/
 !/flake.nix
 !/home.nix
+!/emacs
 
+*.elc
+*.eln
+/emacs/auto-save-list
+/emacs/eln-cache/
+/emacs/elpa
 *.zwc
 zsh/.zsh_history
 zsh/completion/*
