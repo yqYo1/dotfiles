@@ -5,7 +5,7 @@ if [ ! -d ~/.cache/Local/local-tmp-folder ]; then
   mkdir -p ~/.cache/Local/local-tmp-folder
 fi
 export TMPDIR="${HOME}/.cache/Local/local-tmp-folder"
-alias ls=eza
+alias ls='eza -F'
 alias ll='eza -alhF --git --git-repos'
 alias vi=nvim
 alias em='emacs -nw'
