@@ -1,4 +1,5 @@
-﻿Set-Alias -Name ls -Value eza
+﻿Function ls {eza -F $args}
+Function lt {eza -T $args}
 Function ll {eza -alhF --git --git-repos $args}
 Function d {Set-Location "~\dotfiles\"}
 Function .. {Set-Location "..\$args"}
