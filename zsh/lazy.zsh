@@ -8,6 +8,7 @@ export TMPDIR="${HOME}/.cache/Local/local-tmp-folder"
 alias ls='eza -F'
 alias ls='eza -T'
 alias ll='eza -alhF --git --git-repos'
+alias rmdir='rm -rf'
 alias vi=nvim
 alias em='emacs -nw'
 alias cls=clear
