@@ -16,6 +16,7 @@ return {
         "cpp",
         "css",
         "dockerfile",
+        "diff",
         "git_config",
         "git_rebase",
         "gitattributes",

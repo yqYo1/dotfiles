@@ -1,7 +1,5 @@
 local M = {}
 
-local Util = require("lazy.core.util")
-
 M.showInlayHint = true
 
 local function setInlayHintHL()
@@ -25,33 +23,13 @@ local function setInlayHintHL()
   vim.api.nvim_set_hl(0, "LspInlayHint", { fg = foreground, bg = background })
 end
 
-local function keymap(bufnr)
-  vim.keymap.set({ "n", "v", "x" }, "<leader>l", function()
-    local state, lsp_lines = pcall(require, "lsp_lines")
-    if state then
-      lsp_lines.toggle()
-    end
-    M.showInlayHint = not M.showInlayHint
-    vim.lsp.inlay_hint.enable(M.showInlayHint, { bufnr })
-  end, { buffer = bufnr, silent = true, noremap = true, desc = "toggle inlay hints & lsp_lines" })
-end
-
 M.on_attach = function(client, bufnr)
   local supports_inlay_hint = client.server_capabilities.inlayHintProvider
 
-  --[[
-  if client.name ~= nil then
-    Util.info(
-      supports_inlay_hint and "Inlay hints supported" or "Inlay hints not supported",
-      { title = client.name }
-    )
-  end
-  ]]
-
   if supports_inlay_hint then
-    keymap(bufnr)
+    -- keymap(bufnr)
 
-    setInlayHintHL()
+    -- setInlayHintHL()
 
     vim.lsp.inlay_hint.enable(M.showInlayHint, { bufnr })
 
