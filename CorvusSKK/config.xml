@@ -1022,6 +1022,8 @@
       <row ro="lya" hi="ゃ" ka="ャ" an="ｬ" so="0" />
       <row ro="lyu" hi="ゅ" ka="ュ" an="ｭ" so="0" />
       <row ro="lyo" hi="ょ" ka="ョ" an="ｮ" so="0" />
+      <row ro="lka" hi="ゕ" ka="ヵ" an="ｶ" so="0" />
+      <row ro="lke" hi="ゖ" ka="ヶ" an="ｹ" so="0" />
       <row ro="xxa" hi="ぁ" ka="ァ" an="ｧ" so="0" />
       <row ro="xxi" hi="ぃ" ka="ィ" an="ｨ" so="0" />
       <row ro="xxu" hi="ぅ" ka="ゥ" an="ｩ" so="0" />
@@ -1030,8 +1032,6 @@
       <row ro="xxya" hi="ゃ" ka="ャ" an="ｬ" so="0" />
       <row ro="xxyu" hi="ゅ" ka="ュ" an="ｭ" so="0" />
       <row ro="xxyo" hi="ょ" ka="ョ" an="ｮ" so="0" />
-      <row ro="kA" hi="ゕ" ka="ヵ" an="ｶ" so="0" />
-      <row ro="kE" hi="ゖ" ka="ヶ" an="ｹ" so="0" />
       <row ro=";" hi="っ" ka="ッ" an="ｯ" so="0" />
       <row ro="q" hi="ん" ka="ン" an="ﾝ" so="0" />
       <row ro="'" hi="ー" ka="ー" an="ｰ" so="0" />
@@ -1083,9 +1083,11 @@
       <row ro="$" hi="$" ka="$" an="$" so="0" />
       <row ro="%" hi="%" ka="%" an="%" so="0" />
       <row ro="&amp;" hi="&amp;" ka="&amp;" an="&amp;" so="0" />
-      <row ro="x'" hi="'" ka="'" an="'" so="0" />
+      <row ro="xx'" hi="'" ka="'" an="" so="0" />
       <row ro="(" hi="(" ka="(" an="(" so="0" />
       <row ro=")" hi=")" ka=")" an=")" so="0" />
+      <row ro="z(" hi="（" ka="（" an="（" so="0" />
+      <row ro="z)" hi="）" ka="）" an="）" so="0" />
       <row ro="*" hi="*" ka="*" an="*" so="0" />
       <row ro="+" hi="+" ka="+" an="+" so="0" />
       <row ro="," hi="、" ka="、" an="､" so="0" />
@@ -1098,24 +1100,29 @@
       <row ro="l:" hi=":" ka=":" an=":" so="0" />
       <row ro="l;" hi=";" ka=";" an=";" so="0" />
       <row ro="&lt;" hi="&lt;" ka="&lt;" an="&lt;" so="0" />
+      <row ro=">" hi=">" ka=">" an=">" so="0" />
       <row ro="l=" hi="=" ka="=" an="=" so="0" />
       <row ro="x=" hi="=" ka="=" an="=" so="0" />
-      <row ro=">" hi=">" ka=">" an=">" so="0" />
       <row ro="?" hi="？" ka="？" an="?" so="0" />
       <row ro="l@" hi="@" ka="@" an="@" so="0" />
       <row ro="[" hi="「" ka="「" an="｢" so="0" />
-      <row ro="l[" hi="[" ka="[" an="[" so="0" />
       <row ro="]" hi="」" ka="」" an="｣" so="0" />
+      <row ro="l[" hi="[" ka="[" an="[" so="0" />
       <row ro="l]" hi="]" ka="]" an="]" so="0" />
+      <row ro="xx[" hi="『" ka="『" an="『" so="0" />
+      <row ro="xx]" hi="』" ka="』" an="』" so="0" />
       <row ro="x\" hi="\" ka="\" an="\" so="0" />
       <row ro="l\" hi="\" ka="\" an="\" so="0" />
       <row ro="x^" hi="^" ka="^" an="^" so="0" />
       <row ro="l^" hi="^" ka="^" an="^" so="0" />
       <row ro="_" hi="_" ka="_" an="_" so="0" />
       <row ro="`" hi="`" ka="`" an="`" so="0" />
+      <!--
       <row ro="l{" hi="{" ka="{" an="{" so="0" />
       <row ro="xx{" hi="{" ka="{" an="{" so="0" />
+      -->
       <row ro="|" hi="|" ka="|" an="|" so="0" />
+      <row ro="{" hi="{" ka="{" an="{" so="0" />
       <row ro="}" hi="}" ka="}" an="}" so="0" />
       <row ro="~" hi="~" ka="~" an="~" so="0" />
       <row ro="z " hi="　" ka="　" an="　" so="0" />
@@ -1124,10 +1131,6 @@
       <row ro="z~" hi="〜" ka="〜" an="〜" so="0" />
       <row ro="z." hi="…" ka="…" an="…" so="0" />
       <row ro="z/" hi="・" ka="・" an="･" so="0" />
-      <row ro="z(" hi="（" ka="（" an="（" so="0" />
-      <row ro="z)" hi="）" ka="）" an="）" so="0" />
-      <row ro="z[" hi="『" ka="『" an="『" so="0" />
-      <row ro="z]" hi="』" ka="』" an="』" so="0" />
       <row ro="z{" hi="【" ka="【" an="【" so="0" />
       <row ro="z}" hi="】" ka="】" an="】" so="0" />
       <row ro="z;" hi="゛" ka="゛" an="ﾞ" so="0" />
