@@ -2,7 +2,7 @@ require("core.plugin").init()
 local lazy = require("lazy")
 
 if vim.env.NVIM_COLORSCHEME == nil then
-  vim.env.NVIM_COLORSCHEME = "tokyonight"
+  vim.env.NVIM_COLORSCHEME = "catppuccin"
 end
 
 -- load plugins
@@ -12,7 +12,10 @@ lazy.setup({
     { import = "cli" },
   },
   defaults = { lazy = true },
-  install = { missing = true, colorscheme = { "tokyonight" } },
+  install = {
+    missing = true,
+    colorscheme = { "catppuccin" },
+  },
   checker = { enabled = false },
   concurrency = 64,
   performance = {

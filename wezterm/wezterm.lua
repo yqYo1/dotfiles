@@ -1,4 +1,4 @@
-local wezterm = require("wezterm")
+local wezterm = require("wezterm") --[[@as Wezterm]]
 
 local hostname = wezterm.hostname()
 local config = {}
@@ -8,7 +8,7 @@ if wezterm.config_builder then
 end
 
 --theme
-config.color_scheme = "Tokyo Night"
+config.color_scheme = "Catppuccin Mocha"
 
 --disable title bar
 config.window_decorations = "RESIZE"
