@@ -1117,10 +1117,6 @@
       <row ro="l^" hi="^" ka="^" an="^" so="0" />
       <row ro="_" hi="_" ka="_" an="_" so="0" />
       <row ro="`" hi="`" ka="`" an="`" so="0" />
-      <!--
-      <row ro="l{" hi="{" ka="{" an="{" so="0" />
-      <row ro="xx{" hi="{" ka="{" an="{" so="0" />
-      -->
       <row ro="|" hi="|" ka="|" an="|" so="0" />
       <row ro="{" hi="{" ka="{" an="{" so="0" />
       <row ro="}" hi="}" ka="}" an="}" so="0" />
