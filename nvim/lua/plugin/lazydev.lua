@@ -18,5 +18,6 @@ return {
       },
     },
   },
-  { "Bilal2453/luvit-meta" }, -- optional `vim.uv` typings
+  { "Bilal2453/luvit-meta" },
+  { "gonstoll/wezterm-types" },
 }
