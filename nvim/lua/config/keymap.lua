@@ -23,8 +23,8 @@ vim.keymap.set("x", "y", "mzy`z")
 -- Paste continuously in Visual mode
 vim.keymap.set("x", "p", "P")
 
--- escape from insert or visual
-vim.keymap.set({ "i", "v" }, "jk", "<Esc>")
+-- escape from insert
+vim.keymap.set("i", "jk", "<Esc>")
 
 -- H/L submode
 vim.keymap.set("n", "H", "H<Plug>(H)")
