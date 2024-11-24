@@ -5,16 +5,17 @@ if [ ! -d ~/.cache/Local/local-tmp-folder ]; then
   mkdir -p ~/.cache/Local/local-tmp-folder
 fi
 export TMPDIR="${HOME}/.cache/Local/local-tmp-folder"
+alias bunx='bun x'
+alias cls=clear
+alias d='cd ~/dotfiles/'
+alias em='emacs -nw'
+alias gp='git pull'
+alias lg=lazygit
+alias ll='eza -alhF --git --git-repos'
 alias ls='eza -F'
 alias lt='eza -T'
-alias ll='eza -alhF --git --git-repos'
 alias rmdir='rm -rf'
 alias vi=nvim
-alias em='emacs -nw'
-alias cls=clear
-alias lg=lazygit
-alias gp='git pull'
-alias d='cd ~/dotfiles/'
 alias ..='cd ../'
 alias ...='cd ../../'
 export AQUA_PROGRESS_BAR=true
