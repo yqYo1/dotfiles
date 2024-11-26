@@ -4,6 +4,7 @@
 
 # not ignore
 !/.gitignore
+!/.gitmodules
 !/README.md
 !/starship.toml
 !/bat
