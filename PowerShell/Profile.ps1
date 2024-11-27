@@ -1,5 +1,5 @@
-﻿#Aliases
-Function cat {bat --paging=never}
+﻿# Aliases
+Function cat {bat --paging=never --style=grid $args}
 Function ls {eza -F $args}
 Function lt {eza -T $args}
 Function ll {eza -alhF --git --git-repos $args}
