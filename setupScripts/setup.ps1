@@ -19,6 +19,7 @@ Push-Location -Path $PSScriptRoot
 
 if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole("Administrators")) {
   #not admin
+  git submodule update --init --recursive
   Start-Process pwsh.exe "-File `"$PSCommandPath`"" -Verb RunAs -Wait
   . "$env:USERPROFILE\Documents\PowerShell\Profile.ps1"
 

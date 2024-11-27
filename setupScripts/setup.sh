@@ -5,6 +5,7 @@ if [ ! -d $XDG_CONFIG_HOME ]; then
 fi
 curl -sSfL https://raw.githubusercontent.com/aquaproj/aqua-installer/v3.1.0/aqua-installer | bash
 CURRENT=$(cd $(dirname $0);pwd)
+git submodule update --init --recursive
 ln -sfnv $CURRENT/../zsh $XDG_CONFIG_HOME/zsh
 ln -sfnv $CURRENT/../zsh/.zshrc $HOME/.zshrc
 ln -sfnv $CURRENT/../zsh/sheldon $XDG_CONFIG_HOME/sheldon
