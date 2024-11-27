@@ -12,6 +12,7 @@ if( (Get-Alias gp).CommandType -eq "Alias" ){
 }
 Function gp {git pull}
 Set-Alias -Name which -Value where.exe
+Set-Alias -Name where -Value where.exe
 Set-Alias -Name vi -Value nvim
 Set-Alias -Name lg -Value Lazygit
 
