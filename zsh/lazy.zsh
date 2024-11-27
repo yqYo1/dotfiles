@@ -6,7 +6,7 @@ if [ ! -d ~/.cache/Local/local-tmp-folder ]; then
 fi
 export TMPDIR="${HOME}/.cache/Local/local-tmp-folder"
 alias bunx='bun x'
-alias cat='bat --paging=never'
+alias cat='bat --paging=never --style=grid'
 alias cls=clear
 alias d='cd ~/dotfiles/'
 alias em='emacs -nw'
