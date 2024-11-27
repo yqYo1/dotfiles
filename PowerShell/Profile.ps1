@@ -1,4 +1,6 @@
-﻿Function ls {eza -F $args}
+﻿#Aliases
+Function cat {bat --paging=never}
+Function ls {eza -F $args}
 Function lt {eza -T $args}
 Function ll {eza -alhF --git --git-repos $args}
 Function d {Set-Location "~\dotfiles\"}
