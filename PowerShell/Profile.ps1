@@ -1,6 +1,6 @@
 ﻿# Aliases
 if( (Get-Alias cat).CommandType -eq "Alias" ){
-  Remove-Item alias:gp -Force
+  Remove-Item alias:cat -Force
 }
 Function cat {bat --paging=never --style=grid $args}
 Function ls {eza -F $args}
@@ -10,9 +10,9 @@ Function d {Set-Location "~\dotfiles\"}
 Function .. {Set-Location "..\$args"}
 Function ... {Set-Location "..\..\$args"}
 Function .... {Set-Location "..\..\..\$args"}
-# if( (Get-Alias gp).CommandType -eq "Alias" ){
-#   Remove-Item alias:gp -Force
-# }
+if( (Get-Alias gp).CommandType -eq "Alias" ){
+  Remove-Item alias:gp -Force
+}
 Function gp {git pull}
 Set-Alias -Name which -Value where.exe
 if( (Get-Alias where).CommandType -eq "Alias" ){
