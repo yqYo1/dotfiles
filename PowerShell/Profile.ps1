@@ -7,11 +7,10 @@ Function d {Set-Location "~\dotfiles\"}
 Function .. {Set-Location "..\$args"}
 Function ... {Set-Location "..\..\$args"}
 Function .... {Set-Location "..\..\..\$args"}
-if( (Get-Alias gp).CommandType -eq "Alias" ){
-  Remove-Item alias:gp -Force
-}
+Remove-Item alias:gp -Force
 Function gp {git pull}
 Set-Alias -Name which -Value where.exe
+Remove-Item alias:where -Force
 Set-Alias -Name where -Value where.exe
 Set-Alias -Name vi -Value nvim
 Set-Alias -Name lg -Value Lazygit
