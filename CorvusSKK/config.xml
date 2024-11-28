@@ -1104,7 +1104,7 @@
       <row ro="l=" hi="=" ka="=" an="=" so="0" />
       <row ro="x=" hi="=" ka="=" an="=" so="0" />
       <row ro="?" hi="？" ka="？" an="?" so="0" />
-      <row ro="l@" hi="@" ka="@" an="@" so="0" />
+      <row ro="@" hi="@" ka="@" an="@" so="0" />
       <row ro="[" hi="「" ka="「" an="｢" so="0" />
       <row ro="]" hi="」" ka="」" an="｣" so="0" />
       <row ro="l[" hi="[" ka="[" an="[" so="0" />
