@@ -1,4 +1,7 @@
 ﻿# Aliases
+if( (Get-Alias cat).CommandType -eq "Alias" ){
+  Remove-Item alias:gp -Force
+}
 Function cat {bat --paging=never --style=grid $args}
 Function ls {eza -F $args}
 Function lt {eza -T $args}
@@ -7,10 +10,14 @@ Function d {Set-Location "~\dotfiles\"}
 Function .. {Set-Location "..\$args"}
 Function ... {Set-Location "..\..\$args"}
 Function .... {Set-Location "..\..\..\$args"}
-Remove-Item alias:gp -Force
+# if( (Get-Alias gp).CommandType -eq "Alias" ){
+#   Remove-Item alias:gp -Force
+# }
 Function gp {git pull}
 Set-Alias -Name which -Value where.exe
-Remove-Item alias:where -Force
+if( (Get-Alias where).CommandType -eq "Alias" ){
+  Remove-Item alias:where -Force
+}
 Set-Alias -Name where -Value where.exe
 Set-Alias -Name vi -Value nvim
 Set-Alias -Name lg -Value Lazygit

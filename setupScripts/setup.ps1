@@ -23,10 +23,14 @@ if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]:
   Start-Process pwsh.exe "-File `"$PSCommandPath`"" -Verb RunAs -Wait
   . "$env:USERPROFILE\Documents\PowerShell\Profile.ps1"
 
-  #yaskkserv2
-  cargo install --git https://github.com/wachikun/yaskkserv2.git
-  #aqua init
+  # yaskkserv2
+  # cargo install --git https://github.com/wachikun/yaskkserv2.git
+
+  # aqua init
   ../aquaproj-aqua/update.ps1
+
+  # bat
+  bat cache --build
 
 }else{
   #run admin
@@ -142,6 +146,12 @@ if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]:
   makeSymbolickLink $pwshProfile "$PSScriptRoot\..\PowerShell\Profile.ps1"
   #Install-Module -Name PSReadLine -AllowClobber -Force
   Install-Module -Name posh-git -Scope CurrentUser -Force
+
+  #bat
+  $batDir = "$Env:APPDATA\bat"
+  makeDir $batDir
+  makeSymbolickLink "$batDir\config" "$PSScriptRoot\..\bat\config"
+  makeSymbolickLink "$batDir\themes" "$PSScriptRoot\..\bat-catppuccin\themes"
 
   Get-Command podman -ea SilentlyContinue | Out-Null
   if ($? -eq $true) { # コマンドが存在すれば

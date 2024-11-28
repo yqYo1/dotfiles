@@ -1,4 +1,4 @@
 Push-Location -Path $PSScriptRoot
-aqua i -a
 aqua upa
+aqua i -a
 Pop-Location
