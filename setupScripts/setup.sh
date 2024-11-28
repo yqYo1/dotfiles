@@ -7,6 +7,7 @@ if [ ! -d $XDG_CONFIG_HOME ]; then
   mkdir $XDG_CONFIG_HOME
 fi
 git submodule update --init --recursive
+ln -sfnv $DOTDIR/git-hook/post-merge $DOTDIR/.git/hooks/post-merge
 ln -sfnv $DOTDIR/zsh $XDG_CONFIG_HOME/zsh
 ln -sfnv $DOTDIR/zsh/.zshrc $HOME/.zshrc
 ln -sfnv $DOTDIR/zsh/sheldon $XDG_CONFIG_HOME/sheldon
