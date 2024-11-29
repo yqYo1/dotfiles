@@ -35,4 +35,4 @@ packages:
 - name: ClementTsang/bottom@0.10.2
 - name: astral-sh/uv@0.5.4
 - name: nodejs/node@v23.3.0
-- name: oven-sh/bun@bun-v1.1.36
+- name: oven-sh/bun@bun-v1.1.37
