@@ -8,7 +8,8 @@ export TMPDIR="${HOME}/.cache/Local/local-tmp-folder"
 alias bunx='bun x'
 alias cat='bat --paging=never --style=grid'
 alias cls=clear
-alias d='cd ~/dotfiles/'
+#alias d='cd ~/dotfiles/'
+alias d="cd $(dirname $(realpath $0))/.."
 alias em='emacs -nw'
 alias gp='git pull'
 alias lg=lazygit
