@@ -28,12 +28,6 @@ Set-PSReadLineOption -BellStyle None
 Set-PSReadLineKeyHandler -Key Tab -Function MenuComplete
 Import-Module posh-git
 
-$apikeyps1 = Join-Path (Split-Path -Parent $PROFILE) apikey.ps1
-if(Test-Path $apikeyps1){
-  . $apikeyps1
-}
-Remove-Variable apikeyps1
-
 Invoke-Expression (&starship init powershell)
 $prompt = ""
 function Invoke-Starship-PreCommand {
