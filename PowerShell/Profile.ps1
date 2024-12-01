@@ -6,7 +6,7 @@ Function cat {bat --paging=never --style=grid $args}
 Function ls {eza -F $args}
 Function lt {eza -T $args}
 Function ll {eza -alhF --git --git-repos $args}
-Function d {Set-Location "~\dotfiles\"}
+Function d {Push-Location "~\dotfiles\"}
 Function .. {Set-Location "..\$args"}
 Function ... {Set-Location "..\..\$args"}
 Function .... {Set-Location "..\..\..\$args"}
