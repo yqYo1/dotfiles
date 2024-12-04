@@ -26,3 +26,7 @@
 (leaf paren
   :doc "highlight matching paren"
   :global-minor-mode show-paren-mode)
+(leaf catppuccin-theme
+  :doc "color scheme"
+  :ensure t)
+(load-theme 'catppuccin :no-confirm)
