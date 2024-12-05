@@ -16,8 +16,6 @@ if( (Get-Alias gp).CommandType -eq "Alias" ){
   Remove-Item alias:gp -Force
 }
 Function gp {git pull}
-# Function pushd {Push-Location $args}
-# Set-Alias -Name popd -Value Pop-Location
 Set-Alias -Name which -Value where.exe
 if( (Get-Alias where).CommandType -eq "Alias" ){
   Remove-Item alias:where -Force
