@@ -2,7 +2,7 @@
 return {
   {
     "CopilotC-Nvim/CopilotChat.nvim",
-    branch = "canary",
+    -- branch = "canary",
     event = "VeryLazy",
     -- dependencies = {
     --   { "zbirenbaum/copilot.lua" }, -- or github/copilot.vim
