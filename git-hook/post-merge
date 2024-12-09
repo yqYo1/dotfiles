@@ -1,3 +1,8 @@
 #!/bin/env bash
 DOTDIR=$(cd $(dirname $0)/../..;pwd)
-$DOTDIR/aquaproj-aqua/update.sh
+if [ $(uname -o) = "GNU/Linux" ]; then
+  $DOTDIR/setupScripts/setup.sh
+elif [ $(uname -o) = "Msys" ]; then
+  # ln -sfnv $DOTDIR/git-hook/post-merge $DOTDIR/.git/hooks/post-merge
+  $DOTDIR/aquaproj-aqua/update.sh
+fi
