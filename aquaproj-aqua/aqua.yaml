@@ -16,7 +16,7 @@ packages:
 - name: golang/tools/gorename@v0.25.0
 - name: junegunn/fzf@v0.56.3
 - name: mitsuhiko/rye@0.42.0
-- name: LuaLS/lua-language-server@3.13.2
+- name: LuaLS/lua-language-server@3.13.3
 - name: rust-lang/rust-analyzer@2024-11-18
 - name: mattn/efm-langserver@v0.0.54
 - name: rhysd/actionlint@v1.7.4
