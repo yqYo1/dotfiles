@@ -164,6 +164,8 @@ if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]:
     Start-Process -FilePath "C:\Program Files\RedHat\Podman\podman.exe" -ArgumentList "machine", "init" -Wait -NoNewWindow
   }
 
+  winget install --id LuaLS.lua-language-server
+
   pause
 }
 Pop-Location
