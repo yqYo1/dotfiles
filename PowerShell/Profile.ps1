@@ -22,6 +22,7 @@ if( (Get-Alias where).CommandType -eq "Alias" ){
 }
 Set-Alias -Name where -Value where.exe
 Set-Alias -Name vi -Value nvim
+Set-Alias -Name bash -Value sh
 Set-Alias -Name lg -Value Lazygit
 
 Set-PSReadLineOption -PredictionSource HistoryAndPlugin
