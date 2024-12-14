@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/env bash
 set -eu
 AQUA_DIR="$(dirname $AQUA_GLOBAL_CONFIG)"
 cd $AQUA_DIR
