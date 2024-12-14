@@ -3,6 +3,7 @@ function makeDir($dir){
     New-Item $dir -ItemType Directory
   }
 }
+
 function makeSymbolickLink($destination, $source){
   if (Test-Path $destination) {
     if ((Get-ItemProperty $destination).Mode.Substring(0,1) -ne 'l'){
@@ -14,6 +15,12 @@ function makeSymbolickLink($destination, $source){
     New-Item -ItemType SymbolicLink -Path $destination -Value "$source"
   }
 }
+
+function Exist-Command($Name){
+  Get-Command $Name -ErrorAction SilentlyContinue | Out-Null
+  return($? -eq $true)
+}
+
 
 Push-Location -Path $PSScriptRoot
 

@@ -1,5 +1,8 @@
-Get-Command cargo -ea SilentlyContinue | Out-Null
-if ($? -eq $true) { # コマンドが存在すれば
+function Exist-Command($Name){
+  Get-Command $Name -ErrorAction SilentlyContinue | Out-Null
+  return($? -eq $true)
+}
+if (Exist-Command cargo) { # コマンドが存在すれば
   Write-Output "rust is already installed"
   rustup self update
   rustup update stable
