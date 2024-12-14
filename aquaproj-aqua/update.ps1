@@ -1,4 +1,3 @@
 Push-Location -Path $PSScriptRoot
-aqua upa
-aqua i -a
+sh -c "./update.sh"
 Pop-Location
