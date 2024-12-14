@@ -112,7 +112,6 @@
     <list>
       <row vkey="0x1D" mkey="0" />
       <row vkey="0x16" mkey="0" />
-      <row vkey="0x1B" mkey="0" />
     </list>
   </section>
   <section name="keymap">
