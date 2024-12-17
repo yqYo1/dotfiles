@@ -21,7 +21,6 @@ function Exist-Command($Name){
   return($? -eq $true)
 }
 
-
 Push-Location -Path $PSScriptRoot
 if ( ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole("Administrators") ){
   throw "Running with administrator. Do not run with administrator."
@@ -38,4 +37,10 @@ if (!(Exist-Command aria2c)) {
   scoop config aria2-warning-enabled false
 }else{
   echo "aria2 is already installed"
+}
+
+if (!(scoop list | Select-String lua-language-server)){
+  scoop install lua-language-server
+}else{
+  echo "lua-language-server is already installed"
 }
