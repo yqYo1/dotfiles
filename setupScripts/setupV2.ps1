@@ -39,6 +39,24 @@ if (!(Exist-Command aria2c)) {
   echo "aria2 is already installed"
 }
 
+if (!(scoop list | Select-String 7zip)){
+  scoop install 7zip
+}else{
+  echo "7zip is already installed"
+}
+
+if (!(scoop list | Select-String innounp)){
+  scoop install innounp
+}else{
+  echo "innounp is already installed"
+}
+
+if (!(scoop list | Select-String dark)){
+  scoop install dark
+}else{
+  echo "dark is already installed"
+}
+
 if (!(scoop list | Select-String lua-language-server)){
   scoop install lua-language-server
 }else{
