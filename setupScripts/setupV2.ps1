@@ -62,3 +62,9 @@ if (!(scoop list | Select-String lua-language-server)){
 }else{
   echo "lua-language-server is already installed"
 }
+
+if (!(scoop list | Select-String bun)){
+  scoop install bun
+}else{
+  echo "bun is already installed"
+}
