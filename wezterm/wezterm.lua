@@ -42,6 +42,14 @@ if wezterm.target_triple == "x86_64-pc-windows-msvc" then
       },
     })
     table.insert(config.launch_menu, {
+      label = "x86 Native Tools VS " .. year,
+      args = {
+        "cmd.exe",
+        "/k",
+        "C:/Program Files (x86)/" .. vsvers .. "/BuildTools/VC/Auxiliary/Build/vcvars32.bat",
+      },
+    })
+    table.insert(config.launch_menu, {
       label = "Developer PWSH VS " .. year,
       args = {
         "pwsh.exe",
