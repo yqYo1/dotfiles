@@ -50,7 +50,7 @@ if wezterm.target_triple == "x86_64-pc-windows-msvc" then
       },
     })
     table.insert(config.launch_menu, {
-      label = "Developer PWSH VS " .. year,
+      label = "x64 Developer PWSH VS " .. year,
       args = {
         "pwsh.exe",
         "-NoLogo",
@@ -58,9 +58,33 @@ if wezterm.target_triple == "x86_64-pc-windows-msvc" then
         "-Command",
         '&{Import-Module "C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/Common7/Tools/Microsoft.VisualStudio.DevShell.dll"; Enter-VsDevShell '
           .. DevShellarg
-          .. ' -SkipAutomaticLocation -DevCmdArguments "-arch=x64 -host_arch=x64"}',
+          .. ' -SkipAutomaticLocation -DevCmdArguments "-arch=amd64 -host_arch=amd64"}',
       },
     })
+    table.insert(config.launch_menu, {
+      label = "x86 Developer PWSH VS " .. year,
+      args = {
+        "pwsh.exe",
+        "-NoLogo",
+        "-NoExit",
+        "-Command",
+        '&{Import-Module "C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/Common7/Tools/Microsoft.VisualStudio.DevShell.dll"; Enter-VsDevShell '
+          .. DevShellarg
+          .. ' -SkipAutomaticLocation -DevCmdArguments "-arch=x86 -host_arch=amd64"}',
+      },
+    })
+    -- https://learn.microsoft.com/ja-jp/visualstudio/ide/reference/command-prompt-powershell?view=vs-2022#developer-powershell
+    --[[ table.insert(config.launch_menu, {
+      label = "x86 Developer PWSH VS " .. year,
+      args = {
+        "pwsh.exe",
+        "-NoLogo",
+        "-NoExit",
+        "-Command",
+        -- "C:/Program Files (x86)/" .. vsvers .. "/Common7/Tools/Launch-VsDevShell.ps1 -Arch x86 -HostArch amd64"
+        "C:/Program Files (x86)/" .. vsvers .. "/Common7/Tools/Launch-VsDevShell.ps1"
+      },
+    }) ]]
   end
 
   config.window_background_opacity = 0.80
