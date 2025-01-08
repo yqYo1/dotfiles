@@ -1,47 +1,47 @@
-local opt = vim.opt
+vim.opt.backup = true
+vim.opt.backupdir = vim.fn.expand(vim.fn.stdpath("cache") .. "/.neovim_backup")
+vim.opt.swapfile = false
+vim.opt.writebackup = true
+vim.opt.autoread = true
+vim.opt.hidden = true
+vim.opt.mouse = "a"
+vim.opt.confirm = true
 
-opt.backup = true
-opt.backupdir = vim.fn.expand(vim.fn.stdpath("cache") .. "/.neovim_backup")
-opt.swapfile = false
-opt.writebackup = true
-opt.autoread = true
-opt.hidden = true
-opt.mouse = "a"
-opt.confirm = true
+vim.opt.shortmess:append("I")
 
-opt.shortmess:append("I")
+vim.opt.number = true
+vim.opt.relativenumber = true
+vim.opt.signcolumn = "yes"
 
-opt.number = true
-opt.relativenumber = true
-opt.signcolumn = "yes"
+vim.opt.fenc = "utf-8"
 
-opt.fenc = "utf-8"
+-- vim.opt.wrap = true
 
 --indent
 local tabwidth = 2
-opt.tabstop = tabwidth
-opt.softtabstop = tabwidth
-opt.shiftwidth = tabwidth
-opt.expandtab = true
-opt.autoindent = true
-opt.smartindent = true
-opt.backspace = { "indent", "eol", "start" }
-opt.nrformats:remove({ "unsigned", "octal" })
+vim.opt.tabstop = tabwidth
+vim.opt.softtabstop = tabwidth
+vim.opt.shiftwidth = tabwidth
+vim.opt.expandtab = true
+vim.opt.autoindent = true
+vim.opt.smartindent = true
+vim.opt.backspace = { "indent", "eol", "start" }
+vim.opt.nrformats:remove({ "unsigned", "octal" })
 
-opt.list = true
+vim.opt.list = true
 
-opt.listchars = {
+vim.opt.listchars = {
   tab = "▸▹┊",
   trail = "▫",
   extends = "❯",
   precedes = "❮",
 }
 
-opt.cmdheight = 0
+vim.opt.cmdheight = 0
 
-opt.termguicolors = true
-opt.winblend = 0
-opt.pumblend = 0
+vim.opt.termguicolors = true
+vim.opt.winblend = 0
+vim.opt.pumblend = 0
 
 vim.diagnostic.config({ severity_sort = true })
 
@@ -56,6 +56,6 @@ if is_windows() then
   }
 
   for k, v in pairs(pwsh_options) do
-    opt[k] = v
+    vim.opt[k] = v
   end
 end
