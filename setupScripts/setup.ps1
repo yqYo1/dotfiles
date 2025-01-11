@@ -110,9 +110,9 @@ if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]:
   $Env:AQUA_ROOT_DIR = $aquaRootDir
   $oldUsePath = [System.Environment]::GetEnvironmentVariable("Path", "User")
   $newUserPath = ""
-  if ( -not ($oldUsePath.Contains("$aquaRootDir\bat"))){
-    $newUserPath += "$aquaRootDir\bat;"
-  }
+  # if ( -not ($oldUsePath.Contains("$aquaRootDir\bat"))){
+  #   $newUserPath += "$aquaRootDir\bat;"
+  # }
   if ( -not ($oldUsePath.Contains("$aquaRootDir\bin"))){
     $newUserPath += "$aquaRootDir\bin;"
   }
