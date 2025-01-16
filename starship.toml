@@ -6,6 +6,7 @@ $directory\
 $git_branch\
 $git_status\
 [](fg:#394260 bg:#212736)\
+$shell\
 [](fg:#212736 bg:#1d2230)\
 $time\
 [ ](fg:#1d2230)\
@@ -90,3 +91,11 @@ disabled = false
 time_format = "%R" # Hour:Minute Format
 style = "bg:#1d2230"
 format = '[[  $time ](fg:#a0a9cb bg:#1d2230)]($style)'
+
+[shell]
+bash_indicator = "bash "
+zsh_indicator = "zsh"
+pwsh_indicator = "pwsh"
+style = "bg:#212736"
+format = '[[  $indicator ](fg:#a0a9cb bg:#212736)]($style)'
+disabled = false
