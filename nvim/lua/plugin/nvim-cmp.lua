@@ -96,6 +96,15 @@ return {
       --   load_after(p)
       -- end,
     },
+    {
+      "chrisgrieser/cmp-nerdfont",
+      config = function(p)
+        load_after(p)
+      end,
+    },
+    {
+      "lukas-reineke/cmp-under-comparator"
+    },
     -- { "saadparwaiz1/cmp_luasnip" }, -- Snippets source for nvim-cmp
     -- { "L3MON4D3/LuaSnip" }, -- Snippets plugin
   },
@@ -141,6 +150,7 @@ return {
           cmp.config.compare.exact,
           cmp.config.compare.score,
           cmp.config.compare.kind,
+          require("cmp_under_comparator").under,
           cmp.config.compare.recently_used,
           cmp.config.compare.locality,
           cmp.config.compare.sort_text,
@@ -148,7 +158,7 @@ return {
           cmp.config.compare.order,
         },
       },
-      sources = cmp.config.sources({
+      sources = {
         {
           name = "nvim_lsp",
           priority = 100,
@@ -158,7 +168,6 @@ return {
           name = "copilot",
           priority = 90,
         },
-        -- { name = "luasnip", priority = 100 },
         {
           name = "lazydev",
           -- group_index = 0,
@@ -177,17 +186,22 @@ return {
           priority = 50,
         },
         {
+          name = "nerdfont",
+          priority = 50,
+        },
+        {
           name = "nvim_lua",
           priority = 60,
         },
-      }, {
-        { name = "treesitter" },
+        {
+          name = "treesitter"
+        },
         {
           name = "buffer",
           -- group_index = 2,
         },
         { name = "calc" },
-      }),
+      },
       completion = {
         completeopt = "menu,menuone,noinsert,noselect",
       },
@@ -208,6 +222,7 @@ return {
       spell = "[Spell]",
       calc = "[Calc]",
       emoji = "[Emoji]",
+      nerdfont = "[Nerd]",
       neorg = "[Neorg]",
       rg = "[rg]",
       nvim_lsp_signature_help = "[Signature]",
