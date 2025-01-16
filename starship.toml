@@ -97,5 +97,5 @@ bash_indicator = "bash "
 zsh_indicator = "zsh"
 pwsh_indicator = "pwsh"
 style = "bg:#212736"
-format = '[[  $indicator ](fg:#a0a9cb bg:#212736)]($style)'
+format = '[[   $indicator ](fg:#a0a9cb bg:#212736)]($style)'
 disabled = false
