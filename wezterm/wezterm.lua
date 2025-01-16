@@ -86,6 +86,15 @@ if wezterm.target_triple == "x86_64-pc-windows-msvc" then
       },
     }) ]]
   end
+  for _, v in ipairs(wezterm.glob("C:\\Program Files\\Git\\bin\\bash.exe")) do
+    wezterm.log_info("entry" .. v)
+    table.insert(config.launch_menu, {
+      label = "git bash",
+      args = {
+        "C:\\Program Files\\Git\\bin\\bash.exe"
+      }
+    })
+  end
 
   config.window_background_opacity = 0.80
 
