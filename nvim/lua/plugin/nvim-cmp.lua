@@ -102,9 +102,9 @@ return {
         load_after(p)
       end,
     },
-    {
-      "lukas-reineke/cmp-under-comparator"
-    },
+    -- {
+    --   "lukas-reineke/cmp-under-comparator"
+    -- },
     -- { "saadparwaiz1/cmp_luasnip" }, -- Snippets source for nvim-cmp
     -- { "L3MON4D3/LuaSnip" }, -- Snippets plugin
   },
@@ -150,7 +150,7 @@ return {
           cmp.config.compare.exact,
           cmp.config.compare.score,
           cmp.config.compare.kind,
-          require("cmp_under_comparator").under,
+          -- require("cmp_under_comparator").under,
           cmp.config.compare.recently_used,
           cmp.config.compare.locality,
           cmp.config.compare.sort_text,
