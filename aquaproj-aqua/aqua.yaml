@@ -48,4 +48,4 @@ packages:
 - name: sharkdp/fd@v10.2.0
 - name: ajeetdsouza/zoxide@v0.9.6
 - name: sxyazi/yazi@v0.4.2
-- name: PowerShell/PowerShell@v7.4.6
+- name: PowerShell/PowerShell@v7.5.0
