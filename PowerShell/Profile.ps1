@@ -31,6 +31,8 @@ Set-PSReadLineOption -BellStyle None
 Set-PSReadLineKeyHandler -Key Tab -Function MenuComplete
 Import-Module posh-git
 
+tailscale completion powershell | Out-String | Invoke-Expression
+
 Invoke-Expression (&starship init powershell)
 $prompt = ""
 function Invoke-Starship-PreCommand {
