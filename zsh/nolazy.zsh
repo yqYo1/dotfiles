@@ -7,3 +7,12 @@ export RYE_HOME="$XDG_CONFIG_HOME/rye"
 export PATH=${AQUA_ROOT_DIR:-${XDG_DATA_HOME:-$HOME/.local/share}/aquaproj-aqua}/bin:$PATH
 export PATH="$BUN_INSTALL/bin:$PATH"
 source $HOME/.cargo/env
+zshaddhistory() {
+  [[ "$?" == 0 ]]
+}
+setopt share_history
+setopt hist_ignore_all_dups
+setopt hist_ignore_space
+setopt hist_reduce_blanks
+setopt hist_verify
+unsetopt auto_pushd
