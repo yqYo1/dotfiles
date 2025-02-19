@@ -2,6 +2,7 @@ local wezterm = require("wezterm") --[[@as Wezterm]]
 
 local hostname = wezterm.hostname()
 local config = {}
+local keybinds = require("keybinds")
 
 if wezterm.config_builder then
   config = wezterm.config_builder()
@@ -137,13 +138,17 @@ config.animation_fps = 1
 config.log_unknown_escape_sequences = false
 config.notification_handling = "NeverShow"
 
---window size
+-- window size
 config.initial_cols = 100
 config.initial_rows = 40
 
---keymap
+-- key bindings
 config.disable_default_key_bindings = true
-config.keys = require("keybinds").keys
-config.key_tables = require("keybinds").key_tables
+config.keys = keybinds.keys
+config.key_tables = keybinds.key_tables
+
+-- mouse bindings
+config.disable_default_mouse_bindings = true
+config.mouse_bindings = keybinds.mouse_bindings
 
 return config
