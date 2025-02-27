@@ -1,5 +1,7 @@
 local wezterm = require("wezterm")
 local act = wezterm.action
+-- スクロール量
+local scroll_amount = 3
 
 return {
   keys = {
@@ -154,6 +156,16 @@ return {
       event = { Up = { streak = 1, button = 'Left' } },
       mods = 'CTRL',
       action = act.OpenLinkAtMouseCursor,
+    },{
+      -- ホイールアップで3行スクロールアップ
+      event = { Down = { streak = 1, button = { WheelUp = 1 } } },
+      mods = 'NONE',
+      action = act.ScrollByLine(-scroll_amount),
+    },{
+    -- ホイールダウンで3行スクロールダウン
+      event = { Down = { streak = 1, button = { WheelDown = 1 } } },
+      mods = 'NONE',
+      action = act.ScrollByLine(scroll_amount),
     },
   }
 }
