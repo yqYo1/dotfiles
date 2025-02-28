@@ -7,14 +7,9 @@ authors = [
 ]
 dependencies = [
     "ruff>=0.3.2",
-    "pyright>=1.1.354",
-    "python-lsp-ruff>=2.2.0",
-    "ruff-lsp>=0.0.53",
-    "pylyzer>=0.0.54",
     "python-lsp-server>=1.11.0",
     "basedpyright>=1.12.2",
 ]
-readme = "README.md"
 requires-python = ">= 3.12"
 
 [tool.rye]
