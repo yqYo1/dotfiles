@@ -153,6 +153,7 @@ return {
   },
   mouse_bindings = {
     {
+      -- リンクを開く
       event = { Up = { streak = 1, button = 'Left' } },
       mods = 'CTRL',
       action = act.OpenLinkAtMouseCursor,
@@ -167,5 +168,23 @@ return {
       mods = 'NONE',
       action = act.ScrollByLine(scroll_amount),
     },
+    {
+      -- Ward単位で選択
+      event = { Down = { streak = 2, button = "Left" } },
+      mods = "NONE",
+      action = act.SelectTextAtMouseCursor("Word"),
+    },
+    {
+      -- Line単位で選択
+      event = { Down = { streak = 3, button = "Left" } },
+      mods = "NONE",
+      action = act.SelectTextAtMouseCursor("Line"),
+    },
+    {
+      -- ドラッグした範囲を選択
+      event={ Drag = { streak = 1, button = "Left" } },
+      mods = 'NONE',
+      action = act.ExtendSelectionToMouseCursor("Cell")
+    }
   }
 }
