@@ -47,6 +47,6 @@ packages:
 - name: jqlang/jq@jq-1.7.1
 - name: sharkdp/fd@v10.2.0
 - name: ajeetdsouza/zoxide@v0.9.7
-- name: sxyazi/yazi@v25.2.26
+- name: sxyazi/yazi@v25.3.2
 - name: PowerShell/PowerShell@v7.5.0
 - name: x-motemen/ghq@v1.7.1
