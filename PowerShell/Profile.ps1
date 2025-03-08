@@ -1,4 +1,10 @@
-﻿# Aliases
+﻿$Env:PROFILE_DIR = ((Get-ItemProperty $PROFILE.CurrentUserAllHosts).ResolvedTarget | Split-Path)
+$Env:DOTFILES_DIR = ((Get-ItemProperty $PROFILE.CurrentUserAllHosts).ResolvedTarget | Split-Path | Split-Path)
+# test code
+Write-Host $Env:PROFILE_DIR
+Write-Host $Env:DOTFILES_DIR
+#
+# Aliases
 if( (Get-Alias cat).CommandType -eq "Alias" ){
   Remove-Item alias:cat -Force
 }
@@ -7,7 +13,8 @@ Function ls {eza -F $args}
 Function lt {eza -T $args}
 Function ll {eza -alhF --git --git-repos $args}
 Function d {
-  Push-Location ((Get-ItemProperty $PROFILE.CurrentUserAllHosts).ResolvedTarget | Split-Path | Split-Path)
+  # Push-Location ((Get-ItemProperty $PROFILE.CurrentUserAllHosts).ResolvedTarget | Split-Path | Split-Path)
+  Push-Location $Env:DOTFILES_DIR
 }
 Function .. {Set-Location "..\$args"}
 Function ... {Set-Location "..\..\$args"}
@@ -24,6 +31,14 @@ Set-Alias -Name where -Value where.exe
 Set-Alias -Name vi -Value nvim
 Set-Alias -Name bash -Value sh
 Set-Alias -Name lg -Value Lazygit
+
+$API_KEY_FILE = Join-Path -Path $Env:PROFILE_DIR -ChildPath "env_api_key.ps1"
+if (Test-Path $API_KEY_FILE) {
+    . $API_KEY_FILE
+} else {
+    Write-Host "API key file not found"
+    Write-Host "Create $API_KEY_FILE"
+}
 
 Set-PSReadLineOption -PredictionSource HistoryAndPlugin
 Set-PSReadLineOption -PredictionViewStyle ListView
