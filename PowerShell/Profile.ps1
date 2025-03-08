@@ -1,9 +1,6 @@
 ﻿$Env:PROFILE_DIR = ((Get-ItemProperty $PROFILE.CurrentUserAllHosts).ResolvedTarget | Split-Path)
 $Env:DOTFILES_DIR = ((Get-ItemProperty $PROFILE.CurrentUserAllHosts).ResolvedTarget | Split-Path | Split-Path)
-# test code
-Write-Host $Env:PROFILE_DIR
-Write-Host $Env:DOTFILES_DIR
-#
+
 # Aliases
 if( (Get-Alias cat).CommandType -eq "Alias" ){
   Remove-Item alias:cat -Force
@@ -13,7 +10,6 @@ Function ls {eza -F $args}
 Function lt {eza -T $args}
 Function ll {eza -alhF --git --git-repos $args}
 Function d {
-  # Push-Location ((Get-ItemProperty $PROFILE.CurrentUserAllHosts).ResolvedTarget | Split-Path | Split-Path)
   Push-Location $Env:DOTFILES_DIR
 }
 Function .. {Set-Location "..\$args"}
@@ -37,7 +33,7 @@ if (Test-Path $API_KEY_FILE) {
     . $API_KEY_FILE
 } else {
     Write-Host "API key file not found"
-    Write-Host "Create $API_KEY_FILE"
+    Write-Host "Please Create $API_KEY_FILE"
 }
 
 Set-PSReadLineOption -PredictionSource HistoryAndPlugin

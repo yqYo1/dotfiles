@@ -33,7 +33,7 @@ if [ -f $ZSHRC_DIR/env_api_key.zsh ]; then
   zc_source $ZSHRC_DIR/env_api_key.zsh
 else
   echo "API key file not found"
-  echo "Create $ZSHRC_DIR/env_api_key.zsh"
+  echo "Please Create $ZSHRC_DIR/env_api_key.zsh"
 fi
 zsh-defer source $ZSHRC_DIR/lazy.zsh
 unfunction zc_source
