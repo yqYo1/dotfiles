@@ -27,6 +27,7 @@
 !/home.nix
 !/emacs
 
+# ignore
 *.elc
 *.eln
 /emacs/auto-save-list
@@ -34,7 +35,9 @@
 /emacs/elpa
 *.zwc
 zsh/.zsh_history
+zsh/env_api_key.zsh
 zsh/completion/*
+PowerShell/env_api_key.ps1
 aquaproj-aqua/log.txt
 nvim/lua/cli/node_server/node_modules
 nvim/lun/cli/python_tools/.venv
