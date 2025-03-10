@@ -37,7 +37,7 @@ packages:
 - name: JohnnyMorganz/StyLua@v2.0.2
 - name: BurntSushi/ripgrep@14.1.1
 - name: ziglang/zig@0.14.0
-- name: zigtools/zls@0.13.0
+- name: zigtools/zls@0.14.0
 - name: rossmacarthur/sheldon@0.8.1
 - name: jesseduffield/lazygit@v0.48.0
 - name: ClementTsang/bottom@0.10.2
