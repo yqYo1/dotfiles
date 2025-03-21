@@ -41,7 +41,7 @@ packages:
 - name: rossmacarthur/sheldon@0.8.1
 - name: jesseduffield/lazygit@v0.48.0
 - name: ClementTsang/bottom@0.10.2
-- name: astral-sh/uv@0.6.6
+- name: astral-sh/uv@0.6.7
 - name: nodejs/node@v23.10.0
 - name: oven-sh/bun@bun-v1.2.5
 - name: jqlang/jq@jq-1.7.1
