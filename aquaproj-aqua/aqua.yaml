@@ -49,4 +49,4 @@ packages:
 - name: ajeetdsouza/zoxide@v0.9.7
 - name: sxyazi/yazi@v25.3.2
 - name: PowerShell/PowerShell@v7.5.0
-- name: x-motemen/ghq@v1.7.1
+- name: x-motemen/ghq@v1.8.0
