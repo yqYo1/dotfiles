@@ -32,39 +32,35 @@ if (!(Exist-Command scoop)) {
   echo "scoop is already installed"
 }
 
-if (!(Exist-Command aria2c)) {
+[void]($applist = scoop list | Select-Object -ExpandProperty Name)
+foreach ($app in $applist) {
+  if ($app -ne "aqua") {
+    echo "update $app"
+    scoop update $app
+  }
+}
+
+if (-not $applist.Contains("aria2")) {
   scoop install aria2
   scoop config aria2-warning-enabled false
-}else{
-  echo "aria2 is already installed"
 }
 
-if (!(scoop list | Select-String 7zip)){
+if (-not $applist.Contains("7zip")) {
   scoop install 7zip
-}else{
-  echo "7zip is already installed"
 }
 
-if (!(scoop list | Select-String innounp)){
+if (-not $applist.Contains("innounp")) {
   scoop install innounp
-}else{
-  echo "innounp is already installed"
 }
 
-if (!(scoop list | Select-String dark)){
+if (-not $applist.Contains("dark")) {
   scoop install dark
-}else{
-  echo "dark is already installed"
 }
 
-if (!(scoop list | Select-String lua-language-server)){
+if (-not $applist.Contains("lua-language-server")) {
   scoop install lua-language-server
-}else{
-  echo "lua-language-server is already installed"
 }
 
-if (!(scoop list | Select-String bun)){
+if (-not $applist.Contains("bun")) {
   scoop install bun
-}else{
-  echo "bun is already installed"
 }
