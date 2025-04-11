@@ -89,3 +89,5 @@ if (-not (Test-Path $aqua_bin_path)) {
 if ($PathChanged) {
   [System.Environment]::SetEnvironmentVariable("Path", $Path, "User")
 }
+
+bat cache --build
