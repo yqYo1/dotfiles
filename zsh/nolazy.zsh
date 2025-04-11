@@ -12,7 +12,6 @@ zshaddhistory() {
 }
 setopt no_auto_pushd
 setopt no_beep
-setopt hint_expand
 setopt hist_reduce_blanks
 setopt hist_ignore_all_dups
 setopt hist_ignore_space
