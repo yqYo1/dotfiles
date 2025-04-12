@@ -90,4 +90,14 @@ if ($PathChanged) {
   [System.Environment]::SetEnvironmentVariable("Path", $Path, "User")
 }
 
+if (-not (Get-PSRepository PSGallery | Select-Object -ExpandProperty Trusted)) {
+  Write-Host "Trust PSGallery"
+  Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
+}
+
+$moduleList = Get-InstalledModule | Select-Object -ExpandProperty Name
+if (-not $moduleList.Contains("git-completion")) {
+  Install-Module git-completion
+}
+
 bat cache --build

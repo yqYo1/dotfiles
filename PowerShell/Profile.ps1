@@ -40,7 +40,8 @@ Set-PSReadLineOption -PredictionSource HistoryAndPlugin
 Set-PSReadLineOption -PredictionViewStyle ListView
 Set-PSReadLineOption -BellStyle None
 Set-PSReadLineKeyHandler -Key Tab -Function MenuComplete
-Import-Module posh-git
+
+Import-Module git-completion
 
 tailscale completion powershell | Out-String | Invoke-Expression
 
