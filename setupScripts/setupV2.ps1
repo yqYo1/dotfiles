@@ -64,6 +64,12 @@ if (-not $applist.Contains("lua-language-server")) {
 if (-not $applist.Contains("bun")) {
   scoop install bun
 }
+if (-not $applist.Contains("GCC")) {
+  scoop install GCC
+}
+if (-not $applist.Contains("llvm")) {
+  scoop install llvm
+}
 
 if (-not ($Path.Contains("$Env:USERPROFILE\bin"))){
   makeDir $HOME\bin
