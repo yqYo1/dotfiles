@@ -43,7 +43,11 @@ vim.opt.termguicolors = true
 vim.opt.winblend = 0
 vim.opt.pumblend = 0
 
-vim.diagnostic.config({ severity_sort = true })
+vim.diagnostic.config({
+  severity_sort = true,
+  virtual_lines = true,
+  virtual_text = true
+})
 
 if is_windows() then
   local pwsh_options = {
