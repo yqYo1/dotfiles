@@ -70,6 +70,9 @@ if (-not $applist.Contains("GCC")) {
 if (-not $applist.Contains("llvm")) {
   scoop install llvm
 }
+if (-not $applist.Contains("nodejs-lts")) {
+  scoop install nodejs-lts
+}
 
 if (-not ($Path.Contains("$Env:USERPROFILE\bin"))){
   makeDir $HOME\bin
