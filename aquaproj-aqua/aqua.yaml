@@ -50,3 +50,4 @@ packages:
 - name: sxyazi/yazi@v25.4.8
 - name: PowerShell/PowerShell@v7.5.0
 - name: x-motemen/ghq@v1.8.0
+- name: tree-sitter/tree-sitter@v0.25.3
