@@ -20,6 +20,11 @@ vim.keymap.set("n", "U", "<C-r>", { desc = "redo"})
 -- yank
 vim.keymap.set("x", "y", "mzy`z", { desc = "don't move cusur when yank on Visual mode"})
 
+-- delete
+vim.keymap.set({ 'n', 'x' }, 'x', '"_d', { desc = 'Delete using blackhole register' })
+vim.keymap.set('n', 'X', '"_D', { desc = 'Delete using blackhole register' })
+vim.keymap.set('o', 'x', 'd', { desc = 'Delete using x' })
+
 -- Paste continuously in Visual mode
 vim.keymap.set("x", "p", "P", { desc = "Paste without change register"})
 vim.keymap.set("x", "P", "p", { desc = "Paste with change register"})
