@@ -1,30 +1,31 @@
--- yank to clipboard
-vim.keymap.set({ "n", "v" }, "gy", '"+y')
-vim.keymap.set("n", "gp", '"+p')
-vim.keymap.set("n", "gP", '"+P')
+-- clipboard
+vim.keymap.set({ "n", "v" }, "gy", '"+y', { desc = "yank to clipboard"})
+vim.keymap.set("n", "gp", '"+p', { desc = "Paste from clipboard"})
+vim.keymap.set("n", "gP", '"+P', { desc = "Paste from clipboard"})
 
--- Buffer switch
-vim.keymap.set("n", "<C-j>", "<cmd>bprev<CR>")
-vim.keymap.set("n", "<C-k>", "<cmd>bnext<CR>")
+--- Switch buffer
+vim.keymap.set("n", "<C-j>", "<cmd>bprev<CR>", { desc = "Switch to previous buffer"})
+vim.keymap.set("n", "<C-k>", "<cmd>bnext<CR>", { desc = "Switch to next buffer"})
 
--- Terminal escape insert mode
-vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>")
+-- terminal mode
+vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Change to Normal mode"})
 
--- Make sure Undo Block is not interrupted
-vim.keymap.set("i", "<Left>", "<C-G>U<Left>")
-vim.keymap.set("i", "<Right>", "<C-G>U<Right>")
+-- undo block
+vim.keymap.set("i", "<Left>", "<C-G>U<Left>", { desc = "Move left without interrupting the Undo Block"})
+vim.keymap.set("i", "<Right>", "<C-G>U<Right>", { desc = "Move left without interrupting the Undo Block"})
 
 -- redo
-vim.keymap.set("n", "U", "<C-r>")
+vim.keymap.set("n", "U", "<C-r>", { desc = "redo"})
 
--- don't move cusur when yank on Visual mode
-vim.keymap.set("x", "y", "mzy`z")
+-- yank
+vim.keymap.set("x", "y", "mzy`z", { desc = "don't move cusur when yank on Visual mode"})
 
 -- Paste continuously in Visual mode
-vim.keymap.set("x", "p", "P")
+vim.keymap.set("x", "p", "P", { desc = "Paste without change register"})
+vim.keymap.set("x", "P", "p", { desc = "Paste with change register"})
 
 -- escape from insert
-vim.keymap.set("i", "jk", "<Esc>")
+vim.keymap.set("i", "jk", "<Esc>", { desc = "Change to Normal mode"})
 
 -- H/L submode
 vim.keymap.set("n", "H", "H<Plug>(H)")
