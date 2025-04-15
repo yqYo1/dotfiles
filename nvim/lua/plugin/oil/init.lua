@@ -1,3 +1,6 @@
+local is_vscode = require("core.utils").is_vscode
+local tb = require("core.utils").tb
+
 ---@type LazySpec
 return {
   {
@@ -8,6 +11,19 @@ return {
       "nvim-tree/nvim-web-devicons",
     },
     cond = not is_vscode(),
+    opts = function()
+      return {
+        view_options = {
+          show_hidden = true,
+        },
+        win_options = {
+          signcolumn = "yes:2",
+        },
+      }
+    end,
+    config = function(_, opts)
+      require("oil").setup(opts)
+    end,
     init = function()
       local openWithOil = function()
         local path = vim.fn.expand("%:p")
@@ -24,19 +40,6 @@ return {
       end
       vim.api.nvim_create_autocmd({ "BufEnter" }, { callback = openWithOil, nested = true })
       vim.api.nvim_create_autocmd({ "VimEnter" }, { callback = openWithOil })
-    end,
-    opts = function()
-      return {
-        view_options = {
-          show_hidden = true,
-        },
-        win_options = {
-          signcolumn = "yes:2",
-        },
-      }
-    end,
-    config = function(_, opts)
-      require("oil").setup(opts)
     end,
   },{
     "refractalize/oil-git-status.nvim",

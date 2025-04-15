@@ -1,4 +1,4 @@
--- local has = require("core.plugin").has
+local is_vscode = require("core.utils").is_vscode
 
 return {
   "folke/noice.nvim",

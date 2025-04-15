@@ -1,7 +1,7 @@
 local M = {}
 
 M.is_event_available = function(event)
-  return tb(vim.fn.exists(("##" .. event)))
+  return M.tb(vim.fn.exists(("##" .. event)))
 end
 
 M.find_cmd = function(cmd, prefixes, start_from, stop_at)
@@ -57,21 +57,26 @@ function M.repeat_element(x, n)
   return tbl
 end
 
-function M.combination(tbl1, tbl2, separator)
-  local return_events = {}
-  for _, ext in ipairs(tbl1) do
-    for _, event in ipairs(tbl2) do
-      table.insert(return_events, string.format("%s *.%s", event, ext))
-    end
+M.tb = function(value)
+  if value == nil then
+    return false
+  elseif type(value) == "boolean" then
+    return value
+  elseif type(value) == "number" then
+    return value ~= 0
+  elseif type(value) == "string" then
+    return string.lower(value) == "true"
+  else
+    return false
   end
-  return return_events
 end
 
-function M.event_exe_combination(events, exts, init)
-  return vim.tbl_flatten({
-    init or {},
-    M.combination(exts, events, " *."),
-  })
+M.is_vscode = function()
+  return M.tb(vim.g.vscode)
+end
+
+M.is_windows = function()
+  return vim.uv.os_uname().sysname == "Windows_NT"
 end
 
 return M

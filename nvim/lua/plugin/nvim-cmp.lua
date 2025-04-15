@@ -1,3 +1,5 @@
+local is_vscode = require("core.utils").is_vscode
+
 local function load_after(plugin)
   local dir = plugin.dir .. "/after/plugin"
   local fd = vim.uv.fs_scandir(dir)

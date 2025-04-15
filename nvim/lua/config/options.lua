@@ -1,3 +1,4 @@
+local is_windows = require("core.utils").is_windows
 vim.opt.backup = true
 vim.opt.backupdir = vim.fn.expand(vim.fn.stdpath("cache") .. "/.neovim_backup")
 vim.opt.swapfile = false

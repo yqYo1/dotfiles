@@ -1,3 +1,5 @@
+local is_vscode = require("core.utils").is_vscode
+
 ---@type LazySpec
 return {
   "nvimtools/none-ls.nvim",
