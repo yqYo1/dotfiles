@@ -10,6 +10,10 @@ return {
     vim.api.nvim_create_user_command("TrimLine", function()
       require('mini.trailspace').trim_last_lines()
     end,{})
+    vim.api.nvim_create_user_command("TrimBoth", function()
+      require('mini.trailspace').trim()
+      require('mini.trailspace').trim_last_lines()
+    end,{})
   end,
   opgx = {},
 }
