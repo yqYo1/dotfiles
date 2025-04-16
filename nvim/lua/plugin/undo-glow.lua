@@ -125,6 +125,30 @@ return {
       noremap = true,
     },
     {
+      "gb",
+      function()
+        -- This is an implementation to preserve the cursor position
+        local pos = vim.fn.getpos(".")
+        vim.schedule(function()
+          vim.fn.setpos(".", pos)
+        end)
+        return require("undo-glow").comment()
+      end,
+      mode = { "n", "x" },
+      desc = "Toggle comment with highlight",
+      expr = true,
+      noremap = true,
+    },
+    {
+      "gb",
+      function()
+        require("undo-glow").comment_textobject()
+      end,
+      mode = "o",
+      desc = "Comment textobject with highlight",
+      noremap = true,
+    },
+    {
       "gcc",
       function()
         return require("undo-glow").comment_line()
@@ -144,7 +168,7 @@ return {
     })
 
     -- This only handles neovim instance and do not highlight when switching panes in tmux
-    vim.api.nvim_create_autocmd("CursorMoved", {
+    --[[ vim.api.nvim_create_autocmd("CursorMoved", {
       desc = "Highlight when cursor moved significantly",
       callback = function()
         require("undo-glow").cursor_moved({
@@ -153,10 +177,10 @@ return {
           },
         })
       end,
-    })
+    }) ]]
 
     -- This will handle highlights when focus gained, including switching panes in tmux
-    vim.api.nvim_create_autocmd("FocusGained", {
+    --[[ vim.api.nvim_create_autocmd("FocusGained", {
       desc = "Highlight when focus gained",
       callback = function()
         ---@type UndoGlow.CommandOpts
@@ -177,7 +201,7 @@ return {
           force_edge = opts.force_edge == nil and true or opts.force_edge,
         }))
       end,
-    })
+    }) ]]
 
     vim.api.nvim_create_autocmd("CmdLineLeave", {
       pattern = { "/", "?" },
