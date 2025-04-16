@@ -37,3 +37,6 @@ vim.keymap.set("n", "H", "H<Plug>(H)")
 vim.keymap.set("n", "L", "L<Plug>(L)")
 vim.keymap.set("n", "<Plug>(H)H", "<PageUp>H<Plug>(H)")
 vim.keymap.set("n", "<Plug>(L)L", "<PageDown>Lzb<Plug>(L)")
+
+-- disable default keymap
+vim.keymap.set("n", "<C-r>", "<nop>", { desc = "Disable redo"})
