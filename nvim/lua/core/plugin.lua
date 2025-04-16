@@ -59,7 +59,14 @@ end
 
 ---@param plugin string
 function M.has(plugin)
-  return require("lazy.core.config").spec.plugins[plugin] ~= nil
+  local plugin_spec = require("lazy.core.config").spec.plugins[plugin]
+  if plugin_spec ~=nil then
+    local plugin_cond = plugin_spec.cond ~= false
+    local plugin_enabled = plugin_spec.enabled ~= false
+    return plugin_cond and plugin_enabled
+  else
+    return false
+  end
 end
 
 return M
