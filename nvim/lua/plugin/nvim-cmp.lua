@@ -22,6 +22,7 @@ return {
   "hrsh7th/nvim-cmp",
   event = { "InsertEnter", "CmdlineEnter" },
   cond = not is_vscode(),
+  enabled = false,
   dependencies = {
     { "onsails/lspkind.nvim" },
     {

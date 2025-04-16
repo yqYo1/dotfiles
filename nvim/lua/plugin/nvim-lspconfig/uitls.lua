@@ -12,9 +12,14 @@ local function _convert_client(client)
   return _client
 end
 
----@return boolean 'is cmp installed?'
+---@return boolean 'is nvim-cmp enabled?'
 function o.has_cmp()
   return require("core.plugin").has("nvim-cmp")
+end
+
+---@return boolean 'is blink.cmp enabled'
+function o.has_blink()
+  return require("core.plugin").has("blink.cmp")
 end
 
 ---@return LSPConfigOpts
@@ -26,6 +31,7 @@ function o.default_opts()
     "force",
     {},
     vim.lsp.protocol.make_client_capabilities(),
+    o.has_blink() and require("blink.cmp").get_lsp_capabilities() or {},
     o.has_cmp() and require("cmp_nvim_lsp").default_capabilities() or {}
   )
   opts.capabilities.workspace.didChangeWatchedFiles.dynamicRegistration = true
