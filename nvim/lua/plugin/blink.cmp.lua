@@ -19,24 +19,42 @@ return {
   ---@module "blink.cmp"
   ---@type blink.cmp.Config
   opts = {
-    keymap = { preset = "default" },
+    keymap = {
+      preset = "super-tab"
+    },
     completion = {
-      menu = { border = 'single'},
+      menu = {
+        border = 'single',
+        draw = {
+          columns = {
+            {"label", "label_description", gap = 1 },
+            { "kind_icon", gap = 1,  "kind" }
+          }
+        },
+      },
       documentation = {
         auto_show = true,
         auto_show_delay_ms = 0,
         window = { border = 'single' }
       },
     },
+    fuzzy = {
+      implementation = "prefer_rust_with_warning",
+      sorts = {
+        "exact",
+        "score",
+        "sort_text",
+      },
+    },
     snippets = { preset = "luasnip" },
     sources = {
       default = {
-          "lazydev",
-          "lsp",
-          "snippets",
-          "copilot",
-          "path",
-          "buffer"
+        "snippets",
+        "copilot",
+        "lazydev",
+        "lsp",
+        "path",
+        "buffer"
       },
       providers = {
         lazydev = {
@@ -48,11 +66,35 @@ return {
         copilot = {
           name = "copilot",
           module = "blink-copilot",
-          score_offset = 100,
           async = true,
+        },
+      },
+    },
+    signature = { enabled = true },
+    cmdline = {
+      keymap = {
+        preset = "super-tab",
+        ["<CR>"] = { "accept_and_enter", "fallback"}
+      },
+      completion = {
+        menu = {
+          auto_show = true ,
+        },
+      },
+      sources = {
+        providers = {
+          cmdline = {
+          min_keyword_length = function(ctx)
+            if ctx.mode == "cmdline" and ctx.line:find("^%l+$") ~= nil then
+              return 3
+            else
+              return 0
+            end
+          end,
+          }
         }
       }
-    }
+    },
   },
   opts_extend = { "sources.default" }
 }
