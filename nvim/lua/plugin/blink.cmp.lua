@@ -77,23 +77,11 @@ return {
         ["<CR>"] = { "accept_and_enter", "fallback"}
       },
       completion = {
+        ghost_text = { enabled = true },
         menu = {
           auto_show = true ,
         },
       },
-      sources = {
-        providers = {
-          cmdline = {
-          min_keyword_length = function(ctx)
-            if ctx.mode == "cmdline" and ctx.line:find("^%l+$") ~= nil then
-              return 3
-            else
-              return 0
-            end
-          end,
-          }
-        }
-      }
     },
   },
   opts_extend = { "sources.default" }
