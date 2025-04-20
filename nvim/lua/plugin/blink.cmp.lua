@@ -13,6 +13,7 @@ return {
   end,
   event = { "InsertEnter", "CmdLineEnter" },
   dependencies = {
+    "xzbdmw/colorful-menu.nvim",
     "fang2hou/blink-copilot",
     "L3MON4D3/LuaSnip"
   },
@@ -29,7 +30,17 @@ return {
           columns = {
             {"label", "label_description", gap = 1 },
             { "kind_icon", gap = 1,  "kind" }
-          }
+          },
+          components = {
+            label = {
+              text = function(ctx)
+                return require("colorful-menu").blink_components_text(ctx)
+              end,
+              highlight = function(ctx)
+                return require("colorful-menu").blink_components_highlight(ctx)
+              end,
+            },
+          },
         },
       },
       documentation = {
