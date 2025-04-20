@@ -4,7 +4,6 @@ return {
   version = "*",
   dependencies = {
     "rafamadriz/friendly-snippets",
-
   },
   config = function()
     require("luasnip").setup({})
