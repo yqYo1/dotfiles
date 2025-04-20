@@ -1,7 +1,8 @@
 ---@type LazySpec
 return {
   "ysmb-wtsg/in-and-out.nvim",
-  -- event = "InsertEnter",
+  enabled = false,
+  event = "InsertEnter",
   keys = {
     {
       "<C-CR>",
@@ -11,5 +12,5 @@ return {
       mode = "i"
     },
   },
-  opts = {},
+  -- opts = {},
 }
