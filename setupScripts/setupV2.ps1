@@ -45,10 +45,10 @@ if (!(Exist-Command scoop)) {
 #   }
 # }
 scoop update *
-if (-not $applist.Contains("aria2")) {
-  scoop install aria2
-  scoop config aria2-warning-enabled false
-}
+# if (-not $applist.Contains("aria2")) {
+#   scoop install aria2
+#   scoop config aria2-warning-enabled false
+# }
 if (-not $applist.Contains("7zip")) {
   scoop install 7zip
 }
