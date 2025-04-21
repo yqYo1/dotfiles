@@ -73,6 +73,9 @@ if (-not $applist.Contains("llvm")) {
 if (-not $applist.Contains("nodejs-lts")) {
   scoop install nodejs-lts
 }
+if (-not $applist.Contains("make")) {
+  scoop install make
+}
 
 if (-not ($Path.Contains("$Env:USERPROFILE\bin"))){
   makeDir $HOME\bin
