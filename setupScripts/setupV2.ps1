@@ -38,43 +38,26 @@ if (!(Exist-Command scoop)) {
   echo "scoop is already installed"
 }
 [void]($applist = scoop list | Select-Object -ExpandProperty Name)
-# foreach ($app in $applist) {
-#   if ($app -ne "aqua") {
-#     echo "update $app"
-#     scoop update $app
-#   }
-# }
+
+$applist = @(
+  "7zip",
+  "innounp",
+  "dark",
+  "lua-language-server",
+  "bun",
+  "GCC",
+  "llvm",
+  "nodejs-lts",
+  "make"
+)
 scoop update *
-# if (-not $applist.Contains("aria2")) {
-#   scoop install aria2
-#   scoop config aria2-warning-enabled false
-# }
-if (-not $applist.Contains("7zip")) {
-  scoop install 7zip
-}
-if (-not $applist.Contains("innounp")) {
-  scoop install innounp
-}
-if (-not $applist.Contains("dark")) {
-  scoop install dark
-}
-if (-not $applist.Contains("lua-language-server")) {
-  scoop install lua-language-server
-}
-if (-not $applist.Contains("bun")) {
-  scoop install bun
-}
-if (-not $applist.Contains("GCC")) {
-  scoop install GCC
-}
-if (-not $applist.Contains("llvm")) {
-  scoop install llvm
-}
-if (-not $applist.Contains("nodejs-lts")) {
-  scoop install nodejs-lts
-}
-if (-not $applist.Contains("make")) {
-  scoop install make
+foreach ($app in $applist) {
+  if (-not ($applist.Contains($app))) {
+    Write-Host "install $app"
+    scoop install $app
+  }else{
+    Write-Host "$app is already installed"
+  }
 }
 
 if (-not ($Path.Contains("$Env:USERPROFILE\bin"))){
