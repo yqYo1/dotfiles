@@ -113,3 +113,4 @@ if (-not $moduleList.Contains("git-completion")) {
 }
 
 bat cache --build
+Pop-Location
