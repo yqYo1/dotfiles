@@ -37,7 +37,7 @@ if (!(Exist-Command scoop)) {
 }else{
   echo "scoop is already installed"
 }
-[void]($applist = scoop list | Select-Object -ExpandProperty Name)
+[void]($installedApplist = scoop list | Select-Object -ExpandProperty Name)
 
 $applist = @(
   "7zip",
@@ -48,11 +48,12 @@ $applist = @(
   "GCC",
   "llvm",
   "nodejs-lts",
+  "git",
   "make"
 )
 scoop update *
 foreach ($app in $applist) {
-  if (-not ($applist.Contains($app))) {
+  if (-not ($installedApplist.Contains($app))) {
     Write-Host "install $app"
     scoop install $app
   }else{
