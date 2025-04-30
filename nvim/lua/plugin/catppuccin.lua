@@ -40,7 +40,8 @@ return {
     custom_highlights = {},
     default_integrations = true,
     integrations = {
-      cmp = true,
+      -- cmp = true,
+      blink = true,
       gitsigns = true,
       treesitter = true,
       notify = true,
