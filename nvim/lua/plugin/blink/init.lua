@@ -22,14 +22,7 @@ return {
   opts = {
     keymap = require("plugin.blink.keymap").insert,
     completion = require("plugin.blink.completion").insert,
-    fuzzy = {
-      implementation = "prefer_rust_with_warning",
-      sorts = {
-        "exact",
-        "score",
-        "sort_text",
-      },
-    },
+    fuzzy = require("plugin.blink.fuzzy"),
     snippets = { preset = "luasnip" },
     sources = require("plugin.blink.sources").insert,
     signature = { enabled = true },
