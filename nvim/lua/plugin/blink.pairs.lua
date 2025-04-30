@@ -13,5 +13,15 @@ return {
       enabled = true,
       pairs = {},
     },
+    -- highlights = {
+    --   enabled =true,
+    --   groups = {
+    --     'BlinkPairsOrange',
+    --     'BlinkPairsPurple',
+    --     'BlinkPairsBlue',
+    --   },
+    --   priority = 3000,
+    --   ns = vim.api.nvim_create_namespace('blink.pairs'),
+    -- }
   }
 }

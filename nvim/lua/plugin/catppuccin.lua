@@ -4,6 +4,8 @@ return {
   name = "catppuccin",
   priority = 1000,
   lazy = false,
+  ---@module "catppuccin"
+  ---@type CatppuccinOptions
   opts = {
     flavour = "mocha", -- latte, frappe, macchiato, mocha
     background = { -- :h background
@@ -40,7 +42,7 @@ return {
     custom_highlights = {},
     default_integrations = true,
     integrations = {
-      -- cmp = true,
+      cmp = false,
       blink_cmp = true,
       gitsigns = true,
       treesitter = true,
@@ -66,17 +68,12 @@ return {
           background = true,
         },
       },
-      mini = {
-        enabled = true,
-        indentscope_color = "",
-      },
       indent_blankline = {
         enabled = true,
-        scope_color = "",
         colored_indent_levels = true,
       },
       semantic_tokens = true,
-      rainbow_delimiters = true,
+      rainbow_delimiters = false,
       which_key = true,
       -- For more plugins integrations please scroll down (https://github.com/catppuccin/nvim#integrations)
     },
