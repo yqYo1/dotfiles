@@ -30,10 +30,10 @@ Set-Alias -Name lg -Value Lazygit
 
 $API_KEY_FILE = Join-Path -Path $Env:PROFILE_DIR -ChildPath "env_api_key.ps1"
 if (Test-Path $API_KEY_FILE) {
-    . $API_KEY_FILE
+  . $API_KEY_FILE
 } else {
-    Write-Host "API key file not found"
-    Write-Host "Please Create $API_KEY_FILE"
+  Write-Host "API key file not found"
+  Write-Host "Please Create $API_KEY_FILE"
 }
 
 Set-PSReadLineOption -PredictionSource HistoryAndPlugin
@@ -48,11 +48,11 @@ tailscale completion powershell | Out-String | Invoke-Expression
 Invoke-Expression (&starship init powershell)
 $prompt = ""
 function Invoke-Starship-PreCommand {
-    $current_location = $executionContext.SessionState.Path.CurrentLocation
-    if ($current_location.Provider.Name -eq "FileSystem") {
-        $ansi_escape = [char]27
-        $provider_path = $current_location.ProviderPath -replace "\\", "/"
-        $prompt = "$ansi_escape]7;file://${env:COMPUTERNAME}/${provider_path}$ansi_escape\"
-    }
-    $host.ui.Write($prompt)
+  $current_location = $executionContext.SessionState.Path.CurrentLocation
+  if ($current_location.Provider.Name -eq "FileSystem") {
+      $ansi_escape = [char]27
+      $provider_path = $current_location.ProviderPath -replace "\\", "/"
+      $prompt = "$ansi_escape]7;file://${env:COMPUTERNAME}/${provider_path}$ansi_escape\"
+  }
+  $host.ui.Write($prompt)
 }
