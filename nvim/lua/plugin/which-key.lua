@@ -2,12 +2,24 @@
 return {
   "folke/which-key.nvim",
   event = "VeryLazy",
-  --enabled = false,
-  config = function()
-    require("which-key").setup({
-      plugins = {
-        registers = false,
-      },
-    })
-  end,
+  ---@type wk.Opts
+  ---@diagnostic disable-next-line: missing-fields
+  opts = {
+    preset = "modern",
+    delay = 400,
+    layout = {
+      -- width = { min = 20, max = 50 },
+      haight = { mini = 3, max = 15 },
+      spacing = 2,
+    },
+    sort = { "alphanum", "order"},
+  },
+  config = function(_, opts)
+    local wk = require("which-key")
+    -- wk.show({
+    --   keys = "<c-w>",
+    --   loop = true, -- this will keep the popup open until you hit <esc>
+    -- })
+    wk.setup(opts)
+  end
 }
