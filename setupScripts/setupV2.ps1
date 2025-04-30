@@ -30,6 +30,7 @@ if ( ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]:
 
 $PathChanged = $false
 $Path = [System.Environment]::GetEnvironmentVariable("Path", "User")
+$IS_EXECUTED_FROM_IEX = ($null -eq $MyInvocation.MyCommand.Path)
 
 # scoop
 if (!(Exist-Command scoop)) {
