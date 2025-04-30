@@ -31,29 +31,7 @@ return {
       },
     },
     snippets = { preset = "luasnip" },
-    sources = {
-      default = {
-        "snippets",
-        "copilot",
-        "lazydev",
-        "lsp",
-        "path",
-        "buffer"
-      },
-      providers = {
-        lazydev = {
-          name = "LazyDev",
-          module = "lazydev.integrations.blink",
-          score_offset = 100,
-          async = true,
-        },
-        copilot = {
-          name = "copilot",
-          module = "blink-copilot",
-          async = true,
-        },
-      },
-    },
+    sources = require("plugin.blink.sources").insert,
     signature = { enabled = true },
     cmdline = {
       keymap = require("plugin.blink.keymap").cmdline,
