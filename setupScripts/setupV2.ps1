@@ -80,7 +80,6 @@ if (-not (Test-Path $aqua_bin_path)) {
   Remove-Item -Path aquabin -Recurse -Force
   Remove-Item -Path aqua_windows_amd64.zip -Force
 }
-# Start-Process -FilePath $aqua_bin_path -ArgumentList "i", "-a", "-l" -Wait -NoNewWindow
 
 if ($PathChanged) {
   [System.Environment]::SetEnvironmentVariable("Path", $Path, "User")
