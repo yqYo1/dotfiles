@@ -1,5 +1,6 @@
-﻿$Env:PROFILE_DIR = ((Get-ItemProperty $PROFILE.CurrentUserAllHosts).ResolvedTarget | Split-Path)
-$Env:DOTFILES_DIR = ((Get-ItemProperty $PROFILE.CurrentUserAllHosts).ResolvedTarget | Split-Path | Split-Path)
+﻿$PROFILE_DIR = ((Get-ItemProperty $PROFILE.CurrentUserAllHosts).ResolvedTarget | Split-Path)
+$Env:DOTFILES_DIR = Split-Path $PROFILE_DIR
+echo $Env:DOTFILES_DIR
 
 # Aliases
 if( (Get-Alias cat).CommandType -eq "Alias" ){
@@ -28,7 +29,7 @@ Set-Alias -Name vi -Value nvim
 Set-Alias -Name bash -Value sh
 Set-Alias -Name lg -Value Lazygit
 
-$API_KEY_FILE = Join-Path -Path $Env:PROFILE_DIR -ChildPath "env_api_key.ps1"
+$API_KEY_FILE = Join-Path -Path $PROFILE_DIR -ChildPath "env_api_key.ps1"
 if (Test-Path $API_KEY_FILE) {
   . $API_KEY_FILE
 } else {
