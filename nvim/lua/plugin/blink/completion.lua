@@ -3,6 +3,9 @@ local M = {}
 ---@module "blink.cmp"
 ---@type blink.cmp.CompletionConfigPartial
 M.insert = {
+  keyword = {
+    range ='full',
+  },
   ghost_text = { enabled = true },
   list = {
     selection = {
