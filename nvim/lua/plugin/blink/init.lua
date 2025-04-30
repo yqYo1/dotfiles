@@ -25,7 +25,12 @@ return {
     fuzzy = require("plugin.blink.fuzzy"),
     snippets = { preset = "luasnip" },
     sources = require("plugin.blink.sources").insert,
-    signature = { enabled = true },
+    signature = {
+      enabled = true,
+      trigger = {
+        show_on_insert = true,
+      }
+    },
     cmdline = {
       keymap = require("plugin.blink.keymap").cmdline,
       completion = require("plugin.blink.completion").cmdline,
