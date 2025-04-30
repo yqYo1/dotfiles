@@ -21,39 +21,7 @@ return {
   ---@type blink.cmp.Config
   opts = {
     keymap = require("plugin.blink.keymap").insert,
-    completion = {
-      ghost_text = { enabled = true },
-      list = {
-        selection = {
-          preselect = true,
-          auto_insert = true
-        }
-      },
-      menu = {
-        border = 'single',
-        draw = {
-          columns = {
-            {"label", "label_description", gap = 1 },
-            { "kind_icon", gap = 1,  "kind" }
-          },
-          components = {
-            label = {
-              text = function(ctx)
-                return require("colorful-menu").blink_components_text(ctx)
-              end,
-              highlight = function(ctx)
-                return require("colorful-menu").blink_components_highlight(ctx)
-              end,
-            },
-          },
-        },
-      },
-      documentation = {
-        auto_show = true,
-        auto_show_delay_ms = 0,
-        window = { border = 'single' }
-      },
-    },
+    completion = require("plugin.blink.completion").insert,
     fuzzy = {
       implementation = "prefer_rust_with_warning",
       sorts = {
@@ -89,6 +57,7 @@ return {
     signature = { enabled = true },
     cmdline = {
       keymap = require("plugin.blink.keymap").cmdline,
+      completion = require("plugin.blink.completion").cmdline,
     },
   },
   opts_extend = { "sources.default" }
