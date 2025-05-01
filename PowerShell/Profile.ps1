@@ -1,6 +1,5 @@
 ﻿$PROFILE_DIR = ((Get-ItemProperty $PROFILE.CurrentUserAllHosts).ResolvedTarget | Split-Path)
 $Env:DOTFILES_DIR = Split-Path $PROFILE_DIR
-echo $Env:DOTFILES_DIR
 
 # Aliases
 if( (Get-Alias cat).CommandType -eq "Alias" ){
