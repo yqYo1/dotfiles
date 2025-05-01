@@ -16,10 +16,6 @@ return {
   },
   config = function(_, opts)
     local wk = require("which-key")
-    -- wk.show({
-    --   keys = "<c-w>",
-    --   loop = true, -- this will keep the popup open until you hit <esc>
-    -- })
     wk.setup(opts)
   end
 }
