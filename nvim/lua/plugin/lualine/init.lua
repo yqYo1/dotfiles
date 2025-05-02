@@ -6,7 +6,8 @@ return {
     "AndreM222/copilot-lualine",
   },
   event = { "VeryLazy" },
-  opts = {
+  opts = function()
+    return {
     options = {
       icons_enabled = true,
       theme = "catppuccin",
@@ -28,6 +29,9 @@ return {
       },
       lualine_c = { "filename" },
       lualine_x = {
+        require("plugin.lualine.components.codecompanion"),
+      },
+      lualine_y = {
         {
           "copilot",
           show_colors = true,
@@ -35,27 +39,25 @@ return {
         "encoding",
         "fileformat",
         "filetype",
-      }, -- I added copilot here
-      lualine_y = { "progress" },
-      lualine_z = { "location" },
+      },
+      lualine_z = {
+        "location",
+        "progress",
+      },
+      -- lualine_y = { "progress" },
+      -- lualine_z = { "location" },
     },
     inactive_sections = {
       lualine_a = {},
       lualine_b = {},
       lualine_c = { "filename" },
-      lualine_x = { "location" },
+      -- lualine_x = { "location" },
+      lualine_x = {},
       lualine_y = {},
       lualine_z = {},
     },
     tabline = {},
     extensions = {},
-  },
-  -- config = function()
-  --   local lualine = require("lualine")
-  --   lualine.setup({
-  --     options = {
-  --       theme = "tokyonight",
-  --     },
-  --   })
-  -- end,
+  }
+end
 }
