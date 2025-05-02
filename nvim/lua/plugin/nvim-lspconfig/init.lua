@@ -6,15 +6,9 @@ return {
   },
   {
     "neovim/nvim-lspconfig",
-    -- event = { "BufReadPre", "BufNewFile", "VeryLazy" },
     event = { "VeryLazy" },
     cond = not is_vscode(),
     dependencies = {
-      -- "node_servers",
-      -- "python_tools",
-      -- "b0o/schemastore.nvim",
-      --"lspcontainers/lspcontainers.nvim",
-      -- "ray-x/lsp_signature.nvim",
     },
     init = function()
       require("core.plugin").on_attach(function(client, bufnr)
