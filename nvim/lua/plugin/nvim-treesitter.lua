@@ -19,7 +19,6 @@ return {
         "gitcommit",
         "gitignore",
         "html",
-        "latex",
         "lua",
         "luadoc",
         "markdown",
