@@ -5,6 +5,7 @@ local M = {}
 M.insert = {
   default = {
     "snippets",
+    "codecompanion",
     "copilot",
     "lazydev",
     "lsp",
