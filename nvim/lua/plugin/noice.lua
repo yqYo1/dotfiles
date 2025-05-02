@@ -4,9 +4,6 @@ return {
   "folke/noice.nvim",
   event = "VeryLazy",
   cond = not is_vscode(),
-  -- init = function()
-  --   require("plugin.telescope").le("noice")
-  -- end,
   opts = function()
     return {
       lsp = {
