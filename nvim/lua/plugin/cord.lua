@@ -5,7 +5,7 @@ return {
   event = "VeryLazy",
   opts = {
     idle = {
-      enable = false,
+      enabled = false,
     },
   },
 }
