@@ -1,7 +1,3 @@
--- local function has_cmp()
---   return require("core.plugin").has("nvim-cmp")
--- end
-
 return {
   "nvim-treesitter/nvim-treesitter",
   build = ":TSUpdate",
@@ -23,6 +19,7 @@ return {
         "gitcommit",
         "gitignore",
         "html",
+        "latex",
         "lua",
         "luadoc",
         "markdown",
