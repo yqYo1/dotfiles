@@ -15,7 +15,13 @@ return {
       chat = {
         roles = {
           llm = function(adapter)
-            return "  CodeCompanion (" .. adapter.formatted_name .. ")"
+            local icon_char = ""
+            if adapter.formatted_name == "Copilot" then
+              icon_char = " "
+            else
+              icon_char = "󰚩 "
+            end
+            return icon_char .. " CodeCompanion (" .. adapter.formatted_name .. ")"
           end,
           user = "  Me",
         }
