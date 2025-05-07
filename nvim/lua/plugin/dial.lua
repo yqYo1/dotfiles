@@ -72,8 +72,9 @@ return {
     local config = require("dial.config")
 
     local default = {
-      augend.integer.alias.decimal,
+      augend.integer.alias.decimal_int,
       augend.integer.alias.hex,
+      augend.integer.alias.octal,
       augend.integer.alias.binary,
       augend.date.alias["%Y/%m/%d"],
       augend.date.alias["%Y-%m-%d"],
@@ -82,9 +83,16 @@ return {
       augend.date.alias["%-m/%-d"],
       augend.constant.alias.ja_weekday,
       augend.constant.alias.ja_weekday_full,
-      augend.hexcolor.new({ case = "lower" }),
+      augend.constant.alias.bool,
+      augend.constant.new({ elements = { "True", "False" }, cyclic = true }),
+      augend.constant.new({ elements = { "TRUE", "FALSE" }, cyclic = true }),
+      augend.constant.new({ elements = { "yes", "no" }, cyclic = true }),
+      augend.constant.new({ elements = { "Yes", "No" }, cyclic = true }),
+      augend.constant.new({ elements = { "YES", "NO" }, cyclic = true }),
+      -- augend.constant.alias.alpha,
+      -- augend.constant.alias.Alpha,
       augend.semver.alias.semver,
-      augend.constant.new({ elements = { "true", "false" }, cyclic = true }),
+      augend.hexcolor.new({ case = "lower" }),
     }
 
     config.augends:register_group({
