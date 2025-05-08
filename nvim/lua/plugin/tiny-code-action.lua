@@ -4,8 +4,7 @@ return {
   dependencies = {
     {"nvim-lua/plenary.nvim"},
   },
-  event = "LspAttach",
-  opts = {},
+  event = "VeryLazy",
   keys = {
     {
       "gra",
@@ -15,5 +14,11 @@ return {
       mode = { "n", "v" },
       desc = "Code Actions",
     },
+  },
+  opts = {
+    picker = {
+      "snacks",
+      opts = {},
+    }
   },
 }
