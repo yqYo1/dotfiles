@@ -1,12 +1,11 @@
 local is_vscode = require("core.utils").is_vscode
+local has_Snacks = require("core.plugin").has("snacks")
 local tb = require("core.utils").tb
 
 ---@type LazySpec
 return {
   {
     "stevearc/oil.nvim",
-    -- event = "VeryLazy",
-    -- cmd = { "Oil" },
     dependencies = {
       "nvim-tree/nvim-web-devicons",
     },
@@ -38,8 +37,24 @@ return {
 
         vim.cmd.Oil(path)
       end
-      vim.api.nvim_create_autocmd({ "BufEnter" }, { callback = openWithOil, nested = true })
-      vim.api.nvim_create_autocmd({ "VimEnter" }, { callback = openWithOil })
+      vim.api.nvim_create_autocmd(
+        { "BufEnter" },
+        { callback = openWithOil, nested = true }
+      )
+      vim.api.nvim_create_autocmd(
+        { "VimEnter" },
+        { callback = openWithOil }
+      )
+      if has_Snacks then
+        vim.api.nvim_create_autocmd("User", {
+          pattern = "OilActionsPost",
+          callback = function(event)
+              if event.data.actions.type == "move" then
+                  Snacks.rename.on_rename_file(event.data.actions.src_url, event.data.actions.dest_url)
+              end
+          end,
+        })
+      end
     end,
   },{
     "refractalize/oil-git-status.nvim",
