@@ -26,3 +26,9 @@ source <(uv generate-shell-completion zsh)
 source <(uvx --generate-shell-completion zsh)
 source <(podman completion zsh)
 $(dirname $AQUA_GLOBAL_CONFIG)/update.sh
+function frepo(){
+  local repo_dir=$(ghq list --full-path | fzf --preview "bat --color=always --style=header,grid --line-range :80 $(ghq root)/{}/README.*")
+  if [ -n "$repo_dir" ]; then
+    cd $repo_dir
+  fi
+}
