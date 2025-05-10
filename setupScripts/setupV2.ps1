@@ -44,13 +44,14 @@ $applist = @(
   "7zip",
   "innounp",
   "dark",
-  "lua-language-server",
-  "bun",
   "GCC",
-  "llvm",
-  "nodejs-lts",
+  "bun",
+  "ghq"
   "git",
-  "make"
+  "llvm",
+  "lua-language-server",
+  "make",
+  "nodejs-lts"
 )
 scoop update *
 foreach ($app in $applist) {
