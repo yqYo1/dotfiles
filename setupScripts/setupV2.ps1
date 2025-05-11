@@ -1,3 +1,9 @@
+$PathChanged = $false
+$Path = [System.Environment]::GetEnvironmentVariable("Path", "User")
+$IS_EXECUTED_FROM_IEX = ($null -eq $MyInvocation.MyCommand.Path)
+
+
+# def
 function makeDir($dir){
   if ( -not (Test-Path $dir)){
     New-Item $dir -ItemType Directory
@@ -21,16 +27,13 @@ function Exist-Command($Name){
   return($? -eq $true)
 }
 
+
+# main
 Push-Location -Path $PSScriptRoot
 if ( ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole("Administrators") ){
   throw "Running with administrator. Do not run with administrator."
 }
 
-# main
-
-$PathChanged = $false
-$Path = [System.Environment]::GetEnvironmentVariable("Path", "User")
-$IS_EXECUTED_FROM_IEX = ($null -eq $MyInvocation.MyCommand.Path)
 
 # scoop
 if (!(Exist-Command scoop)) {
@@ -60,6 +63,28 @@ foreach ($app in $applist) {
     scoop install $app
   }else{
     Write-Host "$app is already installed"
+  }
+}
+
+
+#ghq
+if ($IS_EXECUTED_FROM_IEX -eq $true){
+  ghq clone git@github.com:yqYo1/dotfiles.git
+  ghq clone git@github.com:catppuccin/bat.git
+}
+$repo_list = @(
+  "github.com/yqYo1/dotfiles",
+  "github.com/catppuccin/bat"
+)
+$ghq_repo_path_list = ghq list
+foreach ($repo_name in $repo_list){
+  if ($ghq_repo_path_list -Contains $repo_name){
+    Write-Host "$repo_name is already cloned"
+  }else{
+    Write-Host "$repo_name is not found"
+    $repo_name = $repo_name.Replace("github.com/","git@github.com:")
+    Write-Host "$repo_name"
+    # ghq clone $repo_name
   }
 }
 
