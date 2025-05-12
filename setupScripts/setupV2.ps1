@@ -57,6 +57,7 @@ $applist = @(
   "nodejs-lts"
 )
 scoop update *
+scoop cleanup *
 foreach ($app in $applist) {
   if (-not ($installedApplist.Contains($app))) {
     Write-Host "install $app"
