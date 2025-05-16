@@ -68,6 +68,7 @@ foreach ($app in $applist) {
 }
 
 
+#TODO ghwの管理下にないrepoを自動的にcloneする
 #ghq
 if ($IS_EXECUTED_FROM_IEX -eq $true){
   ghq clone git@github.com:yqYo1/dotfiles.git
@@ -112,6 +113,13 @@ if (-not (Test-Path $aqua_bin_path)) {
 if ($PathChanged) {
   [System.Environment]::SetEnvironmentVariable("Path", $Path, "User")
 }
+
+#TODO aqua init
+
+# gh auth token 2>&1 > $null
+# if (-not $?){
+#   gh auth login -p ssh -h Github.com -w
+# }
 
 if (-not (Get-PSRepository PSGallery | Select-Object -ExpandProperty Trusted)) {
   Write-Host "Trust PSGallery"
