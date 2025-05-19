@@ -32,8 +32,7 @@ $API_KEY_FILE = Join-Path -Path $PROFILE_DIR -ChildPath "env_api_key.ps1"
 if (Test-Path $API_KEY_FILE) {
   . $API_KEY_FILE
 } else {
-  Write-Host "API key file not found"
-  Write-Host "Please Create $API_KEY_FILE"
+  New-Item -Path $API_KEY_FILE -ItemType File -Force
 }
 
 Set-PSReadLineOption -PredictionSource HistoryAndPlugin
