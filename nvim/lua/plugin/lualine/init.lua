@@ -4,6 +4,7 @@ return {
   dependencies = {
     "nvim-tree/nvim-web-devicons",
     "AndreM222/copilot-lualine",
+    "pnx/lualine-lsp-status",
   },
   event = { "VeryLazy" },
   opts = function()
@@ -36,6 +37,7 @@ return {
           "copilot",
           show_colors = true,
         },
+        "lsp-status",
         "encoding",
         "fileformat",
         "filetype",
