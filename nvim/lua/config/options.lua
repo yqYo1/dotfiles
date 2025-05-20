@@ -16,7 +16,10 @@ vim.opt.signcolumn = "yes"
 
 vim.opt.fenc = "utf-8"
 
--- vim.opt.wrap = true
+vim.opt.wrap = true
+-- 単語単位で折り返す
+vim.opt.linebreak = true
+
 
 --indent
 local tabwidth = 2
