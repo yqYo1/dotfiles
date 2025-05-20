@@ -85,8 +85,7 @@ foreach ($repo_name in $repo_list){
   }else{
     Write-Host "$repo_name is not found"
     $repo_name = $repo_name.Replace("github.com/","git@github.com:")
-    Write-Host "$repo_name"
-    # ghq clone $repo_name
+    ghq clone $repo_name
   }
 }
 
@@ -116,10 +115,12 @@ if ($PathChanged) {
 
 #TODO aqua init
 
-# gh auth token 2>&1 > $null
-# if (-not $?){
-#   gh auth login -p ssh -h Github.com -w
-# }
+gh auth token 2>&1 > $null
+if (-not $?){
+  gh auth login -p ssh -h Github.com -w
+}else{
+    Write-Host "Github CLI is already logined"
+  }
 
 if (-not (Get-PSRepository PSGallery | Select-Object -ExpandProperty Trusted)) {
   Write-Host "Trust PSGallery"
