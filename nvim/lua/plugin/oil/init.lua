@@ -6,9 +6,9 @@ local tb = require("core.utils").tb
 return {
   {
     "stevearc/oil.nvim",
-    dependencies = {
-      "nvim-tree/nvim-web-devicons",
-    },
+    -- dependencies = {
+    --   "nvim-tree/nvim-web-devicons",
+    -- },
     cond = not is_vscode(),
     opts = function()
       return {
@@ -40,7 +40,7 @@ return {
           pattern = "OilActionsPost",
           callback = function(event)
             if event.data.actions.type == "move" then
-              Snacks.rename.on_rename_file(event.data.actions.src_url, event.data.actions.dest_url)
+              require("snacks").rename.on_rename_file(event.data.actions.src_url, event.data.actions.dest_url)
             end
           end,
         })
