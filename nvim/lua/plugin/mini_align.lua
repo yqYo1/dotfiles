@@ -2,7 +2,6 @@
 return {
   "echasnovski/mini.align",
   version = "*",
-  -- event = "VeryLazy",
   keys = {
     { "ga", mode = { "n", "x" }, desc = "align" },
   },
