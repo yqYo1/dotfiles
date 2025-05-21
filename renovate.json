@@ -6,7 +6,7 @@
     "github>aquaproj/aqua-renovate-config:installer-script#2.8.0(setupScripts/.*\\.sh)"
   ],
   "pyenv": {
-    "enabled": false
+    "enabled": true
   },
   "platformAutomerge": true,
   "ignoreTests": true,
