@@ -27,36 +27,27 @@ return {
       local openWithOil = function()
         local path = vim.fn.expand("%:p")
 
-        if string.match(path, "oil://") then
-          return
-        end
+        if string.match(path, "oil://") then return end
 
-        if not tb(vim.fn.isdirectory(path)) then
-          return
-        end
+        if not tb(vim.fn.isdirectory(path)) then return end
 
         vim.cmd.Oil(path)
       end
-      vim.api.nvim_create_autocmd(
-        { "BufEnter" },
-        { callback = openWithOil, nested = true }
-      )
-      vim.api.nvim_create_autocmd(
-        { "VimEnter" },
-        { callback = openWithOil }
-      )
+      vim.api.nvim_create_autocmd({ "BufEnter" }, { callback = openWithOil, nested = true })
+      vim.api.nvim_create_autocmd({ "VimEnter" }, { callback = openWithOil })
       if has_Snacks then
         vim.api.nvim_create_autocmd("User", {
           pattern = "OilActionsPost",
           callback = function(event)
-              if event.data.actions.type == "move" then
-                  Snacks.rename.on_rename_file(event.data.actions.src_url, event.data.actions.dest_url)
-              end
+            if event.data.actions.type == "move" then
+              Snacks.rename.on_rename_file(event.data.actions.src_url, event.data.actions.dest_url)
+            end
           end,
         })
       end
     end,
-  },{
+  },
+  {
     "refractalize/oil-git-status.nvim",
     event = "VeryLazy",
     cmd = { "Oil" },
@@ -65,5 +56,5 @@ return {
     },
     cond = not is_vscode(),
     opt = {},
-  }
+  },
 }
