@@ -41,7 +41,6 @@ return {
                 reportIgnoreCommentWithoutRule = false,
                 reportImplicitRelativeImport = false,
                 reportMissingTypeStubs = false,
-                reportUnknownMemberType = false,
                 reportUnusedCallResult = false,
                 reportUnusedImport = false,
                 reportUnusedVariable = false,
