@@ -20,7 +20,6 @@ vim.opt.wrap = true
 -- 単語単位で折り返す
 vim.opt.linebreak = true
 
-
 --indent
 local tabwidth = 2
 vim.opt.tabstop = tabwidth
@@ -46,16 +45,6 @@ vim.opt.cmdheight = 0
 vim.opt.termguicolors = true
 vim.opt.winblend = 0
 vim.opt.pumblend = 0
-
-vim.diagnostic.config({
-  severity_sort = true,
-  virtual_lines = {
-    format = function(diagnostic)
-      return string.format("%s (%s: %s)", diagnostic.message, diagnostic.source, diagnostic.code)
-    end
-  },
-  -- virtual_text = true
-})
 
 if is_windows() then
   local pwsh_options = {
