@@ -8,7 +8,7 @@ lazy.setup({
   spec = {
     { import = "plugin" },
     { import = "cli" },
-    { import = "config.lsp" },
+    { import = "lsp" },
   },
   defaults = { lazy = true },
   install = {
