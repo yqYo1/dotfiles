@@ -202,6 +202,7 @@ function M.wrap_text(msg, code, width)
   local count = vim.fn.strdisplaywidth
   local msg_width = count(msg)
   local code_width = count(code)
+
   if not msg or msg_width + code_width + 1 < width then return msg .. " " .. code end
   if msg_width <= width then return msg .. "\n" .. code end
 
