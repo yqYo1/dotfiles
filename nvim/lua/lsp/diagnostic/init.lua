@@ -9,15 +9,7 @@ return {
       severity_sort = true,
       virtual_lines = {
         format = function(diagnostic)
-          -- vim.print(formatter.format_diagnostic_message(diagnostic))
-          -- return string.format("%s (%s: %s)", diagnostic.message, diagnostic.source, diagnostic.code)
-          return string.format(
-            "[%s]%s (%s: %s)",
-            formatter.format_diagnostic_message(diagnostic),
-            diagnostic.message,
-            diagnostic.source,
-            diagnostic.code
-          )
+          return formatter.format_diagnostic_message(diagnostic)
         end,
       },
     })
