@@ -8,10 +8,6 @@ return {
   config = function()
     local ccc = require("ccc")
     ccc.setup({
-      highlighter = {
-        auto_enable = true,
-        lsp = true,
-      },
       pickers = {
         ccc.picker.ansi_escape(),
         ccc.picker.hex,
@@ -24,7 +20,7 @@ return {
         ccc.picker.css_lch,
         ccc.picker.css_oklab,
         ccc.picker.css_oklch,
-        ccc.picker.css_name,
+        -- ccc.picker.css_name,
       },
     })
   end,
