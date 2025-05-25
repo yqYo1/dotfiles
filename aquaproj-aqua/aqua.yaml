@@ -42,7 +42,7 @@ packages:
 - name: oven-sh/bun@bun-v1.2.14
 - name: rhysd/actionlint@v1.7.7
 - name: rhysd/vim-startuptime@v1.3.2
-- name: rossmacarthur/sheldon@0.8.1
+- name: rossmacarthur/sheldon@0.8.2
 - name: rust-lang/rust-analyzer@2024-11-18
 - name: sharkdp/bat@v0.25.0
 - name: sharkdp/fd@v10.2.0
