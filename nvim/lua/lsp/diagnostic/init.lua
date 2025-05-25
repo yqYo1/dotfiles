@@ -1,6 +1,6 @@
 ---@type LazySpec
 return {
-  "lsp-config",
+  "lsp-diagnostics",
   virtual = true,
   event = { "LspAttach" },
   config = function()
