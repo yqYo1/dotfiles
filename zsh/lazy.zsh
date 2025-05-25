@@ -25,7 +25,16 @@ source <(rye self completion -s zsh)
 source <(uv generate-shell-completion zsh)
 source <(uvx --generate-shell-completion zsh)
 source <(podman completion zsh)
-$(dirname $AQUA_GLOBAL_CONFIG)/update.sh
+
+if [[ -z "$LITELLM_API_KEY" ]]; then
+  if [[ ! -e "$HOME/.zshenv" ]]; then
+    touch ~/.zshenv
+  fi
+  if [[ -f "$HOME/.zshenv" ]]; then
+    echo "export LITELLM_API_KEY=\"input_api_key_here\"" >> ~/.zshenv
+  fi
+fi
+# $(dirname $AQUA_GLOBAL_CONFIG)/update.sh
 function frepo(){
   local repo_dir=$(ghq list --full-path | fzf --preview "bat --color=always --style=header,grid --line-range :80 $(ghq root)/{}/README.*")
   if [ -n "$repo_dir" ]; then
