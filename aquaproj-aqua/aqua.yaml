@@ -50,5 +50,5 @@ packages:
 - name: sxyazi/yazi@v25.4.8
 - name: tree-sitter/tree-sitter@v0.25.4
 - name: x-motemen/ghq@v1.8.0
-- name: ziglang/zig@0.14.0
+- name: ziglang/zig@0.14.1
 - name: zigtools/zls@0.14.0
