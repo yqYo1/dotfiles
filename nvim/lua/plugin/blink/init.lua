@@ -15,7 +15,13 @@ return {
   dependencies = {
     "xzbdmw/colorful-menu.nvim",
     "fang2hou/blink-copilot",
-    "L3MON4D3/LuaSnip"
+    "L3MON4D3/LuaSnip",
+    {
+      "saghen/blink.compat",
+      version = '*',
+      opts = {},
+    },
+    "hrsh7th/cmp-calc",
   },
   ---@module "blink.cmp"
   ---@type blink.cmp.Config

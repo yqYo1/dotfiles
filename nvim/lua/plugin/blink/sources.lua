@@ -10,7 +10,8 @@ M.insert = {
     "lazydev",
     "lsp",
     "path",
-    "buffer"
+    "buffer",
+    "calc",
   },
   providers = {
     lazydev = {
@@ -24,6 +25,12 @@ M.insert = {
       module = "blink-copilot",
       async = true,
     },
+    calc = {
+      name = "calc",
+      module = "blink.compat.source",
+      score_offset = 100,
+      async = true,
+    }
   },
   min_keyword_length = function(ctx)
     if ctx.mode == "cmdline" and ctx.line:find("^%l+$") ~= nil then
