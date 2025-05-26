@@ -6,6 +6,7 @@
 !/.gitignore
 !/.gitmodules
 !/README.md
+!/LICENSE
 !/starship.toml
 !/git
 !/bat
