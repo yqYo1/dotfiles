@@ -1,5 +1,5 @@
 $PathChanged = $false
-$Path = [System.Environment]::GetEnvironmentVariable("Path", "User")
+$PathInit = $false
 $IS_EXECUTED_FROM_IEX = ($null -eq $MyInvocation.MyCommand.Path)
 
 
@@ -25,6 +25,49 @@ function makeSymbolickLink($destination, $source){
 function Exist-Command($Name){
   Get-Command $Name -ErrorAction SilentlyContinue | Out-Null
   return($? -eq $true)
+}
+
+function path_change_init(){
+  $script:PathInit = $true
+  $script:currentPathString = [System.Environment]::GetEnvironmentVariable("Path", "User")
+  if ([string]::IsNullOrEmpty($script:currentPathString)) {
+    $script:currentPathsArray = @()
+  } else {
+    # Pathを配列に分割し、各パスを正規化（末尾の '\' を削除）、空のエントリを除去
+    $script:currentPathsArray = $script:currentPathString.Split(';') | ForEach-Object { $_.Trim().TrimEnd('\') } | Where-Object { -not [string]::IsNullOrWhiteSpace($_) }
+  }
+}
+
+function addPath($addPath){
+  if (-not $script:PathInit){
+    path_change_init
+  }
+  $pathAlreadyExists = $false
+  $NormalizedAddPath = $addPath.TrimEnd('\')
+  foreach ($path in $script:currentPathsArray) {
+    if ($path.Equals($NormalizedAddPath, [System.StringComparison]::OrdinalIgnoreCase)){
+      $pathAlreadyExists = $true
+      break
+    }
+  }
+  # if (-not ($Path -cmatch $path)){
+  if (-not $pathAlreadyExists){
+    Write-Host "add $addPath to User Path"
+    $script:PathChanged = $true
+    $script:currentPathString = "$addPath;$script:currentPathString"
+    $Env:PATH = "$addPath;$Env:Path"
+  }else{
+    Write-Host "$addPath is already in Path"
+  }
+}
+
+function applyPath(){
+  if ($script:PathChanged) {
+    [System.Environment]::SetEnvironmentVariable("Path", $script:currentPathString, "User")
+    Write-Host "User Path is changed"
+  }else{
+    Write-Host "User Path is not changed"
+  }
 }
 
 
@@ -89,13 +132,8 @@ foreach ($repo_name in $repo_list){
   }
 }
 
-if (-not ($Path.Contains("$Env:USERPROFILE\bin"))){
-  makeDir $HOME\bin
-  Write-Host "add $Env:USERPROFILE\bin to Path"
-  $PathChanged = $true
-  $Path = "$Env:USERPROFILE\bin;$Path"
-  $Env:PATH = "$Env:USERPROFILE\bin;$Path"
-}
+makeDir "$HOME\bin"
+addPath "$Env:USERPROFILE\bin"
 
 $aqua_bin_path = "$Env:USERPROFILE\bin\aqua.exe"
 if (-not (Test-Path $aqua_bin_path)) {
@@ -109,11 +147,10 @@ if (-not (Test-Path $aqua_bin_path)) {
   Remove-Item -Path aqua_windows_amd64.zip -Force
 }
 
-if ($PathChanged) {
-  [System.Environment]::SetEnvironmentVariable("Path", $Path, "User")
-}
-
 #TODO aqua init
+
+addPath "$Env:USERPROFILE\.bun\bin"
+applyPath
 
 gh auth token 2>&1 > $null
 if (-not $?){
