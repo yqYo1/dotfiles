@@ -7,6 +7,9 @@ return {
       language = "Japanese",
     },
     display = {
+      action_palette = {
+        provider = "snacks"
+      },
       chat = {
         show_header_separator = true,
       }
