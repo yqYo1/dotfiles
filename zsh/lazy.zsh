@@ -31,7 +31,7 @@ if [[ -z "$LITELLM_API_KEY" ]]; then
     touch ~/.zshenv
   fi
   if [[ -f "$HOME/.zshenv" ]]; then
-    echo "export LITELLM_API_KEY=\"input_api_key_here\"" >> ~/.zshenv
+    echo "export LITELLM_API_KEY=\"LITELLM_API_KEY\"" >> ~/.zshenv
   fi
 fi
 # $(dirname $AQUA_GLOBAL_CONFIG)/update.sh
