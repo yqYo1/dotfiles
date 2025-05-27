@@ -4,7 +4,6 @@ return {
   keys = {
     {
       "<leader>o",
-      -- "<cmd>Outline<CR>",
       function()
         require("outline").toggle()
       end,
