@@ -15,6 +15,7 @@ return {
     outline_window = {
       position = "left",
       show_numbers = true,
+      focus_on_open = false,
     },
   },
 }
