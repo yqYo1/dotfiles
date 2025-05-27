@@ -16,6 +16,7 @@ return {
     },
     strategies = {
       chat = {
+        adapter = "copilot",
         roles = {
           llm = function(adapter)
             local icon_char = ""
@@ -27,8 +28,23 @@ return {
             return icon_char .. " CodeCompanion (" .. adapter.formatted_name .. ")"
           end,
           user = "  Me",
-        }
+        },
+        keymaps = {
+          send = {
+            modes = { n = "<C-s>", i = "<C-s>" },
+            callback = function(chat)
+              vim.cmd("stopinsert")
+              chat:add_buf_message({ role = "llm", content = "" })
+              chat:submit()
+            end,
+            index = 1,
+            description = "Send",
+          }
+        },
       }
-    }
+    },
   },
+  init = function()
+    require("plugin.codecompanion.spinner"):init()
+  end,
 }
