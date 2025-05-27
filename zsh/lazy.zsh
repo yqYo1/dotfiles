@@ -20,11 +20,15 @@ alias vi=nvim
 alias ..='cd ../'
 alias ...='cd ../../'
 export AQUA_PROGRESS_BAR=true
+
+# completions
+[ -s "/home/yayoi/.bun/_bun" ] && source "/home/yayoi/.bun/_bun"
 source <(gh completion -s zsh)
 source <(rye self completion -s zsh)
 source <(uv generate-shell-completion zsh)
 source <(uvx --generate-shell-completion zsh)
 source <(podman completion zsh)
+source <(tailscale completion zsh)
 
 if [[ -z "$LITELLM_API_KEY" ]]; then
   if [[ ! -e "$HOME/.zshenv" ]]; then

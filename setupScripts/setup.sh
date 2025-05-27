@@ -35,10 +35,15 @@ else
 fi
 cd $DOTDIR/aquaproj-aqua
 ./update.sh
-# if [ -f $HOME/.cargo/env ]; then
-#   echo "test"
-#   source $HOME/.cargo/env
-# fi
+
+if type bun > /dev/null 2>&1; then
+  echo "Bun is already installed"
+  bun upgrade
+else
+  echo "Bun not found"
+  curl -fsSL https://bun.sh/install | bash
+fi
+
 if type rustup > /dev/null 2>&1; then
   echo "Rust is already installed"
   rustup self update
