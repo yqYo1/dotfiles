@@ -4,6 +4,11 @@ return {
     -- dependencies = {
     --     "nvim-lua/plenary.nvim",
     -- },
-    build = "bun install -g mcp-hub@latest",  -- Installs `mcp-hub` node binary globally
-    opts = {}
+    -- TODO: use cli dir local plugin
+    build = "bun install -g mcp-hub@latest",
+    ---@module "mcphub"
+    ---@type MCPHub.Config
+    opts = {
+      cmd = "mcp-hub",
+    }
 }
