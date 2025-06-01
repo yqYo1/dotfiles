@@ -13,7 +13,7 @@ lazy.setup({
   defaults = { lazy = true },
   install = {
     missing = true,
-    colorscheme = { "catppuccin" },
+    colorscheme = { vim.env.NVIM_COLORSCHEME },
   },
   checker = { enabled = false },
   concurrency = 64,
