@@ -1,6 +1,7 @@
 ---@type LazySpec
 return {
   "ray-x/lsp_signature.nvim",
+  version = "*",
   event = { "LspAttach" },
   opt = {
     hint_enable = false, -- disable hint on virtual text
