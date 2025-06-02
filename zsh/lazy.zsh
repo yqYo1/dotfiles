@@ -29,6 +29,8 @@ source <(uv generate-shell-completion zsh)
 source <(uvx --generate-shell-completion zsh)
 source <(podman completion zsh)
 source <(tailscale completion zsh)
+source <(deno completion zsh)
+source <(bat --completion zsh)
 
 if [[ -z "$LITELLM_API_KEY" ]]; then
   if [[ ! -e "$HOME/.zshenv" ]]; then
