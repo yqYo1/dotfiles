@@ -58,7 +58,7 @@ local function command()
   vim.api.nvim_create_user_command("Format", M.format, { nargs = 0 })
 end
 
-local function auto_format(buf)
+local function init_auto_format(buf)
   vim.api.nvim_create_autocmd("BufWritePre", {
     group = vim.api.nvim_create_augroup("LspFormat." .. buf, {}),
     buffer = buf,
@@ -73,7 +73,7 @@ end
 function M.on_attach(client, buf)
   if client.server_capabilities.documentFormattingProvider then
     command()
-    auto_format(buf)
+    init_auto_format(buf)
   end
 end
 
