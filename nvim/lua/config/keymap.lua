@@ -1,3 +1,5 @@
+vim.g.mapleader = " "
+
 -- clipboard
 vim.keymap.set({ "n", "v" }, "gy", '"+y', { desc = "yank to clipboard" })
 vim.keymap.set("n", "gp", '"+p', { desc = "Paste from clipboard" })
