@@ -44,6 +44,7 @@ Import-Module git-completion
 
 tailscale completion powershell | Out-String | Invoke-Expression
 
+Invoke-Expression (& { (zoxide init powershell | Out-String) })
 Invoke-Expression (&starship init powershell)
 $prompt = ""
 function Invoke-Starship-PreCommand {

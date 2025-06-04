@@ -32,6 +32,8 @@ source <(tailscale completion zsh)
 source <(deno completion zsh)
 source <(bat --completion zsh)
 
+eval "$(zoxide init zsh)"
+
 if [[ -z "$LITELLM_API_KEY" ]]; then
   if [[ ! -e "$HOME/.zshenv" ]]; then
     touch ~/.zshenv
