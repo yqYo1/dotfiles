@@ -3,7 +3,7 @@ return {
   "Davidyz/inlayhint-filler.nvim",
   keys = {
     {
-      "<Leader>I", -- Use whatever keymap you want.
+      "<Leader>i", -- Use whatever keymap you want.
       function()
         require("inlayhint-filler").fill()
       end,
