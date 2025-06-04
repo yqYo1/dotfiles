@@ -2,6 +2,7 @@
 return {
   "pogyomo/submode.nvim",
   event = "VeryLazy",
+  enabled = false,
   config = function()
     local submode = require("submode")
     submode.create("WindowMoveAndResize", {
