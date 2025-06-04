@@ -2,8 +2,8 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "config:recommended",
-    "github>aquaproj/aqua-renovate-config:file#2.8.0(aquaproj-aqua/aqua.yaml)",
-    "github>aquaproj/aqua-renovate-config:installer-script#2.8.0(setupScripts/.*\\.sh)"
+    "github>aquaproj/aqua-renovate-config:file#2.8.1(aquaproj-aqua/aqua.yaml)",
+    "github>aquaproj/aqua-renovate-config:installer-script#2.8.1(setupScripts/.*\\.sh)"
   ],
   "pyenv": {
     "enabled": true
