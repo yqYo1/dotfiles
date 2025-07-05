@@ -31,7 +31,7 @@ if type aqua > /dev/null 2>&1; then
   echo "aqua is already installed"
 else
   echo "aqua not fuond"
-  curl -sSfL https://raw.githubusercontent.com/aquaproj/aqua-installer/v4.0.0/aqua-installer | bash
+  curl -sSfL https://raw.githubusercontent.com/aquaproj/aqua-installer/v4.0.2/aqua-installer | bash
 fi
 cd $DOTDIR/aquaproj-aqua
 ./update.sh
