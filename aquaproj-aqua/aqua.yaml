@@ -26,7 +26,7 @@ packages:
 - name: ajeetdsouza/zoxide@v0.9.8
 - name: astral-sh/uv@0.7.19
 - name: cli/cli@v2.74.2
-- name: denoland/deno@v2.3.6
+- name: denoland/deno@v2.4.0
 - name: eza-community/eza@v0.21.6
 - name: golang/go@go1.24.4
 - name: golang/tools/goimports@v0.33.0
