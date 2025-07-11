@@ -41,7 +41,7 @@ packages:
 - name: nodejs/node@v24.3.0
 - name: rhysd/actionlint@v1.7.7
 - name: rhysd/vim-startuptime@v1.3.2
-- name: rossmacarthur/sheldon@0.8.3
+- name: rossmacarthur/sheldon@0.8.4
 - name: rust-lang/rust-analyzer@2025-05-26
 - name: sharkdp/bat@v0.25.0
 - name: sharkdp/fd@v10.2.0
