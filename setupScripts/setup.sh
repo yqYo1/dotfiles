@@ -39,6 +39,20 @@ cd $DOTDIR/aquaproj-aqua
 if type bun > /dev/null 2>&1; then
   echo "Bun is already installed"
   bun upgrade
+
+  if grep -q "# bun completions" "$HOME/.zshrc"; then
+    echo "Cleaning up.zshrc after bun upgrade..."
+    local tmpfile
+    tmpfile="$(mktemp)"
+    # "# bun completions" という行とその直後の1行を削除する
+    # Bunのスクリプトは2行追加するため、計2行をスキップする
+    awk '
+      $0 == "# bun completions" { n=2; next }
+      n > 0 { n--; next }
+      { print }
+    ' "$HOME/.zshrc" > "$tmpfile" && mv "$tmpfile" "$HOME/.zshrc"
+    echo ".zshrc cleanup complete."
+  fi
 else
   echo "Bun not found"
   curl -fsSL https://bun.sh/install | bash
