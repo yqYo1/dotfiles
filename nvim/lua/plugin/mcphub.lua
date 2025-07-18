@@ -8,7 +8,8 @@ return {
     build = "bun install -g mcp-hub@latest",
     ---@module "mcphub"
     ---@type MCPHub.Config
+      ---@diagnostic disable-next-line:missing-fields
     opts = {
-      cmd = "mcp-hub",
+      cmd = "mcp-hub"
     }
 }
