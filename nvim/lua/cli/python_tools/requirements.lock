@@ -10,26 +10,7 @@
 #   universal: false
 
 basedpyright==1.29.1
-docstring-to-markdown==0.17
-    # via python-lsp-server
-importlib-metadata==8.7.0
-    # via docstring-to-markdown
-jedi==0.19.2
-    # via python-lsp-server
 nodejs-wheel-binaries==22.15.1
     # via basedpyright
-parso==0.8.4
-    # via jedi
-pluggy==1.6.0
-    # via python-lsp-server
-python-lsp-jsonrpc==1.1.2
-    # via python-lsp-server
-python-lsp-server==1.12.2
 ruff==0.11.10
-typing-extensions==4.13.2
-    # via docstring-to-markdown
-ujson==5.10.0
-    # via python-lsp-jsonrpc
-    # via python-lsp-server
-zipp==3.21.0
-    # via importlib-metadata
+tombi==0.4.33
