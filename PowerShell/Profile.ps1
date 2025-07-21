@@ -15,6 +15,13 @@ Function d {
 Function .. {Set-Location "..\$args"}
 Function ... {Set-Location "..\..\$args"}
 Function .... {Set-Location "..\..\..\$args"}
+function frepo {
+  $GHQ_ROOT = ghq root
+  $repo_path = ghq list | fzf --preview "bat --color=always --style=header,grid --line-range :80 $GHQ_ROOT/{}/README.*"
+  if ($repo_path) {
+    Push-Location (Join-Path -Path $GHQ_ROOT -ChildPath $repo_path)
+  }
+}
 if( (Get-Alias gp).CommandType -eq "Alias" ){
   Remove-Item alias:gp -Force
 }
