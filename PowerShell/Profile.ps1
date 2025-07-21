@@ -2,7 +2,7 @@
 $Env:DOTFILES_DIR = Split-Path $PROFILE_DIR
 
 # Aliases
-if( (Get-Alias cat).CommandType -eq "Alias" ){
+if( (Get-Command cat).CommandType -eq "Alias" ){
   Remove-Item alias:cat -Force
 }
 Function cat {bat --paging=never --style=grid $args}
@@ -22,12 +22,12 @@ function frepo {
     Push-Location (Join-Path -Path $GHQ_ROOT -ChildPath $repo_path)
   }
 }
-if( (Get-Alias gp).CommandType -eq "Alias" ){
+if( (Get-Command gp).CommandType -eq "Alias" ){
   Remove-Item alias:gp -Force
 }
 Function gp {git pull}
 Set-Alias -Name which -Value where.exe
-if( (Get-Alias where).CommandType -eq "Alias" ){
+if( (Get-Command where).CommandType -eq "Alias" ){
   Remove-Item alias:where -Force
 }
 Set-Alias -Name where -Value where.exe
@@ -47,9 +47,12 @@ Set-PSReadLineOption -PredictionViewStyle ListView
 Set-PSReadLineOption -BellStyle None
 Set-PSReadLineKeyHandler -Key Tab -Function MenuComplete
 
+# Completion
 Import-Module git-completion
 
 tailscale completion powershell | Out-String | Invoke-Expression
+(& uv generate-shell-completion powershell) | Out-String | Invoke-Expression
+(& uvx --generate-shell-completion powershell) | Out-String | Invoke-Expression
 
 Invoke-Expression (& { (zoxide init powershell | Out-String) })
 Invoke-Expression (&starship init powershell)
