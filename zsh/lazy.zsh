@@ -44,7 +44,8 @@ if [[ -z "$LITELLM_API_KEY" ]]; then
 fi
 # $(dirname $AQUA_GLOBAL_CONFIG)/update.sh
 function frepo(){
-  local repo_dir=$(ghq list --full-path | fzf --preview "bat --color=always --style=header,grid --line-range :80 $(ghq root)/{}/README.*")
+  local GHQ_ROOT=$(ghq root)
+  local repo_dir=$(ghq list --full-path | fzf --preview "bat --color=always --style=header,grid --line-range :80 $GHQ_ROOT/{}/README.*")
   if [ -n "$repo_dir" ]; then
     cd $repo_dir
   fi
