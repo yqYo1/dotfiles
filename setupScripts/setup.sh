@@ -1,5 +1,6 @@
 #!/bin/env bash
 DOTDIR=$(cd $(dirname $0)/..;pwd)
+ZSHRC="$DOTDIR/zsh/.zshrc"
 cd $DOTDIR
 XDG_CONFIG_HOME="$HOME/.config"
 export AQUA_GLOBAL_CONFIG=$XDG_CONFIG_HOME/aquaproj-aqua/aqua.yaml
@@ -10,7 +11,7 @@ git submodule update --init --recursive
 ln -sfnv $DOTDIR/git-hook/post-merge $DOTDIR/.git/hooks/post-merge
 ln -sfnv $DOTDIR/git $XDG_CONFIG_HOME/git
 ln -sfnv $DOTDIR/zsh $XDG_CONFIG_HOME/zsh
-ln -sfnv $DOTDIR/zsh/.zshrc $HOME/.zshrc
+ln -sfnv $ZSHRC $HOME/.zshrc
 ln -sfnv $DOTDIR/zsh/sheldon $XDG_CONFIG_HOME/sheldon
 ln -sfnv $DOTDIR/starship.toml $XDG_CONFIG_HOME/starship.toml
 ln -sfnv $DOTDIR/nvim $XDG_CONFIG_HOME/nvim
@@ -40,7 +41,7 @@ if type bun > /dev/null 2>&1; then
   echo "Bun is already installed"
   bun upgrade
 
-  if grep -q "# bun completions" "$HOME/.zshrc"; then
+  if grep -q "# bun completions" "$ZSHRC"; then
     echo "Cleaning up.zshrc after bun upgrade..."
     local tmpfile
     tmpfile="$(mktemp)"
@@ -50,7 +51,7 @@ if type bun > /dev/null 2>&1; then
       $0 == "# bun completions" { n=2; next }
       n > 0 { n--; next }
       { print }
-    ' "$HOME/.zshrc" > "$tmpfile" && mv "$tmpfile" "$HOME/.zshrc"
+    ' "$ZSHRC" > "$tmpfile" && mv "$tmpfile" "$ZSHRC"
     echo ".zshrc cleanup complete."
   fi
 else
