@@ -8,7 +8,9 @@ return {
     "neovim/nvim-lspconfig",
     event = { "VeryLazy" },
     cond = not is_vscode(),
-    dependencies = {},
+    dependencies = {
+      "python_tools",
+    },
     init = function()
       require("core.plugin").on_attach(function(client, bufnr)
         local exclude_ft = { "oil" }
