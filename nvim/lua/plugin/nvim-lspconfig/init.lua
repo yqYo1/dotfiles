@@ -42,6 +42,9 @@ return {
         "basedpyright",
         -- c
         "clangd",
+        -- misc
+        "gh_actions_ls",
+        "tombi",
       })
     end,
   },
