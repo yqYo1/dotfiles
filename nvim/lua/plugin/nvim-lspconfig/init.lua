@@ -37,14 +37,18 @@ return {
       vim.lsp.enable({
         -- lua
         "lua_ls",
+
         -- python
         "ruff",
+
         "basedpyright",
         -- c
         -- "clangd",
+
         -- misc
         "gh_actions_ls",
         "tombi",
+        "yamlls",
       })
     end,
   },

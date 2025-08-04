@@ -4,6 +4,7 @@
   "type": "module",
   "dependencies": {
     "@types/bun": "latest",
-    "gh-actions-language-server": "^0.0.3"
+    "gh-actions-language-server": "^0.0.3",
+    "yaml-language-server": "^1.18.0"
   }
 }
