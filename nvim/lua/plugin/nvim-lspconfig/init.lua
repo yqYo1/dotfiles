@@ -49,6 +49,7 @@ return {
         "gh_actions_ls",
         "tombi",
         "yamlls",
+        "jsonls",
       })
     end,
   },

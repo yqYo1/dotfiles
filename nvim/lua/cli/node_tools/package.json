@@ -5,6 +5,7 @@
   "dependencies": {
     "@types/bun": "latest",
     "gh-actions-language-server": "^0.0.3",
+    "vscode-langservers-extracted": "^4.10.0",
     "yaml-language-server": "^1.18.0"
   }
 }
