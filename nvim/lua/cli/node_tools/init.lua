@@ -1,6 +1,6 @@
 ---@type LazySpec
 return {
-  name = "node_servers",
+  name = "node_tools",
   dir = vim.fn.fnamemodify(debug.getinfo(1).source:sub(2), ":h"),
   build = "bun install",
   config = function(spec)
