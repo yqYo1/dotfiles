@@ -49,6 +49,10 @@ vim.keymap.set("n", "L", "L<Plug>(L)")
 vim.keymap.set("n", "<Plug>(H)H", "<PageUp>H<Plug>(H)")
 vim.keymap.set("n", "<Plug>(L)L", "<PageDown>Lzb<Plug>(L)")
 
+-- Jump Top/Bottom
+vim.keymap.set("n", "gg", "mggg", { desc = "Jump to top" })
+vim.keymap.set("n", "G", "mgG", { desc = "Jump to bottom" })
+
 -- Window move and resize submode
 vim.keymap.set("n", "<C-w>h", "<C-w>h<Plug>(WindowMoveAndResize)", { desc = "Go to the left window" })
 vim.keymap.set("n", "<C-w>j", "<C-w>j<Plug>(WindowMoveAndResize)", { desc = "Go to the down window" })
@@ -65,10 +69,10 @@ vim.keymap.set("n", "<C-w>v", "<C-w>v<Plug>(WindowMoveAndResize)", { desc = "Spl
 vim.keymap.set("n", "<C-w>q", "<C-w>q<Plug>(WindowMoveAndResize)", { desc = "Quit a window" })
 
 vim.keymap.set("n", "<C-w>+", "<cmd>resize +1<CR><Plug>(WindowMoveAndResize)", { desc = "Increase height" })
-vim.keymap.set("n", "<C-w>-", "<cmd>resize -1<CR><Plug>(WindowMoveAndResize)", { desc = "Decrease height"})
+vim.keymap.set("n", "<C-w>-", "<cmd>resize -1<CR><Plug>(WindowMoveAndResize)", { desc = "Decrease height" })
 vim.keymap.set("n", "<C-w>>", "<cmd>virtical resize +1<CR><Plug>(WindowMoveAndResize)", { desc = "Increase width" })
-vim.keymap.set("n", "<C-w><lt>", "<cmd>virtical resize -1<CR><Plug>(WindowMoveAndResize)", { desc = "Decrease width"})
-vim.keymap.set("n", "<C-w>=", "<cmd>wincmd =<CR><Plug>(WindowMoveAndResize)", { desc = "Equally high and wide"})
+vim.keymap.set("n", "<C-w><lt>", "<cmd>virtical resize -1<CR><Plug>(WindowMoveAndResize)", { desc = "Decrease width" })
+vim.keymap.set("n", "<C-w>=", "<cmd>wincmd =<CR><Plug>(WindowMoveAndResize)", { desc = "Equally high and wide" })
 
 vim.keymap.set("n", "<Plug>(WindowMoveAndResize)h", "<C-w>h", { remap = true, desc = "Go to the left window" })
 vim.keymap.set("n", "<Plug>(WindowMoveAndResize)j", "<C-w>j", { remap = true, desc = "Go to the down window" })
@@ -85,12 +89,12 @@ vim.keymap.set("n", "<Plug>(WindowMoveAndResize)v", "<C-w>v", { remap = true, de
 vim.keymap.set("n", "<Plug>(WindowMoveAndResize)q", "<C-w>q", { remap = true, desc = "Quit a window" })
 
 vim.keymap.set("n", "<Plug>(WindowMoveAndResize)+", "<C-w>+", { remap = true, desc = "Increase width" })
-vim.keymap.set("n", "<Plug>(WindowMoveAndResize)-", "<C-w>-", { remap = true, desc = "Decrease width"})
+vim.keymap.set("n", "<Plug>(WindowMoveAndResize)-", "<C-w>-", { remap = true, desc = "Decrease width" })
 vim.keymap.set("n", "<Plug>(WindowMoveAndResize)>", "<C-w>>", { remap = true, desc = "Increase height" })
-vim.keymap.set("n", "<Plug>(WindowMoveAndResize)<lt>", "<C-w><lt>", { remap = true, desc = "Decrease height"})
-vim.keymap.set("n", "<Plug>(WindowMoveAndResize)=", "<C-w>=", { remap = true, desc = "Equally high and wide"})
+vim.keymap.set("n", "<Plug>(WindowMoveAndResize)<lt>", "<C-w><lt>", { remap = true, desc = "Decrease height" })
+vim.keymap.set("n", "<Plug>(WindowMoveAndResize)=", "<C-w>=", { remap = true, desc = "Equally high and wide" })
 
-vim.keymap.set("n", "<Plug>(WindowMoveAndResize)<Esc>" ,"<Nop>", { desc = "Exit submode" })
+vim.keymap.set("n", "<Plug>(WindowMoveAndResize)<Esc>", "<Nop>", { desc = "Exit submode" })
 
 -- disable default keymap
 vim.keymap.set("n", "<C-r>", "<nop>", { desc = "Disable default keymap" })
