@@ -28,6 +28,9 @@ return {
         enable = true,
         setType = true,
       },
+      semantic = {
+        enable = false,
+      },
     },
   },
 }
