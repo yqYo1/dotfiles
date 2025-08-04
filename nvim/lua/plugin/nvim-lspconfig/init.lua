@@ -10,6 +10,7 @@ return {
     cond = not is_vscode(),
     dependencies = {
       "python_tools",
+      "node_tools",
     },
     init = function()
       require("core.plugin").on_attach(function(client, bufnr)

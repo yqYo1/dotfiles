@@ -1,0 +1,9 @@
+{
+  "name": "node_tools",
+  "module": "index.ts",
+  "type": "module",
+  "dependencies": {
+    "@types/bun": "latest",
+    "gh-actions-language-server": "^0.0.3"
+  }
+}
