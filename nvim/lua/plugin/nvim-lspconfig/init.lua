@@ -50,6 +50,7 @@ return {
         "tombi",
         "yamlls",
         "jsonls",
+        "html",
       })
     end,
   },
