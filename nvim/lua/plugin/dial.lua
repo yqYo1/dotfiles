@@ -100,50 +100,56 @@ return {
     })
 
     config.augends:on_filetype({
-      python = vim.iter({
-        default,
-        { augend.constant.new({ elements = { "True", "False" }, cyclic = true }) },
-      })
+      python = vim
+        .iter({
+          default,
+          { augend.constant.new({ elements = { "True", "False" }, cyclic = true }) },
+          { augend.constant.new({ elements = { "TOP", "BTM", "RIGHT", "LEFT" }, cyclic = true }) },
+        })
         :flatten()
         :totable(),
     })
 
     config.augends:on_filetype({
-      markdown = vim.iter({
-        default,
-        { augend.misc.alias.markdown_header },
-      })
+      markdown = vim
+        .iter({
+          default,
+          { augend.misc.alias.markdown_header },
+        })
         :flatten()
         :totable(),
     })
 
-    local typescriptGroup = vim.iter({
-      default,
-      {
-        augend.integer.alias.decimal,
-        augend.integer.alias.hex,
-        augend.paren.alias.quote,
-        augend.constant.new({ elements = { "let", "const" } }),
-      },
-    })
+    local typescriptGroup = vim
+      .iter({
+        default,
+        {
+          augend.integer.alias.decimal,
+          augend.integer.alias.hex,
+          augend.paren.alias.quote,
+          augend.constant.new({ elements = { "let", "const" } }),
+        },
+      })
       :flatten()
       :totable()
 
-    vim.iter({
-      "typescript",
-      "javascript",
-      "typescriptreact",
-      "javascriptreact",
-      "tsx",
-      "jsx",
-      "svelte",
-      "vue",
-      "astro",
-    }):each(function(ft)
-      config.augends:on_filetype({
-        [ft] = typescriptGroup,
+    vim
+      .iter({
+        "typescript",
+        "javascript",
+        "typescriptreact",
+        "javascriptreact",
+        "tsx",
+        "jsx",
+        "svelte",
+        "vue",
+        "astro",
       })
-    end)
+      :each(function(ft)
+        config.augends:on_filetype({
+          [ft] = typescriptGroup,
+        })
+      end)
 
     require("core.utils").redetect_filetype()
   end,
