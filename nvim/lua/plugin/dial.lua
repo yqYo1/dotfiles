@@ -104,7 +104,7 @@ return {
         .iter({
           default,
           { augend.constant.new({ elements = { "True", "False" }, cyclic = true }) },
-          { augend.constant.new({ elements = { "TOP", "BTM", "RIGHT", "LEFT" }, cyclic = true }) },
+          { augend.constant.new({ elements = { "TOP", "BTM", "LEFT", "RIGHT" }, cyclic = true }) },
         })
         :flatten()
         :totable(),
