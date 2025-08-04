@@ -41,7 +41,7 @@ return {
         "ruff",
         "basedpyright",
         -- c
-        "clangd",
+        -- "clangd",
         -- misc
         "gh_actions_ls",
         "tombi",
