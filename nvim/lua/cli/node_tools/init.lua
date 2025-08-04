@@ -1,3 +1,4 @@
+---@type LazySpec
 return {
   name = "node_servers",
   dir = vim.fn.fnamemodify(debug.getinfo(1).source:sub(2), ":h"),
