@@ -59,4 +59,21 @@ if is_windows() then
   for k, v in pairs(pwsh_options) do
     vim.opt[k] = v
   end
+else
+  local function resilient_osc52_paste()
+    -- weztermなどのterminalはOSC52の読み取りをサポートしない為無名レジスタにフォールバック
+    return { vim.fn.split(vim.fn.getreg('"'), "\n"), vim.fn.getregtype('"') }
+  end
+
+  vim.g.clipboard = {
+    name = "OSC52-Resilient",
+    copy = {
+      ["+"] = require("vim.ui.clipboard.osc52").copy("+"),
+      ["*"] = require("vim.ui.clipboard.osc52").copy("*"),
+    },
+    paste = {
+      ["+"] = resilient_osc52_paste,
+      ["*"] = resilient_osc52_paste,
+    },
+  }
 end
