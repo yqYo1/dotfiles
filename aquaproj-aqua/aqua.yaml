@@ -19,6 +19,7 @@ registries:
 
 packages:
 - name: BurntSushi/ripgrep@14.1.1
+- name: arduino/arduino-cli@v1.2.2
 - name: ClementTsang/bottom@0.10.2
 - name: JohnnyMorganz/StyLua@v2.1.0
 - name: LuaLS/lua-language-server@3.15.0
