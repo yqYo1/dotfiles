@@ -6,6 +6,7 @@ export BUN_INSTALL="$HOME/.bun"
 export RYE_HOME="$XDG_CONFIG_HOME/rye"
 export PATH=${AQUA_ROOT_DIR:-${XDG_DATA_HOME:-$HOME/.local/share}/aquaproj-aqua}/bin:$PATH
 export PATH="$BUN_INSTALL/bin:$PATH"
+export ARDUINO_UPDATER_ENABLE_NOTIFICATION=false
 source $HOME/.cargo/env
 zshaddhistory() {
   [[ "$?" == 0 ]]
