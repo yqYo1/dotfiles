@@ -33,3 +33,4 @@ zsh-defer source $ZSHRC_DIR/lazy.zsh
 unfunction zc_source
 eval "$(starship init zsh)"
 
+
