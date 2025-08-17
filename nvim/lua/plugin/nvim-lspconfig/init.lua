@@ -44,6 +44,7 @@ return {
         "basedpyright",
         -- c
         "clangd",
+        "arduino_language_server",
 
         -- misc
         "gh_actions_ls",

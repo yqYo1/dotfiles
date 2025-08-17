@@ -52,3 +52,4 @@ packages:
 - name: x-motemen/ghq@v1.8.0
 - name: ziglang/zig@0.14.1
 - name: zigtools/zls@0.14.0
+- name: arduino/arduino-language-server@0.7.7
