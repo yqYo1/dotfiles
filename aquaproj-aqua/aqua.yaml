@@ -50,6 +50,6 @@ packages:
 - name: sxyazi/yazi@v25.5.31
 - name: tree-sitter/tree-sitter@v0.25.8
 - name: x-motemen/ghq@v1.8.0
-- name: ziglang/zig@0.14.1
+- name: ziglang/zig@0.15.1
 - name: zigtools/zls@0.15.0
 - name: arduino/arduino-language-server@0.7.7
