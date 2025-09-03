@@ -2,7 +2,8 @@
 return {
   "olimorris/codecompanion.nvim",
   dependencies = {
-    "ravitemer/codecompanion-history.nvim"
+    "ravitemer/codecompanion-history.nvim",
+    "franco-ruggeri/codecompanion-spinner.nvim",
   },
   event = "VeryLazy",
   opts = {
@@ -11,23 +12,25 @@ return {
     },
     display = {
       action_palette = {
-        provider = "snacks"
+        provider = "snacks",
       },
       chat = {
         show_header_separator = true,
-      }
+      },
     },
     adapters = {
-      -- copilotアダプタを上書き
-      copilot = function()
-        return require("codecompanion.adapters").extend("copilot", {
-          schema = {
-            model = {
-              default = "gpt-4.1",
+      http = {
+        -- copilotアダプタを上書き
+        copilot = function()
+          return require("codecompanion.adapters.http").extend("copilot", {
+            schema = {
+              model = {
+                default = "gpt-4.1",
+              },
             },
-          },
-        })
-      end,
+          })
+        end,
+      },
     },
     strategies = {
       chat = {
@@ -49,30 +52,31 @@ return {
             modes = { n = "<C-s>", i = "<C-s>" },
             callback = function(chat)
               vim.cmd("stopinsert")
-              chat:add_buf_message({ role = "llm", content = "" })
               chat:submit()
+              chat:add_buf_message({ role = "llm", content = "" })
             end,
             index = 1,
             description = "Send",
-          }
+          },
         },
-      }
+      },
     },
     extensions = {
+      spinner = {},
       mcphub = {
         callback = "mcphub.extensions.codecompanion",
         opts = {
-          -- MCP Tools 
-          make_tools = true,              -- Make individual tools (@server__tool) and server groups (@server) from MCP servers
+          -- MCP Tools
+          make_tools = true, -- Make individual tools (@server__tool) and server groups (@server) from MCP servers
           show_server_tools_in_chat = true, -- Show individual tools in chat completion (when make_tools=true)
           add_mcp_prefix_to_tool_names = false, -- Add mcp__ prefix (e.g `@mcp__github`, `@mcp__neovim__list_issues`)
-          show_result_in_chat = true,      -- Show tool results directly in chat buffer
-          format_tool = nil,               -- function(tool_name:string, tool: CodeCompanion.Agent.Tool) : string Function to format tool names to show in the chat buffer
+          show_result_in_chat = true, -- Show tool results directly in chat buffer
+          format_tool = nil, -- function(tool_name:string, tool: CodeCompanion.Agent.Tool) : string Function to format tool names to show in the chat buffer
           -- MCP Resources
-          make_vars = true,                -- Convert MCP resources to #variables for prompts
-          -- MCP Prompts 
-          make_slash_commands = true,      -- Add MCP prompts as /slash commands
-        }
+          make_vars = true, -- Convert MCP resources to #variables for prompts
+          -- MCP Prompts
+          make_slash_commands = true, -- Add MCP prompts as /slash commands
+        },
       },
       history = {
         enabled = true,
@@ -90,7 +94,7 @@ return {
           ---Automatically generate titles for new chats
           auto_generate_title = true,
           title_generation_opts = {
-            ---Adapter for generating titles (defaults to active chat's adapter) 
+            ---Adapter for generating titles (defaults to active chat's adapter)
             adapter = nil, -- e.g "copilot"
             ---Model for generating titles (defaults to active chat's model)
             model = nil, -- e.g "gpt-4o"
@@ -103,11 +107,8 @@ return {
           dir_to_save = vim.fn.stdpath("data") .. "/codecompanion-history",
           ---Enable detailed logging for history extension
           enable_logging = false,
-        }
+        },
       },
-    }
+    },
   },
-  init = function()
-    require("plugin.codecompanion.spinner"):init()
-  end,
 }
