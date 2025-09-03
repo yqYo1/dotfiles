@@ -38,7 +38,7 @@ packages:
 - name: martinvonz/jj@v0.32.0
 - name: mattn/efm-langserver@v0.0.54
 - name: mitsuhiko/rye@0.44.0
-- name: neovim/neovim@v0.11.3
+- name: neovim/neovim@v0.11.4
 - name: nodejs/node@v24.7.0
 - name: rhysd/actionlint@v1.7.7
 - name: rhysd/vim-startuptime@v1.3.2
