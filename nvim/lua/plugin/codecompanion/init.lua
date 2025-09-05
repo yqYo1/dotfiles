@@ -21,7 +21,6 @@ return {
     },
     adapters = {
       http = {
-        -- copilotアダプタを上書き
         copilot = function()
           return require("codecompanion.adapters.http").extend("copilot", {
             schema = {
