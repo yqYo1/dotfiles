@@ -26,7 +26,7 @@ return {
           return require("codecompanion.adapters.http").extend("copilot", {
             schema = {
               model = {
-                default = "gpt-4.1",
+                default = "gpt-5-mini",
               },
             },
           })
@@ -114,8 +114,6 @@ return {
         callback = "codecompanion._extensions.gitcommit",
         opts = {
           -- Basic configuration
-          adapter = "copilot", -- LLM adapter
-          model = "gpt-4.1", -- Model name
           languages = { "English", "Japanese" }, -- Supported languages
 
           -- File filtering (optional)
@@ -136,7 +134,6 @@ return {
           -- Buffer integration
           buffer = {
             enabled = true, -- Enable gitcommit buffer keymaps
-            keymap = "<leader>gc", -- Keymap for generating commit messages
             auto_generate = true, -- Auto-generate on buffer enter
             auto_generate_delay = 200, -- Auto-generation delay (ms)
             skip_auto_generate_on_amend = true, -- Skip auto-generation during git commit --amend
