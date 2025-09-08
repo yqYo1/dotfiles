@@ -1,5 +1,5 @@
 #!/bin/env bash
-DOTDIR=$(cd $(dirname $0)/..;pwd)
+DOTDIR=$(cd $(git rev-parse --show-toplevel);pwd)
 ZSHRC="$DOTDIR/zsh/.zshrc"
 cd $DOTDIR
 XDG_CONFIG_HOME="$HOME/.config"
@@ -26,8 +26,6 @@ if [ ! -d $XDG_CONFIG_HOME/bat ]; then
 fi
 ln -sfnv $DOTDIR/bat/config $XDG_CONFIG_HOME/bat/config
 ln -sfnv $DOTDIR/bat-catppuccin/themes $XDG_CONFIG_HOME/bat/themes
-#ln -sfnv $DOTDIR/bun/package.json $HOME/package.json
-#ln -sfnv $DOTDIR/bun/bun.lockb $HOME/bun.lockb
 if type aqua > /dev/null 2>&1; then
   echo "aqua is already installed"
 else
