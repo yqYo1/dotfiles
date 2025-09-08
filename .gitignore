@@ -14,6 +14,7 @@
 /zsh/.zsh_history
 /zsh/env_api_key.zsh
 /zsh/completion/*
+/zsh/starship.zsh
 /PowerShell/env_api_key.ps1
 /aquaproj-aqua/log.txt
 /nvim/lua/cli/node_server/node_modules
