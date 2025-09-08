@@ -7,14 +7,17 @@ return {
       function()
         require("aibou.codecompanion").start({
           codecompanion = {
-            chat_args ={
-              adapter = "copilot",
-            }
-          }
+            ---@diagnostic disable-next-line: missing-fields
+            chat_args = {
+              http = {
+                adapter = "copilot",
+              },
+            },
+          },
         })
       end,
       mode = { "n" },
       desc = "Start aibou",
-    }
+    },
   },
 }
