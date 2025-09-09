@@ -34,9 +34,3 @@ source $ZSHRC_DIR/nolazy.zsh
 zsh-defer source $ZSHRC_DIR/lazy.zsh
 source $ZSHRC_DIR/starship.zsh
 unfunction source
-
-
-
-
-# bun completions
-[ -s "/home/yayoi/.bun/_bun" ] && source "/home/yayoi/.bun/_bun"
