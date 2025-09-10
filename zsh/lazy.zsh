@@ -1,5 +1,3 @@
-export FPATH="$ZSHRC_DIR/completion:$FPATH"
-autoload -Uz compinit && compinit
 export PATH="$HOME/.local/bin:$PATH"
 if [ ! -d ~/.cache/Local/local-tmp-folder ]; then
   mkdir -p ~/.cache/Local/local-tmp-folder
