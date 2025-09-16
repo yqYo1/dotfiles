@@ -33,6 +33,13 @@ return {
         },
         typeCheckingMode = "all",
         useLibraryCodeForTypes = true,
+        inlayHints = {
+          variableTypes = true,
+          callArgumentTypes = true,
+          callArgumentNamesMatching = true,
+          functionReturnTypes = true,
+          genericTypes = true,
+        },
       },
     },
     python = {},
