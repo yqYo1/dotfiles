@@ -41,7 +41,6 @@ if type bun > /dev/null 2>&1; then
 
   if grep -q "# bun completions" "$ZSHRC"; then
     echo "Cleaning up.zshrc after bun upgrade..."
-    local tmpfile
     tmpfile="$(mktemp)"
     # "# bun completions" という行とその直後の1行を削除する
     # Bunのスクリプトは2行追加するため、計2行をスキップする
