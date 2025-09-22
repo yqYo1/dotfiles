@@ -7,7 +7,6 @@ vim.opt.autoread = true
 vim.opt.hidden = true
 vim.opt.mouse = "a"
 vim.opt.confirm = true
-
 vim.opt.shortmess:append("I")
 
 vim.opt.number = true
@@ -17,7 +16,6 @@ vim.opt.signcolumn = "yes"
 vim.opt.fenc = "utf-8"
 
 vim.opt.wrap = true
--- 単語単位で折り返す
 vim.opt.linebreak = true
 
 --indent
@@ -40,6 +38,7 @@ vim.opt.listchars = {
   precedes = "❮",
 }
 
+vim.opt.laststatus = 3
 vim.opt.cmdheight = 0
 
 vim.opt.termguicolors = true
