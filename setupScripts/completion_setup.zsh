@@ -8,12 +8,13 @@ if [ ! -d $ZSH_COMPLETION_DIR ]; then
   mkdir $ZSH_COMPLETION_DIR
 fi
 
+bat --completion zsh > $ZSH_COMPLETION_DIR/_bat
+deno completions zsh > $ZSH_COMPLETION_DIR/_deno
 gh completion -s zsh > $ZSH_COMPLETION_DIR/_gh
 rye self completion -s zsh > $ZSH_COMPLETION_DIR/_rye
+starship completions zsh > $ZSH_COMPLETION_DIR/_starship
 uv generate-shell-completion zsh > $ZSH_COMPLETION_DIR/_uv
 uvx --generate-shell-completion zsh > $ZSH_COMPLETION_DIR/_uvx
-deno completions zsh > $ZSH_COMPLETION_DIR/_deno
-bat --completion zsh > $ZSH_COMPLETION_DIR/_bat
 zoxide init zsh > $ZSH_COMPLETION_DIR/_zoxide
 
 if (( $+commands[podman] )); then
