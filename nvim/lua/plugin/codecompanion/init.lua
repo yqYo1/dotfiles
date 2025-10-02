@@ -25,8 +25,7 @@ return {
           return require("codecompanion.adapters.http").extend("copilot", {
             schema = {
               model = {
-                -- default = "gpt-5-mini",
-                default = "gpt-4.1",
+                default = "gpt-5-mini",
               },
             },
           })
