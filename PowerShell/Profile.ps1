@@ -46,6 +46,8 @@ Set-PSReadLineOption -PredictionSource HistoryAndPlugin
 Set-PSReadLineOption -PredictionViewStyle ListView
 Set-PSReadLineOption -BellStyle None
 Set-PSReadLineKeyHandler -Key Tab -Function MenuComplete
+Set-PSReadLineKeyHandler -Chord Ctrl+n -Function TabCompleteNext
+Set-PSReadLineKeyHandler -Chord Ctrl+p -Function TabCompletePrevious
 
 # Completion
 Import-Module git-completion
