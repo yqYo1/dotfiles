@@ -46,7 +46,7 @@ packages:
 - name: rust-lang/rust-analyzer@2025-05-26
 - name: sharkdp/bat@v0.26.0
 - name: sharkdp/fd@v10.3.0
-- name: starship/starship@v1.23.0
+- name: starship/starship@v1.24.0
 - name: sxyazi/yazi@v25.5.31
 - name: tree-sitter/tree-sitter@v0.25.10
 - name: x-motemen/ghq@v1.8.0
