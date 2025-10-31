@@ -39,7 +39,7 @@ packages:
 - name: mattn/efm-langserver@v0.0.54
 - name: mitsuhiko/rye@0.44.0
 - name: neovim/neovim@v0.11.4
-- name: nodejs/node@v25.0.0
+- name: nodejs/node@v25.1.0
 - name: rhysd/actionlint@v1.7.8
 - name: rhysd/vim-startuptime@v1.3.2
 - name: rossmacarthur/sheldon@0.8.5
