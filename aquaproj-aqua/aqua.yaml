@@ -35,7 +35,7 @@ packages:
 - name: jesseduffield/lazygit@v0.56.0
 - name: jqlang/jq@jq-1.8.1
 - name: junegunn/fzf@v0.66.1
-- name: martinvonz/jj@v0.34.0
+- name: martinvonz/jj@v0.35.0
 - name: mattn/efm-langserver@v0.0.54
 - name: mitsuhiko/rye@0.44.0
 - name: neovim/neovim@v0.11.5
