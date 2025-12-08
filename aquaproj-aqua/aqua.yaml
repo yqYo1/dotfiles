@@ -51,5 +51,5 @@ packages:
 - name: tree-sitter/tree-sitter@v0.25.10
 - name: x-motemen/ghq@v1.8.0
 - name: ziglang/zig@0.15.1
-- name: zigtools/zls@0.15.0
+- name: zigtools/zls@0.15.1
 - name: arduino/arduino-language-server@0.7.7
