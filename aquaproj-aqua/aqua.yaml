@@ -24,7 +24,7 @@ packages:
 - name: LuaLS/lua-language-server@3.16.1
 - name: PowerShell/PowerShell@v7.5.4
 - name: ajeetdsouza/zoxide@v0.9.8
-- name: arduino/arduino-cli@v1.3.1
+- name: arduino/arduino-cli@v1.4.0
 - name: astral-sh/uv@0.9.16
 - name: cli/cli@v2.83.1
 - name: denoland/deno@v2.5.6
