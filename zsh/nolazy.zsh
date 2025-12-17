@@ -6,6 +6,7 @@ export RYE_HOME="$XDG_CONFIG_HOME/rye"
 export PATH="$BUN_INSTALL/bin:$PATH"
 export ARDUINO_UPDATER_ENABLE_NOTIFICATION=false
 source $HOME/.cargo/env
+export SYSTEMD_EDITOR=nvim
 zshaddhistory() {
   [[ "$?" == 0 ]]
 }
