@@ -25,7 +25,7 @@ packages:
 - name: PowerShell/PowerShell@v7.5.4
 - name: ajeetdsouza/zoxide@v0.9.8
 - name: arduino/arduino-cli@v1.4.0
-- name: astral-sh/uv@0.9.25
+- name: astral-sh/uv@0.9.26
 - name: cli/cli@v2.85.0
 - name: denoland/deno@v2.6.5
 - name: eza-community/eza@v0.23.4
