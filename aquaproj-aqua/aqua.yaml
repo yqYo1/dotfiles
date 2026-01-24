@@ -15,7 +15,7 @@
 
 registries:
 - type: standard
-  ref: v4.459.0 # renovate: depName=aquaproj/aqua-registry
+  ref: v4.460.1 # renovate: depName=aquaproj/aqua-registry
 
 packages:
 - name: BurntSushi/ripgrep@15.1.0
