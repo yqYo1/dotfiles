@@ -27,7 +27,7 @@ packages:
 - name: arduino/arduino-cli@v1.4.1
 - name: astral-sh/uv@0.9.27
 - name: cli/cli@v2.86.0
-- name: denoland/deno@v2.6.6
+- name: denoland/deno@v2.6.7
 - name: eza-community/eza@v0.23.4
 - name: golang/go@go1.25.6
 - name: golang/tools/goimports@v0.33.0
