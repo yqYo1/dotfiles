@@ -23,3 +23,9 @@ fi
 if (( $+commands[tailscale] ));then
   tailscale completion zsh > $ZSH_COMPLETION_DIR/_tailscale
 fi
+
+# compinit キャッシュの再生成（zsh-autocomplete が -C フラグで使用するため）
+COMPDUMP="${XDG_CACHE_HOME:-$HOME/.cache}/zsh/compdump"
+rm -f "$COMPDUMP" "$COMPDUMP.zwc"
+export FPATH="$ZSH_COMPLETION_DIR:$FPATH"
+autoload -Uz compinit && compinit -d "$COMPDUMP"
