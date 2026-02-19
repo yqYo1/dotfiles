@@ -19,4 +19,3 @@ setopt hist_verify
 setopt share_history
 
 export FPATH="$ZSHRC_DIR/completion:$FPATH"
-autoload -Uz compinit && compinit
