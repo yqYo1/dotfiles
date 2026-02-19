@@ -65,4 +65,17 @@ else
   curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 fi
 bat cache --build
+if [[ -z "$LITELLM_API_KEY" ]]; then
+  ZSHENV="$HOME/.zshenv"
+  if [[ ! -e "$ZSHENV" ]]; then
+    touch "$ZSHENV"
+  fi
+  if ! grep -q "skip_global_compinit=1" "$ZSHENV"; then
+    echo "skip_global_compinit=1" >> "$ZSHENV"
+  fi
+  if ! grep -q "export LITELLM_API_KEY" "$ZSHENV"; then
+    echo "export LITELLM_API_KEY=\"LITELLM_API_KEY\"" >> "$ZSHENV"
+  fi
+fi
+
 $DOTDIR/setupScripts/completion_setup.zsh

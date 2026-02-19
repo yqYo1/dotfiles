@@ -22,14 +22,7 @@ export AQUA_PROGRESS_BAR=true
 # completions
 [ -s "/home/yayoi/.bun/_bun" ] && source "/home/yayoi/.bun/_bun"
 
-if [[ -z "$LITELLM_API_KEY" ]]; then
-  if [[ ! -e "$HOME/.zshenv" ]]; then
-    touch ~/.zshenv
-  fi
-  if [[ -f "$HOME/.zshenv" ]]; then
-    echo "export LITELLM_API_KEY=\"LITELLM_API_KEY\"" >> ~/.zshenv
-  fi
-fi
+
 # $(dirname $AQUA_GLOBAL_CONFIG)/update.sh
 function frepo(){
   # local GHQ_ROOT=$(ghq root)
