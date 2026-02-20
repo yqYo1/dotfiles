@@ -53,3 +53,4 @@ packages:
 - name: ziglang/zig@0.15.1
 - name: zigtools/zls@0.15.1
 - name: arduino/arduino-language-server@0.7.7
+- name: k1LoW/git-wt@v0.25.0
