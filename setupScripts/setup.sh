@@ -37,19 +37,19 @@ cd $DOTDIR/aquaproj-aqua
 
 if type bun > /dev/null 2>&1; then
   echo "Bun is already installed"
+
+  ZSHRC_BACKUP="$ZSHRC.bak"
+  cp $ZSHRC $ZSHRC_BACKUP
+
   bun upgrade
 
-  if grep -q "# bun completions" "$ZSHRC"; then
-    echo "Cleaning up.zshrc after bun upgrade..."
-    tmpfile="$(mktemp)"
-    # "# bun completions" という行とその直後の1行を削除する
-    # Bunのスクリプトは2行追加するため、計2行をスキップする
-    awk '
-      $0 == "# bun completions" { n=2; next }
-      n > 0 { n--; next }
-      { print }
-    ' "$ZSHRC" > "$tmpfile" && mv "$tmpfile" "$ZSHRC"
-    echo ".zshrc cleanup complete."
+  if ! diff -q "$ZSHRC" "$ZSHRC_BACKUP"; then
+    echo "bun upgrade modified .zshrc. Restoring from backup..."
+    mv  -f "$ZSHRC_BACKUP" "$ZSHRC"
+    echo ".zshrc restored to original state."
+  else
+    echo "bun upgrade did not modify .zshrc."
+    rm -f "$ZSHRC_BACKUP"
   fi
 else
   echo "Bun not found"
