@@ -16,6 +16,7 @@ starship completions zsh > $ZSH_COMPLETION_DIR/_starship
 uv generate-shell-completion zsh > $ZSH_COMPLETION_DIR/_uv
 uvx --generate-shell-completion zsh > $ZSH_COMPLETION_DIR/_uvx
 zoxide init zsh > $ZSH_COMPLETION_DIR/_zoxide
+git wt --init zsh > $ZSH_COMPLETION_DIR/_git-wt
 
 if (( $+commands[podman] )); then
   podman completion zsh > $ZSH_COMPLETION_DIR/_podman
