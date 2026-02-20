@@ -25,7 +25,6 @@ if [ ! -d $XDG_CONFIG_HOME/bat ]; then
   mkdir $XDG_CONFIG_HOME/bat
 fi
 ln -sfnv $DOTDIR/bat/config $XDG_CONFIG_HOME/bat/config
-ln -sfnv $DOTDIR/bat-catppuccin/themes $XDG_CONFIG_HOME/bat/themes
 if type aqua > /dev/null 2>&1; then
   echo "aqua is already installed"
 else
@@ -64,7 +63,11 @@ else
   echo "Rust not found"
   curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 fi
+
+ghq get -u catppuccin/bat
+ln -sfnv $(ghq list -p -e catppuccin/bat)/themes $XDG_CONFIG_HOME/bat/themes
 bat cache --build
+
 if [[ -z "$LITELLM_API_KEY" ]]; then
   ZSHENV="$HOME/.zshenv"
   if [[ ! -e "$ZSHENV" ]]; then
