@@ -97,7 +97,8 @@ $applist = @(
   "llvm",
   "lua-language-server",
   "make",
-  "nodejs-lts"
+  "nodejs-lts",
+  "npiperelay"
 )
 scoop update *
 scoop cleanup *
