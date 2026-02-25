@@ -1,48 +1,60 @@
+local treesitter_path = vim.fs.joinpath(vim.fn.stdpath("data"), "/treesitter")
+local parser_list = {
+  "bash",
+  "c",
+  "cpp",
+  "css",
+  "diff",
+  "dockerfile",
+  "git_config",
+  "git_rebase",
+  "gitattributes",
+  "gitcommit",
+  "gitignore",
+  "html",
+  "lua",
+  "luadoc",
+  "markdown",
+  "markdown_inline",
+  "powershell",
+  "printf",
+  "python",
+  "query",
+  "regex",
+  "rust",
+  "ssh_config",
+  "toml",
+  "vim",
+  "vimdoc",
+  "xml",
+  "yaml",
+}
+
+---@type LazySpec
 return {
   "nvim-treesitter/nvim-treesitter",
-  branch = "master",
-  build = ":TSUpdate",
-  event = { "VeryLazy" },
+  branch = "main",
+  build = function()
+    vim.cmd("TSUpdate")
+    require("nvim-treesitter").install(parser_list)
+  end,
+  lazy = false,
   config = function()
-    local configs = require("nvim-treesitter.configs")
-    ---@diagnostic disable-next-line: missing-fields
-    configs.setup({
-      ensure_installed = {
-        "bash",
-        "c",
-        "cpp",
-        "css",
-        "diff",
-        "dockerfile",
-        "git_config",
-        "git_rebase",
-        "gitattributes",
-        "gitcommit",
-        "gitignore",
-        "html",
-        "lua",
-        "luadoc",
-        "markdown",
-        "markdown_inline",
-        "powershell",
-        "printf",
-        "query",
-        "regex",
-        "rust",
-        "ssh_config",
-        "toml",
-        "vim",
-        "vimdoc",
-        "xml",
-        "yaml",
-      },
-      sync_install = false,
-      auto_install = true,
-      highlight = {
-        enable = true,
-        additional_vim_regex_highlighting = { "python" },
-      },
-      ignore_install = {},
+    require("nvim-treesitter").setup({
+      parser_install_dir = treesitter_path,
+    })
+
+    vim.treesitter.language.register("bash", { "sh", "zsh" })
+
+    vim.api.nvim_create_autocmd("FileType", {
+      pattern = parser_list,
+      group = vim.api.nvim_create_augroup("nvim-treesitter_star", {}),
+      callback = function(args)
+        vim.treesitter.start(args.buf)
+        -- vim.wo.foldmethod = "expr"
+        -- vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+        vim.bo[args.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+      end,
     })
   end,
 }

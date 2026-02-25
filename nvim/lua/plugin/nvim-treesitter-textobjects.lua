@@ -1,49 +1,54 @@
+---@type LazySpec
 return {
   "nvim-treesitter/nvim-treesitter-textobjects",
+  branch = "main",
   event = { "VeryLazy" },
-  config = function()
-    ---@diagnostic disable-next-line: missing-fields
-    require("nvim-treesitter.configs").setup({
-      textobjects = {
-        select = {
-          enable = true,
-
-          -- Automatically jump forward to textobj, similar to targets.vim
-          lookahead = true,
-
-          keymaps = {
-            -- You can use the capture groups defined in textobjects.scm
-            ["af"] = {
-              query = "@function.outer",
-              desc = "Select outer part of a method/function definition",
-            },
-            ["if"] = {
-              query = "@function.inner",
-              desc = "Select inner part of a method/function definition",
-            },
-            ["ac"] = {
-              query = "@class.outer",
-              desc = "Select outer part of a class region",
-            },
-            ["ic"] = {
-              query = "@class.inner",
-              desc = "Select inner part of a class region",
-            },
-            ["as"] = {
-              query = "@scope",
-              query_group = "locals",
-              desc = "Select language scope",
-            },
-          },
-          -- selection_modes = {
-          --   ["@function.outer"] = "V", -- linewise
-          --   ["@function.inner"] = "V",
-          --   ["@class.outer"] = "<c-v>", -- blockwise
-          --   ["@class.inner"] = "V",
-          --   ["@scope"] = "V",
-          -- },
-        },
-      },
-    })
-  end,
+  ---@type TSTextObjects.UserConfig
+  opt = {
+    select = {
+      lookahead = true,
+    },
+  },
+  keys = {
+    {
+      "af",
+      function()
+        require("nvim-treesitter-textobjects.select").select_textobject("@function.outer", "textobjects")
+      end,
+      mode = { "x", "o" },
+      desc = "Select outer part of a method/function definition",
+    },
+    {
+      "if",
+      function()
+        require("nvim-treesitter-textobjects.select").select_textobject("@function.inner", "textobjects")
+      end,
+      mode = { "x", "o" },
+      desc = "Select inner part of a method/function definition",
+    },
+    {
+      "ac",
+      function()
+        require("nvim-treesitter-textobjects.select").select_textobject("@class.outer", "textobjects")
+      end,
+      mode = { "x", "o" },
+      desc = "Select outer part of a class region",
+    },
+    {
+      "ic",
+      function()
+        require("nvim-treesitter-textobjects.select").select_textobject("@class.inner", "textobjects")
+      end,
+      mode = { "x", "o" },
+      desc = "Select inner part of a class region",
+    },
+    {
+      "as",
+      function()
+        require("nvim-treesitter-textobjects.select").select_textobject("@scope", "locals")
+      end,
+      mode = { "x", "o" },
+      desc = "Select language scope",
+    },
+  },
 }
