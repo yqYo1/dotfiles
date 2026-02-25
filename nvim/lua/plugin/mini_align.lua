@@ -1,7 +1,7 @@
 ---@type LazySpec
 return {
   "echasnovski/mini.align",
-  version = "*",
+  version = false,
   keys = {
     { "ga", mode = { "n", "x" }, desc = "align" },
   },

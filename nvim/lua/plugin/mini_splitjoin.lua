@@ -1,13 +1,13 @@
 ---@type LazySpec
 return {
   "echasnovski/mini.splitjoin",
-  version = "*",
+  version = false,
   event = "VeryLazy",
   opts = {
     mappings = {
-      toggle = 'gS',
-      split  = 'ss',
-      join   = 'sj',
+      toggle = "",
+      split = "ss",
+      join = "sj",
     },
-  }
+  },
 }

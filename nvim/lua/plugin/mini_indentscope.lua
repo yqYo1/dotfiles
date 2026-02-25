@@ -1,7 +1,7 @@
 ---@type LazySpec
 return {
   "echasnovski/mini.indentscope",
-  version = "*",
+  version = false,
   keys = {
     { "ai", mode = { "x", "o" }, desc = "around indent" },
     { "ii", mode = { "x", "o" }, desc = "inner indent" },
