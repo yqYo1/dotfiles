@@ -68,17 +68,15 @@ ghq get -u catppuccin/bat
 ln -sfnv $(ghq list -p -e catppuccin/bat)/themes $XDG_CONFIG_HOME/bat/themes
 bat cache --build
 
-if [[ -z "$LITELLM_API_KEY" ]]; then
-  ZSHENV="$HOME/.zshenv"
-  if [[ ! -e "$ZSHENV" ]]; then
-    touch "$ZSHENV"
-  fi
-  if ! grep -q "skip_global_compinit=1" "$ZSHENV"; then
-    echo "skip_global_compinit=1" >> "$ZSHENV"
-  fi
-  if ! grep -q "export LITELLM_API_KEY" "$ZSHENV"; then
-    echo "export LITELLM_API_KEY=\"LITELLM_API_KEY\"" >> "$ZSHENV"
-  fi
+ZSHENV="$HOME/.zshenv"
+if [[ ! -e "$ZSHENV" ]]; then
+  touch "$ZSHENV"
+fi
+if ! grep -q "skip_global_compinit=1" "$ZSHENV"; then
+  echo "skip_global_compinit=1" >> "$ZSHENV"
+fi
+if ! grep -q "export LITELLM_API_KEY" "$ZSHENV"; then
+  echo "export LITELLM_API_KEY=\"LITELLM_API_KEY\"" >> "$ZSHENV"
 fi
 
 $DOTDIR/setupScripts/completion_setup.zsh
