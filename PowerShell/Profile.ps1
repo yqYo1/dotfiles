@@ -52,9 +52,10 @@ Set-PSReadLineKeyHandler -Chord Ctrl+p -Function TabCompletePrevious
 # Completion
 Import-Module git-completion
 
-tailscale completion powershell | Out-String | Invoke-Expression
+(& tailscale completion powershell) | Out-String | Invoke-Expression
 (& uv generate-shell-completion powershell) | Out-String | Invoke-Expression
 (& uvx --generate-shell-completion powershell) | Out-String | Invoke-Expression
+(& wezterm shell-completion --shell power-shell) | Out-String | Invoke-Expression
 
 Invoke-Expression (& { (zoxide init powershell | Out-String) })
 Invoke-Expression (&starship init powershell)
