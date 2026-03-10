@@ -13,9 +13,10 @@
   outputs = { nixpkgs, home-manager, ... }:
     let
       system = "x86_64-linux";
+      username = "yayoi";
       pkgs = nixpkgs.legacyPackages.${system};
     in {
-      homeConfigurations."yayoi" = home-manager.lib.homeManagerConfiguration {
+      homeConfigurations.${username} = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
 
         # Specify your home configuration modules here, for example,
