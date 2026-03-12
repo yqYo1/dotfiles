@@ -149,6 +149,9 @@ if (-not (Test-Path $aqua_bin_path)) {
 }
 
 #TODO aqua init
+$Env:AQUA_GLOBAL_CONFIG = Join-Path (& ghq root) "github.com/yqYo1/dotfiles/aquaproj-aqua/aqua.yaml"
+aqua i -a
+aqua upa
 
 addPath "$Env:USERPROFILE\.bun\bin"
 applyPath
