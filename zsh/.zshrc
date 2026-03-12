@@ -1,5 +1,9 @@
 ZSHRC_DIR=${${(%):-%N}:A:h}
 
+if [ -f "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh" ]; then
+  source "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
+fi
+
 function source {
   ensure_zcompiled $1
   builtin source $1
@@ -12,9 +16,6 @@ function ensure_zcompiled {
   fi
 }
 ensure_zcompiled ~/.zshrc
-if [ -f "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh" ]; then
-  source "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
-fi
 
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"

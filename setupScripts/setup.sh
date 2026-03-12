@@ -16,7 +16,6 @@ ln -sfnv $DOTDIR/zsh/sheldon $XDG_CONFIG_HOME/sheldon
 ln -sfnv $DOTDIR/starship.toml $XDG_CONFIG_HOME/starship.toml
 ln -sfnv $DOTDIR/nvim $XDG_CONFIG_HOME/nvim
 ln -sfnv $DOTDIR/aquaproj-aqua $XDG_CONFIG_HOME/aquaproj-aqua
-ln -sfnv $DOTDIR/rye $XDG_CONFIG_HOME/rye
 ln -sfnv $DOTDIR/wezterm $XDG_CONFIG_HOME/wezterm
 ln -sfnv $DOTDIR/sway $XDG_CONFIG_HOME/sway
 ln -sfnv $DOTDIR/tofi $XDG_CONFIG_HOME/tofi
