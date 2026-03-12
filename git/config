@@ -1,0 +1,8 @@
+[user]
+	email = 52419113+yqYo1@users.noreply.github.com
+	name = yqYoi
+[core]
+	editor = nvim
+	symlinks = true
+[pull]
+	rebase = true
