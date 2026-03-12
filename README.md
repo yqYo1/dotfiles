@@ -1,7 +1,7 @@
 # dotfiles
 
 ## init
-
+WIP
 ### linux
 1. install nix
 ```bash
