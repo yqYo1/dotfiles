@@ -77,6 +77,7 @@ if ( ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]:
   throw "Running with administrator. Do not run with administrator."
 }
 
+winget install --id Microsoft.PowerShell --exact --silent --accept-package-agreements --accept-source-agreements --disable-interactivity
 
 # scoop
 if (!(Exist-Command scoop)) {
