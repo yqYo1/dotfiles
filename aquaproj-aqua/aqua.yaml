@@ -45,7 +45,6 @@ packages:
   - name: sharkdp/fd@v10.4.2
   - name: starship/starship@v1.24.2
   - name: sxyazi/yazi@v26.1.22
-  - name: tree-sitter/tree-sitter@v0.26.6
   - name: x-motemen/ghq@v1.9.4
   - name: ziglang/zig@0.15.1
   - name: zigtools/zls@0.15.1

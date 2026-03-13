@@ -99,6 +99,7 @@ $applist = @(
   "lua-language-server",
   "make",
   "nodejs-lts",
+  "tree-sitter",
   "npiperelay"
 )
 scoop update *
