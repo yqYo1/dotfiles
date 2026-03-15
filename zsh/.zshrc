@@ -20,8 +20,6 @@ ensure_zcompiled ~/.zshrc
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
 export SHELDON_CONFIG_DIR="$ZSHRC_DIR/sheldon"
-export AQUA_GLOBAL_CONFIG=$XDG_CONFIG_HOME/aquaproj-aqua/aqua.yaml
-export PATH=${AQUA_ROOT_DIR:-${XDG_DATA_HOME:-$HOME/.local/share}/aquaproj-aqua}/bin:$PATH
 
 sheldon_cache="$XDG_CONFIG_HOME/sheldon/sheldon.zsh"
 sheldon_toml="$XDG_CONFIG_HOME/sheldon/plugins.toml"

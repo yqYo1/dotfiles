@@ -17,7 +17,6 @@ alias rmdir='rm -rf'
 alias vi=nvim
 alias ..='cd ../'
 alias ...='cd ../../'
-export AQUA_PROGRESS_BAR=true
 
 # completions
 [ -s "/home/yayoi/.bun/_bun" ] && source "/home/yayoi/.bun/_bun"

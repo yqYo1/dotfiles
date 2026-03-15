@@ -1,4 +1,4 @@
-{ pkgs, username, homeDirectory, ... }:
+{ config, pkgs, username, homeDirectory, ... }:
 
 {
   # Home Manager needs a bit of information about you and the paths it should

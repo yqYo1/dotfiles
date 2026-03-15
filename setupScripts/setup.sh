@@ -33,26 +33,37 @@ fi
 cd $DOTDIR/aquaproj-aqua
 ./update.sh
 
-if type bun > /dev/null 2>&1; then
-  echo "Bun is already installed"
-
-  ZSHRC_BACKUP="$ZSHRC.bak"
-  cp $ZSHRC $ZSHRC_BACKUP
-
-  bun upgrade
-
-  if ! diff -q "$ZSHRC" "$ZSHRC_BACKUP"; then
-    echo "bun upgrade modified .zshrc. Restoring from backup..."
-    mv  -f "$ZSHRC_BACKUP" "$ZSHRC"
-    echo ".zshrc restored to original state."
-  else
-    echo "bun upgrade did not modify .zshrc."
-    rm -f "$ZSHRC_BACKUP"
-  fi
+if type nix > /dev/null 2>&1; then
+  echo "Nix is already installed"
 else
-  echo "Bun not found"
-  curl -fsSL https://bun.sh/install | bash
+  echo "Nix not found"
+  echo "Installing Nix..."
+  curl -sSfL https://artifacts.nixos.org/nix-installer | sh -s -- install
+  source /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
 fi
+
+nix run .#switch
+
+# if type bun > /dev/null 2>&1; then
+#   echo "Bun is already installed"
+#
+#   ZSHRC_BACKUP="$ZSHRC.bak"
+#   cp $ZSHRC $ZSHRC_BACKUP
+#
+#   bun upgrade
+#
+#   if ! diff -q "$ZSHRC" "$ZSHRC_BACKUP"; then
+#     echo "bun upgrade modified .zshrc. Restoring from backup..."
+#     mv  -f "$ZSHRC_BACKUP" "$ZSHRC"
+#     echo ".zshrc restored to original state."
+#   else
+#     echo "bun upgrade did not modify .zshrc."
+#     rm -f "$ZSHRC_BACKUP"
+#   fi
+# else
+#   echo "Bun not found"
+#   curl -fsSL https://bun.sh/install | bash
+# fi
 
 if type rustup > /dev/null 2>&1; then
   echo "Rust is already installed"

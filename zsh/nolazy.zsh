@@ -2,7 +2,6 @@ export HISTFILE=$ZSHRC_DIR/.zsh_history
 export HISTSIZE=10000
 export SAVEHIST=100000
 export BUN_INSTALL="$HOME/.bun"
-export RYE_HOME="$XDG_CONFIG_HOME/rye"
 export PATH="$BUN_INSTALL/bin:$PATH"
 export ARDUINO_UPDATER_ENABLE_NOTIFICATION=false
 source $HOME/.cargo/env
