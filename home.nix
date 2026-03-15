@@ -19,8 +19,8 @@
   # environment.
   home.packages = with pkgs; [
     actionlint
-    bat
     basedpyright
+    bat
     bun
     chezmoi
     deno
@@ -40,8 +40,9 @@
     ruff
     tree-sitter
     uv
-    zsh
+    vim
     zoxide
+    zsh
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
