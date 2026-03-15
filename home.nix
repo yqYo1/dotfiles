@@ -24,6 +24,7 @@
     bun
     chezmoi
     deno
+    efm-langserver
     emacs
     eza
     fd
