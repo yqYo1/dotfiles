@@ -1,22 +1,15 @@
-{ config, pkgs, username, homeDirectory, ... }:
+{ config, lib, pkgs, username, homeDirectory, ... }:
 
+let
+  localZshEnv = "${config.home.homeDirectory}/.zshenv.local";
+  localZshRc = "${config.home.homeDirectory}/.zshrc.local";
+in
 {
-  # Home Manager needs a bit of information about you and the paths it should
-  # manage.
   home.username = username;
   home.homeDirectory = homeDirectory;
 
-  # This value determines the Home Manager release that your configuration is
-  # compatible with. This helps avoid breakage when a new Home Manager release
-  # introduces backwards incompatible changes.
-  #
-  # You should not change this value, even if you update Home Manager. If you do
-  # want to update the value, then make sure to first check the Home Manager
-  # release notes.
-  home.stateVersion = "25.11"; # Please read the comment before changing.
+  home.stateVersion = "25.11";
 
-  # The home.packages option allows you to install Nix packages into your
-  # environment.
   home.packages = with pkgs; [
     actionlint
     basedpyright
@@ -29,7 +22,10 @@
     eza
     fd
     fzf
+    gh
+    ghq
     git
+    git-wt
     jq
     lazygit
     lua-language-server
@@ -39,6 +35,7 @@
     powershell-editor-services
     ripgrep
     ruff
+    starship
     tree-sitter
     uv
     vim
@@ -46,40 +43,156 @@
     zsh
   ];
 
-  # Home Manager is pretty good at managing dotfiles. The primary way to manage
-  # plain files is through 'home.file'.
   home.file = {
-    # # Building this configuration will create a copy of 'dotfiles/screenrc' in
-    # # the Nix store. Activating the configuration will then make '~/.screenrc' a
-    # # symlink to the Nix store copy.
-    # ".screenrc".source = dotfiles/screenrc;
-
-    # # You can also set the file content immediately.
-    # ".gradle/gradle.properties".text = ''
-    #   org.gradle.console=verbose
-    #   org.gradle.daemon.idletimeout=3600000
-    # '';
   };
 
-  # Home Manager can also manage your environment variables through
-  # 'home.sessionVariables'. These will be explicitly sourced when using a
-  # shell provided by Home Manager. If you don't want to manage your shell
-  # through Home Manager then you have to manually source 'hm-session-vars.sh'
-  # located at either
-  #
-  #  ~/.nix-profile/etc/profile.d/hm-session-vars.sh
-  #
-  # or
-  #
-  #  ~/.local/state/nix/profiles/profile/etc/profile.d/hm-session-vars.sh
-  #
-  # or
-  #
-  #  /etc/profiles/per-user/yayoi/etc/profile.d/hm-session-vars.sh
-  #
   home.sessionVariables = {
+    EDITOR = "nvim";
+    VISUAL = "nvim";
   };
 
-  # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
+
+  programs.zsh = {
+    enable = true;
+
+    autocd = false;
+
+    enableCompletion = false;
+
+    plugins = [
+      {
+        name = "fast-syntax-highlighting";
+        src = "${pkgs.zsh-fast-syntax-highlighting}/share/zsh/plugins/fast-syntax-highlighting";
+        file = "fast-syntax-highlighting.plugin.zsh";
+      }
+      # {
+      #   name = "zeno";
+      #   src = pkgs.fetchFromGitHub {
+      #     owner = "yuki-yano";
+      #     repo = "zeno.zsh";
+      #     rev = "5e72fa7";
+      #     hash = lib.fakeHash;
+      #   };
+      #   file = "zeno.zsh";
+      # }
+      {
+        name = "powerlevel10k";
+        src = pkgs.zsh-powerlevel10k;
+        file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
+      }
+      {
+          name = "powerlevel10k-config";
+          src = lib.cleanSource ./zsh;
+          file = "p10k.zsh";
+      }
+      {
+        name = "zsh-autocomplete";
+        src = "${pkgs.zsh-autocomplete}/share/zsh-autocomplete";
+        file = "zsh-autocomplete.plugin.zsh";
+      }
+    ];
+
+    history = {
+      append = true;
+      saveNoDups = true;
+      save = 1000000;
+    };
+
+    setOptions = [
+      "no_auto_pushd"
+      "no_beep"
+      "hist_reduce_blanks"
+      "hist_ignore_all_dups"
+      "hist_ignore_space"
+      "hist_verify"
+      "share_history"
+    ];
+
+    envExtra = ''
+      skip_global_compinit=1
+      [[ -r "${localZshEnv}" ]] && source "${localZshEnv}"
+    '';
+
+    initContent = ''
+      # export ZENO_ENABLE_SOCK=1
+      # export POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
+
+      zstyle ':autocomplete::compinit' arguments -C
+
+      if [[ -n $ZENO_LOADED ]]; then
+        bindkey '^x^i' zeno-completion
+        bindkey '^r'   zeno-history-selection
+      fi
+
+      # function frepo(){
+      #   local repo_dir=$(ghq list --full-path | fzf --preview "bat --color=always --style=header,grid --line-range :80 {}/README.*")
+      #   if [ -n "$repo_dir" ]; then
+      #     cd $repo_dir
+      #   fi
+      # }
+
+      zshaddhistory() {
+        [[ "$?" == 0 ]]
+      }
+
+      [[ -r "${localZshRc}" ]] && source "${localZshRc}"
+
+      # alias ..='cd ../'
+      # alias ...='cd ../../'
+    '';
+
+    sessionVariables = {
+      ZENO_ENABLE_SOCK=1;
+      POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true;
+    };
+
+    shellAliases = {
+      cat = "bat --paging=never --style=grid";
+      cls = "clear";
+      em = "emacs -nw";
+      gp = "git pull";
+      lg = "lazygit";
+      ll = "eza -alhF --git --git-repos";
+      ls = "eza -F";
+      lt = "eza -T";
+      vi = "nvim";
+      d = "cd $(ghq list --full-path --exact yqYo1/dotfiles)";
+      ".." = "cd ../";
+      "..." = "cd ../../";
+    };
+
+    siteFunctions = {
+      frepo = ''
+        local repo_dir=$(ghq list --full-path | fzf --preview "bat --color=always --style=header,grid --line-range :80 {}/README.*")
+        if [ -n "$repo_dir" ]; then
+          cd -- $repo_dir
+        fi
+      '';
+    };
+  };
+
+  xdg.configFile."zeno/config.yml".text = ''
+    snippets:
+      - name: git status
+        keyword: gs
+        snippet: git status --short --branch
+  '';
+
+  home.activation.ensureLocalZshFiles = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+      run mkdir -p "${config.home.homeDirectory}"
+
+      if [ ! -e "${localZshEnv}" ]; then
+        run install -m 600 /dev/null "${localZshEnv}"
+      fi
+
+      if [ ! -e "${localZshRc}" ]; then
+        run install -m 600 /dev/null "${localZshRc}"
+      fi
+
+      if ! grep -q "export LITELLM_API_KEY" "${localZshEnv}"; then
+        echo "export LITELLM_API_KEY=\"LITELLM_API_KEY\"" >> "${localZshEnv}"
+      fi
+  '';
+
 }
