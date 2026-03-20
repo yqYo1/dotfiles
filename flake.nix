@@ -22,14 +22,32 @@
       username = "yayoi";
       homeDirectory = "/home/${username}";
       pkgs = nixpkgs.legacyPackages.${system};
+
+      mkHmApp = 
+        name: command:
+        let
+          app = pkgs.writeShellApplication {
+            name = "hm-${name}";
+            runtimeInputs = [
+            home-manager.packages.${system}.home-manager
+            ];
+            text = ''
+              exec home-manager ${command} "$@"
+            '';
+          };
+        in {
+            type = "app";
+            program = "${app}/bin/hm-${name}";
+        };
     in {
-      apps.${system}.switch = {
-        type = "app";
-        program = let
-          switchScript = pkgs.writeShellScriptBin "switch" ''
-            ${home-manager.packages.${system}.home-manager}/bin/home-manager switch --flake .#${username} "$@"
-          '';
-        in "${switchScript}/bin/switch";
+      apps.${system} = rec {
+          switch = mkHmApp "switch" "switch --flake .#${username}";
+
+          build = mkHmApp "build" "build --flake .#${username}";
+
+          generations = mkHmApp "generations" "generations --flake .#${username}";
+
+          default = switch;
       };
 
       homeConfigurations.${username} = home-manager.lib.homeManagerConfiguration {
