@@ -142,6 +142,12 @@ config.notification_handling = "NeverShow"
 config.initial_cols = 100
 config.initial_rows = 40
 
+-- ssh
+config.mux_enable_ssh_agent = true
+if wezterm.target_triple == 'x86_64-pc-windows-msvc' then
+  config.default_ssh_auth_sock = [[\\.\pipe\openssh-ssh-agent]]
+end
+
 -- key bindings
 config.disable_default_key_bindings = true
 config.keys = keybinds.keys
