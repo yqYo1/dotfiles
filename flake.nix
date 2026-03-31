@@ -21,7 +21,14 @@
       system = "x86_64-linux";
       username = "yayoi";
       homeDirectory = "/home/${username}";
-      pkgs = nixpkgs.legacyPackages.${system};
+      pkgs = import nixpkgs {
+        inherit system;
+        config = {
+          allowUnfreePackages = [
+            "github-copilot-cli"
+          ];
+        };
+      };
 
       mkHmApp = 
         name: command:
