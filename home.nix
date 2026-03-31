@@ -18,6 +18,7 @@ in
     bat
     bun
     chezmoi
+    comma
     deno
     efm-langserver
     emacs
@@ -34,6 +35,8 @@ in
     lua-language-server
     neovim
     nodejs-slim
+    nix-search-cli
+    osc
     powershell
     powershell-editor-services
     ripgrep
@@ -141,8 +144,12 @@ in
     };
 
     shellAliases = {
+      ".." = "cd ../";
+      "..." = "cd ../../";
       cat = "bat --paging=never --style=grid";
+      clip = "osc copy";
       cls = "clear";
+      d = "cd $(ghq list --full-path --exact yqYo1/dotfiles)";
       em = "emacs -nw";
       gp = "git pull";
       lg = "lazygit";
@@ -150,9 +157,6 @@ in
       ls = "eza -F";
       lt = "eza -T";
       vi = "nvim";
-      d = "cd $(ghq list --full-path --exact yqYo1/dotfiles)";
-      ".." = "cd ../";
-      "..." = "cd ../../";
     };
 
     siteFunctions = {
