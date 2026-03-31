@@ -3,6 +3,8 @@
 let
   localZshEnv = "${config.home.homeDirectory}/.zshenv.local";
   localZshRc = "${config.home.homeDirectory}/.zshrc.local";
+  
+
 in
 {
   home.username = username;
@@ -35,6 +37,7 @@ in
     powershell-editor-services
     ripgrep
     ruff
+    sheldon
     starship
     tree-sitter
     uv
@@ -71,8 +74,8 @@ in
       #   src = pkgs.fetchFromGitHub {
       #     owner = "yuki-yano";
       #     repo = "zeno.zsh";
-      #     rev = "5e72fa7";
-      #     hash = lib.fakeHash;
+      #     rev = "d57a389";
+      #     hash = "sha256-1vqSLW78/jSEWJB0Ui7Mm4frRpnS8qrfEtnnyd+eX2o=";
       #   };
       #   file = "zeno.zsh";
       # }
@@ -115,9 +118,6 @@ in
     '';
 
     initContent = ''
-      # export ZENO_ENABLE_SOCK=1
-      # export POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
-
       zstyle ':autocomplete::compinit' arguments -C
 
       if [[ -n $ZENO_LOADED ]]; then
@@ -125,25 +125,17 @@ in
         bindkey '^r'   zeno-history-selection
       fi
 
-      # function frepo(){
-      #   local repo_dir=$(ghq list --full-path | fzf --preview "bat --color=always --style=header,grid --line-range :80 {}/README.*")
-      #   if [ -n "$repo_dir" ]; then
-      #     cd $repo_dir
-      #   fi
-      # }
-
       zshaddhistory() {
         [[ "$?" == 0 ]]
       }
 
       [[ -r "${localZshRc}" ]] && source "${localZshRc}"
-
-      # alias ..='cd ../'
-      # alias ...='cd ../../'
     '';
 
     sessionVariables = {
+      ZENO_HOME="${config.home.homeDirectory}/.config/zeno";
       ZENO_ENABLE_SOCK=1;
+      ZENO_DISABLE_EXECUTE_CACHE_COMMAND=1;
       POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true;
     };
 
