@@ -94,8 +94,14 @@ in
           file = "p10k.zsh";
       }
       {
-        name = "zsh-autocomplete";
-        src = "${pkgs.zsh-autocomplete}/share/zsh-autocomplete";
+      name = "zsh-autocomplete";
+        # src = "${pkgs.zsh-autocomplete}/share/zsh-autocomplete";
+        src = pkgs.fetchFromGitHub {
+          owner = "marlonrichert";
+          repo = "zsh-autocomplete";
+          rev = "bbba73ebdc7c01323e09d4d518e51e2d6847ccc2";
+          sha256 = "sha256-998rYEyYD67XleSDbqvnQptRrGuG2N2AgFvTpFWvoV8=";
+        };
         file = "zsh-autocomplete.plugin.zsh";
       }
     ];
@@ -122,7 +128,25 @@ in
     '';
 
     initContent = ''
+      zmodload -i zsh/complist
+
       zstyle ':autocomplete::compinit' arguments -C
+
+      zstyle ':autocomplete:*' widget-style list-choices
+      zstyle ':autocomplete:*' min-input 1
+      zstyle ':autocomplete:*' delay 0.0
+      zstyle -e ':autocomplete:*:*' list-lines 'reply=( $(( LINES / 4 )) )'
+
+      bindkey '^I' menu-select
+      [[ -n "''${terminfo[kcbt]-}" ]] && bindkey "''${terminfo[kcbt]}" reverse-menu-complete
+      bindkey -M menuselect '^I' menu-complete
+      [[ -n "''${terminfo[kcbt]-}" ]] && bindkey -M menuselect "''${terminfo[kcbt]}" reverse-menu-complete
+
+      bindkey '^N' menu-select
+      bindkey '^P' reverse-menu-complete
+
+      bindkey -M menuselect '^N' menu-complete
+      bindkey -M menuselect '^P' reverse-menu-complete
 
       if [[ -n $ZENO_LOADED ]]; then
         bindkey '^x^i' zeno-completion
