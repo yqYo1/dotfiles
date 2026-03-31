@@ -3,7 +3,7 @@
 let
   localZshEnv = "${config.home.homeDirectory}/.zshenv.local";
   localZshRc = "${config.home.homeDirectory}/.zshrc.local";
-  
+
 
 in
 {
@@ -28,6 +28,7 @@ in
     ghq
     git
     git-wt
+    github-copilot-cli
     jq
     lazygit
     lua-language-server
