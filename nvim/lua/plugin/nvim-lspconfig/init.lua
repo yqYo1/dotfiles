@@ -40,11 +40,15 @@ return {
 
         -- python
         "ruff",
-
         "basedpyright",
+
         -- c
         "clangd",
         "arduino_language_server",
+
+        -- nix
+        "nixd",
+        "nil_ls",
 
         -- misc
         "gh_actions_ls",
@@ -52,7 +56,6 @@ return {
         "yamlls",
         "jsonls",
         "html",
-        "nixd",
       })
     end,
   },

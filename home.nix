@@ -1,9 +1,15 @@
-{ config, lib, pkgs, username, homeDirectory, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  username,
+  homeDirectory,
+  ...
+}:
 
 let
   localZshEnv = "${config.home.homeDirectory}/.zshenv.local";
   localZshRc = "${config.home.homeDirectory}/.zshrc.local";
-
 
 in
 {
@@ -30,14 +36,16 @@ in
     ghq
     git
     git-wt
-    github-copilot-cli
+    # github-copilot-cli
     jq
     lazygit
     lua-language-server
     neovim
     nodejs-slim
+    nil
     nix-search-cli
     nixd
+    nixfmt
     osc
     powershell
     powershell-editor-services
@@ -92,12 +100,12 @@ in
         file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
       }
       {
-          name = "powerlevel10k-config";
-          src = lib.cleanSource ./zsh;
-          file = "p10k.zsh";
+        name = "powerlevel10k-config";
+        src = lib.cleanSource ./zsh;
+        file = "p10k.zsh";
       }
       {
-      name = "zsh-autocomplete";
+        name = "zsh-autocomplete";
         # src = "${pkgs.zsh-autocomplete}/share/zsh-autocomplete";
         src = pkgs.fetchFromGitHub {
           owner = "marlonrichert";
@@ -164,10 +172,10 @@ in
     '';
 
     sessionVariables = {
-      ZENO_HOME="${config.home.homeDirectory}/.config/zeno";
-      ZENO_ENABLE_SOCK=1;
-      ZENO_DISABLE_EXECUTE_CACHE_COMMAND=1;
-      POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true;
+      ZENO_HOME = "${config.home.homeDirectory}/.config/zeno";
+      ZENO_ENABLE_SOCK = 1;
+      ZENO_DISABLE_EXECUTE_CACHE_COMMAND = 1;
+      POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD = true;
     };
 
     shellAliases = {
@@ -204,19 +212,19 @@ in
   '';
 
   home.activation.ensureLocalZshFiles = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-      run mkdir -p "${config.home.homeDirectory}"
+    run mkdir -p "${config.home.homeDirectory}"
 
-      if [ ! -e "${localZshEnv}" ]; then
-        run install -m 600 /dev/null "${localZshEnv}"
-      fi
+    if [ ! -e "${localZshEnv}" ]; then
+      run install -m 600 /dev/null "${localZshEnv}"
+    fi
 
-      if [ ! -e "${localZshRc}" ]; then
-        run install -m 600 /dev/null "${localZshRc}"
-      fi
+    if [ ! -e "${localZshRc}" ]; then
+      run install -m 600 /dev/null "${localZshRc}"
+    fi
 
-      if ! grep -q "export LITELLM_API_KEY" "${localZshEnv}"; then
-        echo "export LITELLM_API_KEY=\"LITELLM_API_KEY\"" >> "${localZshEnv}"
-      fi
+    if ! grep -q "export LITELLM_API_KEY" "${localZshEnv}"; then
+      echo "export LITELLM_API_KEY=\"LITELLM_API_KEY\"" >> "${localZshEnv}"
+    fi
   '';
 
 }

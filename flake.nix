@@ -10,13 +10,14 @@
     };
   };
 
-  outputs = inputs@ {
-    self,
-    nixpkgs,
-    flake-parts,
-    home-manager,
-    ...
-  }:
+  outputs =
+    inputs@{
+      self,
+      nixpkgs,
+      flake-parts,
+      home-manager,
+      ...
+    }:
     let
       system = "x86_64-linux";
       username = "yayoi";
@@ -30,31 +31,33 @@
         };
       };
 
-      mkHmApp = 
+      mkHmApp =
         name: command:
         let
           app = pkgs.writeShellApplication {
             name = "hm-${name}";
             runtimeInputs = [
-            home-manager.packages.${system}.home-manager
+              home-manager.packages.${system}.home-manager
             ];
             text = ''
               exec home-manager ${command} "$@"
             '';
           };
-        in {
-            type = "app";
-            program = "${app}/bin/hm-${name}";
+        in
+        {
+          type = "app";
+          program = "${app}/bin/hm-${name}";
         };
-    in {
+    in
+    {
       apps.${system} = rec {
-          switch = mkHmApp "switch" "switch --flake .#${username}";
+        switch = mkHmApp "switch" "switch --flake .#${username}";
 
-          build = mkHmApp "build" "build --flake .#${username}";
+        build = mkHmApp "build" "build --flake .#${username}";
 
-          generations = mkHmApp "generations" "generations --flake .#${username}";
+        generations = mkHmApp "generations" "generations --flake .#${username}";
 
-          default = switch;
+        default = switch;
       };
 
       homeConfigurations.${username} = home-manager.lib.homeManagerConfiguration {
@@ -64,7 +67,7 @@
 
         extraSpecialArgs = {
           inherit username homeDirectory;
-          };
+        };
       };
     };
 }
