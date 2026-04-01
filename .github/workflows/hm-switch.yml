@@ -1,0 +1,119 @@
+name: home-manager-ci
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  check:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - system: x86_64-linux
+            runner: ubuntu-24.04
+          - system: aarch64-linux
+            runner: ubuntu-24.04-arm
+
+    runs-on: ${{ matrix.runner }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: nixbuild/nix-quick-install-action@v30
+        with:
+          nix_conf: |
+            experimental-features = nix-command flakes
+            keep-env-derivations = true
+            keep-outputs = true
+
+      - name: Restore and save Nix store
+        uses: nix-community/cache-nix-action@v6
+        with:
+          primary-key: nix-${{ github.job }}-${{ matrix.system }}-${{ hashFiles('**/*.nix', '**/flake.lock') }}
+          restore-prefixes-first-match: |
+            nix-${{ github.job }}-${{ matrix.system }}-
+            nix-switch-${{ matrix.system }}-
+            nix-check-${{ matrix.system }}-
+          gc-max-store-size-linux: 8G
+
+      - name: Run flake check
+        shell: bash
+        run: |
+          set -euxo pipefail
+          nix flake check --print-build-logs
+
+  switch:
+    needs: check
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - system: x86_64-linux
+            runner: ubuntu-24.04
+          - system: aarch64-linux
+            runner: ubuntu-24.04-arm
+
+    runs-on: ${{ matrix.runner }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: nixbuild/nix-quick-install-action@v30
+        with:
+          nix_conf: |
+            experimental-features = nix-command flakes
+            keep-env-derivations = true
+            keep-outputs = true
+
+      - name: Restore and save Nix store
+        uses: nix-community/cache-nix-action@v6
+        with:
+          primary-key: nix-${{ github.job }}-${{ matrix.system }}-${{ hashFiles('**/*.nix', '**/flake.lock') }}
+          restore-prefixes-first-match: |
+            nix-${{ github.job }}-${{ matrix.system }}-
+            nix-check-${{ matrix.system }}-
+            nix-switch-${{ matrix.system }}-
+          gc-max-store-size-linux: 8G
+
+      - name: Create yayoi user
+        shell: bash
+        run: |
+          set -euxo pipefail
+          if ! id yayoi >/dev/null 2>&1; then
+            sudo useradd -m -s /bin/bash yayoi
+          fi
+          sudo mkdir -p /home/yayoi
+          sudo chown -R yayoi:yayoi /home/yayoi
+
+      - name: Prepare ghq-style repository path
+        shell: bash
+        run: |
+          set -euxo pipefail
+          repo=/home/yayoi/ghq/github.com/yqYo1/dotfiles
+          sudo -u yayoi mkdir -p "$(dirname "$repo")"
+          sudo rsync -a --delete \
+            --exclude '.git' \
+            "$GITHUB_WORKSPACE"/ \
+            "$repo"/
+          sudo chown -R yayoi:yayoi /home/yayoi/ghq
+
+      - name: Run nix run . as yayoi
+        shell: bash
+        run: |
+          set -euxo pipefail
+          sudo -u yayoi env \
+            HOME=/home/yayoi \
+            USER=yayoi \
+            LOGNAME=yayoi \
+            XDG_CACHE_HOME=/home/yayoi/.cache \
+            XDG_STATE_HOME=/home/yayoi/.local/state \
+            XDG_CONFIG_HOME=/home/yayoi/.config \
+            NIX_CONFIG="experimental-features = nix-command flakes" \
+            bash -lc '
+              set -euxo pipefail
+              cd /home/yayoi/ghq/github.com/yqYo1/dotfiles
+              nix run .
+            '
