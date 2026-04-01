@@ -111,15 +111,10 @@ jobs:
             XDG_CACHE_HOME=/home/yayoi/.cache \
             XDG_STATE_HOME=/home/yayoi/.local/state \
             XDG_CONFIG_HOME=/home/yayoi/.config \
-            PATH=/nix/var/nix/profiles/default/bin:/usr/local/bin:/usr/bin:/bin \
             NIX_CONFIG="experimental-features = nix-command flakes" \
-            bash -lc '
+            bash -c '
               set -euxo pipefail
-              if [ -e /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh ]; then
-                . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
-              fi
               cd /home/yayoi/ghq/github.com/yqYo1/dotfiles
-              command -v nix
-              nix --version
-              nix run .
+              /nix/var/nix/profiles/default/bin/nix --version
+              /nix/var/nix/profiles/default/bin/nix run .
             '
