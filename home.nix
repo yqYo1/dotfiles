@@ -14,6 +14,7 @@ in
 
   home.packages = with pkgs; [
     actionlint
+    arduino-language-server
     basedpyright
     bat
     bun
@@ -36,6 +37,7 @@ in
     neovim
     nodejs-slim
     nix-search-cli
+    nixd
     osc
     powershell
     powershell-editor-services
@@ -43,6 +45,7 @@ in
     ruff
     sheldon
     starship
+    stylua
     tree-sitter
     uv
     vim

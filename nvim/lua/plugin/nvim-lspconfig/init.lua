@@ -52,6 +52,7 @@ return {
         "yamlls",
         "jsonls",
         "html",
+        "nixd",
       })
     end,
   },
