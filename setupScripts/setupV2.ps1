@@ -91,6 +91,7 @@ $applist = @(
   "7zip",
   "innounp",
   "dark",
+  "deno",
   "GCC",
   "bun",
   "ghq"
