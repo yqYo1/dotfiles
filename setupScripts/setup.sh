@@ -19,17 +19,13 @@ ln -sfnv $DOTDIR/wezterm $XDG_CONFIG_HOME/wezterm
 ln -sfnv $DOTDIR/sway $XDG_CONFIG_HOME/sway
 ln -sfnv $DOTDIR/tofi $XDG_CONFIG_HOME/tofi
 ln -sfnv $DOTDIR/emacs $HOME/.emacs.d
-if [ ! -d $XDG_CONFIG_HOME/bat ]; then
-  mkdir $XDG_CONFIG_HOME/bat
-fi
-ln -sfnv $DOTDIR/bat/config $XDG_CONFIG_HOME/bat/config
 
 if type nix > /dev/null 2>&1; then
   echo "Nix is already installed"
 else
   echo "Nix not found"
   echo "Installing Nix..."
-  curl -sSfL https://artifacts.nixos.org/nix-installer | sh -s -- install
+  curl -sSfL https://artifacts.nixos.org/nix-installer | sh -s -- install --extra-conf "extra-trusted-users = $(id -un)"
   source /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
 fi
 
@@ -43,7 +39,3 @@ else
   echo "Rust not found"
   curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 fi
-
-ghq get -u catppuccin/bat
-ln -sfnv $(ghq list -p -e catppuccin/bat)/themes $XDG_CONFIG_HOME/bat/themes
-bat cache --build

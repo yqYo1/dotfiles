@@ -11,11 +11,16 @@ let
   localZshEnv = "${config.home.homeDirectory}/.zshenv.local";
   localZshRc = "${config.home.homeDirectory}/.zshrc.local";
 
+  catppuccinZshFsh = pkgs.fetchFromGitHub {
+    owner = "catppuccin";
+    repo = "zsh-fsh";
+    rev = "a9bdf479f8982c4b83b5c5005c8231c6b3352e2a";
+    hash = "sha256-WeqvsKXTO3Iham+2dI1QsNZWA8Yv9BHn1BgdlvR8zaw=";
+  };
 in
 {
   home.username = username;
   home.homeDirectory = homeDirectory;
-
   home.stateVersion = "25.11";
 
   home.packages = with pkgs; [
@@ -24,6 +29,7 @@ in
     basedpyright
     bat
     bun
+    bottom
     chezmoi
     comma
     deno
@@ -71,12 +77,16 @@ in
 
   programs.home-manager.enable = true;
 
+  programs.bat.enable = true;
+  programs.bottom.enable = true;
+  programs.eza.enable = true;
+  programs.lazygit.enable = true;
+
   programs.zsh = {
     enable = true;
-
     autocd = false;
-
     enableCompletion = false;
+    dotDir = "${config.xdg.configHome}/zsh";
 
     plugins = [
       {
@@ -159,6 +169,8 @@ in
       bindkey -M menuselect '^N' menu-complete
       bindkey -M menuselect '^P' reverse-menu-complete
 
+      fast-theme -q XDG:catppuccin-${config.catppuccin.flavor}
+
       if [[ -n $ZENO_LOADED ]]; then
         bindkey '^x^i' zeno-completion
         bindkey '^r'   zeno-history-selection
@@ -204,13 +216,6 @@ in
     };
   };
 
-  xdg.configFile."zeno/config.yml".text = ''
-    snippets:
-      - name: git status
-        keyword: gs
-        snippet: git status --short --branch
-  '';
-
   home.activation.ensureLocalZshFiles = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
     run mkdir -p "${config.home.homeDirectory}"
 
@@ -227,4 +232,25 @@ in
     fi
   '';
 
+  catppuccin = {
+    flavor = "mocha";
+    accent = "mauve";
+
+    bat.enable = true;
+    bottom.enable = true;
+    eza.enable = true;
+    lazygit.enable = true;
+  };
+
+  xdg.enable = true;
+
+  xdg.configFile."zeno/config.yml".text = ''
+    snippets:
+      - name: git status
+        keyword: gs
+        snippet: git status --short --branch
+  '';
+
+  xdg.configFile."fsh/catppuccin-${config.catppuccin.flavor}.ini".source =
+    "${catppuccinZshFsh}/themes/catppuccin-${config.catppuccin.flavor}.ini";
 }

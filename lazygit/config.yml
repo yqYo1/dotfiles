@@ -1,4 +1,2 @@
 os:
-  # not work on Windows
-  # editPreset: "nvim-remote"
   editPreset: "nvim"

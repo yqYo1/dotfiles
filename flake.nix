@@ -1,9 +1,19 @@
 {
   description = "Home Manager configuration of yayoi";
 
+  nixConfig = {
+    extra-substituters = [
+      "https://catppuccin.cachix.org"
+    ];
+    extra-trusted-public-keys = [
+      "catppuccin.cachix.org-1:noG/4HkbhJb+lUAdKrph6LaozJvAeEEZj4N732IysmU="
+    ];
+  };
+
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     flake-parts.url = "github:hercules-ci/flake-parts";
+    catppuccin.url = "github:catppuccin/nix";
     systems.url = "github:nix-systems/default-linux";
 
     home-manager = {
@@ -18,6 +28,7 @@
       flake-parts,
       home-manager,
       systems,
+      catppuccin,
       ...
     }:
     let
@@ -42,7 +53,10 @@
         home-manager.lib.homeManagerConfiguration {
           pkgs = mkPkgs system;
 
-          modules = [ ./home.nix ];
+          modules = [
+            ./home.nix
+            catppuccin.homeModules.catppuccin
+          ];
 
           extraSpecialArgs = {
             inherit username homeDirectory;
