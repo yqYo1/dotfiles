@@ -87,6 +87,11 @@ in
   programs.eza.enable = true;
   programs.lazygit.enable = true;
 
+  programs.opencode = {
+    enable = true;
+    package = pkgs.llm-agents.opencode;
+  };
+
   programs.zsh = {
     enable = true;
     autocd = false;
@@ -245,6 +250,7 @@ in
     bottom.enable = true;
     eza.enable = true;
     lazygit.enable = true;
+    opencode.enable = true;
   };
 
   xdg.enable = true;
