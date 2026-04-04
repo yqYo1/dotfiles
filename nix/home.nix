@@ -18,6 +18,13 @@ let
     rev = "a9bdf479f8982c4b83b5c5005c8231c6b3352e2a";
     hash = "sha256-WeqvsKXTO3Iham+2dI1QsNZWA8Yv9BHn1BgdlvR8zaw=";
   };
+
+  mkXdgConfigDirs =
+    base: names:
+    lib.genAttrs names (name: {
+      source = "${base}/${name}";
+      recursive = true;
+    });
 in
 {
   home.username = username;
@@ -253,15 +260,25 @@ in
     opencode.enable = true;
   };
 
-  xdg.enable = true;
+  xdg = {
+    enable = true;
 
-  xdg.configFile."zeno/config.yml".text = ''
-    snippets:
-      - name: git status
-        keyword: gs
-        snippet: git status --short --branch
-  '';
+    configFile = {
+      "zeno/config.yml".text = ''
+        snippets:
+          - name: git status
+            keyword: gs
+            snippet: git status --short --branch
+      '';
 
-  xdg.configFile."fsh/catppuccin-${config.catppuccin.flavor}.ini".source =
-    "${catppuccinZshFsh}/themes/catppuccin-${config.catppuccin.flavor}.ini";
+      "fsh/catppuccin-${config.catppuccin.flavor}.ini".source =
+        "${catppuccinZshFsh}/themes/catppuccin-${config.catppuccin.flavor}.ini";
+
+    }
+    // mkXdgConfigDirs dotfiles [
+      "nvim"
+      "git"
+      "wezterm"
+    ];
+  };
 }

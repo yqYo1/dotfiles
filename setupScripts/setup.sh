@@ -1,23 +1,12 @@
 #!/bin/env bash
 DOTDIR=$(cd $(git rev-parse --show-toplevel);pwd)
-ZSHRC="$DOTDIR/zsh/.zshrc"
 cd $DOTDIR
 XDG_CONFIG_HOME="$HOME/.config"
-export AQUA_GLOBAL_CONFIG=$XDG_CONFIG_HOME/aquaproj-aqua/aqua.yaml
 if [ ! -d $XDG_CONFIG_HOME ]; then
   mkdir $XDG_CONFIG_HOME
 fi
 git submodule update --init --recursive
 ln -sfnv $DOTDIR/git-hook/post-merge $DOTDIR/.git/hooks/post-merge
-ln -sfnv $DOTDIR/git $XDG_CONFIG_HOME/git
-ln -sfnv $DOTDIR/zsh $XDG_CONFIG_HOME/zsh
-ln -sfnv $ZSHRC $HOME/.zshrc
-ln -sfnv $DOTDIR/zsh/sheldon $XDG_CONFIG_HOME/sheldon
-ln -sfnv $DOTDIR/starship.toml $XDG_CONFIG_HOME/starship.toml
-ln -sfnv $DOTDIR/nvim $XDG_CONFIG_HOME/nvim
-ln -sfnv $DOTDIR/wezterm $XDG_CONFIG_HOME/wezterm
-ln -sfnv $DOTDIR/sway $XDG_CONFIG_HOME/sway
-ln -sfnv $DOTDIR/tofi $XDG_CONFIG_HOME/tofi
 ln -sfnv $DOTDIR/emacs $HOME/.emacs.d
 
 if type nix > /dev/null 2>&1; then
