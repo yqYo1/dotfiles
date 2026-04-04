@@ -29,8 +29,8 @@ in
     arduino-language-server
     basedpyright
     bat
-    bun
     bottom
+    bun
     chezmoi
     comma
     deno
@@ -47,11 +47,11 @@ in
     lazygit
     lua-language-server
     neovim
-    nodejs-slim
     nil
     nix-search-cli
     nixd
     nixfmt
+    nodejs-slim
     osc
     powershell
     powershell-editor-services
@@ -65,6 +65,11 @@ in
     vim
     zoxide
     zsh
+
+    llm-agents.copilot-cli
+    llm-agents.jules
+    llm-agents.kilocode-cli
+    llm-agents.opencode
   ];
 
   home.file = {

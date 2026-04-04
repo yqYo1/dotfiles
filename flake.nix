@@ -50,14 +50,10 @@
         system:
         import nixpkgs {
           inherit system;
+          config.allowUnfree = true;
           overlays = [
             llm-agents.overlays.default
           ];
-          config.allowUnfreePredicate =
-            pkg:
-            builtins.elem (lib.getName pkg) [
-              "github-copilot-cli"
-            ];
         };
 
       mkHomeConfiguration =
@@ -66,7 +62,7 @@
           pkgs = mkPkgs system;
 
           modules = [
-            ./nix/home.nix
+            "${dotfiles}/nix/home.nix"
             catppuccin.homeModules.catppuccin
           ];
 
