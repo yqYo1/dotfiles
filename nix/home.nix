@@ -4,6 +4,7 @@
   pkgs,
   username,
   homeDirectory,
+  dotfiles,
   ...
 }:
 
@@ -42,7 +43,6 @@ in
     ghq
     git
     git-wt
-    # github-copilot-cli
     jq
     lazygit
     lua-language-server
@@ -111,7 +111,7 @@ in
       }
       {
         name = "powerlevel10k-config";
-        src = lib.cleanSource ./zsh;
+        src = lib.cleanSource "${dotfiles}/zsh";
         file = "p10k.zsh";
       }
       {

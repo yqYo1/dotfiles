@@ -16,6 +16,7 @@ local parser_list = {
   "luadoc",
   "markdown",
   "markdown_inline",
+  "nix",
   "powershell",
   "printf",
   "python",
@@ -51,8 +52,6 @@ return {
       group = vim.api.nvim_create_augroup("nvim-treesitter_star", {}),
       callback = function(args)
         vim.treesitter.start(args.buf)
-        -- vim.wo.foldmethod = "expr"
-        -- vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
         vim.bo[args.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
       end,
     })

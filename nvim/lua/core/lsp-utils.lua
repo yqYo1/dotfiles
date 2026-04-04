@@ -3,9 +3,7 @@ local o = {}
 ---@param client string | table
 local function _convert_client(client)
   local _client = client
-  if type(client) == "string" then
-    _client = require("lspconfig")[client]
-  end
+  if type(client) == "string" then _client = require("lspconfig")[client] end
 
   assert(_client)
 
@@ -72,12 +70,13 @@ o.ft.css_like = {
   "less",
 }
 
-o.ft.html_like = vim.iter({
-  o.ft.markdown_like,
-  o.ft.css_like,
-  o.ft.js_framework_like,
-  { "html", "htmldjango" },
-})
+o.ft.html_like = vim
+  .iter({
+    o.ft.markdown_like,
+    o.ft.css_like,
+    o.ft.js_framework_like,
+    { "html", "htmldjango" },
+  })
   :flatten(math.huge)
   :totable()
 
@@ -93,11 +92,12 @@ o.ft.yaml_like = {
   "yaml.gitlab",
 }
 
-o.ft.config_like = vim.iter({
-  o.ft.json_like,
-  o.ft.yaml_like,
-  { "toml" },
-})
+o.ft.config_like = vim
+  .iter({
+    o.ft.json_like,
+    o.ft.yaml_like,
+    { "toml" },
+  })
   :flatten(math.huge)
   :totable()
 
@@ -124,10 +124,11 @@ o.ft.node_specific_files = {
   "pnpm-lock.yaml", -- pnpm
 }
 
-o.ft.node_files = vim.iter({
-  o.ft.node_specific_files,
-  "package.json",
-})
+o.ft.node_files = vim
+  .iter({
+    o.ft.node_specific_files,
+    "package.json",
+  })
   :flatten(math.huge)
   :totable()
 
@@ -173,10 +174,11 @@ function o.setup(client, extra_opts)
   ---@class LSPConfigOpts
   local local_opts = vim.tbl_deep_extend("force", {}, default_opts, extra_opts or {})
 
-  local_opts.filetypes = vim.iter({
-    local_opts.filetypes or o.get_default_filetypes(client),
-    local_opts.extra_filetypes or {},
-  })
+  local_opts.filetypes = vim
+    .iter({
+      local_opts.filetypes or o.get_default_filetypes(client),
+      local_opts.extra_filetypes or {},
+    })
     :flatten()
     :totable()
 

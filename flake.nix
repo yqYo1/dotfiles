@@ -4,43 +4,55 @@
   nixConfig = {
     extra-substituters = [
       "https://catppuccin.cachix.org"
+      "https://cache.numtide.com"
     ];
     extra-trusted-public-keys = [
       "catppuccin.cachix.org-1:noG/4HkbhJb+lUAdKrph6LaozJvAeEEZj4N732IysmU="
+      "niks3.numtide.com-1:DTx8wZduET09hRmMtKdQDxNNthLQETkc/yaX7M4qK0g="
     ];
   };
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    flake-parts.url = "github:hercules-ci/flake-parts";
     catppuccin.url = "github:catppuccin/nix";
+    flake-parts.url = "github:hercules-ci/flake-parts";
     systems.url = "github:nix-systems/default-linux";
 
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    llm-agents = {
+      url = "github:numtide/llm-agents.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
     inputs@{
+      self,
       nixpkgs,
-      flake-parts,
       home-manager,
-      systems,
       catppuccin,
+      flake-parts,
+      llm-agents,
+      systems,
       ...
     }:
     let
       lib = nixpkgs.lib;
       username = "yayoi";
       homeDirectory = "/home/${username}";
+      dotfiles = self.outPath;
       linuxSystems = import systems;
 
       mkPkgs =
         system:
         import nixpkgs {
           inherit system;
+          overlays = [
+            llm-agents.overlays.default
+          ];
           config.allowUnfreePredicate =
             pkg:
             builtins.elem (lib.getName pkg) [
@@ -54,12 +66,12 @@
           pkgs = mkPkgs system;
 
           modules = [
-            ./home.nix
+            ./nix/home.nix
             catppuccin.homeModules.catppuccin
           ];
 
           extraSpecialArgs = {
-            inherit username homeDirectory;
+            inherit username homeDirectory dotfiles;
           };
         };
     in
