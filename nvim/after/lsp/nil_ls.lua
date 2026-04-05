@@ -8,4 +8,5 @@ return {
     if text_document then text_document.semanticTokens = nil end
   end,
   on_attach = format_config(false),
+  workspace_required = true,
 }

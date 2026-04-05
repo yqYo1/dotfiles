@@ -34,6 +34,7 @@ local flake_dir = ghq_repo_path("yqYo1/dotfiles")
 ---@type vim.lsp.Config
 local config = {
   on_attach = format_config(true),
+  workspace_required = true,
   settings = {
     nixd = {
       formatting = {
