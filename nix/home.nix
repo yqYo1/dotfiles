@@ -68,6 +68,7 @@ in
     starship
     stylua
     tree-sitter
+    ty
     uv
     vim
     zoxide

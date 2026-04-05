@@ -35,6 +35,7 @@ local flake_dir = ghq_repo_path("yqYo1/dotfiles")
 local config = {
   on_attach = format_config(true),
   workspace_required = true,
+  exit_timeout = 1000,
   settings = {
     nixd = {
       formatting = {
@@ -45,10 +46,12 @@ local config = {
 }
 
 if flake_dir then
+  ---@diagnostic disable-next-line
   config.settings.nixd.nixpkgs = {
     expr = ('let flake = builtins.getFlake "%s"; in import flake.inputs.nixpkgs { }'):format(flake_dir),
   }
 
+  ---@diagnostic disable-next-line
   config.settings.nixd.options = {
     home_manager = {
       expr = ([[

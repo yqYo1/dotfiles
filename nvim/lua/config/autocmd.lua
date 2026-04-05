@@ -8,9 +8,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
   group = vim.api.nvim_create_augroup("ContextfulMark", { clear = true }),
   callback = function(ctx)
     local op = vim.v.event.operator
-    if not op then
-      return
-    end
+    if not op then return end
 
     local win = vim.api.nvim_get_current_win()
     vim.schedule(function()
@@ -24,4 +22,12 @@ vim.api.nvim_create_autocmd("TextYankPost", {
     end)
   end,
   desc = "Set marks after text yank",
+})
+
+vim.api.nvim_create_autocmd("VimLeavePre", {
+  callback = function()
+    for _, client in ipairs(vim.lsp.get_clients({ name = "nixd" })) do
+      if not client:is_stopped() then client:stop(500) end
+    end
+  end,
 })
