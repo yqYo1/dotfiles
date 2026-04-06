@@ -41,6 +41,7 @@ in
     chezmoi
     comma
     deno
+    direnv
     efm-langserver
     emacs
     eza
@@ -98,6 +99,12 @@ in
   programs.opencode = {
     enable = true;
     package = pkgs.llm-agents.opencode;
+  };
+
+  programs.direnv = {
+    enable = true;
+    enableZshIntegration = true;
+    nix-direnv.enable = true;
   };
 
   programs.zsh = {
