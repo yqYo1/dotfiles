@@ -60,6 +60,7 @@ in
     nixd
     nixfmt
     nodejs-slim
+    opencommit
     osc
     powershell
     powershell-editor-services
@@ -253,7 +254,10 @@ in
     fi
 
     if ! grep -q "export LITELLM_API_KEY" "${localZshEnv}"; then
-      echo "export LITELLM_API_KEY=\"LITELLM_API_KEY\"" >> "${localZshEnv}"
+      echo "export LITELLM_API_KEY=\"input_LITELLM_API_KEY_here\"" >> "${localZshEnv}"
+    fi
+    if ! grep -q "export HF_TOKEN" "${localZshEnv}"; then
+      echo "export HF_TOKEN=\"input_HF_TOKEN_here\"" >> "${localZshEnv}"
     fi
   '';
 
