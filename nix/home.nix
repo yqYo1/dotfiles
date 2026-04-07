@@ -106,6 +106,14 @@ in
   programs.opencode = {
     enable = true;
     package = pkgs.llm-agents.opencode;
+    settings = {
+      permission = {
+        edit = "allow";
+        bash = {
+          "*" = "ask";
+        };
+      };
+    };
   };
 
   programs.direnv = {
