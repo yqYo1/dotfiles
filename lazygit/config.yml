@@ -14,7 +14,7 @@ customCommands:
         valueFormat: '{{ .subject }}<SEP>{{ .body }}'
         labelFormat: '{{ .subject }}'
     output: "terminal"
-    command: bash -c 'MSG="{{ .Form.Commit }}" && SUBJ="${MSG%%<SEP>*}" && BODY="${MSG#*<SEP>}" && git commit -e -m "$SUBJ" ${BODY:+-m "$BODY"}'
+    command: bash -c 'MSG="{{ .Form.Commit }}" && SUBJ="${MSG%%<SEP>*}" && BODY="${MSG#*<SEP>}" && git commit -m "$SUBJ" ${BODY:+-m "$BODY"}'
   # Long commit with fzf preview (Shift+C in files panel)
   - key: "C"
     context: "files"
