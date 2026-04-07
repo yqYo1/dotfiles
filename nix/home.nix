@@ -25,20 +25,6 @@ let
       source = "${base}/${name}";
       recursive = true;
     });
-
-  readYamlFile =
-    file:
-    builtins.fromJSON (
-      builtins.readFile (
-        pkgs.runCommand "${builtins.baseNameOf file}.json"
-          {
-            nativeBuildInputs = [ pkgs.yj ];
-          }
-          ''
-            ${pkgs.yj}/bin/yj < "${file}" > "$out"
-          ''
-      )
-    );
 in
 {
   home.username = username;
@@ -115,11 +101,6 @@ in
       export LG_CONFIG_FILE="${config.xdg.configHome}/lazygit/config.yml''${LG_CONFIG_FILE:+,$LG_CONFIG_FILE}"
       exec ${lib.getExe pkgs.lazygit} "$@"
     '';
-    # settings =
-    #   let
-    #     raw = readYamlFile "${dotfiles}/lazygit/config.yml";
-    #   in
-    #   raw;
   };
 
   programs.opencode = {
