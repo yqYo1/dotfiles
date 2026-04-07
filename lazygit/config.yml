@@ -8,13 +8,13 @@ customCommands:
     prompts:
       - type: "menuFromCommand"
         title: "Select commit message"
-        key: "CommitMsg"
+        key: "Commit"
         command: "aicommit2 --output json"
         filter: '"subject":"(?P<subject>[^"]+)","body":"(?P<body>[^"]*)"'
         valueFormat: '{{ .subject }}<SEP>{{ .body }}'
         labelFormat: '{{ .subject }}'
-    output: "terminal"
-    command: "git commit -m '{{ .Form.CommitMsg }}'"
+    # command: "git commit -m '{{ .Form.CommitMsg }}'"
+    command: bash -c 'MSG="{{ .Form.Commit }}" && SUBJ="${MSG%%<SEP>*}" && BODY="${MSG#*<SEP>}" && git commit -m "$SUBJ" ${BODY:+-m "$BODY"}'
   # Long commit with fzf preview (Shift+C in files panel)
   - key: "C"
     context: "files"
