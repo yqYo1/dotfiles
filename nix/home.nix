@@ -30,7 +30,7 @@ let
     file:
     builtins.fromJSON (
       builtins.readFile (
-        pkgs.runCommandNoCC "${builtins.baseNameOf file}.json"
+        pkgs.runCommand "${builtins.baseNameOf file}.json"
           {
             nativeBuildInputs = [ pkgs.yj ];
           }
@@ -67,7 +67,6 @@ in
     git
     git-wt
     jq
-    lazygit
     lua-language-server
     neovim
     nil
@@ -111,11 +110,16 @@ in
   programs.eza.enable = true;
   programs.lazygit = {
     enable = true;
-    settings =
-      let
-        raw = readYamlFile "${dotfiles}/lazygit/config.yml";
-      in
-      raw;
+    settings = { };
+    package = pkgs.writeShellScriptBin "lazygit" ''
+      export LG_CONFIG_FILE="${config.xdg.configHome}/lazygit/config.yml''${LG_CONFIG_FILE:+,$LG_CONFIG_FILE}"
+      exec ${lib.getExe pkgs.lazygit} "$@"
+    '';
+    # settings =
+    #   let
+    #     raw = readYamlFile "${dotfiles}/lazygit/config.yml";
+    #   in
+    #   raw;
   };
 
   programs.opencode = {
@@ -309,6 +313,7 @@ in
 
     }
     // mkXdgConfigDirs dotfiles [
+      "lazygit"
       "aicommit2"
       "git"
       "nvim"

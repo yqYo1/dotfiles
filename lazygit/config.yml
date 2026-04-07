@@ -15,3 +15,9 @@ customCommands:
         labelFormat: '{{ .subject }}'
     output: "terminal"
     command: bash -c 'MSG="{{ .Form.Commit }}" && SUBJ="${MSG%%<SEP>*}" && BODY="${MSG#*<SEP>}" && git commit -e -m "$SUBJ" ${BODY:+-m "$BODY"}'
+  # Long commit with fzf preview (Shift+C in files panel)
+  - key: "C"
+    context: "files"
+    description: "Generate commit message (long) with aicommit2"
+    output: "terminal"
+    command: "$XDG_CONFIG_HOME/lazygit/aicommit_fzf.sh"  # Update with your script path
