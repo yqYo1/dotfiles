@@ -14,6 +14,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    aicommit2.url = "github:tak-bro/aicommit2";
     catppuccin.url = "github:catppuccin/nix";
     flake-parts.url = "github:hercules-ci/flake-parts";
     systems.url = "github:nix-systems/default-linux";
@@ -33,6 +34,7 @@
       self,
       nixpkgs,
       home-manager,
+      aicommit2,
       catppuccin,
       flake-parts,
       llm-agents,
@@ -53,6 +55,9 @@
           config.allowUnfree = true;
           overlays = [
             llm-agents.overlays.default
+            (final: prev: {
+              aicommit2 = aicommit2.packages.${system}.default;
+            })
           ];
         };
 

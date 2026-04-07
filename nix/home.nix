@@ -34,6 +34,7 @@ in
   home.packages = with pkgs; [
     actionlint
     arduino-language-server
+    aicommit2
     basedpyright
     bat
     bottom
@@ -60,7 +61,6 @@ in
     nixd
     nixfmt
     nodejs-slim
-    opencommit
     osc
     powershell
     powershell-editor-services
@@ -288,6 +288,7 @@ in
 
     }
     // mkXdgConfigDirs dotfiles [
+      "aicommit2"
       "nvim"
       "git"
       "wezterm"
