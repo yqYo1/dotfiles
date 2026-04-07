@@ -25,6 +25,20 @@ let
       source = "${base}/${name}";
       recursive = true;
     });
+
+  readYamlFile =
+    file:
+    builtins.fromJSON (
+      builtins.readFile (
+        pkgs.runCommandNoCC "${builtins.baseNameOf file}.json"
+          {
+            nativeBuildInputs = [ pkgs.yj ];
+          }
+          ''
+            ${pkgs.yj}/bin/yj < "${file}" > "$out"
+          ''
+      )
+    );
 in
 {
   home.username = username;
@@ -95,7 +109,14 @@ in
   programs.bat.enable = true;
   programs.bottom.enable = true;
   programs.eza.enable = true;
-  programs.lazygit.enable = true;
+  programs.lazygit = {
+    enable = true;
+    settings =
+      let
+        raw = readYamlFile "${dotfiles}/lazygit/config.yml";
+      in
+      raw;
+  };
 
   programs.opencode = {
     enable = true;
@@ -289,8 +310,8 @@ in
     }
     // mkXdgConfigDirs dotfiles [
       "aicommit2"
-      "nvim"
       "git"
+      "nvim"
       "wezterm"
     ];
   };
