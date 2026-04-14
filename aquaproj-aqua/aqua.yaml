@@ -44,7 +44,7 @@ packages:
   - name: sharkdp/fd@v10.4.2
   - name: starship/starship@v1.24.2
   - name: sxyazi/yazi@v26.1.22
-  - name: x-motemen/ghq@v1.10.0
+  - name: x-motemen/ghq@v1.10.1
   - name: ziglang/zig@0.15.1
   - name: zigtools/zls@0.15.1
   - name: arduino/arduino-language-server@0.7.7
