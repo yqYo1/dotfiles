@@ -174,12 +174,13 @@ in
     };
 
     setOptions = [
-      "no_auto_pushd"
-      "no_beep"
-      "hist_reduce_blanks"
+      "hist_find_no_dups"
       "hist_ignore_all_dups"
       "hist_ignore_space"
+      "hist_reduce_blanks"
       "hist_verify"
+      "no_auto_pushd"
+      "no_beep"
       "share_history"
     ];
 
