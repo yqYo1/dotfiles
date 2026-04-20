@@ -35,6 +35,7 @@ in
   home.username = username;
   home.homeDirectory = homeDirectory;
   home.stateVersion = "25.11";
+  news.display = "silent";
 
   home.packages = with pkgs; [
     actionlint
