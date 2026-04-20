@@ -15,6 +15,7 @@ let
 
   generatedZshCompletions = [
     "podman completion zsh"
+    "tailscale completion zsh"
   ];
 
   catppuccinZshFsh = pkgs.fetchFromGitHub {
