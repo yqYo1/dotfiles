@@ -214,7 +214,8 @@ in
       (lib.mkOrder 1000 ''
         zmodload -i zsh/complist
 
-        zstyle ':autocomplete::compinit' arguments -C
+        # zstyle ':autocomplete::compinit' arguments -C
+        zstyle ':autocomplete::compinit' arguments -i
 
         zstyle ':autocomplete:*' widget-style list-choices
         zstyle ':autocomplete:*' min-input 1
