@@ -11,6 +11,11 @@
 let
   localZshEnv = "${config.home.homeDirectory}/.zshenv.local";
   localZshRc = "${config.home.homeDirectory}/.zshrc.local";
+  zshCompletionDir = "${config.xdg.dataHome}/zsh/site-functions";
+
+  generatedZshCompletions = [
+    "podman completion zsh"
+  ];
 
   catppuccinZshFsh = pkgs.fetchFromGitHub {
     owner = "catppuccin";
@@ -189,40 +194,57 @@ in
       [[ -r "${localZshEnv}" ]] && source "${localZshEnv}"
     '';
 
-    initContent = ''
-      zmodload -i zsh/complist
+    initContent = lib.mkMerge [
+      (lib.mkOrder 550 ''
+        typeset -U fpath
+        fpath=(
+          "${zshCompletionDir}"
+          "${config.home.profileDirectory}/share/zsh/site-functions"
+          "${config.home.profileDirectory}/share/zsh/$ZSH_VERSION/functions"
+          "${config.home.profileDirectory}/share/zsh/vendor-completions"
+          /usr/local/share/zsh/site-functions
+          /usr/local/share/zsh/vendor-completions
+          /usr/share/zsh/site-functions
+          /usr/share/zsh/vendor-completions
+          /usr/share/zsh/vendor-functions
+          $fpath
+        )
+      '')
+      (lib.mkOrder 1000 ''
+        zmodload -i zsh/complist
 
-      zstyle ':autocomplete::compinit' arguments -C
+        zstyle ':autocomplete::compinit' arguments -C
 
-      zstyle ':autocomplete:*' widget-style list-choices
-      zstyle ':autocomplete:*' min-input 1
-      zstyle ':autocomplete:*' delay 0.0
-      zstyle -e ':autocomplete:*:*' list-lines 'reply=( $(( LINES / 4 )) )'
+        zstyle ':autocomplete:*' widget-style list-choices
+        zstyle ':autocomplete:*' min-input 1
+        zstyle ':autocomplete:*' delay 0.0
+        zstyle -e ':autocomplete:*:*' list-lines 'reply=( $(( LINES / 4 )) )'
 
-      bindkey '^I' menu-select
-      [[ -n "''${terminfo[kcbt]-}" ]] && bindkey "''${terminfo[kcbt]}" reverse-menu-complete
-      bindkey -M menuselect '^I' menu-complete
-      [[ -n "''${terminfo[kcbt]-}" ]] && bindkey -M menuselect "''${terminfo[kcbt]}" reverse-menu-complete
+        bindkey '^I' menu-select
+        [[ -n "''${terminfo[kcbt]-}" ]] && bindkey "''${terminfo[kcbt]}" reverse-menu-complete
+        bindkey -M menuselect '^I' menu-complete
+        [[ -n "''${terminfo[kcbt]-}" ]] && bindkey -M menuselect "''${terminfo[kcbt]}" reverse-menu-complete
 
-      bindkey '^N' menu-select
-      bindkey '^P' reverse-menu-complete
+        bindkey '^N' menu-select
+        bindkey '^P' reverse-menu-complete
 
-      bindkey -M menuselect '^N' menu-complete
-      bindkey -M menuselect '^P' reverse-menu-complete
+        bindkey -M menuselect '^N' menu-complete
+        bindkey -M menuselect '^P' reverse-menu-complete
 
-      fast-theme -q XDG:catppuccin-${config.catppuccin.flavor}
+        fast-theme -q XDG:catppuccin-${config.catppuccin.flavor}
 
-      if [[ -n $ZENO_LOADED ]]; then
-        bindkey '^x^i' zeno-completion
-        bindkey '^r'   zeno-history-selection
-      fi
+        if [[ -n $ZENO_LOADED ]]; then
+          bindkey '^x^i' zeno-completion
+          bindkey '^r'   zeno-history-selection
+        fi
 
-      zshaddhistory() {
-        [[ "$?" == 0 ]]
-      }
+        zshaddhistory() {
+          [[ "$?" == 0 ]]
+        }
 
-      [[ -r "${localZshRc}" ]] && source "${localZshRc}"
-    '';
+        [[ -r "${localZshRc}" ]] && source "${localZshRc}"
+      '')
+    ];
 
     sessionVariables = {
       ZENO_HOME = "${config.home.homeDirectory}/.config/zeno";
@@ -310,4 +332,61 @@ in
       "wezterm"
     ];
   };
+
+  home.activation.generateExternalZshCompletions = lib.hm.dag.entryAfter [ "writeBoundary" ] (
+    let
+      normalizeZshCompletionEntry =
+        entry: if builtins.isString entry then { generate = entry; } else entry;
+
+      inferCmdFromGenerate =
+        entry:
+        let
+          normalized = normalizeZshCompletionEntry entry;
+        in
+        if normalized ? cmd then
+          normalized.cmd
+        else
+          let
+            parts = lib.filter (part: part != "") (lib.splitString " " normalized.generate);
+          in
+          if parts == [ ] then
+            throw "generatedZshCompletions entry must have non-empty generate command"
+          else
+            lib.head parts;
+
+      inferCompletionFile =
+        entry:
+        let
+          normalized = normalizeZshCompletionEntry entry;
+          cmd = inferCmdFromGenerate normalized;
+        in
+        normalized.file or "_${cmd}";
+
+      generators = lib.concatMapStringsSep "\n" (
+        rawEntry:
+        let
+          entry = normalizeZshCompletionEntry rawEntry;
+          cmd = inferCmdFromGenerate entry;
+          completionFile = inferCompletionFile entry;
+          outputPath = "${zshCompletionDir}/${completionFile}";
+          shellCommand = "${entry.generate} > ${lib.escapeShellArg outputPath}";
+        in
+        ''
+          if command -v ${lib.escapeShellArg cmd} >/dev/null 2>&1; then
+            if ! sh -c ${lib.escapeShellArg shellCommand}; then
+              echo "warning: failed to generate zsh completion for ${cmd}" >&2
+              rm -f ${lib.escapeShellArg outputPath}
+            fi
+          fi
+        ''
+      ) generatedZshCompletions;
+    in
+    ''
+      PATH="${config.home.path}/bin:/usr/local/bin:/usr/bin:/bin:$PATH"
+      export PATH
+
+      run mkdir -p ${lib.escapeShellArg zshCompletionDir}
+      ${generators}
+    ''
+  );
 }
