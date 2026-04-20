@@ -46,6 +46,6 @@ packages:
   - name: sxyazi/yazi@v26.1.22
   - name: x-motemen/ghq@v1.10.1
   - name: ziglang/zig@0.15.1
-  - name: zigtools/zls@0.15.1
+  - name: zigtools/zls@0.16.0
   - name: arduino/arduino-language-server@0.7.7
   - name: k1LoW/git-wt@v0.26.2
