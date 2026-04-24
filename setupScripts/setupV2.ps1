@@ -182,17 +182,17 @@ foreach ($repo_name in $repo_list){
 makeDir "$HOME\bin"
 addPath "$Env:USERPROFILE\bin"
 
-$aqua_bin_path = "$Env:USERPROFILE\bin\aqua.exe"
-if (-not (Test-Path $aqua_bin_path)) {
-  curl -sSLO "https://github.com/aquaproj/aqua/releases/latest/download/aqua_windows_amd64.zip"
-  makeDir "aquabin"
-  Set-Location .\aquabin
-  tar -xf ..\aqua_windows_amd64.zip
-  Set-Location ..
-  Copy-Item -Path aquabin\aqua.exe -Destination $aqua_bin_path
-  Remove-Item -Path aquabin -Recurse -Force
-  Remove-Item -Path aqua_windows_amd64.zip -Force
-}
+# $aqua_bin_path = "$Env:USERPROFILE\bin\aqua.exe"
+# if (-not (Test-Path $aqua_bin_path)) {
+#   curl -sSLO "https://github.com/aquaproj/aqua/releases/latest/download/aqua_windows_amd64.zip"
+#   makeDir "aquabin"
+#   Set-Location .\aquabin
+#   tar -xf ..\aqua_windows_amd64.zip
+#   Set-Location ..
+#   Copy-Item -Path aquabin\aqua.exe -Destination $aqua_bin_path
+#   Remove-Item -Path aquabin -Recurse -Force
+#   Remove-Item -Path aqua_windows_amd64.zip -Force
+# }
 
 #TODO aqua init
 $Env:AQUA_GLOBAL_CONFIG = Join-Path (& ghq root) "github.com/yqYo1/dotfiles/aquaproj-aqua/aqua.yaml"
