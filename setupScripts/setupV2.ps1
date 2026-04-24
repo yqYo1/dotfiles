@@ -10,16 +10,59 @@ function makeDir($dir){
   }
 }
 
-function makeSymbolickLink($destination, $source){
-  if (Test-Path $destination) {
-    if ((Get-ItemProperty $destination).Mode.Substring(0,1) -ne 'l'){
-      Remove-Item $destination -Force  -Recurse
-      New-Item -ItemType SymbolicLink -Path $destination -Value "$source"
+function makeSymbolickLink {
+    param(
+        [Parameter(Mandatory)]
+        [string]$Destination,
+
+        [Parameter(Mandatory)]
+        [string]$Source
+    )
+
+    $item = Get-Item -LiteralPath $Destination -Force -ErrorAction SilentlyContinue
+    $sourceFull = [System.IO.Path]::GetFullPath($Source)
+
+    if ($null -ne $item) {
+        $isSymbolicLink = ($item.PSObject.Properties.Name -contains 'LinkType') -and ($item.LinkType -eq 'SymbolicLink')
+
+        if ($isSymbolicLink) {
+            $currentTargetRaw = $null
+
+            if (($item.PSObject.Properties.Name -contains 'LinkTarget') -and $item.LinkTarget) {
+                $currentTargetRaw = $item.LinkTarget
+            }
+            elseif (($item.PSObject.Properties.Name -contains 'Target') -and $item.Target) {
+                $currentTargetRaw = $item.Target
+            }
+
+            if ($currentTargetRaw -is [array]) {
+                $currentTargetRaw = $currentTargetRaw[0]
+            }
+
+            $currentTargetFull = $null
+            if ($currentTargetRaw) {
+                if ([System.IO.Path]::IsPathRooted($currentTargetRaw)) {
+                    $currentTargetFull = [System.IO.Path]::GetFullPath($currentTargetRaw)
+                }
+                else {
+                    $baseDir = Split-Path -Parent $item.FullName
+                    $currentTargetFull = [System.IO.Path]::GetFullPath((Join-Path $baseDir $currentTargetRaw))
+                }
+            }
+
+            if ($currentTargetFull -ine $sourceFull) {
+                Remove-Item -LiteralPath $Destination -Force
+                New-Item -ItemType SymbolicLink -Path $Destination -Target $Source | Out-Null
+            }
+        }
+        else {
+            Remove-Item -LiteralPath $Destination -Force -Recurse
+            New-Item -ItemType SymbolicLink -Path $Destination -Target $Source | Out-Null
+        }
     }
-    #(Get-ItemProperty $destination).LinkTarget
-  }else {
-    New-Item -ItemType SymbolicLink -Path $destination -Value "$source"
-  }
+    else {
+        New-Item -ItemType SymbolicLink -Path $Destination -Target $Source | Out-Null
+    }
 }
 
 function Exist-Command($Name){
@@ -175,6 +218,22 @@ $moduleList = Get-InstalledModule | Select-Object -ExpandProperty Name
 if (-not $moduleList.Contains("git-completion")) {
   Install-Module git-completion
 }
+
+$dotConfig = "$env:USERPROFILE\.config"
+$dotfiles = (ghq list --full-path --exact yqYo1/dotfiles)
+makeDir $dotConfig
+
+makeSymbolickLink "$Env:USERPROFILE\.gitconfig" "$dotfiles\git\config"
+makeSymbolickLink "$Env:APPDATA\CorvusSKK" "$dotfiles\CorvusSKK"
+makeSymbolickLink "$Env:APPDATA\bat\config" "$dotfiles\bat\config"
+makeSymbolickLink "$Env:APPDATA\bat\themes" "$(ghq list --full-path --exact catppuccin/bat)/themes"
+makeSymbolickLink "$Env:LOCALAPPDATA\aicommit2" "$dotfiles\aicommit2"
+makeSymbolickLink "$Env:LOCALAPPDATA\lazygit" "$dotfiles\lazygit"
+makeSymbolickLink "$Env:LOCALAPPDATA\nvim" "$dotfiles\nvim"
+makeSymbolickLink "$dotConfig\aquaproj-aqua\aqua.yaml" "$dotfiles\aquaproj-aqua\aqua.yaml"
+makeSymbolickLink "$dotConfig\starship.toml" "$dotfiles\starship.toml"
+makeSymbolickLink "$dotConfig\wezterm" "$dotfiles\wezterm"
+makeSymbolickLink "$env:USERPROFILE\Documents\PowerShell\Profile.ps1" "$dotfiles\PowerShell\Profile.ps1"
 
 bat cache --build
 Pop-Location
