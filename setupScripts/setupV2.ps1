@@ -139,7 +139,7 @@ $applist = @(
   "bun",
   "dark",
   "deno",
-  "ghq"
+  "ghq",
   "git",
   "innounp",
   "llvm",
@@ -147,7 +147,7 @@ $applist = @(
   "make",
   "nodejs-lts",
   "npiperelay"
-  "tree-sitter",
+  "tree-sitter"
 )
 scoop update *
 scoop cleanup *
