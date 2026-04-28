@@ -129,22 +129,25 @@ if (!(Exist-Command scoop)) {
   echo "scoop is already installed"
 }
 [void]($installedApplist = scoop list | Select-Object -ExpandProperty Name)
+scoop bucket add aquaproj https://github.com/aquaproj/scoop-bucket
+scoop bucket add extras
 
 $applist = @(
   "7zip",
-  "innounp",
+  "GCC",
+  "aqua",
+  "bun",
   "dark",
   "deno",
-  "GCC",
-  "bun",
   "ghq"
   "git",
+  "innounp",
   "llvm",
   "lua-language-server",
   "make",
   "nodejs-lts",
-  "tree-sitter",
   "npiperelay"
+  "tree-sitter",
 )
 scoop update *
 scoop cleanup *
@@ -181,18 +184,6 @@ foreach ($repo_name in $repo_list){
 
 makeDir "$HOME\bin"
 addPath "$Env:USERPROFILE\bin"
-
-# $aqua_bin_path = "$Env:USERPROFILE\bin\aqua.exe"
-# if (-not (Test-Path $aqua_bin_path)) {
-#   curl -sSLO "https://github.com/aquaproj/aqua/releases/latest/download/aqua_windows_amd64.zip"
-#   makeDir "aquabin"
-#   Set-Location .\aquabin
-#   tar -xf ..\aqua_windows_amd64.zip
-#   Set-Location ..
-#   Copy-Item -Path aquabin\aqua.exe -Destination $aqua_bin_path
-#   Remove-Item -Path aquabin -Recurse -Force
-#   Remove-Item -Path aqua_windows_amd64.zip -Force
-# }
 
 #TODO aqua init
 $Env:AQUA_GLOBAL_CONFIG = Join-Path (& ghq root) "github.com/yqYo1/dotfiles/aquaproj-aqua/aqua.yaml"
