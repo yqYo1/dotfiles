@@ -1,2 +1,0 @@
-skip_global_compinit=1
-export LITELLM_API_KEY="LITELLM_API_KEY"
