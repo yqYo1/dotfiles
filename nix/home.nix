@@ -114,6 +114,32 @@ in
     enable = true;
     package = pkgs.llm-agents.opencode;
     settings = {
+      provider.litellm = {
+        npm = "@ai-sdk/openai-compatible";
+        name = "LiteLLM";
+        options = {
+          baseURL = "https://litellm.yqyoi.dev/v1";
+          apiKey = "{env:LITELLM_API_KEY}";
+        };
+        models = {
+          "deepseek-v4-flash" = {
+            name = "DeepSeek V4 Flash";
+          };
+          "glm-5.1" = {
+            name = "GLM 5.1";
+          };
+          "qwen3.6-plus" = {
+            name = "Qwen 3.6 Plus";
+          };
+          "kimi-k2.6" = {
+            name = "Kimi K2.6";
+          };
+        };
+      };
+      model = "litellm/deepseek-v4-flash";
+      small_model = "litellm/deepseek-v4-flash";
+      default_agent = "build";
+      autoupdate = false;
       permission = {
         edit = "allow";
         bash = {
