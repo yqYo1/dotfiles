@@ -87,6 +87,7 @@ in
     llm-agents.jules
     llm-agents.kilocode-cli
     llm-agents.opencode
+    llm-agents.rtk
   ];
 
   home.file = {
