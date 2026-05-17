@@ -38,9 +38,6 @@ in
   home.stateVersion = "25.11";
   news.display = "silent";
 
-  home-manager.backupFileExtension = "backup";
-  home-manager.overwriteBackup = true;
-
   home.packages = with pkgs; [
     actionlint
     arduino-language-server

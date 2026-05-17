@@ -105,7 +105,7 @@
         in
         {
           apps = rec {
-            switch = mkHmApp "switch" "switch --flake .#${hmAttr}";
+            switch = mkHmApp "switch" "switch -b backup --flake .#${hmAttr}";
             build = mkHmApp "build" "build --flake .#${hmAttr}";
             generations = mkHmApp "generations" "generations --flake .#${hmAttr}";
             default = switch;
