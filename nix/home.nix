@@ -43,6 +43,7 @@ in
     arduino-language-server
     aicommit2
     basedpyright
+    bash
     bat
     bottom
     bun
@@ -94,6 +95,22 @@ in
   home.sessionVariables = {
     EDITOR = "nvim";
     VISUAL = "nvim";
+  };
+
+  home.shellAliases = {
+    ".." = "cd ../";
+    "..." = "cd ../../";
+    cat = "bat --paging=never --style=grid";
+    clip = "osc copy";
+    cls = "clear";
+    d = ''cd "$(ghq list --full-path --exact yqYo1/dotfiles)"'';
+    em = "emacs -nw";
+    gp = "git pull";
+    lg = "lazygit";
+    ll = "eza -alhF --git --git-repos";
+    ls = "eza -F";
+    lt = "eza -T";
+    vi = "nvim";
   };
 
   programs.home-manager.enable = true;
@@ -153,6 +170,10 @@ in
     enable = true;
     enableZshIntegration = true;
     nix-direnv.enable = true;
+  };
+
+  programs.bash = {
+    enable = true;
   };
 
   programs.zsh = {
@@ -219,6 +240,12 @@ in
 
     envExtra = ''
       skip_global_compinit=1
+      gh_token_temp="$(env -u GH_TOKEN -u GITHUB_TOKEN gh auth token 2>/dev/null || true)"
+      if [ -n "$gh_token_temp" ]; then
+        export GH_TOKEN="$gh_token_temp"
+        export GITHUB_TOKEN="$gh_token_temp"
+      fi
+      unset gh_token_temp
       [[ -r "${localZshEnv}" ]] && source "${localZshEnv}"
     '';
 
@@ -280,22 +307,6 @@ in
       ZENO_ENABLE_SOCK = 1;
       ZENO_DISABLE_EXECUTE_CACHE_COMMAND = 1;
       POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD = true;
-    };
-
-    shellAliases = {
-      ".." = "cd ../";
-      "..." = "cd ../../";
-      cat = "bat --paging=never --style=grid";
-      clip = "osc copy";
-      cls = "clear";
-      d = "cd $(ghq list --full-path --exact yqYo1/dotfiles)";
-      em = "emacs -nw";
-      gp = "git pull";
-      lg = "lazygit";
-      ll = "eza -alhF --git --git-repos";
-      ls = "eza -F";
-      lt = "eza -T";
-      vi = "nvim";
     };
 
     siteFunctions = {
