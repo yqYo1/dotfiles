@@ -40,17 +40,22 @@ in
 
   home.packages = with pkgs; [
     actionlint
-    arduino-language-server
     aicommit2
+    arduino-language-server
+    astro-language-server
     basedpyright
     bash
+    bash-language-server
     bat
     bottom
     bun
     chezmoi
+    clang
+    clang-tools
     comma
     deno
     direnv
+    dockerfile-language-server
     efm-langserver
     emacs
     eza
@@ -71,15 +76,20 @@ in
     osc
     powershell
     powershell-editor-services
+    pyright
     ripgrep
     ruff
+    rust-analyzer
     sheldon
     starship
     stylua
     tree-sitter
     ty
+    typescript-language-server
     uv
     vim
+    vue-language-server
+    yaml-language-server
     zoxide
     zsh
 
