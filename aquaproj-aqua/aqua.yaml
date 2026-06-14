@@ -34,7 +34,7 @@ packages:
   - name: jqlang/jq@jq-1.8.1
   - name: junegunn/fzf@v0.73.1
   - name: mattn/efm-langserver@v0.0.56
-  - name: neovim/neovim@v0.12.2
+  - name: neovim/neovim@v0.12.3
   - name: nodejs/node@v26.3.0
   - name: rhysd/actionlint@v1.7.12
   - name: rhysd/vim-startuptime@v1.3.2
