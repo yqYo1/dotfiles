@@ -88,6 +88,8 @@ in
     typescript-language-server
     uv
     vim
+    vscode-json-languageserver
+    vscode-css-languageserver
     vue-language-server
     yaml-language-server
     zoxide
