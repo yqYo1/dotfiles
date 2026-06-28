@@ -5,9 +5,9 @@
     "breakdown": true,
     "pricingOverrides": {
       "kimi-for-coding": {
-        "inputCostPerToken": 1.90,
-        "cacheReadInputTokenCost": 0.38,
-        "outputCostPerToken": 8.00,
+        "inputCostPerToken": 0.0000019,
+        "cacheReadInputTokenCost": 0.00000038,
+        "outputCostPerToken": 0.000008,
         "maxInputTokens": 262144
       }
     }
