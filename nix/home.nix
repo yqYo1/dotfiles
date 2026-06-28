@@ -159,15 +159,37 @@ in
           "deepseek-v4-flash" = {
             name = "DeepSeek V4 Flash";
           };
+          "deepseek-v4-pro" = {
+            name = "DeepSeek V4 Pro";
+          };
           "glm-5.1" = {
             name = "GLM 5.1";
+          };
+          "glm-5.2" = {
+            name = "GLM 5.2";
           };
           "qwen3.6-plus" = {
             name = "Qwen 3.6 Plus";
           };
+          "qwen3.7-plus" = {
+            name = "Qwen 3.7 Plus";
+          };
+          "qwen3.7-max" = {
+            name = "Qwen 3.7 Max";
+          };
           "kimi-k2.6" = {
             name = "Kimi K2.6";
           };
+          "kimi-k2.7-code" = {
+            name = "Kimi K2.7 Code";
+          };
+          "mimo-v2.5-pro" = {
+            name = "MiMo-V2.5-Pro";
+          };
+          "mimo-v2.5" = {
+            name = "MiMo-V2.5";
+          };
+
         };
       };
       model = "litellm/deepseek-v4-flash";
@@ -385,9 +407,10 @@ in
 
     }
     // mkXdgConfigDirs dotfiles [
-      "lazygit"
       "aicommit2"
+      "claude"
       "git"
+      "lazygit"
       "nvim"
       "wezterm"
     ];
