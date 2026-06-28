@@ -93,9 +93,10 @@ in
     zoxide
     zsh
 
-    llm-agents.copilot-cli
+    llm-agents.claude-code
     llm-agents.jules
-    llm-agents.kilocode-cli
+    llm-agents.pi
+    llm-agents.ccusage
     llm-agents.opencode
     llm-agents.rtk
   ];
