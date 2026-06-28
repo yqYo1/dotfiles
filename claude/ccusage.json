@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ccusage.com/config-schema.json",
+  "defaults": {
+    "timezone": "Asia/Tokyo",
+    "breakdown": true,
+    "pricingOverrides": {
+      "kimi-for-coding": {
+        "inputCostPerToken": 1.90,
+        "cacheReadInputTokenCost": 0.38,
+        "outputCostPerToken": 8.00,
+        "maxInputTokens": 262144
+      }
+    }
+  }
+}
