@@ -1,5 +1,5 @@
 DOTDIR=$(cd $(dirname $0)/../;pwd)
-if [ $(uname -o) = "GNU/Linux" ]; then
+# if [ $(uname -o) = "GNU/Linux" ]; then
   # read -p "Do you want to update environment? [y/N] " yn
   # case "yn" in
   #   [Yy]|[Yy][Ee][Ss])
@@ -13,7 +13,8 @@ if [ $(uname -o) = "GNU/Linux" ]; then
   #     echo "Invalid input."
   #     ;;
   # esac
-elif [ $(uname -o) = "Msys" ]; then
+# elif [ $(uname -o) = "Msys" ]; then
+if [ $(uname -o) = "Msys" ]; then
   # Linuxはsetup.shでリンクする為不要
   ln -sfnv $DOTDIR/git-hook/post-merge $DOTDIR/.git/hooks/post-merge
   $DOTDIR/aquaproj-aqua/update.sh
