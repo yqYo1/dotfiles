@@ -1,8 +1,13 @@
 [user]
-	email = 52419113+yqYo1@users.noreply.github.com
-	name = yqYoi
+  email = 52419113+yqYo1@users.noreply.github.com
+  name = yqYoi
+  signingkey = ~/.ssh/github_ed25519.pub
 [core]
-	editor = nvim
-	symlinks = true
+  editor = nvim
+  symlinks = true
 [pull]
-	rebase = true
+  rebase = true
+[gpg]
+  format = ssh
+[commit]
+  gpgsign = true
