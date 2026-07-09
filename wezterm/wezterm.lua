@@ -4,9 +4,7 @@ local hostname = wezterm.hostname()
 local config = {}
 local keybinds = require("keybinds")
 
-if wezterm.config_builder then
-  config = wezterm.config_builder()
-end
+if wezterm.config_builder then config = wezterm.config_builder() end
 
 --theme
 config.color_scheme = "Catppuccin Mocha"
@@ -92,8 +90,8 @@ if wezterm.target_triple == "x86_64-pc-windows-msvc" then
     table.insert(config.launch_menu, {
       label = "git bash",
       args = {
-        "C:\\Program Files\\Git\\bin\\bash.exe"
-      }
+        "C:\\Program Files\\Git\\bin\\bash.exe",
+      },
     })
   end
 
@@ -130,6 +128,8 @@ end
 
 config.font_size = 12
 config.adjust_window_size_when_changing_font_size = true
+config.enable_kitty_keyboard = true
+config.enable_kitty_graphics = true
 
 config.audible_bell = "Disabled"
 config.use_ime = true
@@ -144,7 +144,7 @@ config.initial_rows = 40
 
 -- ssh
 config.mux_enable_ssh_agent = true
-if wezterm.target_triple == 'x86_64-pc-windows-msvc' then
+if wezterm.target_triple == "x86_64-pc-windows-msvc" then
   config.default_ssh_auth_sock = [[\\.\pipe\openssh-ssh-agent]]
 end
 
