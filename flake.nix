@@ -53,7 +53,7 @@
           inherit system;
           config.allowUnfree = true;
           overlays = [
-            llm-agents.overlays.default
+            llm-agents.overlays.shared-nixpkgs
             (final: prev: {
               aicommit2 = aicommit2.packages.${system}.default;
             })
