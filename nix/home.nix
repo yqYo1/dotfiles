@@ -94,11 +94,13 @@ in
     zoxide
     zsh
 
-    llm-agents.claude-code
-    llm-agents.jules
-    llm-agents.pi
     llm-agents.ccusage
+    llm-agents.claude-code
+    llm-agents.codex
+    llm-agents.jules
+    llm-agents.omp
     llm-agents.opencode
+    llm-agents.pi
     llm-agents.rtk
   ];
 
