@@ -18,7 +18,7 @@ registries:
     ref: v4.538.0 # renovate: depName=aquaproj/aqua-registry
 
 packages:
-  - name: BurntSushi/ripgrep@15.1.0
+  - name: BurntSushi/ripgrep@15.2.0
   - name: ClementTsang/bottom@0.14.4
   - name: JohnnyMorganz/StyLua@v2.5.2
   - name: LuaLS/lua-language-server@3.18.2
