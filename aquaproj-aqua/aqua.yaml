@@ -32,7 +32,7 @@ packages:
   - name: golang/tools/gorename@v0.25.0
   - name: jesseduffield/lazygit@v0.63.1
   - name: jqlang/jq@jq-1.8.2
-  - name: junegunn/fzf@v0.74.0
+  - name: junegunn/fzf@v0.74.1
   - name: mattn/efm-langserver@v0.0.57
   - name: neovim/neovim@v0.12.4
   - name: nodejs/node@v26.5.0
