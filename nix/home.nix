@@ -223,7 +223,7 @@ in
     clean = {
       enable = true;
       dates = "weekly";
-      extaraArgs = "--keep-since 30d --keep-one";
+      extraArgs = "--keep-since 30d --keep-one";
     };
   };
 
