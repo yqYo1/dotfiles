@@ -68,6 +68,7 @@ in
     jq
     lua-language-server
     neovim
+    nh
     nil
     nix-search-cli
     nixd
@@ -215,6 +216,15 @@ in
 
   programs.bash = {
     enable = true;
+  };
+
+  programs.nh = {
+    enable = true;
+    clean = {
+      enable = true;
+      dates = "weekly";
+      extaraArgs = "--keep-since 30d --keep-one";
+    };
   };
 
   programs.zsh = {
