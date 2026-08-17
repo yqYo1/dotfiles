@@ -21,7 +21,7 @@ packages:
   - name: BurntSushi/ripgrep@15.2.0
   - name: ClementTsang/bottom@0.14.8
   - name: JohnnyMorganz/StyLua@v2.5.2
-  - name: LuaLS/lua-language-server@3.19.0
+  - name: LuaLS/lua-language-server@3.19.1
   - name: ajeetdsouza/zoxide@v0.10.0
   - name: arduino/arduino-cli@v1.5.1
   - name: astral-sh/uv@0.12.4
