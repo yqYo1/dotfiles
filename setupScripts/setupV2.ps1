@@ -70,6 +70,12 @@ function Exist-Command($Name){
   return($? -eq $true)
 }
 
+function Assert-Command($Name, $InstallSource){
+  if (-not (Exist-Command $Name)) {
+    throw "$Name is not available after installation. Check the $InstallSource installation output above."
+  }
+}
+
 function path_change_init(){
   $script:PathInit = $true
   $script:currentPathString = [System.Environment]::GetEnvironmentVariable("Path", "User")
@@ -77,7 +83,7 @@ function path_change_init(){
     $script:currentPathsArray = @()
   } else {
     # Pathを配列に分割し、各パスを正規化（末尾の '\' を削除）、空のエントリを除去
-    $script:currentPathsArray = $script:currentPathString.Split(';') | ForEach-Object { $_.Trim().TrimEnd('\') } | Where-Object { -not [string]::IsNullOrWhiteSpace($_) }
+    $script:currentPathsArray = @($script:currentPathString.Split(';') | ForEach-Object { $_.Trim().TrimEnd('\') } | Where-Object { -not [string]::IsNullOrWhiteSpace($_) })
   }
 }
 
@@ -98,6 +104,7 @@ function addPath($addPath){
     Write-Host "add $addPath to User Path"
     $script:PathChanged = $true
     $script:currentPathString = "$addPath;$script:currentPathString"
+    $script:currentPathsArray = @($NormalizedAddPath) + @($script:currentPathsArray)
     $Env:PATH = "$addPath;$Env:Path"
   }else{
     Write-Host "$addPath is already in Path"
@@ -128,7 +135,7 @@ if (!(Exist-Command scoop)) {
 }else{
   echo "scoop is already installed"
 }
-[void]($installedApplist = scoop list | Select-Object -ExpandProperty Name)
+$installedApplist = @(scoop list | Select-Object -ExpandProperty Name)
 scoop bucket add aquaproj https://github.com/aquaproj/scoop-bucket
 scoop bucket add extras
 
@@ -152,13 +159,16 @@ $applist = @(
 scoop update *
 scoop cleanup *
 foreach ($app in $applist) {
-  if (-not ($installedApplist.Contains($app))) {
+  if ($installedApplist -notcontains $app) {
     Write-Host "install $app"
     scoop install $app
   }else{
     Write-Host "$app is already installed"
   }
 }
+
+Assert-Command "ghq" "Scoop"
+Assert-Command "aqua" "Scoop"
 
 
 #TODO ghwの管理下にないrepoを自動的にcloneする
@@ -171,7 +181,7 @@ $repo_list = @(
   "github.com/yqYo1/dotfiles",
   "github.com/catppuccin/bat"
 )
-$ghq_repo_path_list = ghq list
+$ghq_repo_path_list = @(ghq list)
 foreach ($repo_name in $repo_list){
   if ($ghq_repo_path_list -Contains $repo_name){
     Write-Host "$repo_name is already cloned"
@@ -187,8 +197,13 @@ addPath "$Env:USERPROFILE\bin"
 
 #TODO aqua init
 $Env:AQUA_GLOBAL_CONFIG = Join-Path (& ghq root) "github.com/yqYo1/dotfiles/aquaproj-aqua/aqua.yaml"
+$aquaBin = Join-Path (& aqua root-dir) "bin"
+addPath $aquaBin
 aqua i -a
 aqua upa
+
+Assert-Command "gh" "aqua"
+Assert-Command "bat" "aqua"
 
 addPath "$Env:USERPROFILE\.bun\bin"
 applyPath
@@ -205,8 +220,8 @@ if (-not (Get-PSRepository PSGallery | Select-Object -ExpandProperty Trusted)) {
   Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
 }
 
-$moduleList = Get-InstalledModule | Select-Object -ExpandProperty Name
-if (-not $moduleList.Contains("git-completion")) {
+$moduleList = @(Get-InstalledModule | Select-Object -ExpandProperty Name)
+if ($moduleList -notcontains "git-completion") {
   Install-Module git-completion
 }
 
