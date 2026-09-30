@@ -119,29 +119,49 @@ else
 end
 
 config.font_size = 12
+
 --font
-config.font = wezterm.font_with_fallback({
-  {
+local function font_exists(family)
+  local wezterm_bin = wezterm.executable_dir
+    .. (wezterm.target_triple:find("windows") and "\\wezterm.exe" or "/wezterm")
+
+  local success, stdout = wezterm.run_child_process({
+    wezterm_bin,
+    "-n",
+    "ls-fonts",
+    "--list-system",
+  })
+  return success and stdout:find(family, 1, true) ~= nil
+end
+
+local fonts = {}
+if font_exists("HackGen Console NF") then
+  table.insert(fonts, {
     family = "HackGen Console NF",
     weight = "Regular",
     stretch = "Normal",
     style = "Normal",
-  },
-  {
+  })
+else
+  wezterm.log_info("HackGen Console NF is not installed")
+end
+
+if font_exists("PlemolJP Console NF") then
+  table.insert(fonts, {
     family = "PlemolJP Console NF",
     weight = "Regular",
     stretch = "Normal",
     style = "Normal",
-  },
+  })
+else
+  wezterm.log_info("PlemolJP Console NF is not installed")
+end
 
-  -- <built-in>, BuiltIn
-  "JetBrains Mono",
-  -- <built-in>, BuiltIn
-  -- Assumed to have Emoji Presentation
-  "Noto Color Emoji",
-  -- <built-in>, BuiltIn
-  "Symbols Nerd Font Mono",
-})
+table.insert(fonts, "JetBrains Mono")
+table.insert(fonts, "Noto Color Emoji")
+table.insert(fonts, "Symbols Nerd Font Mono")
+
+config.font = wezterm.font_with_fallback(fonts)
 config.warn_about_missing_glyphs = false
 config.adjust_window_size_when_changing_font_size = true
 config.enable_kitty_keyboard = true
