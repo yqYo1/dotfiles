@@ -122,6 +122,20 @@ if wezterm.target_triple == "x86_64-pc-windows-msvc" then
       stretch = "Normal",
       style = "Normal",
     },
+    {
+      family = "PlemolJP Console NF",
+      weight = "Regular",
+      stretch = "Normal",
+      style = "Normal",
+    },
+
+    -- <built-in>, BuiltIn
+    "JetBrains Mono",
+    -- <built-in>, BuiltIn
+    -- Assumed to have Emoji Presentation
+    "Noto Color Emoji",
+    -- <built-in>, BuiltIn
+    "Symbols Nerd Font Mono",
   })
 else
   -- not Windows
