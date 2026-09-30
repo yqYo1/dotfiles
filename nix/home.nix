@@ -98,11 +98,12 @@ in
     llm-agents.ccusage
     llm-agents.claude-code
     llm-agents.codex
-    llm-agents.jules
+    llm-agents.dsh
     llm-agents.omp
     llm-agents.opencode
     llm-agents.pi
-    llm-agents.rtk
+    llm-agents.orca
+
   ];
 
   home.file = {
