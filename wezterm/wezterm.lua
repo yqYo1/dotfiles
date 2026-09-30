@@ -113,36 +113,36 @@ if wezterm.target_triple == "x86_64-pc-windows-msvc" then
   end
   --wezterm.log_info("front end = " .. frontEnd)
   config.front_end = frontEnd
-
-  --font
-  config.font = wezterm.font_with_fallback({
-    {
-      family = "HackGen Console NF",
-      weight = "Regular",
-      stretch = "Normal",
-      style = "Normal",
-    },
-    {
-      family = "PlemolJP Console NF",
-      weight = "Regular",
-      stretch = "Normal",
-      style = "Normal",
-    },
-
-    -- <built-in>, BuiltIn
-    "JetBrains Mono",
-    -- <built-in>, BuiltIn
-    -- Assumed to have Emoji Presentation
-    "Noto Color Emoji",
-    -- <built-in>, BuiltIn
-    "Symbols Nerd Font Mono",
-  })
 else
   -- not Windows
   config.window_background_opacity = 0.70
 end
 
 config.font_size = 12
+--font
+config.font = wezterm.font_with_fallback({
+  {
+    family = "HackGen Console NF",
+    weight = "Regular",
+    stretch = "Normal",
+    style = "Normal",
+  },
+  {
+    family = "PlemolJP Console NF",
+    weight = "Regular",
+    stretch = "Normal",
+    style = "Normal",
+  },
+
+  -- <built-in>, BuiltIn
+  "JetBrains Mono",
+  -- <built-in>, BuiltIn
+  -- Assumed to have Emoji Presentation
+  "Noto Color Emoji",
+  -- <built-in>, BuiltIn
+  "Symbols Nerd Font Mono",
+})
+config.warn_about_missing_glyphs = false
 config.adjust_window_size_when_changing_font_size = true
 config.enable_kitty_keyboard = true
 config.enable_kitty_graphics = true
