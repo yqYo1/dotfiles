@@ -76,6 +76,10 @@ return {
       augend.integer.alias.hex,
       augend.integer.alias.octal,
       augend.integer.alias.binary,
+      augend.constant.alias.en_weekday,
+      augend.constant.alias.en_weekday_full,
+      augend.constant.alias.ja_weekday,
+      augend.constant.alias.ja_weekday_full,
       augend.date.alias["%Y/%m/%d"],
       augend.date.alias["%Y-%m-%d"],
       augend.date.alias["%Y年%-m月%-d日(%ja)"],
@@ -89,10 +93,13 @@ return {
       augend.constant.new({ elements = { "yes", "no" }, cyclic = true }),
       augend.constant.new({ elements = { "Yes", "No" }, cyclic = true }),
       augend.constant.new({ elements = { "YES", "NO" }, cyclic = true }),
+      augend.constant.new({ elements = { "on", "off" }, cyclic = true }),
+      augend.constant.new({ elements = { "On", "Off" }, cyclic = true }),
+      augend.constant.new({ elements = { "ON", "OFF" }, cyclic = true }),
       -- augend.constant.alias.alpha,
       -- augend.constant.alias.Alpha,
       augend.semver.alias.semver,
-      augend.hexcolor.new({ case = "lower" }),
+      augend.hexcolor.new({ case = "prefer_lower" }),
     }
 
     config.augends:register_group({
