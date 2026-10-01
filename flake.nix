@@ -55,6 +55,12 @@
           overlays = [
             llm-agents.overlays.shared-nixpkgs
             (final: prev: {
+              # codex sandbox
+              # llm-agents = prev.llm-agents // {
+              #   codex = prev.llm-agents.codex.overrideAttrs (old: {
+              #     postFixup = builtins.replaceStrings [ "--prefix PATH :" ] [ "--suffix PATH :" ] old.postFixup;
+              #   });
+              # };
               aicommit2 = aicommit2.packages.${system}.default;
             })
           ];

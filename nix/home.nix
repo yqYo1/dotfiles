@@ -404,6 +404,33 @@ in
     opencode.enable = true;
   };
 
+  # service
+  # systemd.user.services.codex-remote-control = {
+  #   Unit = {
+  #     Description = "OpenAI Codex Remote Control";
+  #   };
+  #
+  #   Service = {
+  #     Type = "simple";
+  #     ExecStart = "${lib.getExe pkgs.llm-agents.codex} remote-control";
+  #
+  #     Restart = "always";
+  #     RestartSec = 5;
+  #
+  #     # Codex 0.156.1+ の foreground remote-control で、
+  #     # socket directory の permission check に引っ掛かる問題への対策。
+  #     UMask = "0077";
+  #
+  #     Environment = [
+  #       "PATH=${config.home.homeDirectory}/.local/bin:${config.home.profileDirectory}/bin:/usr/local/bin:/usr/bin:/bin"
+  #     ];
+  #   };
+  #
+  #   Install = {
+  #     WantedBy = [ "default.target" ];
+  #   };
+  # };
+
   xdg = {
     enable = true;
 
