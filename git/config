@@ -11,3 +11,5 @@
   format = ssh
 [commit]
   gpgsign = true
+[url "git@github.com:"]
+  pushInsteadOf = https://github.com/
