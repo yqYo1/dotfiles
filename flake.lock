@@ -71,6 +71,44 @@
         "type": "github"
       }
     },
+    "dsh": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1788799579,
+        "narHash": "sha256-QXEq9OMFLpJBTjTBUYw614Mmz7coB/QbToi0XyYiWJs=",
+        "owner": "deepseek-ai",
+        "repo": "deepseek-harness",
+        "rev": "c389f96bf3a9b6807cb71ed6bdad5849be0df6d8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "deepseek-ai",
+        "repo": "deepseek-harness",
+        "rev": "c389f96bf3a9b6807cb71ed6bdad5849be0df6d8",
+        "type": "github"
+      }
+    },
+    "dsh-nix": {
+      "inputs": {
+        "dsh": "dsh",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1790882655,
+        "narHash": "sha256-0NEfAP2H02TbMrOTJXxpC3CJV7+Ury07/rpWt1Cb4qc=",
+        "owner": "yqYo1",
+        "repo": "dsh-nix",
+        "rev": "cc4c801f189502a8e51132abf42f20970297e40c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "yqYo1",
+        "repo": "dsh-nix",
+        "type": "github"
+      }
+    },
     "flake-parts": {
       "inputs": {
         "nixpkgs-lib": "nixpkgs-lib"
@@ -157,11 +195,11 @@
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1790864162,
-        "narHash": "sha256-7utF8CsnM21wifMSyKO/E/5VmdK8lkgMKID1toZStIo=",
+        "lastModified": 1790866708,
+        "narHash": "sha256-1yu2AwhKxU2VtZh7dB5r1KUK2iu8aSrxX0+tGyZtAf0=",
         "owner": "numtide",
         "repo": "llm-agents.nix",
-        "rev": "681f29a6bd028afc6f454bf11411295a80403281",
+        "rev": "83cd3693f5f33071ceb33977f2298c8b40b2aba4",
         "type": "github"
       },
       "original": {
@@ -247,11 +285,11 @@
     },
     "nixpkgs_4": {
       "locked": {
-        "lastModified": 1790689126,
-        "narHash": "sha256-ilerN1WLSvF+HMjziC/Wv99J5y02maDH+6hZPwsORKg=",
+        "lastModified": 1790822859,
+        "narHash": "sha256-69xHQhAeMAD2wDXO7T2pcOZIF9Sga2W+JkmY2a11Ops=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "b4fd65b198c599cbe814fcb9f42d25d021595ec9",
+        "rev": "c59305bab2065cfecc4944690d9eedbb56f3a9fa",
         "type": "github"
       },
       "original": {
@@ -265,6 +303,7 @@
       "inputs": {
         "aicommit2": "aicommit2",
         "catppuccin": "catppuccin",
+        "dsh-nix": "dsh-nix",
         "flake-parts": "flake-parts_2",
         "home-manager": "home-manager",
         "llm-agents": "llm-agents",

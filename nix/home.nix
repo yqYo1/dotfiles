@@ -97,7 +97,7 @@ in
 
     llm-agents.ccusage
     llm-agents.claude-code
-    llm-agents.codex
+    # llm-agents.codex
     llm-agents.dsh
     llm-agents.omp
     llm-agents.opencode
@@ -206,6 +206,35 @@ in
           "*" = "ask";
         };
       };
+    };
+  };
+
+  programs.dsh = {
+    enable = true;
+    package = pkgs.llm-agents.dsh;
+
+    profiles.web = {
+      plugins = [
+        "@deepseek-ai/dsh-base"
+        "@deepseek-ai/dsh-web-app"
+
+        # ChatGPT subscription / Codex
+        "dsh-codex@0.3.2"
+      ];
+
+      userPatches = [
+        {
+          id = "llm-openai-codex";
+          config = {
+            searchMode = "live";
+
+            # OpenAI/Codex native compaction
+            useNativeCompaction = true;
+          };
+        }
+      ];
+
+      specsHash = "sha256-INvE43uf7q58QjE11LlK0oPqTCjgXfIMm8DExVGX5mQ=";
     };
   };
 
