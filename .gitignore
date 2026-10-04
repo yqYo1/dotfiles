@@ -24,3 +24,9 @@
 /lazygit/state.yml
 /rye/env
 /rye/*/*
+
+## Nix
+result
+result-*
+repl-result-*
+gcroot/
