@@ -98,7 +98,7 @@ in
     llm-agents.ccusage
     llm-agents.claude-code
     # llm-agents.codex
-    llm-agents.dsh
+    # llm-agents.dsh
     llm-agents.omp
     llm-agents.opencode
     llm-agents.pi
@@ -211,7 +211,7 @@ in
 
   programs.dsh = {
     enable = true;
-    package = pkgs.llm-agents.dsh;
+    # package = pkgs.llm-agents.dsh;
 
     profiles.web = {
       plugins = [
