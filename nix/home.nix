@@ -219,22 +219,22 @@ in
         "@deepseek-ai/dsh-web-app"
 
         # ChatGPT subscription / Codex
-        "dsh-codex@0.3.2"
+        # "dsh-codex@0.3.2"
       ];
 
-      userPatches = [
-        {
-          id = "llm-openai-codex";
-          config = {
-            searchMode = "live";
-
-            # OpenAI/Codex native compaction
-            useNativeCompaction = true;
-          };
-        }
-      ];
-
-      specsHash = "sha256-INvE43uf7q58QjE11LlK0oPqTCjgXfIMm8DExVGX5mQ=";
+      # userPatches = [
+      #   {
+      #     id = "llm-openai-codex";
+      #     config = {
+      #       searchMode = "live";
+      #
+      #       # OpenAI/Codex native compaction
+      #       useNativeCompaction = true;
+      #     };
+      #   }
+      # ];
+      #
+      # specsHash = "sha256-INvE43uf7q58QjE11LlK0oPqTCjgXfIMm8DExVGX5mQ=";
     };
   };
 
