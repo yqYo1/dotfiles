@@ -196,14 +196,40 @@ in
 
         };
       };
-      model = "litellm/deepseek-v4-flash";
-      small_model = "litellm/deepseek-v4-flash";
+      provider.opencode = {
+        models = {
+          "glm-5.3-flash-free" = {
+            limit = {
+              context = 1000000;
+              output = 32000;
+            };
+            options.reasoningEffort = "max";
+          };
+          "deepseek-v4.1-flash-free" = {
+            limit = {
+              context = 1000000;
+              output = 32000;
+            };
+            options.reasoningEffort = "max";
+          };
+        };
+      };
+      small_model = "opencode/glm-5.3-flash-free";
+      model = "opencode/deepseek-v4.1-flash-free";
       default_agent = "build";
       autoupdate = false;
       permission = {
         edit = "allow";
         bash = {
           "*" = "ask";
+          "pwd" = "allow";
+          "ls" = "allow";
+          "ls *" = "allow";
+          "git status" = "allow";
+          "git status *" = "allow";
+          "git diff" = "allow";
+          "git diff *" = "allow";
+          "git push *" = "ask";
         };
       };
     };
