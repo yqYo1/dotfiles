@@ -283,6 +283,13 @@ in
     };
   };
 
+  # `nh` shells out to `nix`, but systemd user services run with the user
+  # manager's environment, which has no Nix on PATH: the weekly cleanup fails
+  # instantly. Give the generated unit an explicit PATH.
+  systemd.user.services.nh-clean.Service.Environment = [
+    "PATH=${pkgs.nix}/bin:/usr/bin:/bin"
+  ];
+
   programs.zsh = {
     enable = true;
     autocd = false;
