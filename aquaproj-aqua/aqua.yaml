@@ -15,7 +15,7 @@
 
 registries:
   - type: standard
-    ref: v4.574.1 # renovate: depName=aquaproj/aqua-registry
+    ref: v4.575.0 # renovate: depName=aquaproj/aqua-registry
 
 packages:
   - name: BurntSushi/ripgrep@15.2.0
@@ -30,12 +30,12 @@ packages:
   - name: golang/go@go1.27.2
   - name: golang/tools/goimports@v0.33.0
   - name: golang/tools/gorename@v0.25.0
-  - name: jesseduffield/lazygit@v0.65.1
+  - name: jesseduffield/lazygit@v0.66.1
   - name: jqlang/jq@jq-1.8.2
   - name: junegunn/fzf@v0.74.5
   - name: mattn/efm-langserver@v0.0.57
   - name: neovim/neovim@v0.12.6
-  - name: nodejs/node@v26.10.0
+  - name: nodejs/node@v26.12.0
   - name: rhysd/actionlint@v1.7.12
   - name: rhysd/vim-startuptime@v1.3.2
   - name: rossmacarthur/sheldon@0.8.5
@@ -44,8 +44,8 @@ packages:
   - name: sharkdp/fd@v10.5.0
   - name: starship/starship@v1.26.0
   - name: sxyazi/yazi@v26.9.1
-  - name: x-motemen/ghq@v1.10.1
+  - name: x-motemen/ghq@v1.11.2
   - name: ziglang/zig@0.15.1
   - name: zigtools/zls@0.16.0
   - name: arduino/arduino-language-server@0.7.7
-  - name: k1LoW/git-wt@v0.29.3
+  - name: k1LoW/git-wt@v0.30.0
