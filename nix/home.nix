@@ -151,43 +151,156 @@ in
   # Declarative Agent Skills: one shared skill set delivered to every
   # Nix-managed agent. Hermes keeps its own skills directory for now, so it is
   # intentionally not a target here.
-  programs.agent-skills = {
-    enable = true;
+  programs.agent-skills =
+    let
+      # mattpocock/skills nests its skills as skills/<group>/<skill>/SKILL.md.
+      # Agents discover only <target>/<skill>/SKILL.md, so every selected skill
+      # is renamed to its basename and installed flat.
+      mattSkills = [
+          "engineering/ask-matt"
+          "engineering/code-review"
+          "engineering/codebase-design"
+          "engineering/diagnosing-bugs"
+          "engineering/domain-modeling"
+          "engineering/grill-with-docs"
+          "engineering/implement"
+          "engineering/implement-spec"
+          "engineering/improve-codebase-architecture"
+          "engineering/pr"
+          "engineering/prototype"
+          "engineering/research"
+          "engineering/retro"
+          "engineering/setup-matt-pocock-skills"
+          "engineering/tdd"
+          "engineering/to-spec"
+          "engineering/to-tickets"
+          "engineering/triage"
+          "engineering/wayfinder"
+          "engineering/wizard"
+          "in-progress/chief-of-staff"
+          "in-progress/claude-handoff"
+          "in-progress/loop-me"
+          "in-progress/setup-ts-deep-modules"
+          "in-progress/writing-beats"
+          "in-progress/writing-fragments"
+          "in-progress/writing-shape"
+          "misc/git-guardrails-claude-code"
+          "misc/migrate-to-shoehorn"
+          "misc/scaffold-exercises"
+          "misc/setup-pre-commit"
+          "productivity/grill-me"
+          "productivity/grilling"
+          "productivity/handoff"
+          "productivity/teach"
+          "productivity/to-questionnaire"
+          "productivity/wait-what"
+          "productivity/writing-for-agents"
+      ];
+      flatFrom =
+        source: ids:
+        builtins.listToAttrs (
+          map (id: {
+            name = builtins.baseNameOf id;
+            value = {
+              from = source;
+              path = id;
+              rename = builtins.baseNameOf id;
+            };
+          }) ids
+        );
+    in
+    {
+      enable = true;
 
-    sources = {
-      # Skills authored in this repository. `nix/skills` is deliberately not an
-      # agent-discoverable path (`.claude/skills`, `.agents/skills`, ...): these
-      # skills are not project skills of the dotfiles repository itself.
-      local = {
-        path = ./skills;
+      sources = {
+        # Skills authored in this repository. `nix/skills` is deliberately not
+        # an agent-discoverable path (`.claude/skills`, `.agents/skills`, ...):
+        # these are not project skills of the dotfiles repository itself.
+        local = {
+          path = ./skills;
+        };
+
+        # Third-party catalogs, all pinned by flake.lock.
+        mattpocock = {
+          input = "mattpocock-skills";
+          subdir = "skills";
+          filter.maxDepth = 2;
+        };
+        intel = {
+          input = "intel-skills";
+          subdir = "skills";
+        };
+        # intel/gpu-ai-skills ships the same skills as intel/skills; only its
+        # unique skill is selected so the catalog has no duplicate IDs.
+        intel-gpu = {
+          input = "intel-gpu-ai-skills";
+          subdir = "plugins/intel-gpu-ai-skills/skills";
+          filter.nameRegex = "^enable-xpu-monitoring$";
+        };
+        uxl = {
+          input = "uxl-skills";
+          subdir = "skills";
+        };
       };
 
-      # Third-party catalog, pinned by flake.lock (anthropic-skills input).
-      # No idPrefix: skills are installed flat as <target>/<skill>/SKILL.md,
-      # which is the layout agents discover. Names do not collide with the
-      # local source.
-      anthropic = {
-        input = "anthropic-skills";
-        subdir = "skills";
+      skills = {
+        enable = [
+          "git-workflow"
+          "enable-xpu-monitoring"
+          # intel/skills
+          "cuda-to-xpu-migration"
+          "dpnp-interop"
+          "dpnp-io"
+          "dpnp-linalg-fft"
+          "dpnp-memory"
+          "dpnp-migration"
+          "dpnp-quickstart"
+          "dpnp-random"
+          "dpnp-troubleshooting"
+          "linux-perf"
+          "llamacpp-xpu-run"
+          "mkl-extension-advisor"
+          "model-can-it-fit"
+          "model-config-recommend"
+          "onetbb-quickstart"
+          "performance-patterns"
+          "phoronix-test-suite"
+          "sglang-xpu-bench"
+          "sglang-xpu-run"
+          "torch-xpu-bench"
+          "torch-xpu-profile"
+          "torch-xpu-run"
+          "vllm-xpu-bench"
+          "vllm-xpu-profile"
+          "vllm-xpu-run"
+          "xpu-container-run"
+          "xpu-deploy-plan"
+          "xpu-discover"
+          "xpu-model-type-detect"
+          "xpu-port"
+          "xpu-profile-unitrace"
+          "xpu-runtime-preflight"
+          "xpu-system-setup"
+          # uxlfoundation/skills
+          "uxl-oneccl"
+          "uxl-onedal"
+          "uxl-onednn"
+          "uxl-onedpl"
+          "uxl-onemath"
+          "uxl-onetbb"
+          "uxl-performance-validation"
+          "uxl-sycl-build-debug"
+        ];
+        explicit = flatFrom "mattpocock" mattSkills;
+      };
+
+      targets = {
+        agents.enable = true; # omp / orca (shared Agent Skills home)
+        claude.enable = true; # Claude Code
+        opencode.enable = true; # opencode
+        pi.enable = true; # pi
       };
     };
-
-    skills.enable = [
-      "git-workflow"
-      "pdf"
-      "docx"
-      "xlsx"
-      "pptx"
-      "skill-creator"
-    ];
-
-    targets = {
-      agents.enable = true; # omp / orca (shared Agent Skills home)
-      claude.enable = true; # Claude Code
-      opencode.enable = true; # opencode
-      pi.enable = true; # pi
-    };
-  };
 
   programs.opencode = {
     enable = true;

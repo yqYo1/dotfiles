@@ -39,22 +39,6 @@
         "type": "github"
       }
     },
-    "anthropic-skills": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1791571549,
-        "narHash": "sha256-+UIqBnzyeIOvJSKYaDaE3GYPEpLw7qQqyUw5S971AfU=",
-        "owner": "anthropics",
-        "repo": "skills",
-        "rev": "dbd4588f9e1033efb41dad4bef2f7947c8993d44",
-        "type": "github"
-      },
-      "original": {
-        "owner": "anthropics",
-        "repo": "skills",
-        "type": "github"
-      }
-    },
     "bun2nix": {
       "inputs": {
         "flake-parts": [
@@ -223,6 +207,38 @@
         "type": "github"
       }
     },
+    "intel-gpu-ai-skills": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1791998531,
+        "narHash": "sha256-8OG6GWoQixTFLCQT/2OyowRjqmGHGfLHLB5dkZlrKgM=",
+        "owner": "intel",
+        "repo": "gpu-ai-skills",
+        "rev": "496c1553d26a8d742541231cee7ef5bdb4a1435c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "intel",
+        "repo": "gpu-ai-skills",
+        "type": "github"
+      }
+    },
+    "intel-skills": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1792421103,
+        "narHash": "sha256-tXrVUXWwMfUxQqWrJLUDWbVFEO0NzGLqU40aqse3pAs=",
+        "owner": "intel",
+        "repo": "skills",
+        "rev": "ebdd6084add7276c47823e4b3ccd4fa7ad7bf519",
+        "type": "github"
+      },
+      "original": {
+        "owner": "intel",
+        "repo": "skills",
+        "type": "github"
+      }
+    },
     "llm-agents": {
       "inputs": {
         "bun2nix": "bun2nix",
@@ -242,6 +258,22 @@
       "original": {
         "owner": "numtide",
         "repo": "llm-agents.nix",
+        "type": "github"
+      }
+    },
+    "mattpocock-skills": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1792425100,
+        "narHash": "sha256-2FKfe3/Fwc4MmwBLa+d/oQW4/gtYIssdWapy2MPd39I=",
+        "owner": "mattpocock",
+        "repo": "skills",
+        "rev": "5beb35b040e3de97e54fa9e386d7e42d15c295c2",
+        "type": "github"
+      },
+      "original": {
+        "owner": "mattpocock",
+        "repo": "skills",
         "type": "github"
       }
     },
@@ -340,14 +372,17 @@
       "inputs": {
         "agent-skills": "agent-skills",
         "aicommit2": "aicommit2",
-        "anthropic-skills": "anthropic-skills",
         "catppuccin": "catppuccin",
         "dsh-nix": "dsh-nix",
         "flake-parts": "flake-parts_2",
         "home-manager": "home-manager",
+        "intel-gpu-ai-skills": "intel-gpu-ai-skills",
+        "intel-skills": "intel-skills",
         "llm-agents": "llm-agents",
+        "mattpocock-skills": "mattpocock-skills",
         "nixpkgs": "nixpkgs_4",
-        "systems": "systems_3"
+        "systems": "systems_3",
+        "uxl-skills": "uxl-skills"
       }
     },
     "systems": {
@@ -413,6 +448,22 @@
       "original": {
         "owner": "numtide",
         "repo": "treefmt-nix",
+        "type": "github"
+      }
+    },
+    "uxl-skills": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1788909450,
+        "narHash": "sha256-a6IWgi66CPdn0DwcaFfmap8eT8gMJRB0aGHCUUD1968=",
+        "owner": "uxlfoundation",
+        "repo": "skills",
+        "rev": "ba807a8bb42a5b68da6e33965155cd800aac0668",
+        "type": "github"
+      },
+      "original": {
+        "owner": "uxlfoundation",
+        "repo": "skills",
         "type": "github"
       }
     }
