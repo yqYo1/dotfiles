@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  inputs,
   username,
   homeDirectory,
   dotfiles,
@@ -153,155 +154,121 @@ in
   # intentionally not a target here.
   programs.agent-skills =
     let
-      # mattpocock/skills nests its skills as skills/<group>/<skill>/SKILL.md.
-      # Agents discover only <target>/<skill>/SKILL.md, so every selected skill
-      # is renamed to its basename and installed flat.
-      mattSkills = [
-          "engineering/ask-matt"
-          "engineering/code-review"
-          "engineering/codebase-design"
-          "engineering/diagnosing-bugs"
-          "engineering/domain-modeling"
-          "engineering/grill-with-docs"
-          "engineering/implement"
-          "engineering/implement-spec"
-          "engineering/improve-codebase-architecture"
-          "engineering/pr"
-          "engineering/prototype"
-          "engineering/research"
-          "engineering/retro"
-          "engineering/setup-matt-pocock-skills"
-          "engineering/tdd"
-          "engineering/to-spec"
-          "engineering/to-tickets"
-          "engineering/triage"
-          "engineering/wayfinder"
-          "engineering/wizard"
-          "in-progress/chief-of-staff"
-          "in-progress/claude-handoff"
-          "in-progress/loop-me"
-          "in-progress/setup-ts-deep-modules"
-          "in-progress/writing-beats"
-          "in-progress/writing-fragments"
-          "in-progress/writing-shape"
-          "misc/git-guardrails-claude-code"
-          "misc/migrate-to-shoehorn"
-          "misc/scaffold-exercises"
-          "misc/setup-pre-commit"
-          "productivity/grill-me"
-          "productivity/grilling"
-          "productivity/handoff"
-          "productivity/teach"
-          "productivity/to-questionnaire"
-          "productivity/wait-what"
-          "productivity/writing-for-agents"
-      ];
-      flatFrom =
-        source: ids:
-        builtins.listToAttrs (
-          map (id: {
-            name = builtins.baseNameOf id;
-            value = {
-              from = source;
-              path = id;
-              rename = builtins.baseNameOf id;
-            };
-          }) ids
-        );
-      # builtins.listToAttrs keeps the first duplicate key and silently drops
-      # the rest, so a basename collision added upstream would lose a skill
-      # without an error. Fail loudly instead.
-      mattNames = map builtins.baseNameOf mattSkills;
+      agentLib = inputs."agent-skills".lib.agent-skills;
+
+      # Source definitions are used both by the module and by the catalog
+      # queries below, so selection can never drift from what is discovered.
+      srcLocal = {
+        path = ./skills;
+      };
+      srcMatt = {
+        path = inputs."mattpocock-skills";
+        subdir = "skills";
+        filter.maxDepth = 2;
+      };
+      srcIntel = {
+        path = inputs."intel-skills";
+        subdir = "skills";
+      };
+      srcGpu = {
+        path = inputs."intel-gpu-ai-skills";
+        subdir = "plugins/intel-gpu-ai-skills/skills";
+      };
+      srcUxl = {
+        path = inputs."uxl-skills";
+        subdir = "skills";
+      };
+
+      idsOf = name: source: builtins.attrNames (agentLib.discoverCatalog { ${name} = source; });
+
+      localIds = idsOf "local" srcLocal;
+      mattIds = idsOf "mattpocock" srcMatt;
+      intelIds = idsOf "intel" srcIntel;
+      gpuIds = idsOf "intel-gpu" srcGpu;
+      uxlIds = idsOf "uxl" srcUxl;
+
+      # intel/gpu-ai-skills repeats the intel/skills catalog. Drop every name
+      # intel already provides and keep the remainder, so a new gpu-only skill
+      # is picked up automatically and a skill that intel later absorbs stops
+      # being duplicated instead of breaking evaluation.
+      gpuUnique = builtins.filter (id: !(builtins.elem id intelIds)) gpuIds;
+      gpuRegex = "^(${lib.concatMapStringsSep "|" lib.escapeRegex gpuUnique})$";
+
+      # mattpocock/skills nests skills as skills/<group>/<skill>/SKILL.md while
+      # agents discover only <target>/<skill>/SKILL.md, so every discovered
+      # skill is renamed to its basename and installed flat.
+      mattNames = map builtins.baseNameOf mattIds;
       mattDuplicateNames = lib.filter (
         name: builtins.length (builtins.filter (other: other == name) mattNames) > 1
       ) (lib.unique mattNames);
       explicitMatt =
         if mattDuplicateNames == [ ] then
-          flatFrom "mattpocock" mattSkills
+          builtins.listToAttrs (
+            map
+              (id: {
+                name = builtins.baseNameOf id;
+                value = {
+                  from = "mattpocock";
+                  path = id;
+                  rename = builtins.baseNameOf id;
+                };
+              })
+              mattIds
+          )
         else
           throw "agent-skills: duplicate mattpocock skill basenames: ${lib.concatStringsSep ", " mattDuplicateNames}";
+
+      # A source that stops yielding skills means its layout moved upstream.
+      # Fail instead of silently installing nothing.
+      emptySources = map (entry: entry.name) (
+        builtins.filter (entry: entry.ids == [ ]) [
+          {
+            name = "local";
+            ids = localIds;
+          }
+          {
+            name = "mattpocock";
+            ids = mattIds;
+          }
+          {
+            name = "intel";
+            ids = intelIds;
+          }
+          {
+            name = "intel-gpu";
+            ids = gpuIds;
+          }
+          {
+            name = "uxl";
+            ids = uxlIds;
+          }
+        ]
+      );
     in
+    assert builtins.length emptySources == 0
+    || throw "agent-skills: source(s) ${lib.concatStringsSep ", " emptySources} now yield no skills; check their layout upstream";
     {
       enable = true;
 
       sources = {
-        # Skills authored in this repository. `nix/skills` is deliberately not
-        # an agent-discoverable path (`.claude/skills`, `.agents/skills`, ...):
-        # these are not project skills of the dotfiles repository itself.
-        local = {
-          path = ./skills;
+        local = srcLocal;
+        mattpocock = srcMatt;
+        intel = srcIntel;
+        intel-gpu = srcGpu // {
+          filter.nameRegex = gpuRegex;
         };
-
-        # Third-party catalogs, all pinned by flake.lock.
-        mattpocock = {
-          input = "mattpocock-skills";
-          subdir = "skills";
-          filter.maxDepth = 2;
-        };
-        intel = {
-          input = "intel-skills";
-          subdir = "skills";
-        };
-        # intel/gpu-ai-skills ships the same skills as intel/skills; only its
-        # unique skill is selected so the catalog has no duplicate IDs.
-        intel-gpu = {
-          input = "intel-gpu-ai-skills";
-          subdir = "plugins/intel-gpu-ai-skills/skills";
-          filter.nameRegex = "^enable-xpu-monitoring$";
-        };
-        uxl = {
-          input = "uxl-skills";
-          subdir = "skills";
-        };
+        uxl = srcUxl;
       };
 
       skills = {
-        enable = [
-          "git-workflow"
-          "enable-xpu-monitoring"
-          # intel/skills
-          "cuda-to-xpu-migration"
-          "dpnp-interop"
-          "dpnp-io"
-          "dpnp-linalg-fft"
-          "dpnp-memory"
-          "dpnp-migration"
-          "dpnp-quickstart"
-          "dpnp-random"
-          "dpnp-troubleshooting"
-          "linux-perf"
-          "llamacpp-xpu-run"
-          "mkl-extension-advisor"
-          "model-can-it-fit"
-          "model-config-recommend"
-          "onetbb-quickstart"
-          "performance-patterns"
-          "phoronix-test-suite"
-          "sglang-xpu-bench"
-          "sglang-xpu-run"
-          "torch-xpu-bench"
-          "torch-xpu-profile"
-          "torch-xpu-run"
-          "vllm-xpu-bench"
-          "vllm-xpu-profile"
-          "vllm-xpu-run"
-          "xpu-container-run"
-          "xpu-deploy-plan"
-          "xpu-discover"
-          "xpu-model-type-detect"
-          "xpu-port"
-          "xpu-profile-unitrace"
-          "xpu-runtime-preflight"
-          "xpu-system-setup"
-          # uxlfoundation/skills
-          "uxl-oneccl"
-          "uxl-onedal"
-          "uxl-onednn"
-          "uxl-onedpl"
-          "uxl-onemath"
-          "uxl-onetbb"
-          "uxl-performance-validation"
-          "uxl-sycl-build-debug"
+        # Everything discovered is installed. A new upstream skill is picked up
+        # without editing this file; mattpocock is selected through `explicit`
+        # because its skills need flattening.
+        enableAll = [
+          "local"
+          "intel"
+          "intel-gpu"
+          "uxl"
         ];
         explicit = explicitMatt;
       };
