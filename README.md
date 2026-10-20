@@ -37,14 +37,28 @@ All non-local sources are `flake = false` inputs pinned in `flake.lock`.
 
 ### Selection and targets
 
-- `programs.agent-skills.skills.enable` lists the skill IDs to install. The
-  prefix-free IDs keep the installed layout flat (`<target>/<skill>/SKILL.md`),
-  which is what agents discover.
-- Targets are every Nix-managed agent: `agents` (`~/.agents/skills`, read by omp
-  and orca), `claude` (`~/.claude/skills`), `opencode`
-  (`~/.config/opencode/skills`), and `pi` (`~/.pi/agent/skills`).
-- Hermes is not a target yet. It keeps its own skills directory until that
-  directory is managed by Nix.
+Selection is source-driven, not name-driven: every skill the catalogs contain is
+installed, so a flake input update never needs a hand-edited allowlist.
+
+- `skills.enableAll` covers `local`, `intel`, `intel-gpu` and `uxl`. A skill that
+  appears upstream is installed on the next activation.
+- `mattpocock` is selected through `skills.explicit`, generated from the
+  discovered catalog, because its two-level layout has to be flattened to
+  `<target>/<skill>/SKILL.md`. New upstream skills are flattened the same way.
+- `intel-gpu` is filtered to the skills `intel` does not provide. The filter is
+  computed from both catalogs at evaluation time, so a gpu-only skill is picked
+  up automatically and a skill that `intel` later absorbs stops being a
+  duplicate instead of breaking evaluation.
+- Structural drift fails the build instead of silently installing less: a source
+  that yields no skills, a duplicate skill ID across sources, and duplicate
+  flattened basenames all raise an evaluation error.
+
+Targets are every Nix-managed agent: `agents` (`~/.agents/skills`, read by omp
+and orca), `claude` (`~/.claude/skills`), `opencode`
+(`~/.config/opencode/skills`), and `pi` (`~/.pi/agent/skills`).
+
+Hermes is not a target yet. It keeps its own skills directory until that
+directory is managed by Nix.
 
 Each target directory is owned by agent-skills-nix and carries
 `.agent-skills-managed.json`; synchronization rewrites it, so do not add
@@ -53,9 +67,10 @@ activation once with `AGENT_SKILLS_FORCE=1`.
 
 ### Add a skill
 
-1. Local skill: create `nix/skills/<name>/SKILL.md` and add `"<name>"` to
-   `skills.enable`.
-2. Third-party skill: add the repository as a `flake = false` input, declare a
-   source such as `sources.<name> = { input = "<input>"; subdir = "skills"; };`,
-   then add the discovered skill IDs to `skills.enable`.
+1. Local skill: create `nix/skills/<name>/SKILL.md`. It is installed on the next
+   `nix run .#switch` without any list edit.
+2. Third-party catalog: add the repository as a `flake = false` input and declare
+   a source such as `sources.<name> = { path = inputs."<input>"; subdir = "skills"; };`,
+   then add `<name>` to `skills.enableAll`. Its skills are installed as they are
+   discovered.
 3. Apply with `nix run .#switch`.
