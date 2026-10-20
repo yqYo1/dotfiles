@@ -24,8 +24,16 @@ Agent Skills (`SKILL.md` directories) are managed declaratively with
 - `local` — `nix/skills/`, skills authored in this repository. The path is
   intentionally not an agent-discovered location (`.claude/skills`,
   `.agents/skills`, ...): these are not skills of the dotfiles repository itself.
-- `anthropic` — the `anthropic-skills` flake input (`github:anthropics/skills`),
-  pinned in `flake.lock`.
+- `mattpocock` — `github:mattpocock/skills`. The repository nests skills as
+  `skills/<group>/<skill>/SKILL.md`, so every selected skill is renamed to its
+  basename and installed flat.
+- `intel` — `github:intel/skills`.
+- `intel-gpu` — `github:intel/gpu-ai-skills`. It repeats the `intel` catalog, so
+  the source is filtered to its unique skill (`enable-xpu-monitoring`) and the
+  rest comes from `intel`.
+- `uxl` — `github:uxlfoundation/skills`.
+
+All non-local sources are `flake = false` inputs pinned in `flake.lock`.
 
 ### Selection and targets
 

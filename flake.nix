@@ -34,10 +34,22 @@
       url = "github:Kyure-A/agent-skills-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # Skill catalog source (Agent Skills format). Non-flake input: the
-    # repository is consumed as a plain source tree by agent-skills-nix.
-    anthropic-skills = {
-      url = "github:anthropics/skills";
+    # Skill catalog sources (Agent Skills format). Non-flake inputs: consumed as
+    # plain source trees by agent-skills-nix.
+    mattpocock-skills = {
+      url = "github:mattpocock/skills";
+      flake = false;
+    };
+    intel-skills = {
+      url = "github:intel/skills";
+      flake = false;
+    };
+    intel-gpu-ai-skills = {
+      url = "github:intel/gpu-ai-skills";
+      flake = false;
+    };
+    uxl-skills = {
+      url = "github:uxlfoundation/skills";
       flake = false;
     };
   };
