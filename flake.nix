@@ -30,6 +30,16 @@
       url = "github:yqYo1/dsh-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    agent-skills = {
+      url = "github:Kyure-A/agent-skills-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    # Skill catalog source (Agent Skills format). Non-flake input: the
+    # repository is consumed as a plain source tree by agent-skills-nix.
+    anthropic-skills = {
+      url = "github:anthropics/skills";
+      flake = false;
+    };
   };
 
   outputs =
@@ -109,10 +119,13 @@
             "${dotfiles}/nix/home.nix"
             catppuccin.homeModules.catppuccin
             dsh-nix.homeManagerModules.dsh
+            inputs.agent-skills.homeManagerModules.default
           ];
 
           extraSpecialArgs = {
             inherit username homeDirectory dotfiles;
+            # agent-skills-nix resolves `sources.<name>.input` against this.
+            inputs = inputs;
           };
         };
     in
