@@ -208,6 +208,18 @@ in
             };
           }) ids
         );
+      # builtins.listToAttrs keeps the first duplicate key and silently drops
+      # the rest, so a basename collision added upstream would lose a skill
+      # without an error. Fail loudly instead.
+      mattNames = map builtins.baseNameOf mattSkills;
+      mattDuplicateNames = lib.filter (
+        name: builtins.length (builtins.filter (other: other == name) mattNames) > 1
+      ) (lib.unique mattNames);
+      explicitMatt =
+        if mattDuplicateNames == [ ] then
+          flatFrom "mattpocock" mattSkills
+        else
+          throw "agent-skills: duplicate mattpocock skill basenames: ${lib.concatStringsSep ", " mattDuplicateNames}";
     in
     {
       enable = true;
@@ -291,7 +303,7 @@ in
           "uxl-performance-validation"
           "uxl-sycl-build-debug"
         ];
-        explicit = flatFrom "mattpocock" mattSkills;
+        explicit = explicitMatt;
       };
 
       targets = {
