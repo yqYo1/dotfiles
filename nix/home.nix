@@ -148,6 +148,47 @@ in
     '';
   };
 
+  # Declarative Agent Skills: one shared skill set delivered to every
+  # Nix-managed agent. Hermes keeps its own skills directory for now, so it is
+  # intentionally not a target here.
+  programs.agent-skills = {
+    enable = true;
+
+    sources = {
+      # Skills authored in this repository. `nix/skills` is deliberately not an
+      # agent-discoverable path (`.claude/skills`, `.agents/skills`, ...): these
+      # skills are not project skills of the dotfiles repository itself.
+      local = {
+        path = ./skills;
+      };
+
+      # Third-party catalog, pinned by flake.lock (anthropic-skills input).
+      # No idPrefix: skills are installed flat as <target>/<skill>/SKILL.md,
+      # which is the layout agents discover. Names do not collide with the
+      # local source.
+      anthropic = {
+        input = "anthropic-skills";
+        subdir = "skills";
+      };
+    };
+
+    skills.enable = [
+      "git-workflow"
+      "pdf"
+      "docx"
+      "xlsx"
+      "pptx"
+      "skill-creator"
+    ];
+
+    targets = {
+      agents.enable = true; # omp / orca (shared Agent Skills home)
+      claude.enable = true; # Claude Code
+      opencode.enable = true; # opencode
+      pi.enable = true; # pi
+    };
+  };
+
   programs.opencode = {
     enable = true;
     package = pkgs.llm-agents.opencode;
