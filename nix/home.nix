@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  inputs,
   username,
   homeDirectory,
   dotfiles,
@@ -147,6 +148,138 @@ in
       exec ${lib.getExe pkgs.lazygit} "$@"
     '';
   };
+
+  # Declarative Agent Skills: one shared skill set delivered to every
+  # Nix-managed agent. Hermes keeps its own skills directory for now, so it is
+  # intentionally not a target here.
+  programs.agent-skills =
+    let
+      agentLib = inputs."agent-skills".lib.agent-skills;
+
+      # Source definitions are used both by the module and by the catalog
+      # queries below, so selection can never drift from what is discovered.
+      srcLocal = {
+        path = ./skills;
+      };
+      srcMatt = {
+        path = inputs."mattpocock-skills";
+        subdir = "skills";
+        filter.maxDepth = 2;
+      };
+      srcIntel = {
+        path = inputs."intel-skills";
+        subdir = "skills";
+      };
+      srcGpu = {
+        path = inputs."intel-gpu-ai-skills";
+        subdir = "plugins/intel-gpu-ai-skills/skills";
+      };
+      srcUxl = {
+        path = inputs."uxl-skills";
+        subdir = "skills";
+      };
+
+      idsOf = name: source: builtins.attrNames (agentLib.discoverCatalog { ${name} = source; });
+
+      localIds = idsOf "local" srcLocal;
+      mattIds = idsOf "mattpocock" srcMatt;
+      intelIds = idsOf "intel" srcIntel;
+      gpuIds = idsOf "intel-gpu" srcGpu;
+      uxlIds = idsOf "uxl" srcUxl;
+
+      # intel/gpu-ai-skills repeats the intel/skills catalog. Drop every name
+      # intel already provides and keep the remainder, so a new gpu-only skill
+      # is picked up automatically and a skill that intel later absorbs stops
+      # being duplicated instead of breaking evaluation.
+      gpuUnique = builtins.filter (id: !(builtins.elem id intelIds)) gpuIds;
+      gpuRegex = "^(${lib.concatMapStringsSep "|" lib.escapeRegex gpuUnique})$";
+
+      # mattpocock/skills nests skills as skills/<group>/<skill>/SKILL.md while
+      # agents discover only <target>/<skill>/SKILL.md, so every discovered
+      # skill is renamed to its basename and installed flat.
+      mattNames = map builtins.baseNameOf mattIds;
+      mattDuplicateNames = lib.filter (
+        name: builtins.length (builtins.filter (other: other == name) mattNames) > 1
+      ) (lib.unique mattNames);
+      explicitMatt =
+        if mattDuplicateNames == [ ] then
+          builtins.listToAttrs (
+            map
+              (id: {
+                name = builtins.baseNameOf id;
+                value = {
+                  from = "mattpocock";
+                  path = id;
+                  rename = builtins.baseNameOf id;
+                };
+              })
+              mattIds
+          )
+        else
+          throw "agent-skills: duplicate mattpocock skill basenames: ${lib.concatStringsSep ", " mattDuplicateNames}";
+
+      # A source that stops yielding skills means its layout moved upstream.
+      # Fail instead of silently installing nothing.
+      emptySources = map (entry: entry.name) (
+        builtins.filter (entry: entry.ids == [ ]) [
+          {
+            name = "local";
+            ids = localIds;
+          }
+          {
+            name = "mattpocock";
+            ids = mattIds;
+          }
+          {
+            name = "intel";
+            ids = intelIds;
+          }
+          {
+            name = "intel-gpu";
+            ids = gpuIds;
+          }
+          {
+            name = "uxl";
+            ids = uxlIds;
+          }
+        ]
+      );
+    in
+    assert builtins.length emptySources == 0
+    || throw "agent-skills: source(s) ${lib.concatStringsSep ", " emptySources} now yield no skills; check their layout upstream";
+    {
+      enable = true;
+
+      sources = {
+        local = srcLocal;
+        mattpocock = srcMatt;
+        intel = srcIntel;
+        intel-gpu = srcGpu // {
+          filter.nameRegex = gpuRegex;
+        };
+        uxl = srcUxl;
+      };
+
+      skills = {
+        # Everything discovered is installed. A new upstream skill is picked up
+        # without editing this file; mattpocock is selected through `explicit`
+        # because its skills need flattening.
+        enableAll = [
+          "local"
+          "intel"
+          "intel-gpu"
+          "uxl"
+        ];
+        explicit = explicitMatt;
+      };
+
+      targets = {
+        agents.enable = true; # omp / orca (shared Agent Skills home)
+        claude.enable = true; # Claude Code
+        opencode.enable = true; # opencode
+        pi.enable = true; # pi
+      };
+    };
 
   programs.opencode = {
     enable = true;
