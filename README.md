@@ -53,10 +53,11 @@ installed, so a flake input update never needs a hand-edited allowlist.
   that yields no skills, a duplicate skill ID across sources, and duplicate
   flattened basenames all raise an evaluation error.
 
-Targets follow `home.packages`: a target is enabled while the agent's package is
-listed there and disabled when the package is removed from the list.
-`programs.*.enable` is deliberately not inspected, so a package installed by a
-program module does not turn a target on.
+Targets follow `config.home.packages`: a target is enabled while the agent's
+package is present there and disabled when it is removed. Detection never reads
+`programs.*.enable`. Note that a Home Manager program module can itself add its
+package to `home.packages` (for example `programs.opencode` does); such a package
+counts, because `home.packages` is the single source of truth.
 
 | Target | Enabled by the package name |
 | --- | --- |

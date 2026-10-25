@@ -33,7 +33,19 @@ let
       recursive = true;
     });
 
-  homePackages = with pkgs; [
+
+  # Agent skill targets follow this list only. `programs.*.enable` is
+  # deliberately not inspected: a package installed by a program module must
+  # not turn a target on.
+  hasAgentPackage = pname: builtins.any (p: lib.getName p == pname) config.home.packages;
+in
+{
+  home.username = username;
+  home.homeDirectory = homeDirectory;
+  home.stateVersion = "26.11";
+  news.display = "silent";
+
+  home.packages = with pkgs; [
     actionlint
     aicommit2
     arduino-language-server
@@ -100,19 +112,6 @@ let
     llm-agents.orca
 
   ];
-
-  # Agent skill targets follow this list only. `programs.*.enable` is
-  # deliberately not inspected: a package installed by a program module must
-  # not turn a target on.
-  hasAgentPackage = pname: builtins.any (p: lib.getName p == pname) homePackages;
-in
-{
-  home.username = username;
-  home.homeDirectory = homeDirectory;
-  home.stateVersion = "26.11";
-  news.display = "silent";
-
-  home.packages = homePackages;
 
   home.file = {
   };
