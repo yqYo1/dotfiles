@@ -53,9 +53,17 @@ installed, so a flake input update never needs a hand-edited allowlist.
   that yields no skills, a duplicate skill ID across sources, and duplicate
   flattened basenames all raise an evaluation error.
 
-Targets are every Nix-managed agent: `agents` (`~/.agents/skills`, read by omp
-and orca), `claude` (`~/.claude/skills`), `opencode`
-(`~/.config/opencode/skills`), and `pi` (`~/.pi/agent/skills`).
+Targets follow `home.packages`: a target is enabled while the agent's package is
+listed there and disabled when the package is removed from the list.
+`programs.*.enable` is deliberately not inspected, so a package installed by a
+program module does not turn a target on.
+
+| Target | Enabled by the package name |
+| --- | --- |
+| `agents` | `omp` or `orca` (shared Agent Skills home) |
+| `claude` | `claude-code` |
+| `opencode` | `opencode` |
+| `pi` | `pi` |
 
 Hermes is not a target yet. It keeps its own skills directory until that
 directory is managed by Nix.

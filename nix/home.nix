@@ -32,14 +32,8 @@ let
       source = "${base}/${name}";
       recursive = true;
     });
-in
-{
-  home.username = username;
-  home.homeDirectory = homeDirectory;
-  home.stateVersion = "26.11";
-  news.display = "silent";
 
-  home.packages = with pkgs; [
+  homePackages = with pkgs; [
     actionlint
     aicommit2
     arduino-language-server
@@ -106,6 +100,19 @@ in
     llm-agents.orca
 
   ];
+
+  # Agent skill targets follow this list only. `programs.*.enable` is
+  # deliberately not inspected: a package installed by a program module must
+  # not turn a target on.
+  hasAgentPackage = pname: builtins.any (p: lib.getName p == pname) homePackages;
+in
+{
+  home.username = username;
+  home.homeDirectory = homeDirectory;
+  home.stateVersion = "26.11";
+  news.display = "silent";
+
+  home.packages = homePackages;
 
   home.file = {
   };
@@ -274,10 +281,12 @@ in
       };
 
       targets = {
-        agents.enable = true; # omp / orca (shared Agent Skills home)
-        claude.enable = true; # Claude Code
-        opencode.enable = true; # opencode
-        pi.enable = true; # pi
+        # A target is on while the agent's package is listed in home.packages.
+        # Removing the package from that list turns the target off.
+        agents.enable = hasAgentPackage "omp" || hasAgentPackage "orca";
+        claude.enable = hasAgentPackage "claude-code";
+        opencode.enable = hasAgentPackage "opencode";
+        pi.enable = hasAgentPackage "pi";
       };
     };
 
