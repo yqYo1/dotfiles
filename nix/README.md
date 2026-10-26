@@ -52,6 +52,35 @@ a hand-edited allowlist.
   that yields no skills, a duplicate skill ID across sources, and duplicate
   flattened basenames all raise an evaluation error.
 
+### Where agents look
+
+Verified against each product's documentation or source. None of them scans a
+plain `skills/` directory at the repository root: every path is a product-specific
+directory, or the cross-agent `.agents/skills`.
+
+| Harness | Project paths (repo) | User paths |
+| --- | --- | --- |
+| Claude Code | `.claude/skills` in the cwd and every parent up to the repo root, nested `<subdir>/.claude/skills`, `--add-dir <dir>/.claude/skills`; a plugin package uses `<plugin>/skills/` | `~/.claude/skills` (`CLAUDE_CONFIG_DIR`) |
+| Codex CLI | `.agents/skills` in the cwd, parent directories and the repo root | `~/.agents/skills`; admin `/etc/codex/skills` |
+| GitHub Copilot CLI | `.github/skills`, `.claude/skills`, `.agents/skills` | `~/.copilot/skills`, `~/.agents/skills` |
+| opencode | `.opencode/skills`, `.claude/skills`, `.agents/skills` (walk up to the git worktree) | `~/.config/opencode/skills`, `~/.claude/skills`, `~/.agents/skills` |
+| pi | `.pi/skills`, `.agents/skills` (ancestors) | `~/.pi/agent/skills` |
+| omp | `.omp/skills` (ancestors) plus the `.claude`, `.codex`, `.config/opencode`, `.github` and `.agents` roots it reads as providers | `~/.omp/agent/skills` plus the same provider roots |
+| orca | `.agents/skills`, plus provider roots such as `.claude/skills` and `.opencode/skills` | `~/.agents/skills` |
+| Cursor | `.agents/skills`, `.cursor/skills`, including nested ones anywhere in the repo | `~/.agents/skills`, `~/.cursor/skills` |
+| Windsurf / Devin Desktop | `.devin/skills` (legacy `.windsurf/skills`), `.agents/skills`, `.claude/skills` when Claude config reading is on | `~/.codeium/windsurf/skills`, `~/.config/devin/skills`, `~/.agents/skills` |
+| Antigravity | `.agents/skills` (App, CLI and IDE) | App/IDE `~/.gemini/config/skills`; CLI `~/.gemini/antigravity-cli/skills`; legacy `~/.gemini/antigravity/skills` |
+| Gemini CLI | `.gemini/skills`, `.agents/skills` | `~/.gemini/skills` |
+
+Two agent-skills-nix defaults differ from the current product paths and only
+matter if that agent is installed:
+
+- `codex` writes `~/.codex/skills`, while the current Codex documentation lists
+  `~/.agents/skills` (the `agents` target) for user scope.
+- `antigravity` writes `~/.gemini/antigravity/skills`, the legacy IDE path. The
+  App and IDE now read `~/.gemini/config/skills`, and the CLI reads
+  `~/.gemini/antigravity-cli/skills`.
+
 ### Targets
 
 Every target agent-skills-nix ships is declared, whether or not it is installed
