@@ -34,10 +34,71 @@ let
     });
 
 
-  # Agent skill targets follow this list only. `programs.*.enable` is
-  # deliberately not inspected: a package installed by a program module must
-  # not turn a target on.
-  hasAgentPackage = pname: builtins.any (p: lib.getName p == pname) config.home.packages;
+  # Agent skill targets and how each one is detected in home.packages.
+  #
+  # `names` matches lib.getName (pname, else name) against the packages
+  # installed in home.packages, so the same tool is found regardless of where
+  # it is packaged (nixpkgs, llm-agents, vendor). `packages` matches exact
+  # derivations for self-packaged builds whose name does not match.
+  #
+  # One entry per target that agent-skills-nix ships. The key must be the
+  # target name; its destination is agent-skills-nix's default for that name.
+  agentTargets = {
+    agents = {
+      names = [
+        "omp"
+        "orca"
+      ];
+    };
+    codex = {
+      names = [ "codex" ];
+    };
+    opencode = {
+      names = [ "opencode" ];
+    };
+    claude = {
+      names = [ "claude-code" ];
+    };
+    copilot = {
+      names = [ "github-copilot-cli" ];
+    };
+    cursor = {
+      names = [ "cursor" ];
+    };
+    windsurf = {
+      names = [
+        "windsurf"
+        "devin-desktop"
+      ];
+    };
+    antigravity = {
+      names = [
+        "antigravity"
+        "antigravity-ide"
+      ];
+    };
+    gemini = {
+      names = [ "gemini-cli" ];
+    };
+    pi = {
+      names = [
+        "pi"
+        "pi-coding-agent"
+      ];
+      # packages = [ pkgs.my-own-pi ];
+    };
+    # A self-packaged agent: list its derivation here so the name does not
+    # matter, for example
+    #   my-agent = { names = [ ]; packages = [ pkgs.my-agent ]; };
+  };
+
+  agentPackageMatches =
+    target: package:
+    builtins.elem (lib.getName package) target.names
+    || builtins.any (extra: extra.outPath == package.outPath) (target.packages or [ ]);
+
+  agentTargetEnabled = target: builtins.any (agentPackageMatches target) config.home.packages;
+
 in
 {
   home.username = username;
@@ -279,17 +340,14 @@ in
         explicit = explicitMatt;
       };
 
-      targets = {
-        # A target is on while the agent's package is in `config.home.packages`.
-        # Detection reads that option and nothing else: no `programs.*.enable`
-        # lookups, so centralising package declarations later (and stopping
-        # program modules from injecting their own package into home.packages)
-        # needs no change here.
-        agents.enable = hasAgentPackage "omp" || hasAgentPackage "orca";
-        claude.enable = hasAgentPackage "claude-code";
-        opencode.enable = hasAgentPackage "opencode";
-        pi.enable = hasAgentPackage "pi";
-      };
+      # A target is on while its agent's package is in `config.home.packages`.
+      # Detection reads that option and nothing else: no `programs.*.enable`
+      # lookups, so centralising package declarations later (and stopping
+      # program modules from injecting their own package into home.packages)
+      # needs no change here.
+      targets = builtins.mapAttrs (_: target: {
+        enable = agentTargetEnabled target;
+      }) agentTargets;
     };
 
   programs.opencode = {

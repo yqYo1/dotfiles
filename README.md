@@ -59,12 +59,36 @@ package is present there and disabled when it is removed. Detection never reads
 package to `home.packages` (for example `programs.opencode` does); such a package
 counts, because `home.packages` is the single source of truth.
 
-| Target | Enabled by the package name |
+Every target agent-skills-nix ships is declared, whether or not it is installed
+today. A package matches when `lib.getName` (pname, else name) equals one of the
+listed names, so the same tool is found from nixpkgs, llm-agents, or a vendor
+package.
+
+| Target | Matched package names |
 | --- | --- |
-| `agents` | `omp` or `orca` (shared Agent Skills home) |
+| `agents` | `omp`, `orca` (shared Agent Skills home) |
 | `claude` | `claude-code` |
+| `codex` | `codex` |
+| `copilot` | `github-copilot-cli` |
+| `cursor` | `cursor` |
+| `gemini` | `gemini-cli` |
 | `opencode` | `opencode` |
-| `pi` | `pi` |
+| `pi` | `pi`, `pi-coding-agent` |
+| `windsurf` | `windsurf`, `devin-desktop` |
+| `antigravity` | `antigravity`, `antigravity-ide` |
+
+A self-packaged agent whose name does not match can be registered by derivation:
+
+```nix
+pi = {
+  names = [ "pi" "pi-coding-agent" ];
+  packages = [ pkgs.my-own-pi ];
+};
+```
+
+Name matching is what makes this cheap, and it has two known failure modes: a
+different package that happens to share a name turns a target on, and a package
+that gets renamed upstream turns a target off until the name list is updated.
 
 Hermes is not a target yet. It keeps its own skills directory until that
 directory is managed by Nix.
