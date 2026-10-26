@@ -2,7 +2,6 @@
   config,
   lib,
   pkgs,
-  inputs,
   username,
   homeDirectory,
   dotfiles,
@@ -34,76 +33,11 @@ let
     });
 
 
-  # Agent skill targets and how each one is detected in home.packages.
-  #
-  # `names` matches lib.getName (pname, else name) against the packages
-  # installed in home.packages, so the same tool is found regardless of where
-  # it is packaged (nixpkgs, llm-agents, vendor). `packages` matches exact
-  # derivations for self-packaged builds whose name does not match.
-  #
-  # One entry per target that agent-skills-nix ships. The key must be the
-  # target name; its destination is agent-skills-nix's default for that name.
-  agentTargets = {
-    agents = {
-      names = [
-        "omp"
-        "orca"
-      ];
-    };
-    codex = {
-      names = [ "codex" ];
-    };
-    opencode = {
-      names = [
-        "opencode"
-        "opencode2"
-      ];
-    };
-    claude = {
-      names = [ "claude-code" ];
-    };
-    copilot = {
-      names = [
-        "github-copilot-cli"
-        "copilot-cli"
-      ];
-    };
-    cursor = {
-      names = [ "cursor-agent" ];
-    };
-    windsurf = {
-      names = [ "devin-desktop" ];
-    };
-    antigravity = {
-      names = [
-        "antigravity-ide"
-        "antigravity-cli"
-      ];
-    };
-    gemini = {
-      names = [ "gemini-cli" ];
-    };
-    pi = {
-      names = [
-        "pi"
-        "pi-coding-agent"
-      ];
-      # packages = [ pkgs.my-own-pi ];
-    };
-    # A self-packaged agent: list its derivation here so the name does not
-    # matter, for example
-    #   my-agent = { names = [ ]; packages = [ pkgs.my-agent ]; };
-  };
-
-  agentPackageMatches =
-    target: package:
-    builtins.elem (lib.getName package) target.names
-    || builtins.any (extra: extra.outPath == package.outPath) (target.packages or [ ]);
-
-  agentTargetEnabled = target: builtins.any (agentPackageMatches target) config.home.packages;
 
 in
 {
+  imports = [ ./agent-skills.nix ];
+
   home.username = username;
   home.homeDirectory = homeDirectory;
   home.stateVersion = "26.11";
@@ -219,139 +153,6 @@ in
     '';
   };
 
-  # Declarative Agent Skills: one shared skill set delivered to every
-  # Nix-managed agent. Hermes keeps its own skills directory for now, so it is
-  # intentionally not a target here.
-  programs.agent-skills =
-    let
-      agentLib = inputs."agent-skills".lib.agent-skills;
-
-      # Source definitions are used both by the module and by the catalog
-      # queries below, so selection can never drift from what is discovered.
-      srcLocal = {
-        path = ./skills;
-      };
-      srcMatt = {
-        path = inputs."mattpocock-skills";
-        subdir = "skills";
-        filter.maxDepth = 2;
-      };
-      srcIntel = {
-        path = inputs."intel-skills";
-        subdir = "skills";
-      };
-      srcGpu = {
-        path = inputs."intel-gpu-ai-skills";
-        subdir = "plugins/intel-gpu-ai-skills/skills";
-      };
-      srcUxl = {
-        path = inputs."uxl-skills";
-        subdir = "skills";
-      };
-
-      idsOf = name: source: builtins.attrNames (agentLib.discoverCatalog { ${name} = source; });
-
-      localIds = idsOf "local" srcLocal;
-      mattIds = idsOf "mattpocock" srcMatt;
-      intelIds = idsOf "intel" srcIntel;
-      gpuIds = idsOf "intel-gpu" srcGpu;
-      uxlIds = idsOf "uxl" srcUxl;
-
-      # intel/gpu-ai-skills repeats the intel/skills catalog. Drop every name
-      # intel already provides and keep the remainder, so a new gpu-only skill
-      # is picked up automatically and a skill that intel later absorbs stops
-      # being duplicated instead of breaking evaluation.
-      gpuUnique = builtins.filter (id: !(builtins.elem id intelIds)) gpuIds;
-      gpuRegex = "^(${lib.concatMapStringsSep "|" lib.escapeRegex gpuUnique})$";
-
-      # mattpocock/skills nests skills as skills/<group>/<skill>/SKILL.md while
-      # agents discover only <target>/<skill>/SKILL.md, so every discovered
-      # skill is renamed to its basename and installed flat.
-      mattNames = map builtins.baseNameOf mattIds;
-      mattDuplicateNames = lib.filter (
-        name: builtins.length (builtins.filter (other: other == name) mattNames) > 1
-      ) (lib.unique mattNames);
-      explicitMatt =
-        if mattDuplicateNames == [ ] then
-          builtins.listToAttrs (
-            map
-              (id: {
-                name = builtins.baseNameOf id;
-                value = {
-                  from = "mattpocock";
-                  path = id;
-                  rename = builtins.baseNameOf id;
-                };
-              })
-              mattIds
-          )
-        else
-          throw "agent-skills: duplicate mattpocock skill basenames: ${lib.concatStringsSep ", " mattDuplicateNames}";
-
-      # A source that stops yielding skills means its layout moved upstream.
-      # Fail instead of silently installing nothing.
-      emptySources = map (entry: entry.name) (
-        builtins.filter (entry: entry.ids == [ ]) [
-          {
-            name = "local";
-            ids = localIds;
-          }
-          {
-            name = "mattpocock";
-            ids = mattIds;
-          }
-          {
-            name = "intel";
-            ids = intelIds;
-          }
-          {
-            name = "intel-gpu";
-            ids = gpuIds;
-          }
-          {
-            name = "uxl";
-            ids = uxlIds;
-          }
-        ]
-      );
-    in
-    assert builtins.length emptySources == 0
-    || throw "agent-skills: source(s) ${lib.concatStringsSep ", " emptySources} now yield no skills; check their layout upstream";
-    {
-      enable = true;
-
-      sources = {
-        local = srcLocal;
-        mattpocock = srcMatt;
-        intel = srcIntel;
-        intel-gpu = srcGpu // {
-          filter.nameRegex = gpuRegex;
-        };
-        uxl = srcUxl;
-      };
-
-      skills = {
-        # Everything discovered is installed. A new upstream skill is picked up
-        # without editing this file; mattpocock is selected through `explicit`
-        # because its skills need flattening.
-        enableAll = [
-          "local"
-          "intel"
-          "intel-gpu"
-          "uxl"
-        ];
-        explicit = explicitMatt;
-      };
-
-      # A target is on while its agent's package is in `config.home.packages`.
-      # Detection reads that option and nothing else: no `programs.*.enable`
-      # lookups, so centralising package declarations later (and stopping
-      # program modules from injecting their own package into home.packages)
-      # needs no change here.
-      targets = builtins.mapAttrs (_: target: {
-        enable = agentTargetEnabled target;
-      }) agentTargets;
-    };
 
   programs.opencode = {
     enable = true;
