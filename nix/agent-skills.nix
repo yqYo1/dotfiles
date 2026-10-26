@@ -87,7 +87,7 @@ in
       # Source definitions are used both by the module and by the catalog
       # queries below, so selection can never drift from what is discovered.
       srcLocal = {
-        path = ./skills;
+        path = ../skills;
       };
       srcMatt = {
         path = inputs."mattpocock-skills";

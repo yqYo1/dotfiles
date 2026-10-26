@@ -6,7 +6,11 @@ Home Manager configuration for this profile.
 
 - `home.nix` — entry point: packages, programs, shell, editor, services.
 - `agent-skills.nix` — declarative Agent Skills, imported by `home.nix`.
-- `skills/` — skills authored in this repository.
+- `../skills/` — skills authored in this repository, at the repository root
+  rather than under `nix/` so the source tree reads as skills first. The path is
+  not one of the directories agents scan for project skills (`.claude/skills`,
+  `.agents/skills`, ...), so having it in the repository does not advertise these
+  skills to agents working on this repository.
 
 `nix run .#switch` from the repository root applies the configuration.
 
