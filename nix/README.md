@@ -92,6 +92,19 @@ A package matches when `lib.getName` (pname, else name) equals one of the
 target's names. Every name below was checked against the pinned nixpkgs and
 llm-agents.
 
+An agent installed outside Home Manager (a vendor installer, another
+distribution's package manager, a manual install) is switched on by target name:
+
+```nix
+programs.agent-skills.enableWithoutPackage = [
+  "claude"
+  "opencode"
+];
+```
+
+Detection from `home.packages` still applies; this list only adds targets. An
+unknown name fails evaluation with the offending names in the message.
+
 | Target | Matched package names | Packaged as |
 | --- | --- | --- |
 | `agents` | `omp`, `orca` | nixpkgs and llm-agents |

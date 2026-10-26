@@ -38,6 +38,14 @@ in
 {
   imports = [ ./agent-skills.nix ];
 
+  # Enable skill delivery for agents that are not installed through
+  # home.packages, such as a vendor installer or another distribution's package
+  # manager. Agents from home.packages are detected automatically.
+  programs.agent-skills.enableWithoutPackage = [
+    # "claude"
+    # "opencode"
+  ];
+
   home.username = username;
   home.homeDirectory = homeDirectory;
   home.stateVersion = "26.11";
