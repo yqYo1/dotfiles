@@ -54,27 +54,30 @@ let
       names = [ "codex" ];
     };
     opencode = {
-      names = [ "opencode" ];
+      names = [
+        "opencode"
+        "opencode2"
+      ];
     };
     claude = {
       names = [ "claude-code" ];
     };
     copilot = {
-      names = [ "github-copilot-cli" ];
+      names = [
+        "github-copilot-cli"
+        "copilot-cli"
+      ];
     };
     cursor = {
-      names = [ "cursor" ];
+      names = [ "cursor-agent" ];
     };
     windsurf = {
-      names = [
-        "windsurf"
-        "devin-desktop"
-      ];
+      names = [ "devin-desktop" ];
     };
     antigravity = {
       names = [
-        "antigravity"
         "antigravity-ide"
+        "antigravity-cli"
       ];
     };
     gemini = {

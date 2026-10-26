@@ -64,18 +64,18 @@ today. A package matches when `lib.getName` (pname, else name) equals one of the
 listed names, so the same tool is found from nixpkgs, llm-agents, or a vendor
 package.
 
-| Target | Matched package names |
-| --- | --- |
-| `agents` | `omp`, `orca` (shared Agent Skills home) |
-| `claude` | `claude-code` |
-| `codex` | `codex` |
-| `copilot` | `github-copilot-cli` |
-| `cursor` | `cursor` |
-| `gemini` | `gemini-cli` |
-| `opencode` | `opencode` |
-| `pi` | `pi`, `pi-coding-agent` |
-| `windsurf` | `windsurf`, `devin-desktop` |
-| `antigravity` | `antigravity`, `antigravity-ide` |
+| Target | Matched package names | Packaged as |
+| --- | --- | --- |
+| `agents` | `omp`, `orca` | nixpkgs and llm-agents |
+| `claude` | `claude-code` | nixpkgs and llm-agents |
+| `codex` | `codex` | nixpkgs and llm-agents |
+| `copilot` | `github-copilot-cli`, `copilot-cli` | nixpkgs / llm-agents |
+| `cursor` | `cursor-agent` | llm-agents |
+| `gemini` | `gemini-cli` | nixpkgs and llm-agents |
+| `opencode` | `opencode`, `opencode2` | nixpkgs / llm-agents |
+| `pi` | `pi`, `pi-coding-agent` | llm-agents / nixpkgs |
+| `windsurf` | `devin-desktop` | nixpkgs (`windsurf` is an alias attribute) |
+| `antigravity` | `antigravity-ide`, `antigravity-cli` | nixpkgs / llm-agents |
 
 A self-packaged agent whose name does not match can be registered by derivation:
 
