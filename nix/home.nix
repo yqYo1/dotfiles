@@ -280,8 +280,11 @@ in
       };
 
       targets = {
-        # A target is on while the agent's package is listed in home.packages.
-        # Removing the package from that list turns the target off.
+        # A target is on while the agent's package is in `config.home.packages`.
+        # Detection reads that option and nothing else: no `programs.*.enable`
+        # lookups, so centralising package declarations later (and stopping
+        # program modules from injecting their own package into home.packages)
+        # needs no change here.
         agents.enable = hasAgentPackage "omp" || hasAgentPackage "orca";
         claude.enable = hasAgentPackage "claude-code";
         opencode.enable = hasAgentPackage "opencode";
