@@ -32,8 +32,6 @@ let
       recursive = true;
     });
 
-
-
 in
 {
   imports = [ ./agent-skills.nix ];

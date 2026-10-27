@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  pkgs,
   inputs,
   ...
 }:
@@ -15,7 +14,8 @@ let
   # derivations for self-packaged builds whose name does not match.
   #
   # One entry per target that agent-skills-nix ships. The key must be the
-  # target name; its destination is agent-skills-nix's default for that name.
+  # target name; `dest` overrides the module's default destination for that
+  # name.
   agentTargets = {
     agents = {
       names = [
@@ -81,7 +81,6 @@ let
 
 in
 {
-
   options.programs.agent-skills.enableWithoutPackage = lib.mkOption {
     type = lib.types.listOf lib.types.str;
     default = [ ];
@@ -98,7 +97,6 @@ in
   };
 
   config = {
-
     # Declarative Agent Skills: one shared skill set delivered to every
     # Nix-managed agent. Hermes keeps its own skills directory for now, so it is
     # intentionally not a target here.
@@ -142,7 +140,13 @@ in
         # is picked up automatically and a skill that intel later absorbs stops
         # being duplicated instead of breaking evaluation.
         gpuUnique = builtins.filter (id: !(builtins.elem id intelIds)) gpuIds;
-        gpuRegex = "^(${lib.concatMapStringsSep "|" lib.escapeRegex gpuUnique})$";
+        # "a^" can never match, so an empty complement installs nothing rather
+        # than falling back to every skill in the source.
+        gpuRegex =
+          if gpuUnique == [ ] then
+            "a^"
+          else
+            "^(${lib.concatMapStringsSep "|" lib.escapeRegex gpuUnique})$";
 
         # mattpocock/skills nests skills as skills/<group>/<skill>/SKILL.md while
         # agents discover only <target>/<skill>/SKILL.md, so every discovered
@@ -232,11 +236,14 @@ in
         targets = builtins.mapAttrs (
           name: target:
           {
-            enable =
+            # mkDefault so a profile can override the computed value for a
+            # single target without a conflicting definition.
+            enable = lib.mkDefault (
               agentTargetEnabled target
-              || builtins.elem name config.programs.agent-skills.enableWithoutPackage;
+              || builtins.elem name config.programs.agent-skills.enableWithoutPackage
+            );
           }
-          // lib.optionalAttrs (target ? dest) { inherit (target) dest; }
+          // lib.optionalAttrs (target ? dest) { dest = lib.mkDefault target.dest; }
         ) agentTargets;
       };
 
