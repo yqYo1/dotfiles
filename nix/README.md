@@ -81,6 +81,29 @@ matter if that agent is installed:
   App and IDE now read `~/.gemini/config/skills`, and the CLI reads
   `~/.gemini/antigravity-cli/skills`.
 
+### Codex
+
+Codex resolves skill roots in `codex-rs/ext/skills/src/host_roots.rs`. It covers
+repo, user, admin and system scopes, with two roots for repo and user:
+
+| Scope | Path |
+| --- | --- |
+| Repo | `.agents/skills` in every directory from the project root down to the cwd |
+| Repo | `<repo>/.codex/skills` (the project config layer) |
+| User | `~/.agents/skills` |
+| User | `$CODEX_HOME/skills` (default `~/.codex/skills`) — marked deprecated in the source, kept for backward compatibility |
+| Admin | `/etc/codex/skills` (system config layer) |
+| System | the bundled system cache plus plugin skill roots |
+
+Consequence: `~/.codex/skills` still works, but `~/.agents/skills` is the
+non-deprecated user location. If Codex should receive skills through the modern
+path, set `programs.agent-skills.targets.codex.dest = "$HOME/.agents/skills"`;
+the `agents` target already writes there when omp or orca is installed, and the
+module deduplicates targets that resolve to the same destination.
+
+A plain `skills/` directory at the repository root is not a Codex skill root, so
+the authored skills in this repository stay invisible to Codex working in it.
+
 ### Targets
 
 Every target agent-skills-nix ships is declared, whether or not it is installed
