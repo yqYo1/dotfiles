@@ -104,6 +104,13 @@ module deduplicates targets that resolve to the same destination.
 A plain `skills/` directory at the repository root is not a Codex skill root, so
 the authored skills in this repository stay invisible to Codex working in it.
 
+When a skill exists in both user roots, Codex does not merge them: deduplication
+is per `SKILL.md` path, so two different files with the same name stay two
+entries (both appear in the skill selector) and a plain `$name` resolves to the
+first entry in catalog order, which is sorted by scope, name, then absolute path.
+A symlinked copy of the same skill deduplicates to one entry. Keeping the same
+skill out of both directories avoids the duplicate listing entirely.
+
 ### Targets
 
 Every target agent-skills-nix ships is declared, whether or not it is installed
