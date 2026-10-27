@@ -135,6 +135,10 @@ programs.agent-skills.enableWithoutPackage = [
 Detection from `home.packages` still applies; this list only adds targets. An
 unknown name fails evaluation with the offending names in the message.
 
+This repository enables `codex` this way: the Codex package is not managed here,
+only its skills are delivered, and they go to `~/.agents/skills` (see the Codex
+section above).
+
 | Target | Matched package names | Packaged as |
 | --- | --- | --- |
 | `agents` | `omp`, `orca` | nixpkgs and llm-agents |

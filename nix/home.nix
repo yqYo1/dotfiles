@@ -41,9 +41,11 @@ in
   # Enable skill delivery for agents that are not installed through
   # home.packages, such as a vendor installer or another distribution's package
   # manager. Agents from home.packages are detected automatically.
+  #
+  # codex: the package is not managed here; only its skills are delivered
+  # (to ~/.agents/skills, the location Codex reads for user skills).
   programs.agent-skills.enableWithoutPackage = [
-    # "claude"
-    # "opencode"
+    "codex"
   ];
 
   home.username = username;
