@@ -25,6 +25,10 @@ let
     };
     codex = {
       names = [ "codex" ];
+      # Codex reads ~/.agents/skills as its current user scope;
+      # $CODEX_HOME/skills (~/.codex/skills) is deprecated in its source. Write
+      # only to the modern location so a skill is never listed twice.
+      dest = "$HOME/.agents/skills";
     };
     opencode = {
       names = [
@@ -225,11 +229,15 @@ in
         # centralising package declarations later (and stopping program modules
         # from injecting their own package into home.packages) needs no change
         # here.
-        targets = builtins.mapAttrs (name: target: {
-          enable =
-            agentTargetEnabled target
-            || builtins.elem name config.programs.agent-skills.enableWithoutPackage;
-        }) agentTargets;
+        targets = builtins.mapAttrs (
+          name: target:
+          {
+            enable =
+              agentTargetEnabled target
+              || builtins.elem name config.programs.agent-skills.enableWithoutPackage;
+          }
+          // lib.optionalAttrs (target ? dest) { inherit (target) dest; }
+        ) agentTargets;
       };
 
     assertions = [

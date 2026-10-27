@@ -96,10 +96,10 @@ repo, user, admin and system scopes, with two roots for repo and user:
 | System | the bundled system cache plus plugin skill roots |
 
 Consequence: `~/.codex/skills` still works, but `~/.agents/skills` is the
-non-deprecated user location. If Codex should receive skills through the modern
-path, set `programs.agent-skills.targets.codex.dest = "$HOME/.agents/skills"`;
-the `agents` target already writes there when omp or orca is installed, and the
-module deduplicates targets that resolve to the same destination.
+non-deprecated user location. `targets.codex` therefore points at
+`$HOME/.agents/skills`, so nothing is written to `~/.codex/skills`. When another
+enabled target (such as `agents`) resolves to the same destination, the sync
+merges them and writes once.
 
 A plain `skills/` directory at the repository root is not a Codex skill root, so
 the authored skills in this repository stay invisible to Codex working in it.
