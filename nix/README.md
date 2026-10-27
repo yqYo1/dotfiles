@@ -61,7 +61,7 @@ directory, or the cross-agent `.agents/skills`.
 | Harness | Project paths (repo) | User paths |
 | --- | --- | --- |
 | Claude Code | `.claude/skills` in the cwd and every parent up to the repo root, nested `<subdir>/.claude/skills`, `--add-dir <dir>/.claude/skills`; a plugin package uses `<plugin>/skills/` | `~/.claude/skills` (`CLAUDE_CONFIG_DIR`) |
-| Codex CLI | `.agents/skills` in the cwd, parent directories and the repo root | `~/.agents/skills`; admin `/etc/codex/skills` |
+| Codex CLI | `.agents/skills` in the cwd, parent directories and the repo root; `<repo>/.codex/skills` through the project config layer | `~/.agents/skills`; admin `/etc/codex/skills` |
 | GitHub Copilot CLI | `.github/skills`, `.claude/skills`, `.agents/skills` | `~/.copilot/skills`, `~/.agents/skills` |
 | opencode | `.opencode/skills`, `.claude/skills`, `.agents/skills` (walk up to the git worktree) | `~/.config/opencode/skills`, `~/.claude/skills`, `~/.agents/skills` |
 | pi | `.pi/skills`, `.agents/skills` (ancestors) | `~/.pi/agent/skills` |

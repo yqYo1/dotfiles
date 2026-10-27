@@ -136,7 +136,8 @@
 
           extraSpecialArgs = {
             inherit username homeDirectory dotfiles;
-            # agent-skills-nix resolves `sources.<name>.input` against this.
+            # nix/agent-skills.nix reads the agent-skills library and the skill
+            # catalog sources (all flake inputs) from this.
             inputs = inputs;
           };
         };
