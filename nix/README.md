@@ -152,6 +152,9 @@ section above).
 | `windsurf` | `devin-desktop` | nixpkgs (`windsurf` is an alias attribute) |
 | `antigravity` | `antigravity-ide`, `antigravity-cli` | nixpkgs / llm-agents |
 
+`and` means the same package name exists in both packagings; `/` means each side
+contributes the name on its own.
+
 A self-packaged agent whose name does not match is registered by derivation:
 
 ```nix
@@ -164,6 +167,10 @@ pi = {
 Name matching is what makes this cheap, and it has two known failure modes: a
 different package that happens to share a name turns a target on, and a package
 that gets renamed upstream turns a target off until the name list is updated.
+The `agents` target is the sharpest case: nixpkgs also has `orca` as the GNOME
+screen reader, so adding that package would enable it. A per-target override
+(`programs.agent-skills.targets.agents.enable = false;`) turns the computed value
+off without touching this module.
 
 Each target directory is owned by agent-skills-nix and carries
 `.agent-skills-managed.json`; synchronization rewrites it, so do not add
@@ -185,4 +192,4 @@ activation once with `AGENT_SKILLS_FORCE=1`.
   `nix build --no-link --print-out-paths '.#homeConfigurations."yayoi-x86_64-linux".config.programs.agent-skills.bundlePath' | xargs ls`
 - Installed skills: `ls ~/.agents/skills | wc -l`
 - Agent-side view: `omp skill list --json | jq '.skills | length'`
-- Apply: `nix run`
+- Apply: `nix run .#switch`

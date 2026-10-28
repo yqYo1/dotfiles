@@ -97,9 +97,9 @@ in
   };
 
   config = {
-    # Declarative Agent Skills: one shared skill set delivered to every
-    # Nix-managed agent. Hermes keeps its own skills directory for now, so it is
-    # intentionally not a target here.
+    # Declarative Agent Skills: one shared skill set delivered to the agents
+    # declared below. Hermes Agent is not packaged by this flake and keeps its
+    # own ~/.hermes/skills, so it is not a target.
     programs.agent-skills =
       let
         agentLib = inputs."agent-skills".lib.agent-skills;
@@ -217,13 +217,15 @@ in
         skills = {
           # Everything discovered is installed. A new upstream skill is picked up
           # without editing this file; mattpocock is selected through `explicit`
-          # because its skills need flattening.
-          enableAll = [
-            "local"
-            "intel"
-            "intel-gpu"
-            "uxl"
-          ];
+          # because its skills need flattening. intel-gpu is only selected while
+          # it still has skills intel does not provide.
+          enableAll =
+            [
+              "local"
+              "intel"
+              "uxl"
+            ]
+            ++ lib.optional (gpuUnique != [ ]) "intel-gpu";
           explicit = explicitMatt;
         };
 
