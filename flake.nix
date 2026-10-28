@@ -30,6 +30,28 @@
       url = "github:yqYo1/dsh-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    agent-skills = {
+      url = "github:Kyure-A/agent-skills-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    # Skill catalog sources (Agent Skills format). Non-flake inputs: consumed as
+    # plain source trees by agent-skills-nix.
+    mattpocock-skills = {
+      url = "github:mattpocock/skills";
+      flake = false;
+    };
+    intel-skills = {
+      url = "github:intel/skills";
+      flake = false;
+    };
+    intel-gpu-ai-skills = {
+      url = "github:intel/gpu-ai-skills";
+      flake = false;
+    };
+    uxl-skills = {
+      url = "github:uxlfoundation/skills";
+      flake = false;
+    };
   };
 
   outputs =
@@ -109,10 +131,14 @@
             "${dotfiles}/nix/home.nix"
             catppuccin.homeModules.catppuccin
             dsh-nix.homeManagerModules.dsh
+            inputs.agent-skills.homeManagerModules.default
           ];
 
           extraSpecialArgs = {
             inherit username homeDirectory dotfiles;
+            # nix/agent-skills.nix reads the agent-skills library and the skill
+            # catalog sources (all flake inputs) from this.
+            inputs = inputs;
           };
         };
     in

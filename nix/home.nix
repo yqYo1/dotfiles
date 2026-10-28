@@ -31,8 +31,21 @@ let
       source = "${base}/${name}";
       recursive = true;
     });
+
 in
 {
+  imports = [ ./agent-skills.nix ];
+
+  # Enable skill delivery for agents that are not installed through
+  # home.packages, such as a vendor installer or another distribution's package
+  # manager. Agents from home.packages are detected automatically.
+  #
+  # codex: the package is not managed here; only its skills are delivered
+  # (to ~/.agents/skills, the location Codex reads for user skills).
+  programs.agent-skills.enableWithoutPackage = [
+    "codex"
+  ];
+
   home.username = username;
   home.homeDirectory = homeDirectory;
   home.stateVersion = "26.11";
@@ -147,6 +160,7 @@ in
       exec ${lib.getExe pkgs.lazygit} "$@"
     '';
   };
+
 
   programs.opencode = {
     enable = true;
