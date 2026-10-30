@@ -173,9 +173,25 @@ screen reader, so adding that package would enable it. A per-target override
 off without touching this module.
 
 Each target directory is owned by agent-skills-nix and carries
-`.agent-skills-managed.json`; synchronization rewrites it, so do not add
-unmanaged files there. To take over an existing non-empty directory, run the
-activation once with `AGENT_SKILLS_FORCE=1`.
+`.agent-skills-managed.json`; synchronization rewrites it with `rsync --delete`, so
+do not add unmanaged files there.
+
+A machine that already has a non-empty target directory without that marker (for
+example `~/.agents/skills` filled by another tool) stops activation with:
+
+```
+agent-skills: ... exists and is non-empty but has no .agent-skills-managed.json marker
+```
+
+`AGENT_SKILLS_FORCE=1` allows the sync to proceed, but it means *replacement*: the
+directory is emptied and the bundle is written in its place. To keep what is
+already there, move it aside and re-run, then re-add anything worth keeping as a
+skill under `skills/<name>/SKILL.md`:
+
+```bash
+mv ~/.agents/skills ~/.agents/skills.bak
+nix run .#switch
+```
 
 ### Add a skill
 
