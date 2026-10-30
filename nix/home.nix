@@ -249,34 +249,20 @@ in
     };
   };
 
-  # programs.dsh = {
-  #   enable = true;
-  #   # package = pkgs.llm-agents.dsh;
-  #
-  #   profiles.web = {
-  #     plugins = [
-  #       "@deepseek-ai/dsh-base"
-  #       "@deepseek-ai/dsh-web-app"
-  #
-  #       # ChatGPT subscription / Codex
-  #       # "dsh-codex@0.3.2"
-  #     ];
-  #
-  #     # userPatches = [
-  #     #   {
-  #     #     id = "llm-openai-codex";
-  #     #     config = {
-  #     #       searchMode = "live";
-  #     #
-  #     #       # OpenAI/Codex native compaction
-  #     #       useNativeCompaction = true;
-  #     #     };
-  #     #   }
-  #     # ];
-  #     #
-  #     # specsHash = "sha256-INvE43uf7q58QjE11LlK0oPqTCjgXfIMm8DExVGX5mQ=";
-  #   };
-  # };
+  # Surfaces: the browser UI (web) and the one-shot CLI (headless). Both are
+  # shipped profile templates whose bundles are read from the installed dsh, so
+  # nothing is packaged here. The SDK and ACP templates are not used.
+  programs.dsh = {
+    enable = true;
+
+    # Naming any template replaces the option default, so the two used here are
+    # enabled explicitly and the rest are turned off.
+    templates.web.enable = true;
+    templates.headless.enable = true;
+    templates.sdk.enable = false;
+    templates.sdk-minimal.enable = false;
+    templates.acp.enable = false;
+  };
 
   programs.direnv = {
     enable = true;
