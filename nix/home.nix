@@ -249,19 +249,13 @@ in
     };
   };
 
-  # Surfaces: the browser UI (web) and the one-shot CLI (headless). Both are
-  # shipped profile templates whose bundles are read from the installed dsh, so
-  # nothing is packaged here. The SDK and ACP templates are not used.
+  # Every shipped profile template is installed: web (browser UI), headless
+  # (one-shot CLI), sdk, sdk-minimal and acp. Their bundles are read from the
+  # installed dsh, so nothing is packaged or configured here. Naming any
+  # template would replace the option default, so the list is left untouched
+  # and a future upstream template is picked up the same way.
   programs.dsh = {
     enable = true;
-
-    # Naming any template replaces the option default, so the two used here are
-    # enabled explicitly and the rest are turned off.
-    templates.web.enable = true;
-    templates.headless.enable = true;
-    templates.sdk.enable = false;
-    templates.sdk-minimal.enable = false;
-    templates.acp.enable = false;
   };
 
   programs.direnv = {
