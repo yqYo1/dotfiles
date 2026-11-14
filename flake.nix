@@ -5,10 +5,15 @@
     extra-substituters = [
       "https://catppuccin.cachix.org"
       "https://cache.numtide.com"
+      # dsh-nix publishes the dsh build here; only the root flake's
+      # nixConfig is applied, so the cache dsh-nix declares does not reach
+      # consumers unless it is listed here.
+      "https://yqyo1.cachix.org"
     ];
     extra-trusted-public-keys = [
       "catppuccin.cachix.org-1:noG/4HkbhJb+lUAdKrph6LaozJvAeEEZj4N732IysmU="
       "niks3.numtide.com-1:DTx8wZduET09hRmMtKdQDxNNthLQETkc/yaX7M4qK0g="
+      "yqyo1.cachix.org-1:8v2GAv9lm0AURGOHo92N4+lgAhVE0+v8ou3DFT7hDEg="
     ];
   };
 
