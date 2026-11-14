@@ -105,11 +105,13 @@ jobs:
         shell: bash
         run: |
           set -euxo pipefail
+          # `useradd -m` takes over a minute on these runners (it blocks inside
+          # account creation, not in the home directory copy), so create the
+          # account without a home and install the directory separately.
           if ! id yayoi >/dev/null 2>&1; then
-            sudo useradd -m -s /bin/bash yayoi
+            sudo useradd --no-create-home --no-log-init -s /bin/bash yayoi
           fi
-          sudo mkdir -p /home/yayoi
-          sudo chown -R yayoi:yayoi /home/yayoi
+          sudo install -d -m 0755 -o yayoi -g yayoi /home/yayoi
 
       - name: Prepare ghq-style repository path
         shell: bash
