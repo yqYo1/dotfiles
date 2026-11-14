@@ -31,9 +31,12 @@
     llm-agents = {
       url = "github:numtide/llm-agents.nix";
     };
+    # No `nixpkgs.follows`: dsh-nix publishes its own build of dsh to
+    # yqyo1.cachix.org, and rebuilding it against this flake's nixpkgs yields a
+    # different derivation that no cache serves. home.nix uses the package from
+    # dsh-nix so the cached build is reused.
     dsh-nix = {
       url = "github:yqYo1/dsh-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
     agent-skills = {
       url = "github:Kyure-A/agent-skills-nix";

@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  inputs,
   username,
   homeDirectory,
   dotfiles,
@@ -256,6 +257,9 @@ in
   # and a future upstream template is picked up the same way.
   programs.dsh = {
     enable = true;
+    # dsh-nix's own build, so the artifact matches the cache that dsh-nix
+    # publishes. Building it here instead would produce an uncached variant.
+    package = inputs.dsh-nix.packages.${pkgs.stdenv.hostPlatform.system}.dsh;
   };
 
   programs.direnv = {
