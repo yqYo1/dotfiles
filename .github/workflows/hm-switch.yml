@@ -6,6 +6,11 @@ on:
     branches:
       - main
 
+permissions:
+  contents: read
+  # Required by cache-nix-action to purge older cache versions.
+  actions: write
+
 jobs:
   check:
     strategy:
@@ -34,21 +39,23 @@ jobs:
             # "ignoring untrusted substituter ... you are not a trusted user".
             extra-trusted-users = yayoi
 
-      - name: Restore and save Nix store
+      - name: Restore Nix store
         uses: nix-community/cache-nix-action@v7
         with:
           primary-key: nix-${{ github.job }}-${{ matrix.system }}-${{ hashFiles('**/*.nix', '**/flake.lock') }}
           restore-prefixes-first-match: |
             nix-${{ github.job }}-${{ matrix.system }}-
             nix-switch-${{ matrix.system }}-
-            nix-check-${{ matrix.system }}-
+          # The switch job owns the cache because it is the job that builds the
+          # profile. `check` only restores, so the two matrix jobs do not
+          # compete for the repository's 10 GB cache budget.
+          save: false
           gc-max-store-size-linux: 8G
 
       - name: Run flake check
         run: nix flake check --print-build-logs
 
   switch:
-    needs: check
     strategy:
       fail-fast: false
       matrix:
@@ -81,8 +88,17 @@ jobs:
           primary-key: nix-${{ github.job }}-${{ matrix.system }}-${{ hashFiles('**/*.nix', '**/flake.lock') }}
           restore-prefixes-first-match: |
             nix-${{ github.job }}-${{ matrix.system }}-
-            nix-check-${{ matrix.system }}-
             nix-switch-${{ matrix.system }}-
+            nix-check-${{ matrix.system }}-
+          # Pull requests restore the cache the default branch produced and skip
+          # the multi-gigabyte upload; a push to main refreshes it. Older
+          # versions of the same key prefix are purged on save so one system
+          # keeps a single store inside GitHub's 10 GB cache budget.
+          save: ${{ github.event_name == 'push' }}
+          purge: true
+          purge-prefixes: nix-${{ github.job }}-${{ matrix.system }}-
+          purge-created: 0
+          purge-primary-key: never
           gc-max-store-size-linux: 8G
 
       - name: Create yayoi user
