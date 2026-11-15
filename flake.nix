@@ -88,7 +88,11 @@
           inherit system;
           config.allowUnfree = true;
           overlays = [
-            llm-agents.overlays.shared-nixpkgs
+            # Use llm-agents' own package set. The shared-nixpkgs overlay
+            # rebuilds its packages against this flake's nixpkgs, which makes
+            # compiled packages (omp) a different derivation from the build
+            # llm-agents publishes, so no binary cache can serve them.
+            (final: prev: { llm-agents = llm-agents.packages.${system}; })
             (final: prev: {
               # codex sandbox
               # llm-agents = prev.llm-agents // {
