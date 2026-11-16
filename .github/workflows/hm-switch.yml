@@ -16,11 +16,11 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
+        # Keep this a matrix: add a system here and in `systems` in flake.nix
+        # when it becomes supported.
         include:
           - system: x86_64-linux
             runner: ubuntu-24.04
-          - system: aarch64-linux
-            runner: ubuntu-24.04-arm
 
     runs-on: ${{ matrix.runner }}
 
@@ -48,11 +48,11 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
+        # Keep this a matrix: add a system here and in `systems` in flake.nix
+        # when it becomes supported.
         include:
           - system: x86_64-linux
             runner: ubuntu-24.04
-          - system: aarch64-linux
-            runner: ubuntu-24.04-arm
 
     runs-on: ${{ matrix.runner }}
 
