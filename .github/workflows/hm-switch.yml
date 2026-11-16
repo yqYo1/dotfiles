@@ -118,7 +118,11 @@ jobs:
           dir="$RUNNER_TEMP/nix-bincache"
           if [ -f "$dir/bundle.nar" ]; then
             # The bundle is unsigned; --import still verifies content hashes.
-            nix-store --import < "$dir/bundle.nar" >/dev/null
+            # The runner user is not a trusted user, so the import goes
+            # through root to let the daemon add the paths. sudo resets PATH,
+            # so resolve the binary first.
+            nix_store=$(command -v nix-store)
+            cat "$dir/bundle.nar" | sudo "$nix_store" --import >/dev/null
           else
             echo "no cached store paths to import"
           fi
