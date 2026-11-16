@@ -39,19 +39,8 @@ jobs:
             # "ignoring untrusted substituter ... you are not a trusted user".
             extra-trusted-users = yayoi
 
-      - name: Restore Nix store
-        uses: nix-community/cache-nix-action@v7
-        with:
-          primary-key: nix-${{ github.job }}-${{ matrix.system }}-${{ hashFiles('**/*.nix', '**/flake.lock') }}
-          restore-prefixes-first-match: |
-            nix-${{ github.job }}-${{ matrix.system }}-
-            nix-switch-${{ matrix.system }}-
-          # The switch job owns the cache because it is the job that builds the
-          # profile. `check` only restores, so the two matrix jobs do not
-          # compete for the repository's 10 GB cache budget.
-          save: false
-          gc-max-store-size-linux: 8G
-
+      # `nix flake check` does not build anything today, so this job has no
+      # use for the store cache; only the switch job restores it.
       - name: Run flake check
         run: nix flake check --print-build-logs
 
