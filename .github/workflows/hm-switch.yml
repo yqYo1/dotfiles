@@ -71,24 +71,24 @@ jobs:
             # "ignoring untrusted substituter ... you are not a trusted user".
             extra-trusted-users = yayoi
 
-      - name: Restore and save Nix store
+      # Cache only what the substituters cannot serve: the paths this job
+      # builds. Everything else comes from the binary caches configured below.
+      #
+      # The key tracks flake.lock, so a .nix change restores the same cache
+      # without uploading a new copy.
+      - name: Restore locally built store paths
         uses: nix-community/cache-nix-action@v7
         with:
-          primary-key: nix-${{ github.job }}-${{ matrix.system }}-${{ hashFiles('**/*.nix', '**/flake.lock') }}
+          primary-key: nix-bincache-${{ matrix.system }}-${{ hashFiles('flake.lock') }}
           restore-prefixes-first-match: |
-            nix-${{ github.job }}-${{ matrix.system }}-
-            nix-switch-${{ matrix.system }}-
-            nix-check-${{ matrix.system }}-
-          # Pull requests restore the cache the default branch produced and skip
-          # the multi-gigabyte upload; a push to main refreshes it. Older
-          # versions of the same key prefix are purged on save so one system
-          # keeps a single store inside GitHub's 10 GB cache budget.
+            nix-bincache-${{ matrix.system }}-
+          nix: false
+          paths-linux: ${{ runner.temp }}/nix-bincache
           save: ${{ github.event_name == 'push' }}
           purge: true
-          purge-prefixes: nix-${{ github.job }}-${{ matrix.system }}-
+          purge-prefixes: nix-bincache-${{ matrix.system }}-
           purge-created: 0
           purge-primary-key: never
-          gc-max-store-size-linux: 8G
 
       - name: Create yayoi user
         shell: bash
@@ -110,6 +110,18 @@ jobs:
           sudo -u yayoi mkdir -p "$(dirname "$repo")"
           sudo rsync -a --delete --exclude '.git' "$GITHUB_WORKSPACE"/ "$repo"/
           sudo chown -R yayoi:yayoi /home/yayoi/ghq
+
+      - name: Import cached store paths
+        shell: bash
+        run: |
+          set -euo pipefail
+          dir="$RUNNER_TEMP/nix-bincache"
+          if [ -f "$dir/bundle.nar" ]; then
+            # The bundle is unsigned; --import still verifies content hashes.
+            nix-store --import < "$dir/bundle.nar" >/dev/null
+          else
+            echo "no cached store paths to import"
+          fi
 
       - name: Run nix run . as yayoi
         shell: bash
@@ -135,4 +147,28 @@ jobs:
               cd /home/yayoi/ghq/github.com/yqYo1/dotfiles
               nix --version
               nix run .
-            '
+            ' 2>&1 | tee "$RUNNER_TEMP/nix-run.log"
+
+      - name: Collect store paths for the cache
+        if: github.event_name == 'push'
+        shell: bash
+        run: |
+          set -euo pipefail
+          log="$RUNNER_TEMP/nix-run.log"
+          dir="$RUNNER_TEMP/nix-bincache"
+          # What Nix built here is what the substituters could not serve.
+          grep -o "building '/nix/store/[^']*\.drv'" "$log" \
+            | sed "s/^building '//; s/'$//" | sort -u > "$RUNNER_TEMP/built-drvs.txt" || true
+          while IFS= read -r drv; do
+            [ -n "$drv" ] || continue
+            # --export refuses paths that are not valid in this store.
+            while IFS= read -r out; do
+              nix-store --check-validity "$out" 2>/dev/null && printf '%s\n' "$out"
+            done < <(nix-store -q --outputs "$drv" 2>/dev/null || true)
+          done < "$RUNNER_TEMP/built-drvs.txt" | sort -u > "$RUNNER_TEMP/built-paths.txt"
+          if [ -s "$RUNNER_TEMP/built-paths.txt" ]; then
+            mapfile -t paths < "$RUNNER_TEMP/built-paths.txt"
+            nix-store --export "${paths[@]}" > "$dir/bundle.nar"
+          fi
+          echo "collected $(wc -l < "$RUNNER_TEMP/built-paths.txt") store paths"
+          du -sh "$dir"
