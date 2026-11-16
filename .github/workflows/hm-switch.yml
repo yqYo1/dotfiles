@@ -167,6 +167,7 @@ jobs:
             done < <(nix-store -q --outputs "$drv" 2>/dev/null || true)
           done < "$RUNNER_TEMP/built-drvs.txt" | sort -u > "$RUNNER_TEMP/built-paths.txt"
           if [ -s "$RUNNER_TEMP/built-paths.txt" ]; then
+            mkdir -p "$dir"
             mapfile -t paths < "$RUNNER_TEMP/built-paths.txt"
             nix-store --export "${paths[@]}" > "$dir/bundle.nar"
           fi
