@@ -22,7 +22,10 @@
     aicommit2.url = "github:tak-bro/aicommit2";
     catppuccin.url = "github:catppuccin/nix";
     flake-parts.url = "github:hercules-ci/flake-parts";
-    systems.url = "github:nix-systems/default-linux";
+    # Only x86_64-linux is supported today. To add a system, point this at
+    # `github:nix-systems/default-linux` (or an explicit list) and add the
+    # matching matrix entry in the CI workflow.
+    systems.url = "github:nix-systems/x86_64-linux";
 
     home-manager = {
       url = "github:nix-community/home-manager";
